@@ -1,0 +1,376 @@
+{
+    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/dexpiModel.py",
+    "id": "2753d86f-e9bf-4d38-9b31-337d22d62c72",
+    "composition": {
+        "conceptualModel": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/conceptualModel.py",
+            "id": "eb223f69-c565-44a7-aab6-3b82cbf7b1c6",
+            "composition": {
+                "actuatingSystems": [],
+                "instrumentationLoopFunctions": [],
+                "metaData": null,
+                "pipingNetworkSystems": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSystem.py",
+                        "id": "1d1bb403-6e48-422e-afda-d0492bc2501a",
+                        "composition": {
+                            "customAttributes": [],
+                            "segments": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSegment.py",
+                                    "id": "2dc1d689-439d-4aa1-9630-635d26f5f7cd",
+                                    "composition": {
+                                        "customAttributes": [],
+                                        "connections": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipe.py",
+                                                "id": "df962db1-fb3b-4bc7-8f04-e09ca1fe692c",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "reference": {
+                                                    "sourceItem": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+                                                    "sourceNode": null,
+                                                    "targetItem": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
+                                                    "targetNode": null
+                                                }
+                                            }
+                                        ],
+                                        "items": []
+                                    },
+                                    "reference": {
+                                        "sourceItem": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+                                        "sourceNode": null,
+                                        "targetItem": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
+                                        "targetNode": null
+                                    },
+                                    "data": {
+                                        "colorCode": null,
+                                        "flowDirection": null,
+                                        "fluidCode": null,
+                                        "heatTracingType": null,
+                                        "heatTracingTypeRepresentation": null,
+                                        "inclination": null,
+                                        "insulationThickness": null,
+                                        "insulationType": null,
+                                        "jacketedPipe": null,
+                                        "lowerLimitHeatTracingTemperature": null,
+                                        "nominalDiameterNumericalValueRepresentation": null,
+                                        "nominalDiameterRepresentation": null,
+                                        "nominalDiameterStandard": null,
+                                        "nominalDiameterTypeRepresentation": null,
+                                        "onHold": null,
+                                        "operatingTemperature": null,
+                                        "pipingClassCode": null,
+                                        "pressureTestCircuitNumber": null,
+                                        "primarySecondaryPipingNetworkSegment": null,
+                                        "segmentNumber": null,
+                                        "siphon": null,
+                                        "slope": null
+                                    }
+                                }
+                            ]
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null
+                        },
+                        "data": {
+                            "fluidCode": "MNb",
+                            "heatTracingType": null,
+                            "heatTracingTypeRepresentation": null,
+                            "insulationThickness": null,
+                            "insulationType": null,
+                            "jacketLineNumber": null,
+                            "jacketedLineNumber": null,
+                            "jacketedPipe": null,
+                            "lineNumber": "47132",
+                            "lowerLimitHeatTracingTemperature": null,
+                            "nominalDiameterNumericalValueRepresentation": "80",
+                            "nominalDiameterRepresentation": null,
+                            "nominalDiameterStandard": null,
+                            "nominalDiameterTypeRepresentation": null,
+                            "onHold": null,
+                            "pipingClassCode": "75HB13",
+                            "pipingNetworkSystemGroupNumber": null
+                        }
+                    }
+                ],
+                "plantStructureItems": [],
+                "processInstrumentationFunctions": [],
+                "processSignalGeneratingSystems": [],
+                "taggedPlantItems": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/centrifugalPump.py",
+                        "id": "ea1c8cca-b174-453f-be02-16447104dd9f",
+                        "composition": {
+                            "customAttributes": [],
+                            "nozzles": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "521d6320-62b5-4adc-975a-8fd397f973ef",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "bd4c29b4-c39f-48e8-9d50-7a3319d3d666",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": null,
+                                                    "nominalDiameterRepresentation": null,
+                                                    "nominalDiameterStandard": null,
+                                                    "nominalDiameterTypeRepresentation": null
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N-1"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "402d3c09-b601-4874-9cb2-0f44491e65af",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": null,
+                                                    "nominalDiameterRepresentation": null,
+                                                    "nominalDiameterStandard": null,
+                                                    "nominalDiameterTypeRepresentation": null
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N-2"
+                                    }
+                                }
+                            ],
+                            "chambers": [],
+                            "dryingChambers": [],
+                            "gearBoxes": [],
+                            "motors": [],
+                            "sprayNozzles": [],
+                            "impellers": []
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null
+                        },
+                        "data": {
+                            "tagName": "P-4713",
+                            "tagNamePrefix": "P",
+                            "tagNameSequenceNumber": "4713",
+                            "tagNameSuffix": null,
+                            "equipmentDescription": null,
+                            "designPressureHead": null,
+                            "designVolumeFlowRate": null,
+                            "differentialPressure": null,
+                            "designRotationalSpeed": null,
+                            "designShaftPower": null
+                        }
+                    },
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/plateHeatExchanger.py",
+                        "id": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+                        "composition": {
+                            "customAttributes": [],
+                            "nozzles": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "1320c551-2bc6-4bd0-90c3-365666cc1fe6",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": null,
+                                                    "nominalDiameterRepresentation": null,
+                                                    "nominalDiameterStandard": null,
+                                                    "nominalDiameterTypeRepresentation": null
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N-1"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "c1db7b83-3aed-4bd4-80c7-fdb081dd36ed",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": null,
+                                                    "nominalDiameterRepresentation": null,
+                                                    "nominalDiameterStandard": null,
+                                                    "nominalDiameterTypeRepresentation": null
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N-2"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "ae7f4e4f-12db-4122-a501-bac0fd2e6fa3",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": null,
+                                                    "nominalDiameterRepresentation": null,
+                                                    "nominalDiameterStandard": null,
+                                                    "nominalDiameterTypeRepresentation": null
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N-3"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "27e011b3-2099-4e8c-b562-ffc11a1152cb",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": null,
+                                                    "nominalDiameterRepresentation": null,
+                                                    "nominalDiameterStandard": null,
+                                                    "nominalDiameterTypeRepresentation": null
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N-4"
+                                    }
+                                }
+                            ],
+                            "chambers": [],
+                            "dryingChambers": [],
+                            "gearBoxes": [],
+                            "motors": [],
+                            "sprayNozzles": []
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null,
+                            "agitator": null
+                        },
+                        "data": {
+                            "tagName": "H-1009",
+                            "tagNamePrefix": "H",
+                            "tagNameSequenceNumber": "1009",
+                            "tagNameSuffix": null,
+                            "equipmentDescription": null,
+                            "designHeatFlowRate": null,
+                            "designHeatTransferArea": null,
+                            "designHeatTransferCoefficient": null,
+                            "numberOfPlates": null,
+                            "plateHeight": null,
+                            "plateWidth": null
+                        }
+                    }
+                ]
+            }
+        },
+        "diagram": null,
+        "shapeCatalogues": []
+    },
+    "data": {
+        "exportDateTime": null,
+        "originatingSystemName": null,
+        "originatingSystemVendorName": null,
+        "originatingSystemVersion": "0.9"
+    }
+}

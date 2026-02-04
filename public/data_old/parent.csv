@@ -1,0 +1,9 @@
+parent_id,child_id,edge_name,edge_type
+mc_01,ct_07,is_controlled_by,parental relationship
+mc_01,ic_12,is_indicated_by,parental relationship
+mc_01,ic_13,is_indicated_by,parental relationship
+mc_02,ct_02,is_controlled_by,parental relationship
+mc_03,ct_03,is_controlled_by,parental relationship
+mc_03,ct_04,is_controlled_by,parental relationship
+mc_03,ct_05,is_controlled_by,parental relationship
+mc_03,ct_06,is_controlled_by,parental relationship

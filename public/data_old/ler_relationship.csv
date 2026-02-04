@@ -1,0 +1,31 @@
+src_id,dst_id,edge_name,edge_type,class_num
+ler_01_nu,ler_01_fa,occurred_at,logical operation,ler_01
+ler_01_nu,ler_01_ti,has_title_of,logical operation,ler_01
+ler_01_nu,ler_01_ed,occurred_on,logical operation,ler_01
+ler_01_nu,ler_01_rd,reported_on,logical operation,ler_01
+ler_01_nu,ler_01_cf,relevant_with,logical operation,ler_01
+ler_01_nu,ler_01_ca,caused_by,logical operation,ler_01
+ler_01_nu,ler_01_ac,corrected_with,logical operation,ler_01
+ler_01_nu,ler_01_re,resulted_in,logical operation,ler_01
+ler_01_nu,ler_01_im,influenced,logical operation,ler_01
+ler_01_ca,mc_04,sequence_1,logical operation,ler_01_ca_01
+mc_04,ler_01_ca_01,one_quadrant,relationship,ler_01_ca_01
+ler_01_ca,mc_05,sequence_2,logical operation,ler_01_ca_02
+mc_05,ler_01_ca_02,was,relationship,ler_01_ca_02
+ler_01_ca,sy_01,sequence_3,logical operation,ler_01_ca_03
+sy_01,ler_01_ca_03,was_in,relationship,ler_01_ca_03
+ler_01_ca,mc_04,sequence_4,logical operation,ler_01_ca_04
+mc_04,ler_01_ca_04,second_quadrant_got,relationship,ler_01_ca_04
+ler_01_ca,mc_04,sequence_5,logical operation,ler_01_ca_05
+mc_04,ler_01_ca_05,remaining_were,relationship,ler_01_ca_05
+ler_01_ca,mc_02,sequence_6,logical operation,ler_01_ca_06
+mc_02,ler_01_ca_06,got,relationship,ler_01_ca_06
+ler_01_ac,mc_03,tripped,action,ler_01_ac_01
+ler_01_ac,mc_01,tripped,action,ler_01_ac_02
+ler_01_re,ic_14,sequence_1,logical operation,ler_01_re_01
+ic_14,ler_01_re_01,got,relationship,ler_01_re_01
+ler_01_re,sy_02,sequence_1,logical operation,ler_01_re_02
+sy_02,ler_01_re_02,is,relationship,ler_01_re_02
+ler_01_im,ler_01_im_01,sequence_1,logical operation,ler_01_im_01
+ler_01_im,ler_01_im_02,sequence_2,logical operation,ler_01_im_02
+ler_01_im,ler_01_im_03,sequence_3,logical operation,ler_01_im_03

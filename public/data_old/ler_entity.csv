@@ -1,0 +1,22 @@
+entity_id,entity_name,entity_type,entity_value
+ler_01_nu,LER 86-010-00,LER_NUM,na
+ler_01_fa,SAN ONOFRE NUCLEAR GENERATING STATION,LER_FACILITY,na
+ler_01_ti,MANUAL REACTOR TRIP ON LOSS OF FEEDWATER,LER_TITLE,na
+ler_01_ed,7/26/1986,LER_ED,na
+ler_01_rd,8/25/1986,LER_RD,na
+ler_01_cf, 50.73(a)(2)(iv),LER_CFR,na
+ler_01_ca,Causes,LER_CAUSES,na
+ler_01_ac,Corrective Actions,LER_ACTIONS,na
+ler_01_re,Results,LER_RESULTS,na
+ler_01_im,Impacts,LER_IMPACTS,na
+ler_01_ca_01,Status,LER_CAUSES_FT,out of service for water box cleaning
+ler_01_ca_02,Status,LER_CAUSES_FT,out of service
+ler_01_ca_03,Status,LER_CAUSES_FT,automatic to prevent SG contamination
+ler_01_ca_04,Status,LER_CAUSES_FT,seawater leakage occurred
+ler_01_ca_05,Status,LER_CAUSES_FT,insufficient to satisfy feedwater pump net positive suction
+ler_01_ca_06,Status,LER_CAUSES_FT,vibration and subsequent trip
+ler_01_re_01,Status,LER_RESULTS_FT,low
+ler_01_re_02,Status,LER_RESULTS_FT,initiated
+ler_01_im_01,Impact 1,LER_IMPACTS_FT,The event has been reviewed with operators to reconfirm that action must be taken quickly when overboarding of condensate occurs
+ler_01_im_02,Impact 2,LER_IMPACTS_FT,SCE's program to minimize condenser seawater in-leakage will continue
+ler_01_im_03,Impact 3,LER_IMPACTS_FT,The FFCPD has been returned to service which will preclude the need for overboarding condensate when small condenser tube leaks occur

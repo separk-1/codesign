@@ -1,0 +1,76 @@
+entity_id,entity_name,entity_type,entity_value
+pc_st_01_01,STEP 1.1,PC_ST,na
+pc_st_01_02,STEP 1.2,PC_ST,na
+pc_st_02_01,STEP 2.1,PC_ST,na
+pc_st_02_02,STEP 2.2,PC_ST,na
+pc_st_02_03,STEP 2.3,PC_ST,na
+pc_st_03_01,STEP 3.1,PC_ST,na
+pc_st_03_02,STEP 3.2,PC_ST,na
+pc_st_04_01,STEP 4.1,PC_ST,na
+pc_st_04_02,STEP 4.2,PC_ST,na
+pc_st_05_01,STEP 5.1,PC_ST,na
+pc_st_05_02,STEP 5.2,PC_ST,na
+pc_st_05_03,STEP 5.3,PC_ST,na
+pc_st_06_01,STEP 6.1,PC_ST,na
+pc_st_06_02,STEP 6.2,PC_ST,na
+pc_st_06_03,STEP 6.3,PC_ST,na
+pc_st_07_01,STEP 7.1,PC_ST,na
+pc_st_07_02,STEP 7.2,PC_ST,na
+pc_st_08_01,STEP 8.1,PC_ST,na
+pc_st_08_02,STEP 8.2,PC_ST,na
+pc_st_08_03,STEP 8.3,PC_ST,na
+pc_st_09_01,STEP 9.1,PC_ST,na
+pc_st_10_01,STEP 10.1,PC_ST,na
+pc_st_10_02,STEP 10.2,PC_ST,na
+pc_st_10_03,STEP 10.3,PC_ST,na
+an_01,FEEDWATER LOW FLOW Annunciator,AN,na
+pc_ft_01_01_s,Illuminated,PC_FT,na
+ic_11,Feedwater Flow,IC,na
+pc_ft_01_02_s,Value,PC_FT,1000 L/sec
+ct_01,Feedwater Control Valve,CT,na
+pc_ft_02_01_s,Manual Mode,PC_FT,na
+pc_ft_02_02_s,Value,PC_FT,100%
+pc_ft_02_03_c,Restored,PC_FT,na
+pc_in_02_03_t,END,PC_IN,na
+ct_02,Feedwater Pump Switch,CT,na
+pc_ft_03_01_c,Value,PC_FT,off
+pc_ft_03_01_t,Value,PC_FT,on
+pc_ft_03_02_c,Restored,PC_FT,na
+pc_in_03_02_t,END,PC_IN,na
+ct_03,Turbine Bypass Control Valve,CT,na
+pc_ft_04_01_s,Value,PC_FT,10%
+ic_12,Reactor Core Temperature,IC,na
+pc_ft_04_02_s,Decreasing,PC_FT,na
+ct_04,Trip Turbine Button,CT,na
+ct_05,Turbine Speed Control Valve,CT,na
+pc_ft_05_02_s,Closed(0%),PC_FT,na
+ct_06,Turbine Load Control Valve,CT,na
+pc_ft_05_03_s,Closed(0%),PC_FT,na
+ct_07,Trip Reactor Button,CT,na
+an_02,ALL RODS DOWN Annunciator,AN,na
+pc_ft_06_02_s,Illuminated,PC_FT,na
+ic_13,Reactor Reactivity,IC,na
+pc_ft_06_03_s,Value,PC_FT,0%
+ct_08,Activate Safety Injection Button,CT,na
+an_03,SAFETY INJECTION ENGAGED Annunciator,AN,na
+pc_ft_07_02_s,Illuminated,PC_FT,na
+pc_ft_08_01_s,Decreasing,PC_FT,na
+pc_ft_08_02_c,392C,PC_FT,na
+ct_09,Power Operated Relief Valve Isolation Valve,CT,na
+pc_ft_08_02_t,Closed,PC_FT,na
+pc_ft_08_03_c,392C,PC_FT,na
+pc_in_08_03_f,END,PC_IN,na
+ct_10,Recirculation Coolant Pump Switch,CT,na
+pc_ft_09_01_s,Off,PC_FT,na
+pc_ft_10_01_c,250C,PC_FT,na
+pc_ft_10_01_t,Value,PC_FT,100%
+pc_ft_10_02_s,250C,PC_FT,na
+pc_ft_10_03_s,Value,PC_FT,0%
+ic_14,Steam Generator Levels,IC,na
+mc_01,Reactor,MC,na
+mc_02,Feedwater Pump,MC,na
+mc_03,Turbine,MC,na
+mc_04,Condenser,MC,na
+mc_05,Full Flow Condensate Polishing Deminerializer,MC,na
+sy_01,Condensate Overboard System,SY,na
+sy_02,Emergency Feedwater Actuation Signal,SY,na
