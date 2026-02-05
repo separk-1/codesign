@@ -15,40 +15,45 @@ function App() {
   }, [loadData]);
 
   return (
-    <div className="app-container relative w-screen h-screen" style={{ display: 'flex', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
-      {/* Left Sidebar: Task Progress (220px fixed) */}
-      <div style={{ width: 220, flexShrink: 0 }}>
-        <TaskPanel />
-      </div>
+    <div className="app-container relative w-screen h-screen" style={{ height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
 
-      {/* Center Column: Visuals & Info (60% of remaining) */}
-      <div style={{ flex: '60%', display: 'flex', flexDirection: 'column', borderRight: '1px solid #334155' }}>
-        {/* Top: Schematic Display (65%) */}
-        <div style={{ flex: '65%', position: 'relative', borderBottom: '1px solid #334155' }}>
-          <DisplayPanel />
-        </div>
-        {/* Bottom: Component Info (35%) */}
-        <div style={{ flex: '35%', position: 'relative' }}>
-          <InfoPanel />
-        </div>
-      </div>
+      {/* Main Content Area */}
+      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
 
-      {/* Right Column: AI & Knowledge Graph (40% of remaining) */}
-      <div style={{ flex: '40%', display: 'flex', flexDirection: 'column' }}>
-        {/* Top: AI Chat (40%) */}
-        <div style={{ flex: '40%', position: 'relative', borderBottom: '1px solid #334155' }}>
-          <ChatPanel />
+        {/* Left Sidebar: Task Progress (220px fixed) */}
+        <div style={{ width: 220, flexShrink: 0 }}>
+          <TaskPanel />
         </div>
-        {/* Bottom: Knowledge Graph (60%) */}
-        <div style={{ flex: '60%', position: 'relative' }}>
-          <GraphPanel />
+
+        {/* Center Column: Visuals & Info (60% of remaining -> flex: 6) */}
+        <div style={{ flex: 6, display: 'flex', flexDirection: 'column', borderRight: '1px solid #334155', minWidth: 0 }}>
+          {/* Top: Schematic Display (65% -> flex: 65) */}
+          <div style={{ flex: 65, position: 'relative', borderBottom: '1px solid #334155', minHeight: 0 }}>
+            <DisplayPanel />
+          </div>
+          {/* Bottom: Component Info (35% -> flex: 35) */}
+          <div style={{ flex: 35, position: 'relative', minHeight: 0 }}>
+            <InfoPanel />
+          </div>
         </div>
+
+        {/* Right Column: AI & Knowledge Graph (40% of remaining -> flex: 4) */}
+        <div style={{ flex: 4, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+          {/* Top: AI Chat (40% -> flex: 40) */}
+          <div style={{ flex: 40, position: 'relative', borderBottom: '1px solid #334155', minHeight: 0 }}>
+            <ChatPanel />
+          </div>
+          {/* Bottom: Knowledge Graph (60% -> flex: 60) */}
+          <div style={{ flex: 60, position: 'relative', minHeight: 0 }}>
+            <GraphPanel />
+          </div>
+        </div>
+
       </div>
 
       {/* Footer */}
       <footer className="app-footer" style={{
-          position: 'absolute', bottom: 0, right: 0, left: 0,
-          padding: '4px 10px', background: '#020617', fontSize: '0.7rem', color: '#64748b', textAlign: 'center', zIndex: 100
+          padding: '4px 10px', background: '#020617', fontSize: '0.7rem', color: '#64748b', textAlign: 'center', zIndex: 100, flexShrink: 0
       }}>
         CoDesign · Human-AI Collaborative Design Refinement
       </footer>
