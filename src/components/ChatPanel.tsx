@@ -1,24 +1,35 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDesignStore, ChatMessage } from '../store/designStore';
 
-// Default answers for assumption mode — keyed by AI question patterns
-const AI_DEFAULTS: Record<string, string> = {
-    'process fluid': 'B (Aqueous solution)',
-    'flow rate': 'B (50–200 m³/h)',
-    'pressure rise': 'B (Moderate, 5–15 bar)',
-    'heat exchanger': 'B (Plate heat exchanger)',
-    'suction': 'B (Flooded suction)',
-    'flow arrangement': 'A (Counter-current)',
-    'distance': 'A (Close-coupled, < 5 m)',
-    'sizing': 'A (Accept standard sizing)',
-    'flange': 'A (Class 150)',
-    'operating': 'A (Accept assumptions)',
-};
+interface AutoFillRule {
+    keywords: string[];
+    answer: string;
+    confidence: 'high' | 'medium';
+}
 
-function getDefaultAnswer(aiText: string): string | null {
+const AUTO_FILL_RULES: AutoFillRule[] = [
+    { keywords: ['process fluid'], answer: 'B (Aqueous solution)', confidence: 'high' },
+    { keywords: ['flow rate'], answer: 'B (50–200 m³/h)', confidence: 'high' },
+    { keywords: ['pressure rise'], answer: 'B (Moderate, 5–15 bar)', confidence: 'medium' },
+    { keywords: ['heat exchanger'], answer: 'B (Plate heat exchanger)', confidence: 'high' },
+    { keywords: ['suction'], answer: 'B (Flooded suction)', confidence: 'high' },
+    { keywords: ['flow arrangement'], answer: 'A (Counter-current)', confidence: 'high' },
+    { keywords: ['distance'], answer: 'A (Close-coupled, < 5 m)', confidence: 'medium' },
+    { keywords: ['sizing'], answer: 'A (Accept standard sizing)', confidence: 'high' },
+    { keywords: ['flange'], answer: 'A (Class 150)', confidence: 'medium' },
+    { keywords: ['operating'], answer: 'A (Accept assumptions)', confidence: 'medium' },
+    { keywords: ['confirm', 'proceed', 'continue', 'ready'], answer: 'Yes, proceed', confidence: 'high' },
+    { keywords: ['convert', 'translate', 'switch to detailed'], answer: 'Convert to detailed design', confidence: 'high' },
+    { keywords: ['accept', 'approve'], answer: 'Yes, accept', confidence: 'high' },
+    { keywords: ['material', 'metallurgy'], answer: 'A (Carbon steel)', confidence: 'medium' },
+];
+
+function getDefaultAnswer(aiText: string): { answer: string; confidence: 'high' | 'medium' } | null {
     const lower = aiText.toLowerCase();
-    for (const [keyword, answer] of Object.entries(AI_DEFAULTS)) {
-        if (lower.includes(keyword)) return answer;
+    for (const rule of AUTO_FILL_RULES) {
+        if (rule.keywords.some(k => lower.includes(k))) {
+            return { answer: rule.answer, confidence: rule.confidence };
+        }
     }
     return null;
 }
@@ -30,6 +41,7 @@ export const ChatPanel = () => {
         assumptionMode, setAssumptionMode
     } = useDesignStore();
     const [input, setInput] = useState('');
+    const [currentConfidence, setCurrentConfidence] = useState<'high' | 'medium' | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -42,12 +54,18 @@ export const ChatPanel = () => {
 
     // When assumption mode is on and the last message is from AI, auto-fill the input
     useEffect(() => {
-        if (!assumptionMode) return;
+        if (!assumptionMode) {
+            setCurrentConfidence(null);
+            return;
+        }
         const last = chatMessages[chatMessages.length - 1];
         if (last?.sender === 'ai') {
-            const suggestion = getDefaultAnswer(last.text);
-            if (suggestion) {
-                setInput(suggestion);
+            const result = getDefaultAnswer(last.text);
+            if (result) {
+                setInput(result.answer);
+                setCurrentConfidence(result.confidence);
+            } else {
+                setCurrentConfidence(null);
             }
         }
     }, [chatMessages, assumptionMode]);
@@ -58,11 +76,12 @@ export const ChatPanel = () => {
         const userMsg = input.trim();
         // Determine source: if assumption mode is on and the input matches a default, mark as ai_default
         const last = chatMessages[chatMessages.length - 1];
-        const defaultAnswer = last?.sender === 'ai' ? getDefaultAnswer(last.text) : null;
-        const source = (assumptionMode && defaultAnswer && userMsg === defaultAnswer) ? 'ai_default' : 'human';
+        const defaultResult = last?.sender === 'ai' ? getDefaultAnswer(last.text) : null;
+        const source = (assumptionMode && defaultResult && userMsg === defaultResult.answer) ? 'ai_default' : 'human';
 
         addChatMessage('user', userMsg, source);
         setInput('');
+        setCurrentConfidence(null);
 
         // Mock AI Response
         setTimeout(() => {
@@ -140,18 +159,41 @@ export const ChatPanel = () => {
             </div>
 
             <div style={{ padding: '10px', borderTop: '1px solid #334155', background: '#0f172a' }}>
-                {assumptionMode && input && (
+                {assumptionMode && input && currentConfidence && (
                     <div style={{
-                        fontSize: '0.7rem', color: '#64748b', marginBottom: 4, fontStyle: 'italic'
+                        display: 'flex', alignItems: 'center', gap: 6,
+                        fontSize: '0.7rem', color: '#64748b', marginBottom: 4,
                     }}>
-                        Auto-filled default — edit or press Enter to accept
+                        <span style={{
+                            padding: '1px 6px',
+                            borderRadius: 3,
+                            fontWeight: 700,
+                            fontSize: '0.6rem',
+                            letterSpacing: '0.03em',
+                            background: currentConfidence === 'high' ? 'rgba(34,197,94,0.2)' : 'rgba(234,179,8,0.2)',
+                            color: currentConfidence === 'high' ? '#22c55e' : '#eab308',
+                            border: `1px solid ${currentConfidence === 'high' ? '#22c55e' : '#eab308'}`,
+                        }}>
+                            {currentConfidence === 'high' ? 'HIGH CONF' : 'REVIEW'}
+                        </span>
+                        <span style={{ fontStyle: 'italic' }}>
+                            Auto-filled — edit or press Enter to accept
+                        </span>
                     </div>
                 )}
                 <div style={{ display: 'flex', gap: '6px' }}>
                     <input
                         type="text"
                         value={input}
-                        onChange={(e) => setInput(e.target.value)}
+                        onChange={(e) => {
+                            setInput(e.target.value);
+                            // Clear confidence if user edits away from the auto-filled value
+                            const last = chatMessages[chatMessages.length - 1];
+                            const result = last?.sender === 'ai' ? getDefaultAnswer(last.text) : null;
+                            if (result && e.target.value !== result.answer) {
+                                setCurrentConfidence(null);
+                            }
+                        }}
                         onKeyDown={handleKeyDown}
                         placeholder="Type a message..."
                         style={{

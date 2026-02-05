@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { TaskPanel } from './components/TaskPanel';
 import { DisplayPanel } from './components/DisplayPanel';
 import { InfoPanel } from './components/InfoPanel';
 import { ChatPanel } from './components/ChatPanel';
@@ -15,7 +16,12 @@ function App() {
 
   return (
     <div className="app-container relative w-screen h-screen" style={{ display: 'flex', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
-      {/* Left Column: Visuals & Info (60%) */}
+      {/* Left Sidebar: Task Progress (220px fixed) */}
+      <div style={{ width: 220, flexShrink: 0 }}>
+        <TaskPanel />
+      </div>
+
+      {/* Center Column: Visuals & Info (60% of remaining) */}
       <div style={{ flex: '60%', display: 'flex', flexDirection: 'column', borderRight: '1px solid #334155' }}>
         {/* Top: Schematic Display (65%) */}
         <div style={{ flex: '65%', position: 'relative', borderBottom: '1px solid #334155' }}>
@@ -27,7 +33,7 @@ function App() {
         </div>
       </div>
 
-      {/* Right Column: AI & Knowledge Graph (40%) */}
+      {/* Right Column: AI & Knowledge Graph (40% of remaining) */}
       <div style={{ flex: '40%', display: 'flex', flexDirection: 'column' }}>
         {/* Top: AI Chat (40%) */}
         <div style={{ flex: '40%', position: 'relative', borderBottom: '1px solid #334155' }}>
