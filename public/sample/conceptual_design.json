@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    { "id": "Source-1", "name": "Source Feed", "type": "Source" },
+    { "id": "Pump-1", "name": "Feed Pump", "type": "Pump" },
+    { "id": "HEX-1", "name": "Pre-Heater", "type": "HeatExchanger" },
+    { "id": "Sink-1", "name": "Reactor Feed", "type": "Sink" }
+  ],
+  "links": [
+    { "source": "Source-1", "target": "Pump-1", "label": "Liquid Feed" },
+    { "source": "Pump-1", "target": "HEX-1", "label": "High Pressure Feed" },
+    { "source": "HEX-1", "target": "Sink-1", "label": "Heated Feed" }
+  ]
+}
