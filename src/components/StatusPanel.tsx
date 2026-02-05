@@ -257,45 +257,6 @@ const Valve = ({ x, y, open, label, vertical = true, scale = 1, labelY, labelOff
     const ly = labelY || -30;
     const lx = labelOffset || 0;
 
-    // Handle is fixed relative to pipe orientation.
-    // If pipe is vertical, handle should be horizontal (perpendicular).
-    // If pipe is horizontal, handle should be horizontal (perpendicular to stem which is vertical).
-    // Wait, the image shows a T-handle.
-    // Usually, "perpendicular to pipe" means if pipe is Left-Right, Stem is Up, Handle is Left-Right (parallel to pipe? No, T-handle usually crosses stem).
-    // Let's look at the image again: "TBCV" image shows a horizontal pipe, vertical stem, and a HORIZONTAL bar handle on top.
-    // So the handle is Parallel to the pipe.
-    // If the pipe is VERTICAL (e.g. MSIV), the stem usually sticks out sideways or the valve is drawn rotated 90deg.
-    // If we rotate the whole valve 90deg for vertical pipes, the handle also rotates 90deg (becoming vertical).
-    // BUT the user said: "Valve handle fixed! Perpendicular to hourglass shape".
-    // The hourglass (bowtie) is the body.
-    // If pipe is horizontal, bowtie is Left/Right triangles.
-    // Perpendicular to bowtie's axis (L-R) would be Vertical? No, the image shows Horizontal handle.
-    // Let's re-read: "Valve handle fixed! Perpendicular to hourglass shape" (user text) vs Image (Horizontal handle, Horizontal pipe).
-    // Hourglass axis is along the flow.
-    // Perpendicular to flow is the Stem direction.
-    // The Handle is usually perpendicular to the Stem (forming a T).
-    // So Handle is Parallel to Flow.
-    // Let's implement T-handle fixed to the stem.
-    // Since we rotate the whole group by 90deg for `vertical` prop, the handle will rotate with it.
-    // If the user wants the handle to ALWAYS be horizontal regardless of pipe, we need to counter-rotate.
-    // BUT "perpendicular to hourglass" means if hourglass is vertical (flow vertical), handle is horizontal?
-    // If hourglass is horizontal (flow horizontal), handle is vertical?
-    // The image shows Horizontal Pipe, Vertical Stem, Horizontal Handle.
-    // User text: "Handle fixed! Perpendicular to hourglass shape".
-    // If hourglass is L-R (Horizontal), Perpendicular is Up-Down (Vertical).
-    // This contradicts the image.
-    // BUT the image might be the "example" of what they want.
-    // The image shows a T-handle. T-handle bar is parallel to flow.
-    // Maybe they mean the Handle BAR is perpendicular to the STEM.
-    // Let's assume the Image is the truth.
-    // Image: T-handle. Bar is parallel to pipe.
-    // Implication:
-    // Horizontal Pipe -> Horizontal Handle Bar.
-    // Vertical Pipe -> Vertical Handle Bar (because we rotate everything 90deg).
-    // User instruction "Valve handle fixed! Perpendicular to hourglass shape".
-    // If "hourglass shape" implies the triangles, the "axis" is the flow. Perpendicular is the Stem.
-    // If they mean the handle bar is perpendicular to the STEM, that creates a T.
-    // "Fixed" means it doesn't rotate with value.
 
     return (
         <g transform={`translate(${x}, ${y}) scale(${scale})`}>
@@ -304,36 +265,13 @@ const Valve = ({ x, y, open, label, vertical = true, scale = 1, labelY, labelOff
             {/* Valve Symbol (Bowtie) - Rotates with pipe orientation (vertical prop) */}
             <path d="M -10 -10 L 10 10 L 10 -10 L -10 10 Z" fill={cFill} stroke="black" strokeWidth="1" transform={vertical ? "rotate(90)" : ""} />
 
-            {/* Stem - Fixed relative to body */}
-            {/* If Vertical=true (Flow is Up/Down), we usually draw stem to the Right or Left?
-                The current code rotates the bowtie 90deg.
-                But the Stem is drawn at x=0, y=0 to y=-15.
-                So Stem is ALWAYS Up?
-                If pipe is vertical, Bowtie is rotated 90deg. It occupies Y space.
-                Stem at 0,-15 sticks out 'Up' relative to the group.
-                If the group is NOT rotated, Stem is Up. Pipe is Horizontal. Matches Image.
-                If Pipe is Vertical, we only rotate the Bowtie path? Yes, looks like `transform={vertical ? "rotate(90)" : ""}` is only on the PATH.
-                So Stem is ALWAYS Up.
-            */}
-
-            {/* Stem - Rotates with Valve Group? No, we need logic for Vertical Valves */}
-            {/* If Vertical, Stem should point Left or Right?
-                Usually for vertical pipe, stem is horizontal.
-                Existing code: Stem is always Up (0 to -15).
-                If Vertical=true, Bowtie is rotated 90. Flow is Y.
-                Stem (Up) is parallel to Flow (Y). This is WRONG.
-                Stem should be perpendicular to Flow.
-                So if Vertical=true, Stem should be X axis?
-                Let's fix Stem direction based on 'vertical' prop.
-            */}
-
             {/* Stem */}
             {vertical ? (
                // Vertical Pipe -> Horizontal Stem (e.g. to Right)
                <line x1="0" y1="0" x2="15" y2="0" stroke={cBody} strokeWidth="2" />
             ) : (
                // Horizontal Pipe -> Vertical Stem (Up)
-               <line x1="0" y1="0" x2="0" y2="-15" stroke={cBody} strokeWidth="2" />
+               <line x1="0" y1="0" x2="0" y2="-17" stroke={cBody} strokeWidth="2" />
             )}
 
             {/* T-Handle - Perpendicular to Stem */}

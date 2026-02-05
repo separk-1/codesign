@@ -35,6 +35,8 @@ const KEY_MAPPING: Record<string, string> = {
   fwcv_mode: "Feedwater Control Mode", // Auto/Manual
 };
 
+const MAX_LOG_ENTRIES = 5000;
+
 class Logger {
   private logs: LogEntry[] = [];
   private session_id: string;
@@ -61,6 +63,9 @@ class Logger {
         ...mappedDetails
       }
     };
+    if (this.logs.length >= MAX_LOG_ENTRIES) {
+      this.logs.shift();
+    }
     this.logs.push(entry);
     console.log('[ACTION]', action_type, details);
   }
@@ -77,6 +82,9 @@ class Logger {
         }
     }
 
+    if (this.logs.length >= MAX_LOG_ENTRIES) {
+      this.logs.shift();
+    }
     this.logs.push({
       timestamp: new Date().toISOString(),
       type: 'SNAPSHOT',
