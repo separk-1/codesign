@@ -73,7 +73,6 @@ export const AdvisorPanel = () => {
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [messages]);
 
-  const simState = useSimulationStore();
   const { entityCsv, relationshipCsv, loading: graphLoading } = useGraphData();
 
   const parsedEntityCsv = useMemo(() => parseCsv(entityCsv), [entityCsv]);
