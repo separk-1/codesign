@@ -96,7 +96,10 @@ export const ProcedurePanel = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { activeStepId, setActiveStepId, stepHistory, goToPreviousStep } = useSimulationStore();
+  const activeStepId = useSimulationStore(state => state.activeStepId);
+  const stepHistory = useSimulationStore(state => state.stepHistory);
+  const setActiveStepId = useSimulationStore(state => state.setActiveStepId);
+  const goToPreviousStep = useSimulationStore(state => state.goToPreviousStep);
   const { entityCsv, relationshipCsv, procedureCsv, lerEntityCsv, lerRelationshipCsv, parentCsv, loading } = useGraphData();
 
   // Resize Observer to handle panel resizing
