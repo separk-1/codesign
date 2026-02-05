@@ -15,31 +15,31 @@ function App() {
   }, [loadData]);
 
   return (
-    <div className="app-container relative w-screen h-screen" style={{ display: 'flex', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
-      {/* Left Sidebar: Task Progress (Dynamic ~13%) */}
-      <div style={{ flex: 1.5, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+    <div className="app-container relative w-screen h-screen" style={{ display: 'flex', width: '100vw', height: '100vh', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
+      {/* Left Sidebar: Task Progress (Fixed width) */}
+      <div style={{ width: 260, flexShrink: 0, display: 'flex', flexDirection: 'column', height: '100%', borderRight: '1px solid #334155' }}>
         <TaskPanel />
       </div>
 
-      {/* Center Column: Visuals & Info (Dynamic ~52%) */}
-      <div style={{ flex: 6, minWidth: 0, display: 'flex', flexDirection: 'column', borderRight: '1px solid #334155' }}>
-        {/* Top: Schematic Display (Dynamic ~65% of column) */}
+      {/* Center Column: Visuals & Info (Flexible) */}
+      <div style={{ flex: 3, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100%', borderRight: '1px solid #334155' }}>
+        {/* Top: Schematic Display (65%) */}
         <div style={{ flex: 6.5, minHeight: 0, position: 'relative', borderBottom: '1px solid #334155' }}>
           <DisplayPanel />
         </div>
-        {/* Bottom: Component Info (Dynamic ~35% of column) */}
+        {/* Bottom: Component Info (35%) */}
         <div style={{ flex: 3.5, minHeight: 0, position: 'relative' }}>
           <InfoPanel />
         </div>
       </div>
 
-      {/* Right Column: AI & Knowledge Graph (Dynamic ~35%) */}
-      <div style={{ flex: 4, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
-        {/* Top: AI Chat (Dynamic ~40% of column) */}
+      {/* Right Column: AI & Knowledge Graph (Flexible) */}
+      <div style={{ flex: 2, minWidth: 0, display: 'flex', flexDirection: 'column', height: '100%' }}>
+        {/* Top: AI Chat (40%) */}
         <div style={{ flex: 4, minHeight: 0, position: 'relative', borderBottom: '1px solid #334155' }}>
           <ChatPanel />
         </div>
-        {/* Bottom: Knowledge Graph (Dynamic ~60% of column) */}
+        {/* Bottom: Knowledge Graph (60%) */}
         <div style={{ flex: 6, minHeight: 0, position: 'relative' }}>
           <GraphPanel />
         </div>
