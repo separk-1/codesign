@@ -1,8 +1,45 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDesignStore, ChatMessage } from '../store/designStore';
-import { Intent, MotifCandidate, NozzleMapping, SpecInfo } from '../services/collaborationService';
+import { Intent, MotifCandidate, NozzleMapping, SpecInfo, EquipmentPair } from '../services/collaborationService';
 
 // ── Sub-components for Rich Interaction ──────────────────────────────
+
+const EquipmentSelection = ({ candidates, onSelect }: { candidates: EquipmentPair[], onSelect: (p: EquipmentPair) => void }) => (
+    <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column', gap: 8, overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', color: '#e2e8f0' }}>
+            <thead>
+                <tr style={{ borderBottom: '1px solid #475569' }}>
+                    <th style={{ textAlign: 'left', padding: 4 }}>Model Pair</th>
+                    <th style={{ textAlign: 'center', padding: 4 }}>Total Cost</th>
+                    <th style={{ textAlign: 'center', padding: 4 }}>Score</th>
+                    <th style={{ padding: 4 }}></th>
+                </tr>
+            </thead>
+            <tbody>
+                {candidates.map(c => (
+                    <tr key={c.id} style={{ borderBottom: '1px solid #334155' }}>
+                        <td style={{ padding: 6 }}>
+                            <div style={{ fontWeight: 600, color: '#93c5fd' }}>{c.pumpModel}</div>
+                            <div style={{ color: '#94a3b8', fontSize: '0.75rem' }}>+ {c.hexModel}</div>
+                        </td>
+                        <td style={{ textAlign: 'center', padding: 6 }}>${(c.pumpCost + c.hexCost).toLocaleString()}</td>
+                        <td style={{ textAlign: 'center', padding: 6, color: c.score > 0.9 ? '#4ade80' : '#cbd5e1' }}>
+                            {(c.score * 100).toFixed(0)}%
+                        </td>
+                        <td style={{ padding: 6, textAlign: 'right' }}>
+                            <button
+                                onClick={() => onSelect(c)}
+                                style={{ padding: '4px 8px', background: '#3b82f6', border: 'none', borderRadius: 4, color: '#fff', fontSize: '0.75rem', cursor: 'pointer' }}
+                            >
+                                Select
+                            </button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>
+);
 
 const IntentReview = ({ intent, onConfirm }: { intent: Intent, onConfirm: () => void }) => (
     <div style={{ marginTop: 8, background: 'rgba(15, 23, 42, 0.5)', padding: 10, borderRadius: 6, border: '1px solid #475569' }}>
@@ -104,6 +141,7 @@ export const ChatPanel = () => {
         chatMessages,
         processUserMessage,
         confirmIntent,
+        selectEquipmentPair,
         selectMotif,
         confirmNozzleMapping,
         confirmSpec,
@@ -145,6 +183,14 @@ export const ChatPanel = () => {
                 <>
                     {textContent}
                     <IntentReview intent={msg.data} onConfirm={() => confirmIntent(msg.data)} />
+                </>
+            );
+        }
+        if (msg.type === 'equipment_selection' && msg.data) {
+            return (
+                <>
+                    {textContent}
+                    <EquipmentSelection candidates={msg.data} onSelect={(p) => selectEquipmentPair(p)} />
                 </>
             );
         }
@@ -226,7 +272,7 @@ export const ChatPanel = () => {
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
                         placeholder={workflowStep !== 'IDLE' ? "Interacting with workflow..." : "Type 'Connect pump to heat exchanger'..."}
-                        disabled={workflowStep !== 'IDLE' && workflowStep !== 'INTENT_REVIEW' && workflowStep !== 'MOTIF_SELECTION' && workflowStep !== 'NOZZLE_MAPPING' && workflowStep !== 'SPEC_SELECTION'}
+                        disabled={workflowStep !== 'IDLE' && workflowStep !== 'INTENT_REVIEW' && workflowStep !== 'EQUIPMENT_SELECTION' && workflowStep !== 'MOTIF_SELECTION' && workflowStep !== 'NOZZLE_MAPPING' && workflowStep !== 'SPEC_SELECTION'}
                         // Actually, we usually want input disabled if we are waiting for user to CLICK a button,
                         // but sometimes user might want to abort with text. For this demo, let's keep it simple.
                         style={{

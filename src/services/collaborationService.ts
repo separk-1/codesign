@@ -5,6 +5,20 @@ export interface Intent {
     action: string;
     constraints: string[];
     originalText: string;
+    createdNodeIds?: { source: string; target: string };
+}
+
+export interface EquipmentPair {
+    id: string;
+    pumpModel: string;
+    pumpVendor: string;
+    pumpCost: number;
+    pumpEfficiency: number;
+    hexModel: string;
+    hexVendor: string;
+    hexCost: number;
+    hexEfficiency: number;
+    score: number;
 }
 
 export interface MotifCandidate {
@@ -56,6 +70,50 @@ export const mockAI = {
             constraints: [],
             originalText: text
         };
+    },
+
+    getEquipmentCandidates: async (intent: Intent): Promise<EquipmentPair[]> => {
+        await new Promise(r => setTimeout(r, 1200));
+
+        // Mock data generator for equipment pairs
+        return [
+            {
+                id: 'pair_1',
+                pumpModel: 'P-4713 (Centrifugal)',
+                pumpVendor: 'Grundfos',
+                pumpCost: 12500,
+                pumpEfficiency: 88,
+                hexModel: 'E-204 (Plate)',
+                hexVendor: 'Alfa Laval',
+                hexCost: 8500,
+                hexEfficiency: 92,
+                score: 0.95
+            },
+            {
+                id: 'pair_2',
+                pumpModel: 'CP-3000 (Centrifugal)',
+                pumpVendor: 'Flowserve',
+                pumpCost: 14200,
+                pumpEfficiency: 91,
+                hexModel: 'HX-550 (Shell & Tube)',
+                hexVendor: 'Kelvion',
+                hexCost: 11000,
+                hexEfficiency: 89,
+                score: 0.88
+            },
+            {
+                id: 'pair_3',
+                pumpModel: 'EcoPump 500',
+                pumpVendor: 'KSB',
+                pumpCost: 9800,
+                pumpEfficiency: 85,
+                hexModel: 'Compact-X',
+                hexVendor: 'Danfoss',
+                hexCost: 7200,
+                hexEfficiency: 86,
+                score: 0.82
+            }
+        ];
     },
 
     getMotifCandidates: async (intent: Intent): Promise<MotifCandidate[]> => {

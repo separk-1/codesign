@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { parseConceptualJson, parseDexpiJson } from '../utils/graphParsers';
-import { Intent, MotifCandidate, NozzleMapping, SpecInfo, mockAI } from '../services/collaborationService';
+import { Intent, MotifCandidate, NozzleMapping, SpecInfo, EquipmentPair, mockAI } from '../services/collaborationService';
 
 interface GraphData {
     nodes: any[];
@@ -13,7 +13,7 @@ export interface ChatMessage {
     text: string;
     timestamp: number;
     source?: 'human' | 'ai_default';
-    type?: 'text' | 'intent_review' | 'motif_selection' | 'nozzle_mapping' | 'spec_selection';
+    type?: 'text' | 'intent_review' | 'equipment_selection' | 'motif_selection' | 'nozzle_mapping' | 'spec_selection';
     data?: any;
 }
 
@@ -33,7 +33,7 @@ export interface TokenBudget {
     used: number;
 }
 
-export type WorkflowStep = 'IDLE' | 'INTENT_REVIEW' | 'MOTIF_SELECTION' | 'NOZZLE_MAPPING' | 'SPEC_SELECTION';
+export type WorkflowStep = 'IDLE' | 'INTENT_REVIEW' | 'EQUIPMENT_SELECTION' | 'MOTIF_SELECTION' | 'NOZZLE_MAPPING' | 'SPEC_SELECTION';
 
 function mockTokens(estimate: number): number {
     return Math.floor(estimate * (0.7 + Math.random() * 0.3));
@@ -63,6 +63,8 @@ interface DesignState {
     // Workflow State
     workflowStep: WorkflowStep;
     pendingIntent: Intent | null;
+    equipmentCandidates: EquipmentPair[];
+    selectedEquipmentPair: EquipmentPair | null;
     motifCandidates: MotifCandidate[];
     selectedMotif: MotifCandidate | null;
     pendingNozzleMap: NozzleMapping | null;
@@ -77,6 +79,7 @@ interface DesignState {
     // Workflow Actions
     processUserMessage: (text: string) => Promise<void>;
     confirmIntent: (intent: Intent) => Promise<void>;
+    selectEquipmentPair: (pair: EquipmentPair) => Promise<void>;
     selectMotif: (motif: MotifCandidate) => Promise<void>;
     confirmNozzleMapping: (mapping: NozzleMapping) => Promise<void>;
     confirmSpec: (spec: SpecInfo) => Promise<void>;
@@ -113,6 +116,8 @@ export const useDesignStore = create<DesignState>((set, get) => ({
 
     workflowStep: 'IDLE',
     pendingIntent: null,
+    equipmentCandidates: [],
+    selectedEquipmentPair: null,
     motifCandidates: [],
     selectedMotif: null,
     pendingNozzleMap: null,
@@ -219,15 +224,80 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     },
 
     confirmIntent: async (intent: Intent) => {
-        const { addChatMessage } = get();
-        set({ workflowStep: 'MOTIF_SELECTION' });
+        const { addChatMessage, updateGraph } = get();
 
-        addChatMessage('ai', 'Intent confirmed. Searching Knowledge Graph for connection patterns...', undefined, 'text');
+        // 1. Create Conceptual Nodes
+        const sourceId = `node_${Date.now()}_source`;
+        const targetId = `node_${Date.now()}_target`;
 
-        const candidates = await mockAI.getMotifCandidates(intent);
-        set({ motifCandidates: candidates });
+        const newNodes = [
+            { id: sourceId, name: intent.sourceType, type: 'Equipment', x: 0, y: 0 },
+            { id: targetId, name: intent.targetType, type: 'Equipment', x: 300, y: 0 }
+        ];
 
-        addChatMessage('ai', `I found ${candidates.length} connection motifs from similar projects. Please select one.`, undefined, 'motif_selection', candidates);
+        updateGraph(newNodes, []);
+
+        // 2. Update Intent with IDs
+        const updatedIntent = { ...intent, createdNodeIds: { source: sourceId, target: targetId } };
+
+        set({
+            workflowStep: 'EQUIPMENT_SELECTION',
+            pendingIntent: updatedIntent
+        });
+
+        addChatMessage('ai', 'Intent confirmed. I have initialized the conceptual components.', undefined, 'text');
+        addChatMessage('ai', 'Searching vendor catalogs for suitable equipment models...', undefined, 'text');
+
+        const candidates = await mockAI.getEquipmentCandidates(updatedIntent);
+        set({ equipmentCandidates: candidates });
+
+        addChatMessage('ai', `I found ${candidates.length} compatible equipment pairs based on the design requirements. Please select the preferred models.`, undefined, 'equipment_selection', candidates);
+    },
+
+    selectEquipmentPair: async (pair: EquipmentPair) => {
+        const { addChatMessage, pendingIntent } = get();
+
+        set({ selectedEquipmentPair: pair, workflowStep: 'MOTIF_SELECTION' });
+
+        addChatMessage('ai', `You selected: ${pair.pumpModel} and ${pair.hexModel}.`, undefined, 'text');
+
+        // Update Nodes
+        const ids = pendingIntent?.createdNodeIds;
+        if (ids) {
+            const updateNodes = (graph: GraphData) => ({
+                ...graph,
+                nodes: graph.nodes.map(node => {
+                    if (node.id === ids.source) {
+                        return {
+                            ...node,
+                            name: pair.pumpModel,
+                            attributes: { ...node.attributes, vendor: pair.pumpVendor, cost: pair.pumpCost, efficiency: pair.pumpEfficiency }
+                        };
+                    }
+                    if (node.id === ids.target) {
+                        return {
+                            ...node,
+                            name: pair.hexModel,
+                            attributes: { ...node.attributes, vendor: pair.hexVendor, cost: pair.hexCost, efficiency: pair.hexEfficiency }
+                        };
+                    }
+                    return node;
+                })
+            });
+
+            set(state => ({
+                conceptualGraph: updateNodes(state.conceptualGraph),
+                detailedGraph: updateNodes(state.detailedGraph)
+            }));
+        }
+
+        addChatMessage('ai', 'Equipment models assigned. Searching Knowledge Graph for connection patterns...', undefined, 'text');
+
+        if (pendingIntent) {
+            const candidates = await mockAI.getMotifCandidates(pendingIntent);
+            set({ motifCandidates: candidates });
+            addChatMessage('ai', `I found ${candidates.length} connection motifs from similar projects. Please select one.`, undefined, 'motif_selection', candidates);
+        }
     },
 
     selectMotif: async (motif: MotifCandidate) => {
@@ -267,14 +337,14 @@ export const useDesignStore = create<DesignState>((set, get) => ({
 
         // Create dummy graph elements based on the selection
         // In a real app, this would be much more complex.
-        const sourceId = pendingIntent?.sourceType.replace(/\s/g, '') || 'Source';
-        const targetId = pendingIntent?.targetType.replace(/\s/g, '') || 'Target';
+        const sourceId = pendingIntent?.createdNodeIds?.source || pendingIntent?.sourceType.replace(/\s/g, '') || 'Source';
+        const targetId = pendingIntent?.createdNodeIds?.target || pendingIntent?.targetType.replace(/\s/g, '') || 'Target';
 
         // Ensure source/target exist or create them if they were generic?
         // For this demo, let's create new nodes to represent the added connection
         // We assume the nodes might already exist, but here we add "Lines" and "Valves" between them.
 
-        const newNodes = [];
+        const newNodes: any[] = [];
         const newLinks = [];
 
         // 1. Add Source/Target if not in graph (simplified)
@@ -311,16 +381,13 @@ export const useDesignStore = create<DesignState>((set, get) => ({
             label: spec.size
         });
 
-        // Actually, we should probably add the Source/Target nodes too if they are just strings from the intent
-        // so the graph doesn't crash on missing IDs.
-        // We'll check if they exist in a real app, here we just add them to be safe if they are just names.
-        // But usually we'd select nodes on the graph first.
-        // For this text-to-design demo, we'll add them as new nodes.
-
-        newNodes.push(
-            { id: sourceId, name: pendingIntent?.sourceType, type: 'Equipment', x: 0, y: 0 },
-            { id: targetId, name: pendingIntent?.targetType, type: 'Equipment', x: 200, y: 0 }
-        );
+        // If we didn't create them earlier (legacy path), create them now.
+        if (!pendingIntent?.createdNodeIds) {
+            newNodes.push(
+                { id: sourceId, name: pendingIntent?.sourceType, type: 'Equipment', x: 0, y: 0 },
+                { id: targetId, name: pendingIntent?.targetType, type: 'Equipment', x: 200, y: 0 }
+            );
+        }
 
         updateGraph(newNodes, newLinks);
 
