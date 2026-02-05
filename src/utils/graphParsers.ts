@@ -22,15 +22,50 @@ export const parseDexpiJson = (data: any) => {
   const conceptualModel = data?.composition?.conceptualModel;
   if (!conceptualModel) return { nodes: [], links: [] };
 
-  // 1. Tagged Plant Items (Equipment)
+  // 1. Boundary Items (Source / Sink)
+  const boundaryItems = conceptualModel.composition?.boundaryItems || [];
+  boundaryItems.forEach((item: any) => {
+      const bndNode = {
+          id: item.id,
+          name: item.data?.tagName || 'Boundary',
+          type: item.componentType || 'Source',
+          attributes: item.data
+      };
+      addNode(bndNode);
+
+      // Boundary nozzles — add as Nozzle nodes linked to parent
+      const nozzles = item.composition?.nozzles || [];
+      nozzles.forEach((nozzle: any) => {
+          const nozzleNode = {
+              id: nozzle.id,
+              name: nozzle.data?.subTagName
+                  ? `${bndNode.name}:${nozzle.data.subTagName}`
+                  : 'Nozzle',
+              type: 'Nozzle',
+              parentId: item.id,
+              attributes: nozzle.data
+          };
+          addNode(nozzleNode);
+
+          links.push({
+              source: item.id,
+              target: nozzle.id,
+              label: 'has_nozzle'
+          });
+      });
+  });
+
+  // 2. Tagged Plant Items (Equipment)
   const items = conceptualModel.composition?.taggedPlantItems || [];
 
   items.forEach((item: any) => {
-      // Equipment Node
+      // Determine equipment type from componentType field or default to Equipment
+      const eqType = item.componentType || 'Equipment';
+
       const eqNode = {
           id: item.id,
           name: item.data?.tagName || 'Unknown Equipment',
-          type: 'Equipment',
+          type: eqType,
           attributes: item.data,
           raw: item // store raw data for info panel
       };
@@ -41,7 +76,9 @@ export const parseDexpiJson = (data: any) => {
       nozzles.forEach((nozzle: any) => {
           const nozzleNode = {
               id: nozzle.id,
-              name: nozzle.data?.subTagName ? `${eqNode.name}:${nozzle.data.subTagName}` : 'Nozzle',
+              name: nozzle.data?.subTagName
+                  ? `${eqNode.name}:${nozzle.data.subTagName}`
+                  : 'Nozzle',
               type: 'Nozzle',
               parentId: item.id,
               attributes: nozzle.data
@@ -57,7 +94,7 @@ export const parseDexpiJson = (data: any) => {
       });
   });
 
-  // 2. Piping (Connections)
+  // 3. Piping (Connections)
   const systems = conceptualModel.composition?.pipingNetworkSystems || [];
   systems.forEach((system: any) => {
       const segments = system.composition?.segments || [];
@@ -67,13 +104,6 @@ export const parseDexpiJson = (data: any) => {
           const targetId = segment.reference?.targetItem;
 
           if (sourceId && targetId) {
-              // Create a Pipe Segment Node to show the connection explicitly in KG?
-              // Or just a link?
-              // Requirement: "Detailed Design".
-              // A direct link is cleaner for visualization unless the pipe itself has important data.
-              // The segment has data (lineNumber, fluidCode, etc).
-              // Let's make the Pipe a Node for the Knowledge Graph approach.
-
               const pipeId = segment.id;
               const pipeNode = {
                   id: pipeId,
@@ -86,13 +116,13 @@ export const parseDexpiJson = (data: any) => {
               links.push({
                   source: sourceId,
                   target: pipeId,
-                  label: 'connects_to'
+                  label: segment.data?.service || 'connects_to'
               });
 
               links.push({
                   source: pipeId,
                   target: targetId,
-                  label: 'connects_to'
+                  label: segment.data?.service || 'connects_to'
               });
           }
       });

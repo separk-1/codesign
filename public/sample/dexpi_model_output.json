@@ -9,64 +9,152 @@
                 "actuatingSystems": [],
                 "instrumentationLoopFunctions": [],
                 "metaData": null,
+                "boundaryItems": [
+                    {
+                        "id": "bnd-feed-tank",
+                        "componentType": "Source",
+                        "data": {
+                            "tagName": "Feed Tank",
+                            "description": "Elevated feed tank (flooded suction)",
+                            "fluid": "Aqueous solution",
+                            "temperature": "25°C"
+                        },
+                        "composition": {
+                            "nozzles": [
+                                {
+                                    "id": "bnd-feed-tank-n1",
+                                    "data": {
+                                        "subTagName": "OUT",
+                                        "nominalDiameter": "DN 150",
+                                        "flangeClass": "Class 150"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "bnd-reactor-feed",
+                        "componentType": "Sink",
+                        "data": {
+                            "tagName": "Reactor Feed",
+                            "description": "Downstream reactor inlet",
+                            "temperature": "80°C",
+                            "pressure": "~8 barg"
+                        },
+                        "composition": {
+                            "nozzles": [
+                                {
+                                    "id": "bnd-reactor-feed-n1",
+                                    "data": {
+                                        "subTagName": "IN",
+                                        "nominalDiameter": "DN 100",
+                                        "flangeClass": "Class 150"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "bnd-steam-header",
+                        "componentType": "Source",
+                        "data": {
+                            "tagName": "Steam Header",
+                            "description": "LP saturated steam supply",
+                            "fluid": "LP Steam",
+                            "pressure": "3.5 barg",
+                            "temperature": "~148°C"
+                        },
+                        "composition": {
+                            "nozzles": [
+                                {
+                                    "id": "bnd-steam-header-n1",
+                                    "data": {
+                                        "subTagName": "OUT",
+                                        "nominalDiameter": "DN 50",
+                                        "flangeClass": "Class 150"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "id": "bnd-condensate-return",
+                        "componentType": "Sink",
+                        "data": {
+                            "tagName": "Condensate Return",
+                            "description": "Condensate collection header",
+                            "fluid": "Condensate"
+                        },
+                        "composition": {
+                            "nozzles": [
+                                {
+                                    "id": "bnd-condensate-return-n1",
+                                    "data": {
+                                        "subTagName": "IN",
+                                        "nominalDiameter": "DN 50",
+                                        "flangeClass": "Class 150"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "pipingNetworkSystems": [
                     {
                         "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSystem.py",
-                        "id": "1d1bb403-6e48-422e-afda-d0492bc2501a",
+                        "id": "pns-process-lines",
                         "composition": {
                             "customAttributes": [],
                             "segments": [
                                 {
-                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSegment.py",
-                                    "id": "2dc1d689-439d-4aa1-9630-635d26f5f7cd",
-                                    "composition": {
-                                        "customAttributes": [],
-                                        "connections": [
-                                            {
-                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipe.py",
-                                                "id": "df962db1-fb3b-4bc7-8f04-e09ca1fe692c",
-                                                "composition": {
-                                                    "customAttributes": []
-                                                },
-                                                "reference": {
-                                                    "sourceItem": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
-                                                    "sourceNode": null,
-                                                    "targetItem": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
-                                                    "targetNode": null
-                                                }
-                                            }
-                                        ],
-                                        "items": []
-                                    },
+                                    "id": "seg-L001",
                                     "reference": {
-                                        "sourceItem": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
-                                        "sourceNode": null,
-                                        "targetItem": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
-                                        "targetNode": null
+                                        "sourceItem": "bnd-feed-tank-n1",
+                                        "targetItem": "521d6320-62b5-4adc-975a-8fd397f973ef"
                                     },
                                     "data": {
-                                        "colorCode": null,
-                                        "flowDirection": null,
-                                        "fluidCode": null,
-                                        "heatTracingType": null,
-                                        "heatTracingTypeRepresentation": null,
-                                        "inclination": null,
-                                        "insulationThickness": null,
-                                        "insulationType": null,
-                                        "jacketedPipe": null,
-                                        "lowerLimitHeatTracingTemperature": null,
-                                        "nominalDiameterNumericalValueRepresentation": null,
-                                        "nominalDiameterRepresentation": null,
-                                        "nominalDiameterStandard": null,
-                                        "nominalDiameterTypeRepresentation": null,
-                                        "onHold": null,
-                                        "operatingTemperature": null,
-                                        "pipingClassCode": null,
-                                        "pressureTestCircuitNumber": null,
-                                        "primarySecondaryPipingNetworkSegment": null,
-                                        "segmentNumber": null,
-                                        "siphon": null,
-                                        "slope": null
+                                        "lineNumber": "L-001",
+                                        "service": "Liquid Feed (Suction)",
+                                        "fluidCode": "Water",
+                                        "nominalDiameter": "DN 150 (6\")",
+                                        "flangeClass": "Class 150",
+                                        "material": "Carbon steel",
+                                        "insulation": "None",
+                                        "designVelocity": "1.0–1.5 m/s"
+                                    }
+                                },
+                                {
+                                    "id": "seg-L002",
+                                    "reference": {
+                                        "sourceItem": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+                                        "targetItem": "f62d6687-e6f5-4619-b19f-a18dd626c3a7"
+                                    },
+                                    "data": {
+                                        "lineNumber": "L-002",
+                                        "service": "High Pressure Feed",
+                                        "fluidCode": "Water",
+                                        "nominalDiameter": "DN 100 (4\")",
+                                        "flangeClass": "Class 150",
+                                        "material": "Carbon steel",
+                                        "insulation": "None",
+                                        "designVelocity": "2.0–3.0 m/s"
+                                    }
+                                },
+                                {
+                                    "id": "seg-L003",
+                                    "reference": {
+                                        "sourceItem": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
+                                        "targetItem": "bnd-reactor-feed-n1"
+                                    },
+                                    "data": {
+                                        "lineNumber": "L-003",
+                                        "service": "Heated Feed",
+                                        "fluidCode": "Water",
+                                        "nominalDiameter": "DN 100 (4\")",
+                                        "flangeClass": "Class 150",
+                                        "material": "Carbon steel",
+                                        "insulation": "Yes (heat conservation)",
+                                        "designVelocity": "2.0–3.0 m/s"
                                     }
                                 }
                             ]
@@ -78,23 +166,65 @@
                             "parentStructure": null
                         },
                         "data": {
-                            "fluidCode": "MNb",
-                            "heatTracingType": null,
-                            "heatTracingTypeRepresentation": null,
-                            "insulationThickness": null,
-                            "insulationType": null,
-                            "jacketLineNumber": null,
-                            "jacketedLineNumber": null,
-                            "jacketedPipe": null,
-                            "lineNumber": "47132",
-                            "lowerLimitHeatTracingTemperature": null,
-                            "nominalDiameterNumericalValueRepresentation": "80",
-                            "nominalDiameterRepresentation": null,
-                            "nominalDiameterStandard": null,
-                            "nominalDiameterTypeRepresentation": null,
-                            "onHold": null,
-                            "pipingClassCode": "75HB13",
-                            "pipingNetworkSystemGroupNumber": null
+                            "fluidCode": "Water",
+                            "lineNumber": "Process Lines",
+                            "nominalDiameterNumericalValueRepresentation": null,
+                            "pipingClassCode": null
+                        }
+                    },
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSystem.py",
+                        "id": "pns-utility-lines",
+                        "composition": {
+                            "customAttributes": [],
+                            "segments": [
+                                {
+                                    "id": "seg-L004",
+                                    "reference": {
+                                        "sourceItem": "bnd-steam-header-n1",
+                                        "targetItem": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f"
+                                    },
+                                    "data": {
+                                        "lineNumber": "L-004",
+                                        "service": "LP Steam Supply",
+                                        "fluidCode": "Steam",
+                                        "nominalDiameter": "DN 50 (2\")",
+                                        "flangeClass": "Class 150",
+                                        "material": "Carbon steel",
+                                        "insulation": "Yes (personnel protection)",
+                                        "designVelocity": "15–25 m/s"
+                                    }
+                                },
+                                {
+                                    "id": "seg-L005",
+                                    "reference": {
+                                        "sourceItem": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
+                                        "targetItem": "bnd-condensate-return-n1"
+                                    },
+                                    "data": {
+                                        "lineNumber": "L-005",
+                                        "service": "Condensate Return",
+                                        "fluidCode": "Condensate",
+                                        "nominalDiameter": "DN 50 (2\")",
+                                        "flangeClass": "Class 150",
+                                        "material": "Carbon steel",
+                                        "insulation": "Yes",
+                                        "designVelocity": "1.0–2.0 m/s"
+                                    }
+                                }
+                            ]
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null
+                        },
+                        "data": {
+                            "fluidCode": "Utility",
+                            "lineNumber": "Utility Lines",
+                            "nominalDiameterNumericalValueRepresentation": null,
+                            "pipingClassCode": null
                         }
                     }
                 ],
@@ -105,6 +235,7 @@
                     {
                         "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/centrifugalPump.py",
                         "id": "ea1c8cca-b174-453f-be02-16447104dd9f",
+                        "componentType": "Pump",
                         "composition": {
                             "customAttributes": [],
                             "nozzles": [
@@ -112,64 +243,36 @@
                                     "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
                                     "id": "521d6320-62b5-4adc-975a-8fd397f973ef",
                                     "composition": {
-                                        "nodes": [
-                                            {
-                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
-                                                "id": "bd4c29b4-c39f-48e8-9d50-7a3319d3d666",
-                                                "composition": {
-                                                    "customAttributes": []
-                                                },
-                                                "data": {
-                                                    "nominalDiameterNumericalValueRepresentation": null,
-                                                    "nominalDiameterRepresentation": null,
-                                                    "nominalDiameterStandard": null,
-                                                    "nominalDiameterTypeRepresentation": null
-                                                }
-                                            }
-                                        ],
+                                        "nodes": [],
                                         "customAttributes": []
                                     },
                                     "reference": {
                                         "chamber": null
                                     },
                                     "data": {
-                                        "nominalPressureNumericalValueRepresentation": null,
-                                        "nominalPressureRepresentation": null,
-                                        "nominalPressureStandard": null,
-                                        "nominalPressureTypeRepresentation": null,
-                                        "subTagName": "N-1"
+                                        "subTagName": "S1",
+                                        "function": "Suction inlet",
+                                        "nominalDiameter": "DN 150 (6\")",
+                                        "flangeClass": "Class 150",
+                                        "flangeType": "RF (Raised Face)"
                                     }
                                 },
                                 {
                                     "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
                                     "id": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
                                     "composition": {
-                                        "nodes": [
-                                            {
-                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
-                                                "id": "402d3c09-b601-4874-9cb2-0f44491e65af",
-                                                "composition": {
-                                                    "customAttributes": []
-                                                },
-                                                "data": {
-                                                    "nominalDiameterNumericalValueRepresentation": null,
-                                                    "nominalDiameterRepresentation": null,
-                                                    "nominalDiameterStandard": null,
-                                                    "nominalDiameterTypeRepresentation": null
-                                                }
-                                            }
-                                        ],
+                                        "nodes": [],
                                         "customAttributes": []
                                     },
                                     "reference": {
                                         "chamber": null
                                     },
                                     "data": {
-                                        "nominalPressureNumericalValueRepresentation": null,
-                                        "nominalPressureRepresentation": null,
-                                        "nominalPressureStandard": null,
-                                        "nominalPressureTypeRepresentation": null,
-                                        "subTagName": "N-2"
+                                        "subTagName": "D1",
+                                        "function": "Discharge outlet",
+                                        "nominalDiameter": "DN 100 (4\")",
+                                        "flangeClass": "Class 150",
+                                        "flangeType": "RF (Raised Face)"
                                     }
                                 }
                             ],
@@ -191,17 +294,24 @@
                             "tagNamePrefix": "P",
                             "tagNameSequenceNumber": "4713",
                             "tagNameSuffix": null,
-                            "equipmentDescription": null,
-                            "designPressureHead": null,
-                            "designVolumeFlowRate": null,
-                            "differentialPressure": null,
-                            "designRotationalSpeed": null,
-                            "designShaftPower": null
+                            "equipmentType": "Single-stage centrifugal pump",
+                            "equipmentDescription": "Feed pump — aqueous service",
+                            "service": "Liquid feed pressurization",
+                            "fluid": "Aqueous solution",
+                            "designFlowRate": "100 m³/h",
+                            "differentialPressure": "8 bar",
+                            "designPressure": "12 barg",
+                            "designTemperature": "120°C",
+                            "casingMaterial": "Carbon steel",
+                            "sealType": "Single mechanical seal",
+                            "suctionCondition": "Flooded (elevated tank)",
+                            "estimatedCost": "$12,000"
                         }
                     },
                     {
                         "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/plateHeatExchanger.py",
                         "id": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+                        "componentType": "HeatExchanger",
                         "composition": {
                             "customAttributes": [],
                             "nozzles": [
@@ -209,128 +319,72 @@
                                     "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
                                     "id": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
                                     "composition": {
-                                        "nodes": [
-                                            {
-                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
-                                                "id": "1320c551-2bc6-4bd0-90c3-365666cc1fe6",
-                                                "composition": {
-                                                    "customAttributes": []
-                                                },
-                                                "data": {
-                                                    "nominalDiameterNumericalValueRepresentation": null,
-                                                    "nominalDiameterRepresentation": null,
-                                                    "nominalDiameterStandard": null,
-                                                    "nominalDiameterTypeRepresentation": null
-                                                }
-                                            }
-                                        ],
+                                        "nodes": [],
                                         "customAttributes": []
                                     },
                                     "reference": {
                                         "chamber": null
                                     },
                                     "data": {
-                                        "nominalPressureNumericalValueRepresentation": null,
-                                        "nominalPressureRepresentation": null,
-                                        "nominalPressureStandard": null,
-                                        "nominalPressureTypeRepresentation": null,
-                                        "subTagName": "N-1"
+                                        "subTagName": "N1",
+                                        "function": "Cold-side inlet (process fluid IN)",
+                                        "nominalDiameter": "DN 100 (4\")",
+                                        "flangeClass": "Class 150",
+                                        "flangeType": "RF (Raised Face)"
                                     }
                                 },
                                 {
                                     "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
                                     "id": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
                                     "composition": {
-                                        "nodes": [
-                                            {
-                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
-                                                "id": "c1db7b83-3aed-4bd4-80c7-fdb081dd36ed",
-                                                "composition": {
-                                                    "customAttributes": []
-                                                },
-                                                "data": {
-                                                    "nominalDiameterNumericalValueRepresentation": null,
-                                                    "nominalDiameterRepresentation": null,
-                                                    "nominalDiameterStandard": null,
-                                                    "nominalDiameterTypeRepresentation": null
-                                                }
-                                            }
-                                        ],
+                                        "nodes": [],
                                         "customAttributes": []
                                     },
                                     "reference": {
                                         "chamber": null
                                     },
                                     "data": {
-                                        "nominalPressureNumericalValueRepresentation": null,
-                                        "nominalPressureRepresentation": null,
-                                        "nominalPressureStandard": null,
-                                        "nominalPressureTypeRepresentation": null,
-                                        "subTagName": "N-2"
+                                        "subTagName": "N2",
+                                        "function": "Cold-side outlet (process fluid OUT)",
+                                        "nominalDiameter": "DN 100 (4\")",
+                                        "flangeClass": "Class 150",
+                                        "flangeType": "RF (Raised Face)"
                                     }
                                 },
                                 {
                                     "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
                                     "id": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f",
                                     "composition": {
-                                        "nodes": [
-                                            {
-                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
-                                                "id": "ae7f4e4f-12db-4122-a501-bac0fd2e6fa3",
-                                                "composition": {
-                                                    "customAttributes": []
-                                                },
-                                                "data": {
-                                                    "nominalDiameterNumericalValueRepresentation": null,
-                                                    "nominalDiameterRepresentation": null,
-                                                    "nominalDiameterStandard": null,
-                                                    "nominalDiameterTypeRepresentation": null
-                                                }
-                                            }
-                                        ],
+                                        "nodes": [],
                                         "customAttributes": []
                                     },
                                     "reference": {
                                         "chamber": null
                                     },
                                     "data": {
-                                        "nominalPressureNumericalValueRepresentation": null,
-                                        "nominalPressureRepresentation": null,
-                                        "nominalPressureStandard": null,
-                                        "nominalPressureTypeRepresentation": null,
-                                        "subTagName": "N-3"
+                                        "subTagName": "N3",
+                                        "function": "Hot-side inlet (LP steam IN)",
+                                        "nominalDiameter": "DN 50 (2\")",
+                                        "flangeClass": "Class 150",
+                                        "flangeType": "RF (Raised Face)"
                                     }
                                 },
                                 {
                                     "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
                                     "id": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
                                     "composition": {
-                                        "nodes": [
-                                            {
-                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
-                                                "id": "27e011b3-2099-4e8c-b562-ffc11a1152cb",
-                                                "composition": {
-                                                    "customAttributes": []
-                                                },
-                                                "data": {
-                                                    "nominalDiameterNumericalValueRepresentation": null,
-                                                    "nominalDiameterRepresentation": null,
-                                                    "nominalDiameterStandard": null,
-                                                    "nominalDiameterTypeRepresentation": null
-                                                }
-                                            }
-                                        ],
+                                        "nodes": [],
                                         "customAttributes": []
                                     },
                                     "reference": {
                                         "chamber": null
                                     },
                                     "data": {
-                                        "nominalPressureNumericalValueRepresentation": null,
-                                        "nominalPressureRepresentation": null,
-                                        "nominalPressureStandard": null,
-                                        "nominalPressureTypeRepresentation": null,
-                                        "subTagName": "N-4"
+                                        "subTagName": "N4",
+                                        "function": "Hot-side outlet (condensate OUT)",
+                                        "nominalDiameter": "DN 50 (2\")",
+                                        "flangeClass": "Class 150",
+                                        "flangeType": "RF (Raised Face)"
                                     }
                                 }
                             ],
@@ -352,13 +406,23 @@
                             "tagNamePrefix": "H",
                             "tagNameSequenceNumber": "1009",
                             "tagNameSuffix": null,
-                            "equipmentDescription": null,
-                            "designHeatFlowRate": null,
-                            "designHeatTransferArea": null,
-                            "designHeatTransferCoefficient": null,
-                            "numberOfPlates": null,
-                            "plateHeight": null,
-                            "plateWidth": null
+                            "equipmentType": "Gasketed plate heat exchanger",
+                            "equipmentDescription": "Pre-heater — aqueous feed heating",
+                            "service": "Feed pre-heating before reactor",
+                            "flowArrangement": "Counter-current",
+                            "coldSideFluid": "Aqueous process fluid",
+                            "hotSideFluid": "LP saturated steam (3.5 barg)",
+                            "coldInletTemperature": "25°C",
+                            "coldOutletTemperature": "80°C",
+                            "hotInletTemperature": "~148°C",
+                            "estimatedDuty": "~6.4 MW",
+                            "gasketMaterial": "EPDM",
+                            "plateMaterial": "AISI 316 SS",
+                            "frameMaterial": "Carbon steel",
+                            "designPressure": "12 barg",
+                            "designTemperatureColdSide": "120°C",
+                            "designTemperatureHotSide": "180°C",
+                            "estimatedCost": "$15,000"
                         }
                     }
                 ]
@@ -369,8 +433,8 @@
     },
     "data": {
         "exportDateTime": null,
-        "originatingSystemName": null,
+        "originatingSystemName": "Design Refinement Workshop",
         "originatingSystemVendorName": null,
-        "originatingSystemVersion": "0.9"
+        "originatingSystemVersion": "1.0"
     }
 }

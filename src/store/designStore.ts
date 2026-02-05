@@ -11,6 +11,7 @@ export interface ChatMessage {
     sender: 'user' | 'ai';
     text: string;
     timestamp: number;
+    source?: 'human' | 'ai_default';
 }
 
 interface DesignState {
@@ -19,13 +20,15 @@ interface DesignState {
     activeView: 'conceptual' | 'detailed';
     selectedNode: any | null;
     chatMessages: ChatMessage[];
+    assumptionMode: boolean;
     loading: boolean;
 
     // Actions
     loadData: () => Promise<void>;
     setActiveView: (view: 'conceptual' | 'detailed') => void;
     selectNode: (node: any | null) => void;
-    addChatMessage: (sender: 'user' | 'ai', text: string) => void;
+    addChatMessage: (sender: 'user' | 'ai', text: string, source?: 'human' | 'ai_default') => void;
+    setAssumptionMode: (enabled: boolean) => void;
 }
 
 export const useDesignStore = create<DesignState>((set, get) => ({
@@ -34,8 +37,9 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     activeView: 'conceptual',
     selectedNode: null,
     chatMessages: [
-        { id: '1', sender: 'ai', text: 'Hello! I am your Design Assistant. We are currently in Conceptual Design mode.', timestamp: Date.now() }
+        { id: '1', sender: 'ai', text: 'Welcome to CoDesign! I am your AI Design Assistant. We are currently in Conceptual Design mode. I can guide you through design refinement — from conceptual PFD to detailed P&ID.', timestamp: Date.now() }
     ],
+    assumptionMode: false,
     loading: false,
 
     loadData: async () => {
@@ -62,12 +66,15 @@ export const useDesignStore = create<DesignState>((set, get) => ({
 
     selectNode: (node) => set({ selectedNode: node }),
 
-    addChatMessage: (sender, text) => set((state) => ({
+    addChatMessage: (sender, text, source) => set((state) => ({
         chatMessages: [...state.chatMessages, {
             id: Date.now().toString(),
             sender,
             text,
-            timestamp: Date.now()
+            timestamp: Date.now(),
+            source: source || (sender === 'user' ? 'human' : undefined)
         }]
-    }))
+    })),
+
+    setAssumptionMode: (enabled) => set({ assumptionMode: enabled })
 }));

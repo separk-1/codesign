@@ -50,7 +50,7 @@ export const DisplayPanel = () => {
         // Label
         const label = node.name;
         if (globalScale > 0.8) {
-            ctx.font = '4px Sans-Serif';
+            ctx.font = '5px Sans-Serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
             ctx.fillStyle = '#fff';

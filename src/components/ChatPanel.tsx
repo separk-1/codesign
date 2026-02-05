@@ -1,8 +1,34 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDesignStore, ChatMessage } from '../store/designStore';
 
+// Default answers for assumption mode — keyed by AI question patterns
+const AI_DEFAULTS: Record<string, string> = {
+    'process fluid': 'B (Aqueous solution)',
+    'flow rate': 'B (50–200 m³/h)',
+    'pressure rise': 'B (Moderate, 5–15 bar)',
+    'heat exchanger': 'B (Plate heat exchanger)',
+    'suction': 'B (Flooded suction)',
+    'flow arrangement': 'A (Counter-current)',
+    'distance': 'A (Close-coupled, < 5 m)',
+    'sizing': 'A (Accept standard sizing)',
+    'flange': 'A (Class 150)',
+    'operating': 'A (Accept assumptions)',
+};
+
+function getDefaultAnswer(aiText: string): string | null {
+    const lower = aiText.toLowerCase();
+    for (const [keyword, answer] of Object.entries(AI_DEFAULTS)) {
+        if (lower.includes(keyword)) return answer;
+    }
+    return null;
+}
+
 export const ChatPanel = () => {
-    const { chatMessages, addChatMessage, activeView, setActiveView } = useDesignStore();
+    const {
+        chatMessages, addChatMessage,
+        activeView, setActiveView,
+        assumptionMode, setAssumptionMode
+    } = useDesignStore();
     const [input, setInput] = useState('');
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -14,11 +40,28 @@ export const ChatPanel = () => {
         scrollToBottom();
     }, [chatMessages]);
 
+    // When assumption mode is on and the last message is from AI, auto-fill the input
+    useEffect(() => {
+        if (!assumptionMode) return;
+        const last = chatMessages[chatMessages.length - 1];
+        if (last?.sender === 'ai') {
+            const suggestion = getDefaultAnswer(last.text);
+            if (suggestion) {
+                setInput(suggestion);
+            }
+        }
+    }, [chatMessages, assumptionMode]);
+
     const handleSend = () => {
         if (!input.trim()) return;
 
         const userMsg = input.trim();
-        addChatMessage('user', userMsg);
+        // Determine source: if assumption mode is on and the input matches a default, mark as ai_default
+        const last = chatMessages[chatMessages.length - 1];
+        const defaultAnswer = last?.sender === 'ai' ? getDefaultAnswer(last.text) : null;
+        const source = (assumptionMode && defaultAnswer && userMsg === defaultAnswer) ? 'ai_default' : 'human';
+
+        addChatMessage('user', userMsg, source);
         setInput('');
 
         // Mock AI Response
@@ -27,7 +70,6 @@ export const ChatPanel = () => {
 
             if (userMsg.toLowerCase().includes('convert') || userMsg.toLowerCase().includes('detail')) {
                 aiResponse = "Translating Conceptual Design to Detailed Design... I have mapped the 'Feed Pump' to a Centrifugal Pump (P-4713) and the 'Pre-Heater' to a Plate Heat Exchanger (H-1009). Switching to Detailed View.";
-                // Trigger view switch
                 setTimeout(() => setActiveView('detailed'), 1500);
             } else if (userMsg.toLowerCase().includes('hello') || userMsg.toLowerCase().includes('hi')) {
                 aiResponse = "Hello! I can help you automate your design process. Try asking me to 'convert to detailed design'.";
@@ -47,23 +89,49 @@ export const ChatPanel = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#1e293b', borderLeft: '1px solid #334155' }}>
             <div className="panel-title" style={{ padding: '10px', background: '#0f172a', borderBottom: '1px solid #334155', fontWeight: 'bold', color: '#e2e8f0' }}>
-                AI DESIGN ASSISTANT
+                <span>AI DESIGN ASSISTANT</span>
+                <label style={{
+                    display: 'flex', alignItems: 'center', gap: 6,
+                    fontSize: '0.7rem', fontWeight: 400, color: '#94a3b8', cursor: 'pointer', textTransform: 'none', letterSpacing: 0
+                }}>
+                    <input
+                        type="checkbox"
+                        checked={assumptionMode}
+                        onChange={(e) => setAssumptionMode(e.target.checked)}
+                        style={{ accentColor: '#3b82f6', cursor: 'pointer' }}
+                    />
+                    Assumption Mode
+                </label>
             </div>
 
-            <div style={{ flex: 1, overflowY: 'auto', padding: '10px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ flex: 1, overflowY: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {chatMessages.map((msg: ChatMessage) => (
                     <div key={msg.id} style={{
                         alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
-                        maxWidth: '80%',
-                        padding: '8px 12px',
+                        maxWidth: '85%',
+                        padding: '10px 14px',
                         borderRadius: '8px',
-                        background: msg.sender === 'user' ? '#3b82f6' : '#334155',
+                        background: msg.sender === 'user'
+                            ? (msg.source === 'ai_default' ? '#475569' : '#3b82f6')
+                            : '#334155',
                         color: '#fff',
-                        fontSize: '0.9rem',
-                        lineHeight: '1.4'
+                        fontSize: '0.95rem',
+                        lineHeight: '1.5',
+                        border: msg.source === 'ai_default' ? '1px dashed #64748b' : 'none'
                     }}>
-                        <div style={{ fontSize: '0.7rem', opacity: 0.7, marginBottom: '2px' }}>
-                            {msg.sender === 'user' ? 'You' : 'AI Assistant'}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.75rem', opacity: 0.7, marginBottom: '3px' }}>
+                            <span>{msg.sender === 'user' ? 'You' : 'AI Assistant'}</span>
+                            {msg.source && (
+                                <span style={{
+                                    fontSize: '0.6rem',
+                                    padding: '1px 5px',
+                                    borderRadius: 3,
+                                    background: msg.source === 'ai_default' ? 'rgba(100,116,139,0.4)' : 'rgba(59,130,246,0.3)',
+                                    marginLeft: 8
+                                }}>
+                                    {msg.source === 'ai_default' ? 'AI DEFAULT' : 'HUMAN'}
+                                </span>
+                            )}
                         </div>
                         {msg.text}
                     </div>
@@ -72,7 +140,14 @@ export const ChatPanel = () => {
             </div>
 
             <div style={{ padding: '10px', borderTop: '1px solid #334155', background: '#0f172a' }}>
-                <div style={{ display: 'flex', gap: '5px' }}>
+                {assumptionMode && input && (
+                    <div style={{
+                        fontSize: '0.7rem', color: '#64748b', marginBottom: 4, fontStyle: 'italic'
+                    }}>
+                        Auto-filled default — edit or press Enter to accept
+                    </div>
+                )}
+                <div style={{ display: 'flex', gap: '6px' }}>
                     <input
                         type="text"
                         value={input}
@@ -81,24 +156,26 @@ export const ChatPanel = () => {
                         placeholder="Type a message..."
                         style={{
                             flex: 1,
-                            padding: '8px',
+                            padding: '10px',
                             borderRadius: '4px',
                             border: '1px solid #475569',
                             background: '#1e293b',
                             color: '#fff',
-                            outline: 'none'
+                            outline: 'none',
+                            fontSize: '0.9rem'
                         }}
                     />
                     <button
                         onClick={handleSend}
                         style={{
-                            padding: '8px 16px',
+                            padding: '10px 18px',
                             borderRadius: '4px',
                             border: 'none',
                             background: '#3b82f6',
                             color: '#fff',
                             cursor: 'pointer',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            fontSize: '0.85rem'
                         }}
                     >
                         SEND

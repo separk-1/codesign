@@ -16,13 +16,13 @@ export const InfoPanel = () => {
                 COMPONENT INFO
             </div>
 
-            <div style={{ padding: '10px', borderBottom: '1px solid #334155', display: 'flex', gap: '10px' }}>
-                <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>VIEW MODE:</span>
+            <div style={{ padding: '10px', borderBottom: '1px solid #334155', display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>VIEW MODE:</span>
                 <button
                     onClick={() => setActiveView('conceptual')}
                     style={{
                         background: activeView === 'conceptual' ? '#3b82f6' : '#334155',
-                        border: 'none', borderRadius: '4px', color: '#fff', fontSize: '0.7rem', padding: '2px 8px', cursor: 'pointer'
+                        border: 'none', borderRadius: '4px', color: '#fff', fontSize: '0.8rem', padding: '4px 10px', cursor: 'pointer'
                     }}
                 >
                     CONCEPTUAL
@@ -31,34 +31,34 @@ export const InfoPanel = () => {
                     onClick={() => setActiveView('detailed')}
                     style={{
                         background: activeView === 'detailed' ? '#3b82f6' : '#334155',
-                        border: 'none', borderRadius: '4px', color: '#fff', fontSize: '0.7rem', padding: '2px 8px', cursor: 'pointer'
+                        border: 'none', borderRadius: '4px', color: '#fff', fontSize: '0.8rem', padding: '4px 10px', cursor: 'pointer'
                     }}
                 >
                     DETAILED
                 </button>
             </div>
 
-            <div style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
+            <div style={{ flex: 1, overflowY: 'auto', padding: '12px' }}>
                 {selectedNode ? (
                     <div>
-                        <div style={{ marginBottom: '10px' }}>
-                            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>NAME</div>
-                            <div style={{ fontSize: '1.1rem', fontWeight: 'bold' }}>{selectedNode.name}</div>
+                        <div style={{ marginBottom: '12px' }}>
+                            <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>NAME</div>
+                            <div style={{ fontSize: '1.15rem', fontWeight: 'bold' }}>{selectedNode.name}</div>
                         </div>
-                        <div style={{ marginBottom: '10px' }}>
-                            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>TYPE</div>
-                            <div style={{ color: '#3b82f6' }}>{selectedNode.type}</div>
+                        <div style={{ marginBottom: '12px' }}>
+                            <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>TYPE</div>
+                            <div style={{ color: '#3b82f6', fontSize: '1rem' }}>{selectedNode.type}</div>
                         </div>
-                        <div style={{ marginBottom: '10px' }}>
-                            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>ID</div>
-                            <div style={{ fontSize: '0.8rem', fontFamily: 'monospace' }}>{selectedNode.id}</div>
+                        <div style={{ marginBottom: '12px' }}>
+                            <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>ID</div>
+                            <div style={{ fontSize: '0.85rem', fontFamily: 'monospace' }}>{selectedNode.id}</div>
                         </div>
 
                         {selectedNode.attributes && (
                             <div style={{ marginTop: '20px' }}>
-                                <div style={{ fontSize: '0.8rem', fontWeight: 'bold', marginBottom: '5px', color: '#cbd5e1' }}>ATTRIBUTES</div>
+                                <div style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '8px', color: '#cbd5e1' }}>ATTRIBUTES</div>
                                 <div style={{ background: '#0f172a', padding: '10px', borderRadius: '4px' }}>
-                                    <pre style={{ margin: 0, whiteSpace: 'pre-wrap', fontSize: '0.7rem', color: '#94a3b8' }}>
+                                    <pre style={{ margin: 0, whiteSpace: 'pre-wrap', fontSize: '0.8rem', color: '#94a3b8', lineHeight: 1.5 }}>
                                         {JSON.stringify(selectedNode.attributes, null, 2)}
                                     </pre>
                                 </div>
@@ -66,7 +66,7 @@ export const InfoPanel = () => {
                         )}
                     </div>
                 ) : (
-                    <div style={{ color: '#64748b', fontStyle: 'italic', textAlign: 'center', marginTop: '20px' }}>
+                    <div style={{ color: '#64748b', fontStyle: 'italic', textAlign: 'center', marginTop: '20px', fontSize: '0.9rem' }}>
                         Select a component from the graph to view details.
                     </div>
                 )}

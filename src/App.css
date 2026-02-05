@@ -15,16 +15,16 @@
 
   --border-color: #475569; /* slate-600 */
 
-  /* Dimensions - Fluid Spacing */
+  /* Dimensions */
   --panel-gap: clamp(8px, 1vh, 12px);
   --radius: 6px;
-  --header-height: 28px;
+  --header-height: 32px;
 
-  /* Fluid Typography */
-  --font-xs: clamp(0.6rem, 1vw, 0.7rem);
-  --font-sm: clamp(0.7rem, 1vw, 0.8rem);
-  --font-base: clamp(0.8rem, 1vw, 0.9rem);
-  --font-lg: clamp(0.9rem, 1vw, 1rem);
+  /* Typography — bumped up for readability */
+  --font-xs: clamp(0.7rem, 1vw, 0.8rem);
+  --font-sm: clamp(0.8rem, 1vw, 0.9rem);
+  --font-base: clamp(0.9rem, 1vw, 1rem);
+  --font-lg: clamp(1rem, 1.1vw, 1.1rem);
 }
 
 * {
@@ -37,119 +37,24 @@ body {
   background-color: var(--bg-app);
   color: var(--text-main);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: var(--font-base);
 }
 
-/*
-   Responsive Layout Implementation
-   Strategy:
-   - Desktop: Fixed height (100vh), Internal Scroll, 2-Column Grid (65/35 ratio)
-   - Mobile (<900px): Auto height, Global Scroll, 1-Column Stack
-*/
-
-.app-container {
-  display: grid;
-  width: 100%;
-  padding: var(--panel-gap);
-  gap: var(--panel-gap);
-
-  /* Mobile First Default (Stack) */
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto; /* Sim / Support / Footer */
-  height: auto;
-  min-height: 100vh;
-  overflow-y: auto;
-}
-
-/* Desktop Viewport Logic (>900px) */
-@media (min-width: 900px) {
-  .app-container {
-    height: 100vh; /* Fixed viewport height */
-    overflow: hidden; /* Prevent global scroll */
-
-    /*
-       User Requirement: "grid based ... auto-fit / minmax"
-       We use minmax to enforce the minimum widths, and auto-fit ensures it wraps if needed.
-       However, to maintain the desired 65/35 ratio when space permits, we explicitly define it here.
-       If the screen width drops below ~900px, the Media Query handles the switch to stack.
-
-       We can combine this with minmax to ensure robustness within the grid tracks.
-    */
-    grid-template-columns: minmax(500px, 65fr) minmax(300px, 35fr);
-    grid-template-rows: 1fr auto; /* Content / Footer */
-  }
-}
-
-/* Footer Style */
+/* Footer */
 .app-footer {
-  grid-column: 1 / -1; /* Span full width */
   text-align: center;
-  font-size: 0.7rem;
+  font-size: var(--font-xs);
   color: var(--text-muted);
   opacity: 0.6;
   padding: 4px 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px; /* Minimal fixed height */
+  min-height: 28px;
   line-height: 1.4;
-  word-break: break-word; /* Prevent overflow on tiny screens */
 }
 
-/* --- Column Wrappers --- */
-
-.col-sim, .col-support {
-  display: flex;
-  flex-direction: column;
-  gap: var(--panel-gap);
-  min-width: 0; /* Crucial for nested flex/grid overflow */
-  min-height: 0;
-}
-
-/*
-   Internal Panel Distributions (Flexbox with weights)
-   We replace the rigid grid-template-rows with flex-grow
-*/
-
-/* Simulator Column: Status (Top) vs Control (Bottom) */
-.col-sim .status-panel {
-  flex: 65; /* Roughly 65% vertical space */
-  min-height: 350px; /* Ensure usability */
-}
-
-.col-sim .control-panel {
-  flex: 35;
-  min-height: 200px;
-}
-
-/* Support Column: Advisor (Top) vs Procedure (Bottom) */
-.col-support .advisor-panel {
-  flex: 40;
-  min-height: 300px; /* Chat needs space */
-}
-
-.col-support .procedure-panel {
-  flex: 60;
-  min-height: 300px; /* Graph needs space */
-}
-
-/* --- Panel Component Styles --- */
-
-.panel-container {
-  background-color: var(--bg-panel);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-
-  /* Requirement: min-width/height 0 */
-  min-width: 0;
-  min-height: 0;
-}
-
-/* Window Header */
+/* Panel Header */
 .panel-title {
   height: var(--header-height);
   font-size: var(--font-sm);
@@ -164,201 +69,15 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0; /* Don't shrink header */
+  flex-shrink: 0;
 }
 
+/* Panel Content */
 .panel-content {
-  flex: 1; /* Take remaining height */
+  flex: 1;
   padding: 12px;
   display: flex;
-  overflow: auto; /* Enable scroll if needed */
+  overflow: auto;
   position: relative;
-  min-height: 0; /* Important for nested scrolling */
-}
-
-/* --- Component Styles --- */
-
-/* Buttons */
-.dcs-btn {
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  background-color: var(--bg-panel-light);
-  color: var(--text-main);
-  font-size: var(--font-xs);
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  padding: 8px;
-  text-align: center;
-  user-select: none;
-  white-space: nowrap; /* Prevent button text wrap */
-}
-.dcs-btn:hover:not(:disabled) {
-  filter: brightness(1.2);
-  border-color: var(--text-muted);
-}
-.dcs-btn:active:not(:disabled) {
-  transform: translateY(1px);
-}
-.dcs-btn.active-green {
-  background-color: var(--color-success);
-  color: #fff;
-  border-color: #15803d;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
-}
-.dcs-btn.active-red {
-  background-color: var(--color-danger);
-  color: #fff;
-  border-color: #b91c1c;
-  box-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
-}
-.dcs-btn.active-yellow {
-  background-color: var(--color-warning);
-  color: #000;
-  border-color: #a16207;
-}
-
-/* Sliders */
-.dcs-slider-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.dcs-slider-label {
-  display: flex;
-  justify-content: space-between;
-  font-size: var(--font-xs);
-  color: var(--text-muted);
-}
-.dcs-slider {
-  -webkit-appearance: none;
-  width: 100%;
-  background: transparent;
-}
-.dcs-slider:focus { outline: none; }
-.dcs-slider::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 6px;
-  cursor: pointer;
-  background: var(--bg-input);
-  border-radius: 3px;
-  border: 1px solid var(--border-color);
-}
-.dcs-slider::-webkit-slider-thumb {
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: var(--color-info);
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -6px;
-  border: 2px solid var(--bg-panel);
-  box-shadow: 0 0 4px rgba(0,0,0,0.5);
-}
-
-/* Annunciators */
-.annunciator-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Responsive Grid */
-  gap: 6px;
-  width: 100%;
-  margin-bottom: 12px;
-}
-.annunciator-col {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  background-color: rgba(0,0,0,0.2);
-  padding: 4px;
-  border-radius: 4px;
-}
-.annunciator-header {
-  font-size: 0.5rem; /* Very small fixed */
-  text-align: center;
-  color: var(--text-muted);
-  font-weight: 800;
-  margin-bottom: 4px;
-  letter-spacing: 0.1em;
-}
-.annunciator-tile {
-  flex: 1;
-  min-height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.55rem;
-  font-weight: 700;
-  border: 1px solid #000;
-  background-color: #000;
-  color: #333;
-  text-align: center;
-  transition: all 0.2s;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
-  padding: 2px;
-  word-break: break-word; /* Prevent overflow */
-}
-.annunciator-tile.active {
-  background-color: var(--color-danger);
-  color: #fff;
-  border-color: #ef4444;
-  text-shadow: 0 0 2px rgba(255,255,255,0.8);
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
-  animation: pulse-alarm 1s infinite alternate;
-}
-@keyframes pulse-alarm {
-  from { opacity: 1; }
-  to { opacity: 0.8; }
-}
-
-/* Value Display */
-.value-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-.value-row:last-child { border-bottom: none; }
-.value-label {
-  font-size: var(--font-sm);
-  color: var(--text-muted);
-}
-.value-data {
-  font-family: 'Roboto Mono', 'Consolas', monospace;
-  font-weight: 700;
-  font-size: var(--font-base);
-  color: var(--color-info);
-}
-.value-data.unit {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-left: 4px;
-}
-.value-row.alert {
-  background-color: rgba(239, 68, 68, 0.1);
-  border-left: 3px solid var(--color-danger);
-}
-.value-row.alert .value-data { color: var(--color-danger); }
-
-/* Control Columns */
-.control-col {
-  background-color: var(--bg-panel-light);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex: 1;
-  min-width: 0;
-}
-.control-col-header {
-  text-align: center;
-  font-size: var(--font-sm);
-  font-weight: 700;
-  color: var(--text-muted);
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 6px;
-  margin-bottom: 6px;
+  min-height: 0;
 }

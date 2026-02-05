@@ -1,113 +1,70 @@
-# BuildLink
+# CoDesign
 
-**BuildLink — Research prototype submitted to the Nemetschek Innovation Award · CMU CEE**
+**CoDesign** is a research prototype for studying **human-AI collaborative design refinement** — from conceptual process design to detailed engineering design.
 
-Contact: Seongeun Park ([seongeup@andrew.cmu.edu](mailto:seongeup@andrew.cmu.edu)), Joonsun Hwang ([joonsunh@andrew.cmu.edu](mailto:joonsunh@andrew.cmu.edu))
-
-BuildLink is a research prototype that provides **context-aware, queryable operational support** for complex infrastructure systems.
-It integrates **graph-based procedural knowledge**, **AI-powered conversational assistance**, and an **interactive control-room-style interface**.
-
-This repository includes a **live web-based demonstrator**, validated using a **nuclear power plant Loss of Feedwater (LOFW)** scenario as a representative safety-critical use case.
-
-![BuildLink Live Demonstrator](./images/buildlink_overview.png)
-*Live web-based demonstrator showing the control room interface, AI advisor, and procedure knowledge graph.*
+The tool provides an interactive environment where an AI assistant progressively guides a human designer through design concretization: equipment selection, connection logic, nozzle specification, and P&ID-level decisions. The human remains the final decision-maker at every stage.
 
 ---
 
-## 🔗 Links
-
-* **Live Demonstrator:** [https://buildlink-drab.vercel.app/](https://buildlink-drab.vercel.app/)
-
----
-
-## 🧠 What BuildLink Does
-
-BuildLink supports human operators during abnormal or emergency situations by:
-
-* Visualizing operational procedures as **knowledge graphs**
-* Preserving **operator-driven decision-making**
-* Providing **context-aware AI assistance** grounded in procedures and system state
-* Enabling intuitive navigation of procedures, incidents, and system conditions
-
-The system focuses on **making procedures visible and interpretable**, rather than automating operator actions.
-
----
-
-## 🧪 Live Demonstrator: Nuclear Power Plant LOFW Scenario
-
-The current prototype demonstrates BuildLink using a simulated **pressurized water reactor (PWR)** control environment.
-
-### Supported Scenarios
-
-* **Scenario A (cv):** Feedwater control valve malfunction
-* **Scenario B (pump):** Feedwater pump trip
-* **Scenario C (hard):** Total loss of feedwater requiring emergency shutdown
-
-### Training Mode
-
-* **Training Mode ON (default):**
-
-  * Scenario C is enforced
-  * Stochastic noise is added to system behavior
-* **Training Mode OFF:**
-
-  * Users may manually select Scenario A / B / C
-
----
-
-## 🖥️ System Overview
-
-The interface consists of four coordinated panels:
-
-* **Status Panel:** Real-time system state, indicators, and alarms
-* **Control Panel:** Operator actions, scenario selection, and mode control
-* **AI Advisor:** RAG-based conversational assistant
-* **Procedure Panel:** Graph-based visualization of operational procedures
-
----
-
-## 🛠️ Technology Stack
-
-* **Frontend:** React (Vite), TypeScript
-* **State Management:** Zustand (physics + procedure logic)
-* **Visualization:** react-force-graph-2d
-* **AI:** Retrieval-Augmented Generation (RAG)
-* **Backend:** FastAPI (Python)
-
----
-
-## 🚀 Local Development
-
-### Frontend
+## Setup
 
 ```bash
 npm install
 npm run dev
 ```
 
-Frontend runs at:
+Opens at `http://localhost:5173` (or next available port).
 
-```
-http://localhost:5173
-```
-
-### Backend (required for AI features)
+### Build for production
 
 ```bash
-uvicorn backend.main:app --reload --port 8000
+npm run build
+npm run preview
 ```
-
-Backend runs at:
-
-```
-http://localhost:8000
-```
-
-> The frontend expects the backend server to be running locally.
 
 ---
 
-## 📄 Notes
+## Project Structure
 
-* This repository is intended as a **research prototype and live demonstrator**.
-* Detailed problem formulation, technical contributions, and evaluation are described in the accompanying report submitted to the Nemetschek Innovation Award.
+```
+src/
+  components/
+    DisplayPanel.tsx    # Schematic DAG view of the design
+    InfoPanel.tsx       # Component details & view mode selector
+    ChatPanel.tsx       # AI chat interface
+    GraphPanel.tsx      # Knowledge graph with custom rendering
+  store/
+    designStore.ts      # Zustand store (graphs, selection, chat)
+  utils/
+    graphParsers.ts     # Parsers for conceptual JSON & DEXPI JSON
+  App.tsx               # Main layout
+  App.css               # Global styles
+  main.tsx              # Entry point
+```
+
+---
+
+## Sample Data
+
+Design data is loaded from `public/sample/` and served at `/sample/*`:
+
+| File | Purpose |
+|------|---------|
+| `/sample/conceptual_design.json` | Conceptual PFD: 4 nodes (Source, Pump, HeatExchanger, Sink) with functional links |
+| `/sample/dexpi_model_output.json` | Detailed P&ID: tagged equipment (P-4713, H-1009), nozzles, boundary items, 5 piping segments in DEXPI-inspired format |
+
+### Conceptual view
+
+Minimal process flow — functional blocks connected by labeled streams (e.g., "L-001: Liquid Feed (DN 150)").
+
+### Detailed view
+
+Full knowledge graph with equipment, nozzles, pipe segments, and source/sink boundaries. Each node carries rich attribute data (design pressure, temperature, materials, costs) visible in the Component Info panel.
+
+---
+
+## Technology Stack
+
+- React 18 + TypeScript + Vite
+- Zustand (state management)
+- react-force-graph-2d (graph visualization)

@@ -44,7 +44,7 @@ function App() {
           position: 'absolute', bottom: 0, right: 0, left: 0,
           padding: '4px 10px', background: '#020617', fontSize: '0.7rem', color: '#64748b', textAlign: 'center', zIndex: 100
       }}>
-        Human-AI Collaborative Design Automation · Powered by Knowledge Graphs
+        CoDesign · Human-AI Collaborative Design Refinement
       </footer>
     </div>
   );
