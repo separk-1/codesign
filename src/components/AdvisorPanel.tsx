@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { askGemini } from '../utils/gemini';
 import { useSimulationStore } from '../store/simulationStore';
 import { useGraphData } from '../hooks/useGraphData';
 import { FormattedText } from '../utils/markdown';
+import { parseCsv, filterParsedCsv, ParsedCsv } from '../utils/csvHelper';
 
 type Msg = { sender: 'AI' | 'User'; text: string };
 
@@ -21,38 +22,12 @@ function buildStateKeywords(simState: any) {
   return Array.from(new Set(keys));
 }
 
-function filterCsvByKeywords(csvText: string, keywords: string[], maxLines: number) {
-  const lines = (csvText || '').split('\n').map(l => l.trim()).filter(Boolean);
-  if (lines.length === 0) return '';
-
-  // keep header if it looks like header
-  const header = lines[0].includes(',') && /[a-zA-Z]/.test(lines[0]) ? lines[0] : null;
-  const body = header ? lines.slice(1) : lines;
-
-  const upperKeys = keywords.map(k => k.toUpperCase());
-  const scored = body.map((line) => {
-    const U = line.toUpperCase();
-    let score = 0;
-    for (const k of upperKeys) if (U.includes(k)) score += 1;
-    return { line, score };
-  });
-
-  const picked = scored
-    .filter(x => x.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, maxLines)
-    .map(x => x.line);
-
-  const out = header ? [header, ...picked] : picked;
-  return out.join('\n');
-}
-
 function clampText(text: string, maxChars: number) {
   if (text.length <= maxChars) return text;
   return text.slice(0, maxChars) + '\n...(truncated)';
 }
 
-function buildCompactContext(simState: any, entityCsv: string, relationshipCsv: string) {
+function buildCompactContext(simState: any, entityCsv: ParsedCsv, relationshipCsv: ParsedCsv) {
   const alarms = [
     simState.fw_low_flow && 'FW_LOW_FLOW',
     simState.sg_low_level && 'SG_LOW_LEVEL',
@@ -62,8 +37,8 @@ function buildCompactContext(simState: any, entityCsv: string, relationshipCsv: 
   const keywords = buildStateKeywords(simState);
 
   // keep only a small slice of KG
-  const compactEntities = filterCsvByKeywords(entityCsv, keywords, 8);
-  const compactRels = filterCsvByKeywords(relationshipCsv, keywords, 10);
+  const compactEntities = filterParsedCsv(entityCsv, keywords, 8);
+  const compactRels = filterParsedCsv(relationshipCsv, keywords, 10);
 
   const ctx = `
 STATE:
@@ -98,8 +73,10 @@ export const AdvisorPanel = () => {
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [messages]);
 
-  const simState = useSimulationStore();
   const { entityCsv, relationshipCsv, loading: graphLoading } = useGraphData();
+
+  const parsedEntityCsv = useMemo(() => parseCsv(entityCsv), [entityCsv]);
+  const parsedRelationshipCsv = useMemo(() => parseCsv(relationshipCsv), [relationshipCsv]);
 
   const handleSend = async () => {
     if (loading) return;
@@ -115,7 +92,7 @@ export const AdvisorPanel = () => {
     setInput('');
     setLoading(true);
 
-    const context = buildCompactContext(simState, entityCsv, relationshipCsv);
+    const context = buildCompactContext(simState, parsedEntityCsv, parsedRelationshipCsv);
 
     try {
       const answer = await askGemini(userQuestion, context);

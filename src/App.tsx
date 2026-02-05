@@ -1,54 +1,50 @@
 import { useEffect } from 'react';
-import { StatusPanel } from './components/StatusPanel';
-import { ControlPanel } from './components/ControlPanel';
-import { AdvisorPanel } from './components/AdvisorPanel';
-import { ProcedurePanel } from './components/ProcedurePanel';
-import { useSimulationStore } from './store/simulationStore';
+import { DisplayPanel } from './components/DisplayPanel';
+import { InfoPanel } from './components/InfoPanel';
+import { ChatPanel } from './components/ChatPanel';
+import { GraphPanel } from './components/GraphPanel';
+import { useDesignStore } from './store/designStore';
 import './App.css';
 
 function App() {
-  const loadProcedureRules = useSimulationStore(state => state.loadProcedureRules);
+  const loadData = useDesignStore(state => state.loadData);
 
   useEffect(() => {
-    // Initial load of rules
-    loadProcedureRules().then(() => {
-       // Trigger the initial step's logic after rules are loaded
-       const state = useSimulationStore.getState();
-       if (state.activeStepId) {
-           state.triggerStepAction(state.activeStepId);
-       }
-    });
-  }, []);
+    loadData();
+  }, [loadData]);
 
   return (
-    <div className="app-container relative w-screen h-screen">
-      {/* Left Column: Simulator (65%) */}
-      <div className="col-sim">
-        {/* Top: Status Display (65%) */}
-        <div className="status-panel panel-container">
-          <StatusPanel />
+    <div className="app-container relative w-screen h-screen" style={{ display: 'flex', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
+      {/* Left Column: Visuals & Info (60%) */}
+      <div style={{ flex: '60%', display: 'flex', flexDirection: 'column', borderRight: '1px solid #334155' }}>
+        {/* Top: Schematic Display (65%) */}
+        <div style={{ flex: '65%', position: 'relative', borderBottom: '1px solid #334155' }}>
+          <DisplayPanel />
         </div>
-        {/* Bottom: Control Panel (35%) */}
-        <div className="control-panel panel-container">
-          <ControlPanel />
+        {/* Bottom: Component Info (35%) */}
+        <div style={{ flex: '35%', position: 'relative' }}>
+          <InfoPanel />
         </div>
       </div>
 
-      {/* Right Column: Support (35%) */}
-      <div className="col-support">
-        {/* Top: AI Advisor (40%) */}
-        <div className="advisor-panel panel-container">
-          <AdvisorPanel />
+      {/* Right Column: AI & Knowledge Graph (40%) */}
+      <div style={{ flex: '40%', display: 'flex', flexDirection: 'column' }}>
+        {/* Top: AI Chat (40%) */}
+        <div style={{ flex: '40%', position: 'relative', borderBottom: '1px solid #334155' }}>
+          <ChatPanel />
         </div>
-        {/* Bottom: Procedures (60%) */}
-        <div className="procedure-panel panel-container">
-          <ProcedurePanel />
+        {/* Bottom: Knowledge Graph (60%) */}
+        <div style={{ flex: '60%', position: 'relative' }}>
+          <GraphPanel />
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="app-footer">
-        BuildLink — Research prototype submitted to the Nemetschek Innovation Award · CMU CEE · Contact: seongeup@andrew.cmu.edu, joonsunh@andrew.cmu.edu
+      <footer className="app-footer" style={{
+          position: 'absolute', bottom: 0, right: 0, left: 0,
+          padding: '4px 10px', background: '#020617', fontSize: '0.7rem', color: '#64748b', textAlign: 'center', zIndex: 100
+      }}>
+        Human-AI Collaborative Design Automation · Powered by Knowledge Graphs
       </footer>
     </div>
   );
