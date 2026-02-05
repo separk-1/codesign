@@ -169,6 +169,25 @@ export const ProcedurePanel = () => {
     return { nodes, links };
   }, [entityCsv, relationshipCsv, lerEntityCsv, lerRelationshipCsv, parentCsv, loading, incidentView]);
 
+  // Precompute Adjacency List for O(1) traversal
+  const adjacencyList = useMemo(() => {
+      const adj = new Map<string, string[]>();
+
+      const getId = (node: string | CustomNode) => typeof node === 'object' ? node.id : node;
+
+      graphData.links.forEach(l => {
+          const sId = getId(l.source);
+          const tId = getId(l.target);
+
+          if (!adj.has(sId)) adj.set(sId, []);
+          if (!adj.has(tId)) adj.set(tId, []);
+
+          adj.get(sId)!.push(tId);
+          adj.get(tId)!.push(sId);
+      });
+      return adj;
+  }, [graphData.links]);
+
   // Determine Highlighting Set (Memoized)
   const highlightSet = useMemo(() => {
       const set = new Set<string>();
@@ -269,15 +288,10 @@ export const ProcedurePanel = () => {
                const currId = incidentQueue.shift()!;
 
                // Find neighbors of currId that are LER nodes
-               graphData.links.forEach(l => {
-                   const sId = getId(l.source);
-                   const tId = getId(l.target);
-
-                   let nextId = null;
-                   if (sId === currId) nextId = tId;
-                   else if (tId === currId) nextId = sId;
-
-                   if (nextId) {
+               // Use adjacency list for O(1) neighbor lookup
+               const neighbors = adjacencyList.get(currId);
+               if (neighbors) {
+                   neighbors.forEach(nextId => {
                        if (nextId.startsWith('ler_')) {
                            if (!visitedIncident.has(nextId)) {
                                visitedIncident.add(nextId);
@@ -285,13 +299,13 @@ export const ProcedurePanel = () => {
                                incidentQueue.push(nextId);
                            }
                        }
-                   }
-               });
+                   });
+               }
            }
       }
 
       return set;
-  }, [activeStepId, hoveredNodeId, graphData, incidentView]);
+  }, [activeStepId, hoveredNodeId, graphData, incidentView, adjacencyList]);
 
 
   // Analyze Current Step Options (Memoized)
