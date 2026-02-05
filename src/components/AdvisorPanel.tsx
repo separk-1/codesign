@@ -98,7 +98,6 @@ export const AdvisorPanel = () => {
     if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, [messages]);
 
-  const simState = useSimulationStore();
   const { entityCsv, relationshipCsv, loading: graphLoading } = useGraphData();
 
   const handleSend = async () => {
@@ -115,6 +114,7 @@ export const AdvisorPanel = () => {
     setInput('');
     setLoading(true);
 
+    const simState = useSimulationStore.getState();
     const context = buildCompactContext(simState, entityCsv, relationshipCsv);
 
     try {
