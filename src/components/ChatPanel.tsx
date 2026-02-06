@@ -37,7 +37,6 @@ function getDefaultAnswer(aiText: string): { answer: string; confidence: 'high' 
 export const ChatPanel = () => {
     const {
         chatMessages, addChatMessage,
-        activeView, setActiveView,
         assumptionMode, setAssumptionMode
     } = useDesignStore();
     const [input, setInput] = useState('');
@@ -82,23 +81,7 @@ export const ChatPanel = () => {
         addChatMessage('user', userMsg, source);
         setInput('');
         setCurrentConfidence(null);
-
-        // Mock AI Response
-        setTimeout(() => {
-            let aiResponse = "I'm not sure how to handle that request.";
-
-            if (userMsg.toLowerCase().includes('convert') || userMsg.toLowerCase().includes('detail')) {
-                aiResponse = "Translating Conceptual Design to Detailed Design... I have mapped the 'Feed Pump' to a Centrifugal Pump (P-4713) and the 'Pre-Heater' to a Plate Heat Exchanger (H-1009). Switching to Detailed View.";
-                setTimeout(() => setActiveView('detailed'), 1500);
-            } else if (userMsg.toLowerCase().includes('hello') || userMsg.toLowerCase().includes('hi')) {
-                aiResponse = "Hello! I can help you automate your design process. Try asking me to 'convert to detailed design'.";
-            } else if (userMsg.toLowerCase().includes('concept')) {
-                aiResponse = "Switching back to Conceptual View.";
-                setTimeout(() => setActiveView('conceptual'), 500);
-            }
-
-            addChatMessage('ai', aiResponse);
-        }, 1000);
+        // AI response is now handled by the store's advanceConversation action
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {

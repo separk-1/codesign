@@ -34,6 +34,8 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
   background-color: var(--bg-app);
   color: var(--text-main);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -85,4 +87,15 @@ body {
 @keyframes pulse {
   0%, 100% { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); }
   50% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.1); }
+}
+
+/* Terminal spinner animation */
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.terminal-spinner {
+  display: inline-block;
+  animation: terminal-blink 1s ease-in-out infinite;
 }
