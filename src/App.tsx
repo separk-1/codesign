@@ -15,14 +15,32 @@ function App() {
   }, [loadData]);
 
   return (
-    <div className="app-container relative w-full h-full" style={{ display: 'flex', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
-      {/* Left Sidebar: Task Progress (Dynamic ~13%) */}
-      <div style={{ flex: 1.5, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+    <div className="app-container relative w-full h-full" style={{
+      display: 'flex',
+      overflowX: 'auto',
+      overflowY: 'hidden',
+      background: '#0f172a',
+      color: '#fff',
+      minWidth: '1000px' // Ensure panels don't get crushed
+    }}>
+      {/* Left Sidebar: Task Progress (Fixed 260px) */}
+      <div style={{
+        flex: '0 0 260px',
+        display: 'flex',
+        flexDirection: 'column',
+        borderRight: '1px solid #334155'
+      }}>
         <TaskPanel />
       </div>
 
-      {/* Center Column: Visuals & Info (Dynamic ~52%) */}
-      <div style={{ flex: 6, minWidth: 0, display: 'flex', flexDirection: 'column', borderRight: '1px solid #334155' }}>
+      {/* Center Column: Visuals & Info (Dynamic Flex) */}
+      <div style={{
+        flex: 1,
+        minWidth: '400px', // Prevent it from vanishing
+        display: 'flex',
+        flexDirection: 'column',
+        borderRight: '1px solid #334155'
+      }}>
         {/* Top: Schematic Display (Dynamic ~65% of column) */}
         <div style={{ flex: 6.5, minHeight: 0, position: 'relative', borderBottom: '1px solid #334155' }}>
           <DisplayPanel />
@@ -33,8 +51,12 @@ function App() {
         </div>
       </div>
 
-      {/* Right Column: AI & Knowledge Graph (Dynamic ~35%) */}
-      <div style={{ flex: 4, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+      {/* Right Column: AI & Knowledge Graph (Fixed 350px) */}
+      <div style={{
+        flex: '0 0 350px',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
         {/* Top: AI Chat (Dynamic ~40% of column) */}
         <div style={{ flex: 4, minHeight: 0, position: 'relative', borderBottom: '1px solid #334155' }}>
           <ChatPanel />
