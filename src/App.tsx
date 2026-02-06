@@ -3,7 +3,7 @@ import { TaskPanel } from './components/TaskPanel';
 import { DisplayPanel } from './components/DisplayPanel';
 import { InfoPanel } from './components/InfoPanel';
 import { ChatPanel } from './components/ChatPanel';
-import { GraphPanel } from './components/GraphPanel';
+import { TerminalPanel } from './components/TerminalPanel';
 import { useDesignStore } from './store/designStore';
 import './App.css';
 
@@ -15,7 +15,7 @@ function App() {
   }, [loadData]);
 
   return (
-    <div className="app-container relative w-screen h-screen" style={{ display: 'flex', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
+    <div className="app-container relative w-full h-full" style={{ display: 'flex', overflow: 'hidden', background: '#0f172a', color: '#fff' }}>
       {/* Left Sidebar: Task Progress (Dynamic ~13%) */}
       <div style={{ flex: 1.5, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <TaskPanel />
@@ -39,9 +39,9 @@ function App() {
         <div style={{ flex: 4, minHeight: 0, position: 'relative', borderBottom: '1px solid #334155' }}>
           <ChatPanel />
         </div>
-        {/* Bottom: Knowledge Graph (Dynamic ~60% of column) */}
+        {/* Bottom: Terminal (Dynamic ~60% of column) */}
         <div style={{ flex: 6, minHeight: 0, position: 'relative' }}>
-          <GraphPanel />
+          <TerminalPanel />
         </div>
       </div>
 
