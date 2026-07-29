@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "id": "Source-1",
+      "name": "Feed Tank",
+      "type": "Source",
+      "attributes": {
+        "description": "Elevated feed tank (flooded suction)",
+        "fluid": "Aqueous solution",
+        "flowRate": "100 m³/h",
+        "temperature": "25°C"
+      }
+    },
+    {
+      "id": "Pump-1",
+      "name": "Feed Pump (P-4713)",
+      "type": "Pump",
+      "attributes": {
+        "tag": "P-4713",
+        "equipmentType": "Single-stage centrifugal",
+        "differentialPressure": "8 bar",
+        "designFlowRate": "100 m³/h",
+        "casingMaterial": "Carbon steel",
+        "sealType": "Single mechanical seal",
+        "designPressure": "12 barg",
+        "designTemperature": "120°C",
+        "estimatedCost": "$12,000"
+      }
+    },
+    {
+      "id": "HEX-1",
+      "name": "Pre-Heater (H-1009)",
+      "type": "HeatExchanger",
+      "attributes": {
+        "tag": "H-1009",
+        "equipmentType": "Gasketed plate heat exchanger",
+        "flowArrangement": "Counter-current",
+        "coldInletTemp": "25°C",
+        "coldOutletTemp": "80°C",
+        "heatingMedium": "LP Steam (3.5 barg, ~148°C)",
+        "estimatedDuty": "~6.4 MW",
+        "gasketMaterial": "EPDM",
+        "plateMaterial": "AISI 316 SS",
+        "frameMaterial": "Carbon steel",
+        "designPressure": "12 barg",
+        "designTemperature": "120°C (cold) / 180°C (hot)",
+        "estimatedCost": "$15,000"
+      }
+    },
+    {
+      "id": "Sink-1",
+      "name": "Reactor Feed",
+      "type": "Sink",
+      "attributes": {
+        "description": "Downstream reactor inlet",
+        "temperature": "80°C",
+        "pressure": "~8 barg"
+      }
+    }
+  ],
+  "links": [
+    { "source": "Source-1", "target": "Pump-1", "label": "L-001: Liquid Feed (DN 150)" },
+    { "source": "Pump-1", "target": "HEX-1", "label": "L-002: HP Feed (DN 100)" },
+    { "source": "HEX-1", "target": "Sink-1", "label": "L-003: Heated Feed (DN 100)" }
+  ]
+}

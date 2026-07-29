@@ -1,0 +1,101 @@
+:root {
+  /* Palette */
+  --bg-app: #0f172a;       /* slate-900 */
+  --bg-panel: #1e293b;     /* slate-800 */
+  --bg-panel-light: #334155; /* slate-700 */
+  --bg-input: #0f172a;
+
+  --text-main: #f1f5f9;    /* slate-100 */
+  --text-muted: #94a3b8;   /* slate-400 */
+
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  --border-color: #475569; /* slate-600 */
+
+  /* Dimensions */
+  --panel-gap: clamp(8px, 1vh, 12px);
+  --radius: 6px;
+  --header-height: 32px;
+
+  /* Typography — bumped up for readability */
+  --font-xs: clamp(0.7rem, 1vw, 0.8rem);
+  --font-sm: clamp(0.8rem, 1vw, 0.9rem);
+  --font-base: clamp(0.9rem, 1vw, 1rem);
+  --font-lg: clamp(1rem, 1.1vw, 1.1rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: var(--font-base);
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  opacity: 0.6;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  line-height: 1.4;
+}
+
+/* Panel Header */
+.panel-title {
+  height: var(--header-height);
+  font-size: var(--font-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border-color);
+  margin: 0;
+  background-color: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Panel Content */
+.panel-content {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  overflow: auto;
+  position: relative;
+  min-height: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.1); }
+}
+
+/* Terminal spinner animation */
+@keyframes terminal-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.terminal-spinner {
+  display: inline-block;
+  animation: terminal-blink 1s ease-in-out infinite;
+}
