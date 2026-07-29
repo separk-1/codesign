@@ -1,0 +1,8 @@
+__pycache__/
+.vscode/
+*.log
+*.txt
+*.sh
+*.md
+.env
+.env.example

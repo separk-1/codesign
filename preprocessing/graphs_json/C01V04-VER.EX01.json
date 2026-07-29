@@ -1,0 +1,562 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 1,
+    "pid_name": "C01V04-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\C01V04-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_1",
+      "db_id": 1,
+      "label": "Equipment",
+      "tag_name": "H1007",
+      "class_name": "plateHeatExchanger.py",
+      "tag_prefix": "H",
+      "tag_sequence": "1007",
+      "tag_suffix": "",
+      "description": null,
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "eq_2",
+      "db_id": 2,
+      "label": "Equipment",
+      "tag_name": "H1008",
+      "class_name": "tubularHeatExchanger.py",
+      "tag_prefix": "H",
+      "tag_sequence": "1008",
+      "tag_suffix": "",
+      "description": null,
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "eq_3",
+      "db_id": 3,
+      "label": "Equipment",
+      "tag_name": "P4711",
+      "class_name": "centrifugalPump.py",
+      "tag_prefix": "P",
+      "tag_sequence": "4711",
+      "tag_suffix": "",
+      "description": null,
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "eq_4",
+      "db_id": 4,
+      "label": "Equipment",
+      "tag_name": "P4712",
+      "class_name": "reciprocatingPump.py",
+      "tag_prefix": "P",
+      "tag_sequence": "4712",
+      "tag_suffix": "",
+      "description": null,
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "eq_5",
+      "db_id": 5,
+      "label": "Equipment",
+      "tag_name": "T4750",
+      "class_name": "tank.py",
+      "tag_prefix": "T",
+      "tag_sequence": "4750",
+      "tag_suffix": "",
+      "description": null,
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_1",
+      "db_id": 1,
+      "label": "Nozzle",
+      "subtag": "N1",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 1,
+      "equipment_tag": "H1007",
+      "equipment_class": "plateHeatExchanger.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_2",
+      "db_id": 2,
+      "label": "Nozzle",
+      "subtag": "N2",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 1,
+      "equipment_tag": "H1007",
+      "equipment_class": "plateHeatExchanger.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_3",
+      "db_id": 3,
+      "label": "Nozzle",
+      "subtag": "N3",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 1,
+      "equipment_tag": "H1007",
+      "equipment_class": "plateHeatExchanger.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_4",
+      "db_id": 4,
+      "label": "Nozzle",
+      "subtag": "N4",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 1,
+      "equipment_tag": "H1007",
+      "equipment_class": "plateHeatExchanger.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_5",
+      "db_id": 5,
+      "label": "Nozzle",
+      "subtag": "N1",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 2,
+      "equipment_tag": "H1008",
+      "equipment_class": "tubularHeatExchanger.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_6",
+      "db_id": 6,
+      "label": "Nozzle",
+      "subtag": "N2",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 2,
+      "equipment_tag": "H1008",
+      "equipment_class": "tubularHeatExchanger.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_7",
+      "db_id": 7,
+      "label": "Nozzle",
+      "subtag": "N3",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 2,
+      "equipment_tag": "H1008",
+      "equipment_class": "tubularHeatExchanger.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_8",
+      "db_id": 8,
+      "label": "Nozzle",
+      "subtag": "N4",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 2,
+      "equipment_tag": "H1008",
+      "equipment_class": "tubularHeatExchanger.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_9",
+      "db_id": 9,
+      "label": "Nozzle",
+      "subtag": "N1",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 3,
+      "equipment_tag": "P4711",
+      "equipment_class": "centrifugalPump.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_10",
+      "db_id": 10,
+      "label": "Nozzle",
+      "subtag": "N2",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 3,
+      "equipment_tag": "P4711",
+      "equipment_class": "centrifugalPump.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_11",
+      "db_id": 11,
+      "label": "Nozzle",
+      "subtag": "N1",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 4,
+      "equipment_tag": "P4712",
+      "equipment_class": "reciprocatingPump.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_12",
+      "db_id": 12,
+      "label": "Nozzle",
+      "subtag": "N2",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 4,
+      "equipment_tag": "P4712",
+      "equipment_class": "reciprocatingPump.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_13",
+      "db_id": 13,
+      "label": "Nozzle",
+      "subtag": "N1",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 5,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_14",
+      "db_id": 14,
+      "label": "Nozzle",
+      "subtag": "N2",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 5,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_15",
+      "db_id": 15,
+      "label": "Nozzle",
+      "subtag": "N3",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 5,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_16",
+      "db_id": 16,
+      "label": "Nozzle",
+      "subtag": "N5",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 5,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_17",
+      "db_id": 17,
+      "label": "Nozzle",
+      "subtag": "N6",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 5,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_18",
+      "db_id": 18,
+      "label": "Nozzle",
+      "subtag": "N7",
+      "nominal_diameter": "25",
+      "nominal_pressure": null,
+      "equipment_id": 5,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "noz_19",
+      "db_id": 19,
+      "label": "Nozzle",
+      "subtag": "N8",
+      "nominal_diameter": "800",
+      "nominal_pressure": null,
+      "equipment_id": 5,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_1",
+      "db_id": 1,
+      "label": "Line",
+      "line_number": "47121",
+      "fluid_code": "MNb",
+      "nominal_diameter": "80",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_2",
+      "db_id": 2,
+      "label": "Line",
+      "line_number": "47122",
+      "fluid_code": "MNb",
+      "nominal_diameter": "80",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_3",
+      "db_id": 3,
+      "label": "Line",
+      "line_number": "47123",
+      "fluid_code": "MNb",
+      "nominal_diameter": "80",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_4",
+      "db_id": 4,
+      "label": "Line",
+      "line_number": "47124",
+      "fluid_code": "MNc",
+      "nominal_diameter": "80",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_5",
+      "db_id": 5,
+      "label": "Line",
+      "line_number": "47125",
+      "fluid_code": "MNc",
+      "nominal_diameter": "25",
+      "piping_class_code": "73HG12",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_6",
+      "db_id": 6,
+      "label": "Line",
+      "line_number": "47126",
+      "fluid_code": "MNc",
+      "nominal_diameter": "50",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_7",
+      "db_id": 7,
+      "label": "Line",
+      "line_number": "47127",
+      "fluid_code": "MNc",
+      "nominal_diameter": "50",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_8",
+      "db_id": 8,
+      "label": "Line",
+      "line_number": "47130",
+      "fluid_code": "WKa",
+      "nominal_diameter": "50",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_9",
+      "db_id": 9,
+      "label": "Line",
+      "line_number": "47131",
+      "fluid_code": "WKb",
+      "nominal_diameter": "50",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_10",
+      "db_id": 10,
+      "label": "Line",
+      "line_number": "47140",
+      "fluid_code": "QSa",
+      "nominal_diameter": "50",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    },
+    {
+      "id": "line_11",
+      "db_id": 11,
+      "label": "Line",
+      "line_number": "47141",
+      "fluid_code": "QSb",
+      "nominal_diameter": "50",
+      "piping_class_code": "75HB13",
+      "pid_id": 1,
+      "pid_name": "C01V04-VER.EX01"
+    }
+  ],
+  "links": [
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_1",
+      "target": "noz_1"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_1",
+      "target": "noz_2"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_1",
+      "target": "noz_3"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_1",
+      "target": "noz_4"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_2",
+      "target": "noz_5"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_2",
+      "target": "noz_6"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_2",
+      "target": "noz_7"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_2",
+      "target": "noz_8"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_3",
+      "target": "noz_9"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_3",
+      "target": "noz_10"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_4",
+      "target": "noz_11"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_4",
+      "target": "noz_12"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_5",
+      "target": "noz_13"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_5",
+      "target": "noz_14"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_5",
+      "target": "noz_15"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_5",
+      "target": "noz_16"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_5",
+      "target": "noz_17"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_5",
+      "target": "noz_18"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_5",
+      "target": "noz_19"
+    },
+    {
+      "type": "CONNECTED_BY_LINE",
+      "connection_id": 1,
+      "line_id": 2,
+      "line_number": "47122",
+      "fluid_code": "MNb",
+      "nominal_diameter": "80",
+      "piping_class_code": "75HB13",
+      "source": "noz_1",
+      "target": "noz_10"
+    },
+    {
+      "type": "LINE_TO_NOZZLE",
+      "source": "noz_1",
+      "target": "line_2"
+    },
+    {
+      "type": "LINE_TO_NOZZLE",
+      "source": "noz_10",
+      "target": "line_2"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 34,
+    "pid_name": "P03V01-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\P03V01-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_32",
+      "db_id": 32,
+      "label": "Equipment",
+      "tag_name": "H-1008",
+      "class_name": "plateHeatExchanger.py",
+      "tag_prefix": "H",
+      "tag_sequence": "1008",
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 34,
+      "pid_name": "P03V01-VER.EX01"
+    },
+    {
+      "id": "noz_68",
+      "db_id": 68,
+      "label": "Nozzle",
+      "subtag": "N-4",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 32,
+      "equipment_tag": "H-1008",
+      "equipment_class": "plateHeatExchanger.py",
+      "pid_id": 34,
+      "pid_name": "P03V01-VER.EX01"
+    },
+    {
+      "id": "line_39",
+      "db_id": 39,
+      "label": "Line",
+      "line_number": "10081",
+      "fluid_code": "WKb",
+      "nominal_diameter": "50",
+      "piping_class_code": "75HB13",
+      "pid_id": 34,
+      "pid_name": "P03V01-VER.EX01"
+    }
+  ],
+  "links": [
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_32",
+      "target": "noz_68"
+    }
+  ]
+}

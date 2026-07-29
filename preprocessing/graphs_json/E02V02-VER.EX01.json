@@ -1,0 +1,116 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 5,
+    "pid_name": "E02V02-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\E02V02-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_9",
+      "db_id": 9,
+      "label": "Equipment",
+      "tag_name": "T4750",
+      "class_name": "tank.py",
+      "tag_prefix": null,
+      "tag_sequence": null,
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 5,
+      "pid_name": "E02V02-VER.EX01"
+    },
+    {
+      "id": "noz_29",
+      "db_id": 29,
+      "label": "Nozzle",
+      "subtag": "N-1",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 9,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 5,
+      "pid_name": "E02V02-VER.EX01"
+    },
+    {
+      "id": "noz_30",
+      "db_id": 30,
+      "label": "Nozzle",
+      "subtag": "N-2",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 9,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 5,
+      "pid_name": "E02V02-VER.EX01"
+    },
+    {
+      "id": "noz_31",
+      "db_id": 31,
+      "label": "Nozzle",
+      "subtag": "N-5",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 9,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 5,
+      "pid_name": "E02V02-VER.EX01"
+    },
+    {
+      "id": "noz_32",
+      "db_id": 32,
+      "label": "Nozzle",
+      "subtag": "N-6",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 9,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 5,
+      "pid_name": "E02V02-VER.EX01"
+    },
+    {
+      "id": "noz_33",
+      "db_id": 33,
+      "label": "Nozzle",
+      "subtag": "N-7",
+      "nominal_diameter": "25",
+      "nominal_pressure": null,
+      "equipment_id": 9,
+      "equipment_tag": "T4750",
+      "equipment_class": "tank.py",
+      "pid_id": 5,
+      "pid_name": "E02V02-VER.EX01"
+    }
+  ],
+  "links": [
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_9",
+      "target": "noz_29"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_9",
+      "target": "noz_30"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_9",
+      "target": "noz_31"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_9",
+      "target": "noz_32"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_9",
+      "target": "noz_33"
+    }
+  ]
+}

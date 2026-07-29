@@ -1,0 +1,80 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 7,
+    "pid_name": "E04V01-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\E04V01-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_11",
+      "db_id": 11,
+      "label": "Equipment",
+      "tag_name": "H-1009",
+      "class_name": "plateHeatExchanger.py",
+      "tag_prefix": "H",
+      "tag_sequence": "1009",
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 7,
+      "pid_name": "E04V01-VER.EX01"
+    },
+    {
+      "id": "noz_35",
+      "db_id": 35,
+      "label": "Nozzle",
+      "subtag": "N-2",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 11,
+      "equipment_tag": "H-1009",
+      "equipment_class": "plateHeatExchanger.py",
+      "pid_id": 7,
+      "pid_name": "E04V01-VER.EX01"
+    },
+    {
+      "id": "noz_36",
+      "db_id": 36,
+      "label": "Nozzle",
+      "subtag": "N-3",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 11,
+      "equipment_tag": "H-1009",
+      "equipment_class": "plateHeatExchanger.py",
+      "pid_id": 7,
+      "pid_name": "E04V01-VER.EX01"
+    },
+    {
+      "id": "noz_37",
+      "db_id": 37,
+      "label": "Nozzle",
+      "subtag": "N-4",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 11,
+      "equipment_tag": "H-1009",
+      "equipment_class": "plateHeatExchanger.py",
+      "pid_id": 7,
+      "pid_name": "E04V01-VER.EX01"
+    }
+  ],
+  "links": [
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_11",
+      "target": "noz_35"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_11",
+      "target": "noz_36"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_11",
+      "target": "noz_37"
+    }
+  ]
+}

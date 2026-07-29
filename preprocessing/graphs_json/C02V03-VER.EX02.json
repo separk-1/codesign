@@ -1,0 +1,245 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 2,
+    "pid_name": "C02V03-VER.EX02",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\C02V03-VER.EX02.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_6",
+      "db_id": 6,
+      "label": "Equipment",
+      "tag_name": "K 2750",
+      "class_name": "processColumn.py",
+      "tag_prefix": "K",
+      "tag_sequence": "2750",
+      "tag_suffix": "",
+      "description": null,
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "eq_7",
+      "db_id": 7,
+      "label": "Equipment",
+      "tag_name": "KX 2750",
+      "class_name": "taggedColumnSection.py",
+      "tag_prefix": "KX",
+      "tag_sequence": "2750",
+      "tag_suffix": "",
+      "description": null,
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_20",
+      "db_id": 20,
+      "label": "Nozzle",
+      "subtag": "H1",
+      "nominal_diameter": "250",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_21",
+      "db_id": 21,
+      "label": "Nozzle",
+      "subtag": "N1",
+      "nominal_diameter": "200",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_22",
+      "db_id": 22,
+      "label": "Nozzle",
+      "subtag": "N2",
+      "nominal_diameter": "150",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_23",
+      "db_id": 23,
+      "label": "Nozzle",
+      "subtag": "N3",
+      "nominal_diameter": "150",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_24",
+      "db_id": 24,
+      "label": "Nozzle",
+      "subtag": "N4",
+      "nominal_diameter": "200",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_25",
+      "db_id": 25,
+      "label": "Nozzle",
+      "subtag": "N5",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_26",
+      "db_id": 26,
+      "label": "Nozzle",
+      "subtag": "N7",
+      "nominal_diameter": "50",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_27",
+      "db_id": 27,
+      "label": "Nozzle",
+      "subtag": "P3",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "noz_28",
+      "db_id": 28,
+      "label": "Nozzle",
+      "subtag": "P4",
+      "nominal_diameter": "80",
+      "nominal_pressure": null,
+      "equipment_id": 6,
+      "equipment_tag": "K 2750",
+      "equipment_class": "processColumn.py",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "line_12",
+      "db_id": 12,
+      "label": "Line",
+      "line_number": "2750.001.6",
+      "fluid_code": "8503",
+      "nominal_diameter": "150",
+      "piping_class_code": "10HB25T10B1",
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "line_13",
+      "db_id": 13,
+      "label": "Line",
+      "line_number": "*at N3*",
+      "fluid_code": null,
+      "nominal_diameter": "150",
+      "piping_class_code": null,
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "line_14",
+      "db_id": 14,
+      "label": "Line",
+      "line_number": "*at P3*",
+      "fluid_code": null,
+      "nominal_diameter": "25",
+      "piping_class_code": null,
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    },
+    {
+      "id": "line_15",
+      "db_id": 15,
+      "label": "Line",
+      "line_number": "*at P4*",
+      "fluid_code": null,
+      "nominal_diameter": "25",
+      "piping_class_code": null,
+      "pid_id": 2,
+      "pid_name": "C02V03-VER.EX02"
+    }
+  ],
+  "links": [
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_20"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_21"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_22"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_23"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_24"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_25"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_26"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_27"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_6",
+      "target": "noz_28"
+    }
+  ]
+}

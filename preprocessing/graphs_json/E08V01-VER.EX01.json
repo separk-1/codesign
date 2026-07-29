@@ -1,0 +1,98 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 11,
+    "pid_name": "E08V01-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\E08V01-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_19",
+      "db_id": 19,
+      "label": "Equipment",
+      "tag_name": "PC321",
+      "class_name": "processColumn.py",
+      "tag_prefix": "PC",
+      "tag_sequence": "321",
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 11,
+      "pid_name": "E08V01-VER.EX01"
+    },
+    {
+      "id": "noz_52",
+      "db_id": 52,
+      "label": "Nozzle",
+      "subtag": "N1",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 19,
+      "equipment_tag": "PC321",
+      "equipment_class": "processColumn.py",
+      "pid_id": 11,
+      "pid_name": "E08V01-VER.EX01"
+    },
+    {
+      "id": "noz_53",
+      "db_id": 53,
+      "label": "Nozzle",
+      "subtag": "N2",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 19,
+      "equipment_tag": "PC321",
+      "equipment_class": "processColumn.py",
+      "pid_id": 11,
+      "pid_name": "E08V01-VER.EX01"
+    },
+    {
+      "id": "noz_54",
+      "db_id": 54,
+      "label": "Nozzle",
+      "subtag": "N3",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 19,
+      "equipment_tag": "PC321",
+      "equipment_class": "processColumn.py",
+      "pid_id": 11,
+      "pid_name": "E08V01-VER.EX01"
+    },
+    {
+      "id": "noz_55",
+      "db_id": 55,
+      "label": "Nozzle",
+      "subtag": "N4",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 19,
+      "equipment_tag": "PC321",
+      "equipment_class": "processColumn.py",
+      "pid_id": 11,
+      "pid_name": "E08V01-VER.EX01"
+    }
+  ],
+  "links": [
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_19",
+      "target": "noz_52"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_19",
+      "target": "noz_53"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_19",
+      "target": "noz_54"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_19",
+      "target": "noz_55"
+    }
+  ]
+}

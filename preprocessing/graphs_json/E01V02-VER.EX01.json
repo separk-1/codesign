@@ -1,0 +1,25 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 4,
+    "pid_name": "E01V02-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\E01V02-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_8",
+      "db_id": 8,
+      "label": "Equipment",
+      "tag_name": "T4750",
+      "class_name": "tank.py",
+      "tag_prefix": null,
+      "tag_sequence": null,
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 4,
+      "pid_name": "E01V02-VER.EX01"
+    }
+  ],
+  "links": []
+}

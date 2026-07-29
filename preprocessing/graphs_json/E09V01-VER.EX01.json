@@ -1,0 +1,25 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 12,
+    "pid_name": "E09V01-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\E09V01-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_20",
+      "db_id": 20,
+      "label": "Equipment",
+      "tag_name": "T-9",
+      "class_name": "tank.py",
+      "tag_prefix": null,
+      "tag_sequence": null,
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 12,
+      "pid_name": "E09V01-VER.EX01"
+    }
+  ],
+  "links": []
+}

@@ -1,0 +1,124 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 10,
+    "pid_name": "E07V01-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\E07V01-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_16",
+      "db_id": 16,
+      "label": "Equipment",
+      "tag_name": "PV321",
+      "class_name": "pressureVessel.py",
+      "tag_prefix": "PV",
+      "tag_sequence": "321",
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 10,
+      "pid_name": "E07V01-VER.EX01"
+    },
+    {
+      "id": "eq_17",
+      "db_id": 17,
+      "label": "Equipment",
+      "tag_name": "S3211",
+      "class_name": "taggedColumnSection.py",
+      "tag_prefix": "S",
+      "tag_sequence": "3211",
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 10,
+      "pid_name": "E07V01-VER.EX01"
+    },
+    {
+      "id": "eq_18",
+      "db_id": 18,
+      "label": "Equipment",
+      "tag_name": "S3212",
+      "class_name": "taggedColumnSection.py",
+      "tag_prefix": "S",
+      "tag_sequence": "3212",
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 10,
+      "pid_name": "E07V01-VER.EX01"
+    },
+    {
+      "id": "noz_48",
+      "db_id": 48,
+      "label": "Nozzle",
+      "subtag": "N1",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 16,
+      "equipment_tag": "PV321",
+      "equipment_class": "pressureVessel.py",
+      "pid_id": 10,
+      "pid_name": "E07V01-VER.EX01"
+    },
+    {
+      "id": "noz_49",
+      "db_id": 49,
+      "label": "Nozzle",
+      "subtag": "N2",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 16,
+      "equipment_tag": "PV321",
+      "equipment_class": "pressureVessel.py",
+      "pid_id": 10,
+      "pid_name": "E07V01-VER.EX01"
+    },
+    {
+      "id": "noz_50",
+      "db_id": 50,
+      "label": "Nozzle",
+      "subtag": "N3",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 16,
+      "equipment_tag": "PV321",
+      "equipment_class": "pressureVessel.py",
+      "pid_id": 10,
+      "pid_name": "E07V01-VER.EX01"
+    },
+    {
+      "id": "noz_51",
+      "db_id": 51,
+      "label": "Nozzle",
+      "subtag": "N4",
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 16,
+      "equipment_tag": "PV321",
+      "equipment_class": "pressureVessel.py",
+      "pid_id": 10,
+      "pid_name": "E07V01-VER.EX01"
+    }
+  ],
+  "links": [
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_16",
+      "target": "noz_48"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_16",
+      "target": "noz_49"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_16",
+      "target": "noz_50"
+    },
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_16",
+      "target": "noz_51"
+    }
+  ]
+}

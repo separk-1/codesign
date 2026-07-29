@@ -1,0 +1,34 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 21,
+    "pid_name": "I05V01-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\I05V01-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "line_26",
+      "db_id": 26,
+      "label": "Line",
+      "line_number": null,
+      "fluid_code": null,
+      "nominal_diameter": null,
+      "piping_class_code": null,
+      "pid_id": 21,
+      "pid_name": "I05V01-VER.EX01"
+    },
+    {
+      "id": "line_27",
+      "db_id": 27,
+      "label": "Line",
+      "line_number": null,
+      "fluid_code": null,
+      "nominal_diameter": null,
+      "piping_class_code": null,
+      "pid_id": 21,
+      "pid_name": "I05V01-VER.EX01"
+    }
+  ],
+  "links": []
+}

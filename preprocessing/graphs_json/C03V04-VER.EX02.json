@@ -1,0 +1,45 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 3,
+    "pid_name": "C03V04-VER.EX02",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\C03V04-VER.EX02.json"
+  },
+  "nodes": [
+    {
+      "id": "line_16",
+      "db_id": 16,
+      "label": "Line",
+      "line_number": "13L37014A",
+      "fluid_code": "PB",
+      "nominal_diameter": "0200",
+      "piping_class_code": "FD120",
+      "pid_id": 3,
+      "pid_name": "C03V04-VER.EX02"
+    },
+    {
+      "id": "line_17",
+      "db_id": 17,
+      "label": "Line",
+      "line_number": "13L37007A",
+      "fluid_code": "PB",
+      "nominal_diameter": "0200",
+      "piping_class_code": "FS720",
+      "pid_id": 3,
+      "pid_name": "C03V04-VER.EX02"
+    },
+    {
+      "id": "line_18",
+      "db_id": 18,
+      "label": "Line",
+      "line_number": "43L37007A",
+      "fluid_code": "VF",
+      "nominal_diameter": "0800",
+      "piping_class_code": "AS7F0",
+      "pid_id": 3,
+      "pid_name": "C03V04-VER.EX02"
+    }
+  ],
+  "links": []
+}

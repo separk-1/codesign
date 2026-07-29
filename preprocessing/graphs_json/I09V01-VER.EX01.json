@@ -1,0 +1,44 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "pid_id": 25,
+    "pid_name": "I09V01-VER.EX01",
+    "source_file": "G:\\My Drive\\Git\\CoDesign\\data\\json\\I09V01-VER.EX01.json"
+  },
+  "nodes": [
+    {
+      "id": "eq_27",
+      "db_id": 27,
+      "label": "Equipment",
+      "tag_name": "T09",
+      "class_name": "tank.py",
+      "tag_prefix": "T",
+      "tag_sequence": "09",
+      "tag_suffix": null,
+      "description": null,
+      "pid_id": 25,
+      "pid_name": "I09V01-VER.EX01"
+    },
+    {
+      "id": "noz_62",
+      "db_id": 62,
+      "label": "Nozzle",
+      "subtag": null,
+      "nominal_diameter": null,
+      "nominal_pressure": null,
+      "equipment_id": 27,
+      "equipment_tag": "T09",
+      "equipment_class": "tank.py",
+      "pid_id": 25,
+      "pid_name": "I09V01-VER.EX01"
+    }
+  ],
+  "links": [
+    {
+      "type": "HAS_NOZZLE",
+      "source": "eq_27",
+      "target": "noz_62"
+    }
+  ]
+}
