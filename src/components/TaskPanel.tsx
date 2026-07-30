@@ -62,6 +62,9 @@ const TaskItem = ({ task, isLast }: { task: DesignTask; isLast: boolean }) => {
 export const TaskPanel = () => {
     const tasks = useDesignStore(state => state.tasks);
     const restartSession = useDesignStore(state => state.restartSession);
+    const inputDesigns = useDesignStore(state => state.inputDesigns);
+    const selectedInputDesignId = useDesignStore(state => state.selectedInputDesignId);
+    const selectInputDesign = useDesignStore(state => state.selectInputDesign);
 
     return (
         <div style={{
@@ -87,6 +90,30 @@ export const TaskPanel = () => {
                 >
                     RESTART
                 </button>
+            </div>
+
+            <div style={{ padding: '12px', borderBottom: '1px solid #334155' }}>
+                <div style={{ fontSize: '0.68rem', color: '#94a3b8', fontWeight: 700, marginBottom: 6 }}>INPUT P&ID</div>
+                <select
+                    value={selectedInputDesignId}
+                    onChange={(event) => selectInputDesign(event.target.value)}
+                    style={{
+                        width: '100%',
+                        background: '#0f172a',
+                        border: '1px solid #475569',
+                        borderRadius: 4,
+                        color: '#e2e8f0',
+                        padding: '7px 8px',
+                        fontSize: '0.78rem'
+                    }}
+                >
+                    {inputDesigns.map(design => (
+                        <option key={design.id} value={design.id}>{design.label}</option>
+                    ))}
+                </select>
+                <div style={{ color: '#64748b', fontSize: '0.68rem', lineHeight: 1.35, marginTop: 6 }}>
+                    {inputDesigns.find(design => design.id === selectedInputDesignId)?.description}
+                </div>
             </div>
 
             {/* Task list */}

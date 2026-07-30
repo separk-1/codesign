@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<PlantModel>
+  <PlantInformation Application = "Dexpi" ApplicationVersion = "1.3.1" Date = "2021-11-29" Discipline = "PID" Is3D = "no" OriginatingSystem = "DEXPI Test Case" SchemaVersion = "4.1.1" Time = "13:19:11" Units = "m">
+    <UnitsOfMeasure/>
+  </PlantInformation>
+  <PlantStructureItem ID="Isa95Enterprise-1" ComponentClass="Isa95Enterprise" ComponentClassURI="http://data.posccaesar.org/rdl/RDS10418236543">
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/EnterpriseIdentificationCodeAssignmentClass" Format="string" Name="EnterpriseIdentificationCodeAssignmentClass" Value="Equinor"/>
+    </GenericAttributes>
+    <Association ItemID="SiteIsa95-1" Type="is a collection including"/>
+  </PlantStructureItem>
+  <PlantStructureItem ID="SiteIsa95-1" ComponentClass="SiteIsa95" ComponentClassURI="http://data.posccaesar.org/rdl/RDS10418236632">
+    <Association ItemID="Isa95Enterprise-1" Type="is a part of"/>
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SiteIdentificationCodeAssignmentClass" Format="string" Name="SiteIdentificationCodeAssignmentClass" Value=""/>
+    </GenericAttributes>
+    <Association ItemID="IndustrialComplexIso10209-2012-1" Type="is a collection including"/>
+  </PlantStructureItem>
+  <PlantStructureItem ID="IndustrialComplexIso10209-2012-1" ComponentClass="IndustrialComplexIso10209-2012" ComponentClassURI="http://sandbox.dexpi.org/rdl/IndustrialComplexIso10209-2012">
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/IndustrialComplexIdentificationCodeAssignmentClass" Format="string" Name="IndustrialComplexIdentificationCodeAssignmentClass" Value=""/>
+    </GenericAttributes>
+    <Association ItemID="SiteIsa95-1" Type="is a part of"/>
+    <Association ItemID="ProcessPlant-1" Type="is a collection including"/>
+  </PlantStructureItem>
+  <PlantStructureItem ID="ProcessPlant-1" ComponentClass="ProcessPlant" ComponentClassURI="http://data.posccaesar.org/rdl/RDS7151859">
+    <Association ItemID="IndustrialComplexIso10209-2012-1" Type="is a part of"/>
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/ProcessPlantIdentificationCodeAssignmentClass" Format="string" Name="ProcessPlantIdentificationCodeAssignmentClass" Value="Plant"/>
+    </GenericAttributes>
+    <Association ItemID="PlantSectionIso10209-2012-1" Type="is a collection including"/>
+  </PlantStructureItem>
+  <PlantStructureItem ID="PlantSectionIso10209-2012-1" ComponentClass="PlantSectionIso10209-2012" ComponentClassURI="http://sandbox.dexpi.org/rdl/PlantSectionIso10209-2012">
+    <Association ItemID="PipingNetworkSystem-1" Type="is a collection including"/>
+    <Association ItemID="PipingNetworkSystem-2" Type="is a collection including"/>
+    <Association ItemID="PipingNetworkSystem-3" Type="is a collection including"/>
+    <Association ItemID="ProcessPlant-1" Type="is a part of"/>
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PlantSectionIdentificationCodeAssignmentClass" Format="string" Name="PlantSectionIdentificationCodeAssignmentClass" Value=""/>
+    </GenericAttributes>
+  </PlantStructureItem>
+  <PlantStructureItem ID="AreaIsa95-1" ComponentClass="AreaIsa95" ComponentClassURI="http://data.posccaesar.org/rdl/RDS10418236534">
+    <Association ItemID="PipingNetworkSystem-1" Type="is the location of"/>
+    <Association ItemID="PipingNetworkSystem-2" Type="is the location of"/>
+    <Association ItemID="PipingNetworkSystem-3" Type="is the location of"/>
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PlantAreaIdentificationCodeAssignmentClass" Format="string" Name="PlantAreaIdentificationCodeAssignmentClass" Value="D"/>
+    </GenericAttributes>
+  </PlantStructureItem>
+  <ActuatingSystem ID="ActuatingSystem-1" ComponentClass="ActuatingSystem" ComponentClassURI="http://sandbox.dexpi.org/rdl/ActuatingSystem">
+    <Association ItemID="ActuatingFunction-1" Type="fulfills"/>
+    <Label ID="ActuatingSystemNumberLabel-1" ComponentClass="ActuatingSystemNumberLabel" ComponentClassURI="http://sandbox.dexpi.org/rdl/ActuatingSystemNumberLabel" ComponentName="ACTUATING_SYSTEM_LABEL_SHAPE">
+      <Position>
+        <Location X="0.0566" Y="0.082" Z="0"/>
+        <Axis X="0" Y="0" Z="1"/>
+        <Reference X="1" Y="0" Z="0"/>
+      </Position>
+      <Scale X="1.1" Y="1.1"/>
+      <Text Font="Calibri" Height="0.005" String="ESV" Width="0" Justification="CenterCenter">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.0566" Y="0.0855" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="ProcessInstrumentationFunctionCategoryAssignmentClass" DependantAttributeContents="Value" ItemID="ProcessInstrumentationFunction-1"/>
+          <ObjectAttributesReference DependantAttribute="ProcessInstrumentationFunctionsAssignmentClass" DependantAttributeContents="Value" ItemID="ProcessInstrumentationFunction-1"/>
+        </TextStringFormatSpecification>
+      </Text>
+      <Text Font="Calibri" Height="0.005" String="3712" Width="0" Justification="CenterCenter">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.0566" Y="0.0801" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="ProcessInstrumentationFunctionNumberAssignmentClass" DependantAttributeContents="Value" ItemID="ProcessInstrumentationFunction-1"/>
+        </TextStringFormatSpecification>
+      </Text>
+      <Text Font="Calibri" Height="0.005" String="D-13" Width="0" Justification="RightTop">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.012075" Y="0.101925" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="PanelIdentificationCodeAssignmentClass" DependantAttributeContents="Value" ItemID="ProcessInstrumentationFunction-1"/>
+        </TextStringFormatSpecification>
+      </Text>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0686" Y="0.06325"/>
+        <Coordinate X="0.0614" Y="0.0745"/>
+      </PolyLine>
+    </Label>
+    <ActuatingSystemComponent ID="ControlledActuator-1" ComponentClass="ControlledActuator" ComponentClassURI="http://sandbox.dexpi.org/rdl/ControlledActuator" ComponentName="CONTROLLED_ACTUATOR_ELECTRICAL_SHAPE">
+      <GenericAttributes Set="DexpiAttributes" Number="2">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/DeviceTypeNameAssignmentClass" Format="string" Name="DeviceTypeNameAssignmentClass" Value="Electric"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FailActionRepresentationAssignmentClass" Format="string" Name="FailActionRepresentationAssignmentClass" Value="FB"/>
+      </GenericAttributes>
+      <Position>
+        <Location X="0.0726" Y="0.0615" Z="0"/>
+        <Axis X="0" Y="0" Z="1"/>
+        <Reference X="1" Y="0" Z="0"/>
+      </Position>
+      <Scale X="1.5" Y="1.5"/>
+      <ConnectionPoints NumPoints="2">
+        <Node ID="ControlledActuator-1-Node-0"/>
+        <Node ID="ControlledActuator-1-InstrumentationNode-1" Type="signal">
+          <Position>
+            <Location X="0.0726" Y="0.0768" Z="0"/>
+            <Axis X="0" Y="0" Z="1"/>
+            <Reference X="1" Y="0" Z="0"/>
+          </Position>
+        </Node>
+      </ConnectionPoints>
+    </ActuatingSystemComponent>
+    <ActuatingSystemComponent ID="OperatedValveReference-1" ComponentClass="OperatedValveReference" ComponentClassURI="http://sandbox.dexpi.org/rdl/OperatedValveReference">
+      <Association ItemID="OperatedValve-1" Type="refers to"/>
+    </ActuatingSystemComponent>
+  </ActuatingSystem>
+  <PipingNetworkSystem ID="PipingNetworkSystem-1" ComponentClass="PipingNetworkSystem" ComponentClassURI="http://data.posccaesar.org/rdl/RDS270359">
+    <GenericAttributes Set="DexpiAttributes" Number="7">
+      <GenericAttribute AttributeURI="http://data.posccaesar.org/rdl/RDS4238040" Format="double" Name="InsulationThickness" Units="Millimetre" UnitsURI="http://data.posccaesar.org/rdl/RDS1357739" Value="0.0"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FluidCodeAssignmentClass" Format="string" Name="FluidCodeAssignmentClass" Value="PB"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/HeatTracingTypeRepresentationAssignmentClass" Format="string" Name="HeatTracingTypeRepresentationAssignmentClass" Value="N"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/InsulationTypeAssignmentClass" Format="string" Name="InsulationTypeAssignmentClass" Value="0F"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/LineNumberAssignmentClass" Format="string" Name="LineNumberAssignmentClass" Value="13L37014A"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PipingClassCodeAssignmentClass" Format="string" Name="PipingClassCodeAssignmentClass" Value="FD120"/>
+    </GenericAttributes>
+    <Association ItemID="AreaIsa95-1" Type="is located in"/>
+    <Association ItemID="PlantSectionIso10209-2012-1" Type="is a part of"/>
+    <Label ID="PipingNetworkSystemLabel-1" ComponentClass="PipingNetworkSystemLabel" ComponentClassURI="http://sandbox.dexpi.org/rdl/PipingNetworkSystemLabel">
+      <Text Font="Calibri" Height="0.005" String="D-13L37014A-0200PB-FD120-0F000N" Width="0" Justification="CenterCenter">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.0931" Y="0.0137" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="AreaIdentificationCodeAssignmentClass" DependantAttributeContents="Value" ItemID="AreaIsa95-1"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="LineNumberAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-1"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="NominalDiameterNumericalValueRepresentationAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-1"/>
+          <ObjectAttributesReference DependantAttribute="FluidCodeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-1"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="PipingClassCodeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-1"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="InsulationTypeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-1"/>
+          <ObjectAttributesReference DependantAttribute="InsulationThickness" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-1"/>
+          <ObjectAttributesReference DependantAttribute="HeatTracingTypeRepresentationAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-1"/>
+        </TextStringFormatSpecification>
+      </Text>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0726" Y="0.0522"/>
+        <Coordinate X="0.0726" Y="0.035"/>
+      </PolyLine>
+      <Shape NumPoints="5" Filled="Solid">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0726" Y="0.0522"/>
+        <Coordinate X="0.0735" Y="0.05"/>
+        <Coordinate X="0.0726" Y="0.0506"/>
+        <Coordinate X="0.0717" Y="0.05"/>
+        <Coordinate X="0.0726" Y="0.0522"/>
+      </Shape>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0726" Y="0.025"/>
+        <Coordinate X="0.0726" Y="0.015"/>
+      </PolyLine>
+    </Label>
+    <PipingNetworkSegment ID="PipingNetworkSegment-1" ComponentClass="PipingNetworkSegment" ComponentClassURI="http://data.posccaesar.org/rdl/RDS267704">
+      <GenericAttributes Set="DexpiAttributes" Number="8">
+        <GenericAttribute AttributeURI="http://data.posccaesar.org/rdl/RDS4238040" Format="double" Name="InsulationThickness" Units="Millimetre" UnitsURI="http://data.posccaesar.org/rdl/RDS1357739" Value="0.0"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FluidCodeAssignmentClass" Format="string" Name="FluidCodeAssignmentClass" Value="PB"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/HeatTracingTypeRepresentationAssignmentClass" Format="string" Name="HeatTracingTypeRepresentationAssignmentClass" Value="N"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/InsulationTypeAssignmentClass" Format="string" Name="InsulationTypeAssignmentClass" Value="0F"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PipingClassCodeAssignmentClass" Format="string" Name="PipingClassCodeAssignmentClass" Value="FD220"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PrimarySecondaryPipingNetworkSegmentSpecialization" Format="anyURI" Name="PrimarySecondaryPipingNetworkSegmentSpecialization" Value="PrimaryPipingNetworkSegment" ValueURI="http://sandbox.dexpi.org/rdl/PrimaryPipingNetworkSegment"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SegmentNumberAssignmentClass" Format="string" Name="SegmentNumberAssignmentClass" Value="S1"/>
+      </GenericAttributes>
+      <PipingComponent ID="PipeFitting-1" ComponentClass="PipeFitting" ComponentClassURI="http://sandbox.dexpi.org/rdl/PipeFitting" ComponentName="PLUG_SHAPE">
+        <ConnectionPoints FlowOut="1" NumPoints="2">
+          <Node ID="PipeFitting-1-Node-0"/>
+          <Node ID="PipeFitting-1-Node-1" Type="process">
+            <Position>
+              <Location X="0.035" Y="0.0704" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.035" Y="0.0704" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="6.12323399574e-17" Y="1.0" Z="0"/>
+        </Position>
+        <Scale X="1.2" Y="1.2"/>
+      </PipingComponent>
+      <PipingComponent ID="BlindFlange-1" ComponentClass="BlindFlange" ComponentClassURI="http://data.posccaesar.org/rdl/RDS414719" ComponentName="BLIND_FLANGE_SHAPE">
+        <ConnectionPoints FlowIn="1" FlowOut="2" NumPoints="3">
+          <Node ID="BlindFlange-1-Node-0"/>
+          <Node ID="BlindFlange-1-Node-1" Type="process">
+            <Position>
+              <Location X="0.035" Y="0.0702" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+          <Node ID="BlindFlange-1-Node-2" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.035" Y="0.0702" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.035" Y="0.0702" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="6.12323399574e-17" Y="1.0" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+      </PipingComponent>
+      <PipingComponent ID="Flange-1" ComponentClass="Flange" ComponentClassURI="http://data.posccaesar.org/rdl/RDS13307654" ComponentName="FLANGE_SHAPE">
+        <ConnectionPoints FlowIn="1" FlowOut="2" NumPoints="3">
+          <Node ID="Flange-1-Node-0"/>
+          <Node ID="Flange-1-Node-1" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.035" Y="0.069" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+          <Node ID="Flange-1-Node-2" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.035" Y="0.069" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.035" Y="0.069" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="6.12323399574e-17" Y="1.0" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+      </PipingComponent>
+      <CenterLine NumPoints="3">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.001" R="0.0"/>
+        <Coordinate X="0.035" Y="0.069"/>
+        <Coordinate X="0.035" Y="0.057"/>
+        <Coordinate X="0.0672" Y="0.057"/>
+      </CenterLine>
+      <PipingComponent ID="Flange-2" ComponentClass="Flange" ComponentClassURI="http://data.posccaesar.org/rdl/RDS13307654" ComponentName="FLANGE_SHAPE">
+        <ConnectionPoints FlowIn="1" NumPoints="3">
+          <Node ID="Flange-2-Node-0"/>
+          <Node ID="Flange-2-Node-1" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.0672" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+          <Node ID="Flange-2-Node-2" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.0672" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.0672" Y="0.057" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+      </PipingComponent>
+      <Connection FromID="PipeFitting-1" FromNode="1" ToID="Flange-2" ToNode="2"/>
+    </PipingNetworkSegment>
+    <PipingNetworkSegment ID="PipingNetworkSegment-2" ComponentClass="PipingNetworkSegment" ComponentClassURI="http://data.posccaesar.org/rdl/RDS267704">
+      <GenericAttributes Set="DexpiAttributes" Number="8">
+        <GenericAttribute AttributeURI="http://data.posccaesar.org/rdl/RDS4238040" Format="double" Name="InsulationThickness" Units="Millimetre" UnitsURI="http://data.posccaesar.org/rdl/RDS1357739" Value="0.0"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FluidCodeAssignmentClass" Format="string" Name="FluidCodeAssignmentClass" Value="PB"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/HeatTracingTypeRepresentationAssignmentClass" Format="string" Name="HeatTracingTypeRepresentationAssignmentClass" Value="N"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/InsulationTypeAssignmentClass" Format="string" Name="InsulationTypeAssignmentClass" Value="0F"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PipingClassCodeAssignmentClass" Format="string" Name="PipingClassCodeAssignmentClass" Value="FD120"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PrimarySecondaryPipingNetworkSegmentSpecialization" Format="anyURI" Name="PrimarySecondaryPipingNetworkSegmentSpecialization" Value="PrimaryPipingNetworkSegment" ValueURI="http://sandbox.dexpi.org/rdl/PrimaryPipingNetworkSegment"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SegmentNumberAssignmentClass" Format="string" Name="SegmentNumberAssignmentClass" Value="S2"/>
+      </GenericAttributes>
+      <Association ItemID="ActuatingFunction-1" Type="is the location of"/>
+      <PipingComponent ID="OperatedValve-1" ComponentClass="OperatedValve" ComponentClassURI="http://data.posccaesar.org/rdl/RDS11141590" ComponentName="OPERATED_VALVE_SHAPE">
+        <ConnectionPoints FlowIn="1" NumPoints="3">
+          <Node ID="OperatedValve-1-Node-0"/>
+          <Node ID="OperatedValve-1-Node-1" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.0681" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+          <Node ID="OperatedValve-1-Node-2" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.0771" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Association ItemID="OperatedValveReference-1" Type="is referenced by"/>
+        <Position>
+          <Location X="0.0726" Y="0.057" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+      </PipingComponent>
+      <Connection FromID="Flange-2" FromNode="2" ToID="OperatedValve-1" ToNode="2"/>
+    </PipingNetworkSegment>
+  </PipingNetworkSystem>
+  <PipingNetworkSystem ID="PipingNetworkSystem-2" ComponentClass="PipingNetworkSystem" ComponentClassURI="http://data.posccaesar.org/rdl/RDS270359">
+    <GenericAttributes Set="DexpiAttributes" Number="7">
+      <GenericAttribute AttributeURI="http://data.posccaesar.org/rdl/RDS4238040" Format="double" Name="InsulationThickness" Units="Millimetre" UnitsURI="http://data.posccaesar.org/rdl/RDS1357739" Value="0.0"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FluidCodeAssignmentClass" Format="string" Name="FluidCodeAssignmentClass" Value="PB"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/HeatTracingTypeRepresentationAssignmentClass" Format="string" Name="HeatTracingTypeRepresentationAssignmentClass" Value="N"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/InsulationTypeAssignmentClass" Format="string" Name="InsulationTypeAssignmentClass" Value="0F"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/LineNumberAssignmentClass" Format="string" Name="LineNumberAssignmentClass" Value="13L37007A"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PipingClassCodeAssignmentClass" Format="string" Name="PipingClassCodeAssignmentClass" Value="FS720"/>
+    </GenericAttributes>
+    <Association ItemID="AreaIsa95-1" Type="is located in"/>
+    <Association ItemID="PlantSectionIso10209-2012-1" Type="is a part of"/>
+    <Label ID="PipingNetworkSystemLabel-2" ComponentClass="PipingNetworkSystemLabel" ComponentClassURI="http://sandbox.dexpi.org/rdl/PipingNetworkSystemLabel">
+      <Text Font="Calibri" Height="0.005" String="D-13L37007A-0200PB-FS720-0F000N" Width="0" Justification="CenterCenter">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.13" Y="0.0245" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="AreaIdentificationCodeAssignmentClass" DependantAttributeContents="Value" ItemID="AreaIsa95-1"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="LineNumberAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-2"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="NominalDiameterNumericalValueRepresentationAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-2"/>
+          <ObjectAttributesReference DependantAttribute="FluidCodeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-2"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="PipingClassCodeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-2"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="InsulationTypeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-2"/>
+          <ObjectAttributesReference DependantAttribute="InsulationThickness" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-2"/>
+          <ObjectAttributesReference DependantAttribute="HeatTracingTypeRepresentationAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-2"/>
+        </TextStringFormatSpecification>
+      </Text>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.1015" Y="0.0564"/>
+        <Coordinate X="0.1015" Y="0.026"/>
+      </PolyLine>
+      <Shape NumPoints="5" Filled="Solid">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.1015" Y="0.0564"/>
+        <Coordinate X="0.1024" Y="0.0532"/>
+        <Coordinate X="0.1015" Y="0.0538"/>
+        <Coordinate X="0.1006" Y="0.0532"/>
+        <Coordinate X="0.1015" Y="0.0564"/>
+      </Shape>
+    </Label>
+    <PipingNetworkSegment ID="PipingNetworkSegment-3" ComponentClass="PipingNetworkSegment" ComponentClassURI="http://data.posccaesar.org/rdl/RDS267704">
+      <GenericAttributes Set="DexpiAttributes" Number="8">
+        <GenericAttribute AttributeURI="http://data.posccaesar.org/rdl/RDS4238040" Format="double" Name="InsulationThickness" Units="Millimetre" UnitsURI="http://data.posccaesar.org/rdl/RDS1357739" Value="0.0"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FluidCodeAssignmentClass" Format="string" Name="FluidCodeAssignmentClass" Value="PB"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/HeatTracingTypeRepresentationAssignmentClass" Format="string" Name="HeatTracingTypeRepresentationAssignmentClass" Value="N"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/InsulationTypeAssignmentClass" Format="string" Name="InsulationTypeAssignmentClass" Value="0F"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PipingClassCodeAssignmentClass" Format="string" Name="PipingClassCodeAssignmentClass" Value="FS720"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PrimarySecondaryPipingNetworkSegmentSpecialization" Format="anyURI" Name="PrimarySecondaryPipingNetworkSegmentSpecialization" Value="PrimaryPipingNetworkSegment" ValueURI="http://sandbox.dexpi.org/rdl/PrimaryPipingNetworkSegment"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SegmentNumberAssignmentClass" Format="string" Name="SegmentNumberAssignmentClass" Value="S1"/>
+      </GenericAttributes>
+      <PipingComponent ID="Flange-3" ComponentClass="Flange" ComponentClassURI="http://data.posccaesar.org/rdl/RDS13307654" ComponentName="FLANGE_SHAPE">
+        <ConnectionPoints FlowIn="1" FlowOut="2" NumPoints="3">
+          <Node ID="Flange-3-Node-0"/>
+          <Node ID="Flange-3-Node-1" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.078" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+          <Node ID="Flange-3-Node-2" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.078" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.078" Y="0.057" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+      </PipingComponent>
+      <CenterLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.001" R="0.0"/>
+        <Coordinate X="0.078" Y="0.057"/>
+        <Coordinate X="0.10515" Y="0.057"/>
+      </CenterLine>
+      <PipingComponent ID="RestrictionOrifice-1" ComponentClass="RestrictionOrifice" ComponentClassURI="http://sandbox.dexpi.org/rdl/RestrictionOrifice" ComponentName="ORIFICE_PLATE_SHAPE">
+        <ConnectionPoints FlowIn="1" FlowOut="2" NumPoints="3">
+          <Node ID="RestrictionOrifice-1-Node-0"/>
+          <Node ID="RestrictionOrifice-1-Node-1" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.10515" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+          <Node ID="RestrictionOrifice-1-Node-2" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.11085" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.108" Y="0.057" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+      </PipingComponent>
+      <PipingComponent ID="BallValve-1" ComponentClass="BallValve" ComponentClassURI="http://data.posccaesar.org/rdl/RDS416654" ComponentName="BALL_VALVE_SHAPE">
+        <ConnectionPoints FlowIn="1" NumPoints="3">
+          <Node ID="BallValve-1-Node-0"/>
+          <Node ID="BallValve-1-Node-1" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.1119" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+          <Node ID="BallValve-1-Node-2" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.1209" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.1164" Y="0.057" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+      </PipingComponent>
+      <Connection FromID="OperatedValve-1" FromNode="2" ToID="BallValve-1" ToNode="2"/>
+    </PipingNetworkSegment>
+  </PipingNetworkSystem>
+  <PipingNetworkSystem ID="PipingNetworkSystem-3" ComponentClass="PipingNetworkSystem" ComponentClassURI="http://data.posccaesar.org/rdl/RDS270359">
+    <GenericAttributes Set="DexpiAttributes" Number="7">
+      <GenericAttribute AttributeURI="http://data.posccaesar.org/rdl/RDS4238040" Format="double" Name="InsulationThickness" Units="Millimetre" UnitsURI="http://data.posccaesar.org/rdl/RDS1357739" Value="0.0"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FluidCodeAssignmentClass" Format="string" Name="FluidCodeAssignmentClass" Value="VF"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/HeatTracingTypeRepresentationAssignmentClass" Format="string" Name="HeatTracingTypeRepresentationAssignmentClass" Value="N"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/InsulationTypeAssignmentClass" Format="string" Name="InsulationTypeAssignmentClass" Value="0F"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/LineNumberAssignmentClass" Format="string" Name="LineNumberAssignmentClass" Value="43L37007A"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0800"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PipingClassCodeAssignmentClass" Format="string" Name="PipingClassCodeAssignmentClass" Value="AS7F0"/>
+    </GenericAttributes>
+    <Association ItemID="AreaIsa95-1" Type="is located in"/>
+    <Association ItemID="PlantSectionIso10209-2012-1" Type="is a part of"/>
+    <Label ID="PipingNetworkSystemLabel-3" ComponentClass="PipingNetworkSystemLabel" ComponentClassURI="http://sandbox.dexpi.org/rdl/PipingNetworkSystemLabel">
+      <Text Font="Calibri" Height="0.005" String="D-43L37007A-0800VF-AS7F0-0F000N" Width="0" Justification="CenterCenter">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.195" Y="0.0945" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="AreaIdentificationCodeAssignmentClass" DependantAttributeContents="Value" ItemID="AreaIsa95-1"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="LineNumberAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-3"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="NominalDiameterNumericalValueRepresentationAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-3"/>
+          <ObjectAttributesReference DependantAttribute="FluidCodeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-3"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="PipingClassCodeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-3"/>
+          <ObjectAttributesReference DependantAttribute="-"/>
+          <ObjectAttributesReference DependantAttribute="InsulationTypeAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-3"/>
+          <ObjectAttributesReference DependantAttribute="InsulationThickness" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-3"/>
+          <ObjectAttributesReference DependantAttribute="HeatTracingTypeRepresentationAssignmentClass" DependantAttributeContents="Value" ItemID="PipingNetworkSystem-3"/>
+        </TextStringFormatSpecification>
+      </Text>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.1506" Y="0.0936"/>
+        <Coordinate X="0.1568" Y="0.0936"/>
+      </PolyLine>
+      <Shape NumPoints="5" Filled="Solid">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.1506" Y="0.0936"/>
+        <Coordinate X="0.1528" Y="0.0945"/>
+        <Coordinate X="0.1522" Y="0.0936"/>
+        <Coordinate X="0.1528" Y="0.0927"/>
+        <Coordinate X="0.1506" Y="0.0936"/>
+      </Shape>
+    </Label>
+    <PipingNetworkSegment ID="PipingNetworkSegment-4" ComponentClass="PipingNetworkSegment" ComponentClassURI="http://data.posccaesar.org/rdl/RDS267704">
+      <GenericAttributes Set="DexpiAttributes" Number="8">
+        <GenericAttribute AttributeURI="http://data.posccaesar.org/rdl/RDS4238040" Format="double" Name="InsulationThickness" Units="Millimetre" UnitsURI="http://data.posccaesar.org/rdl/RDS1357739" Value="0.0"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FluidCodeAssignmentClass" Format="string" Name="FluidCodeAssignmentClass" Value="VF"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/HeatTracingTypeRepresentationAssignmentClass" Format="string" Name="HeatTracingTypeRepresentationAssignmentClass" Value="N"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/InsulationTypeAssignmentClass" Format="string" Name="InsulationTypeAssignmentClass" Value="0F"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0800"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PipingClassCodeAssignmentClass" Format="string" Name="PipingClassCodeAssignmentClass" Value="AS7F0"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PrimarySecondaryPipingNetworkSegmentSpecialization" Format="anyURI" Name="PrimarySecondaryPipingNetworkSegmentSpecialization" Value="PrimaryPipingNetworkSegment" ValueURI="http://sandbox.dexpi.org/rdl/PrimaryPipingNetworkSegment"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SegmentNumberAssignmentClass" Format="string" Name="SegmentNumberAssignmentClass" Value="S1"/>
+      </GenericAttributes>
+      <PipingComponent ID="PipeReducer-1" ComponentClass="PipeReducer" ComponentClassURI="http://data.posccaesar.org/rdl/RDS416294" ComponentName="REDUCER_GENERAL_SHAPE">
+        <ConnectionPoints FlowIn="2" NumPoints="3">
+          <Node ID="PipeReducer-1-Node-0"/>
+          <Node ID="PipeReducer-1-Node-1" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0200"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.128" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+          <Node ID="PipeReducer-1-Node-2" Type="process">
+            <GenericAttributes Set="DexpiAttributes" Number="1">
+              <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0800"/>
+            </GenericAttributes>
+            <Position>
+              <Location X="0.122" Y="0.057" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.125" Y="0.057" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="-1.0" Y="1.22464679915e-16" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+        <Label ID="ValveLabel-1" ComponentClass="ValveLabel" ComponentClassURI="http://sandbox.dexpi.org/rdl/ValveLabel">
+          <Text Font="Calibri" Height="0.005" String="0200x0800" Width="0" Justification="CenterCenter">
+            <Presentation B="0.0" G="0.0" R="0.0"/>
+            <Position>
+              <Location X="0.137" Y="0.0655" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+            <TextStringFormatSpecification>
+              <ObjectAttributesReference DependantAttribute="NominalDiameterNumericalValueRepresentationAssignmentClass" DependantAttributeContents="Value" ItemID="PipeReducer-1-Node-1"/>
+              <ObjectAttributesReference DependantAttribute="x"/>
+              <ObjectAttributesReference DependantAttribute="NominalDiameterNumericalValueRepresentationAssignmentClass" DependantAttributeContents="Value" ItemID="PipeReducer-1-Node-2"/>
+            </TextStringFormatSpecification>
+          </Text>
+        </Label>
+      </PipingComponent>
+      <Connection FromID="BallValve-1" FromNode="2" ToID="PipeReducer-1" ToNode="2"/>
+    </PipingNetworkSegment>
+    <PipingNetworkSegment ID="PipingNetworkSegment-5" ComponentClass="PipingNetworkSegment" ComponentClassURI="http://data.posccaesar.org/rdl/RDS267704">
+      <GenericAttributes Set="DexpiAttributes" Number="8">
+        <GenericAttribute AttributeURI="http://data.posccaesar.org/rdl/RDS4238040" Format="double" Name="InsulationThickness" Units="Millimetre" UnitsURI="http://data.posccaesar.org/rdl/RDS1357739" Value="0.0"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/FluidCodeAssignmentClass" Format="string" Name="FluidCodeAssignmentClass" Value="VF"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/HeatTracingTypeRepresentationAssignmentClass" Format="string" Name="HeatTracingTypeRepresentationAssignmentClass" Value="N"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/InsulationTypeAssignmentClass" Format="string" Name="InsulationTypeAssignmentClass" Value="0F"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/NominalDiameterNumericalValueRepresentationAssignmentClass" Format="string" Name="NominalDiameterNumericalValueRepresentationAssignmentClass" Value="0800"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PipingClassCodeAssignmentClass" Format="string" Name="PipingClassCodeAssignmentClass" Value="AS7F0"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PrimarySecondaryPipingNetworkSegmentSpecialization" Format="anyURI" Name="PrimarySecondaryPipingNetworkSegmentSpecialization" Value="PrimaryPipingNetworkSegment" ValueURI="http://sandbox.dexpi.org/rdl/PrimaryPipingNetworkSegment"/>
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SegmentNumberAssignmentClass" Format="string" Name="SegmentNumberAssignmentClass" Value="S2"/>
+      </GenericAttributes>
+      <CenterLine NumPoints="3">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.001" R="0.0"/>
+        <Coordinate X="0.128" Y="0.057"/>
+        <Coordinate X="0.15" Y="0.057"/>
+        <Coordinate X="0.15" Y="0.106"/>
+      </CenterLine>
+      <PipeOffPageConnector ID="FlowOutPipeOffPageConnector-1" ComponentClass="FlowOutPipeOffPageConnector" ComponentClassURI="http://sandbox.dexpi.org/rdl/FlowOutPipeOffPageConnector" ComponentName="SYMBOL_FOR_OUTLET_OF_ESSENTIAL_SUBSTANCES_SHAPE">
+        <ConnectionPoints FlowIn="1" NumPoints="2">
+          <Node ID="FlowOutPipeOffPageConnector-1-Node-0"/>
+          <Node ID="FlowOutPipeOffPageConnector-1-Node-1" Type="process">
+            <Position>
+              <Location X="0.15" Y="0.106" Z="0"/>
+              <Axis X="0" Y="0" Z="1"/>
+              <Reference X="1" Y="0" Z="0"/>
+            </Position>
+          </Node>
+        </ConnectionPoints>
+        <Position>
+          <Location X="0.15" Y="0.111" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </PipeOffPageConnector>
+      <Connection FromID="PipeReducer-1" FromNode="1" ToID="FlowOutPipeOffPageConnector-1" ToNode="1"/>
+      <PipeSlopeSymbol ID="PipeSlopeSymbol-1" ComponentName="PIPE_SLOPE_SYMBOL_SHAPE">
+        <Position>
+          <Location X="0.152" Y="0.076" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="-1.83697019872e-16" Y="-1.0" Z="0"/>
+        </Position>
+        <Scale X="1.5" Y="1.5"/>
+      </PipeSlopeSymbol>
+      <PipeFlowArrow ID="PipeFlowArrow-1" ComponentName="DIRECTION_OF_FLOW_SHAPE_FOR_PRIMARY_SEGMENT">
+        <Position>
+          <Location X="0.15" Y="0.1055" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="6.12323399574e-17" Y="1.0" Z="0"/>
+        </Position>
+        <Scale X="0.7" Y="0.7"/>
+      </PipeFlowArrow>
+    </PipingNetworkSegment>
+  </PipingNetworkSystem>
+  <ProcessInstrumentationFunction ID="ProcessInstrumentationFunction-1" ComponentClass="ProcessInstrumentationFunction" ComponentClassURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction" ComponentName="INSTRUMENTATION_BUBBLE_SHAPE_CENTRAL">
+    <GenericAttributes Set="DexpiAttributes" Number="5">
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/LocationSpecialization" Format="anyURI" Name="LocationSpecialization" Value="CentralLocation" ValueURI="http://sandbox.dexpi.org/rdl/CentralLocation"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/PanelIdentificationCodeAssignmentClass" Format="string" Name="PanelIdentificationCodeAssignmentClass" Value="D-13"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionCategoryAssignmentClass" Format="string" Name="ProcessInstrumentationFunctionCategoryAssignmentClass" Value="E"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionNumberAssignmentClass" Format="string" Name="ProcessInstrumentationFunctionNumberAssignmentClass" Value="3712"/>
+      <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionsAssignmentClass" Format="string" Name="ProcessInstrumentationFunctionsAssignmentClass" Value="SV"/>
+    </GenericAttributes>
+    <Association ItemID="SignalConveyingFunction-1" Type="is logical start of"/>
+    <Position>
+      <Location X="0.02" Y="0.093" Z="0"/>
+      <Axis X="0" Y="0" Z="1"/>
+      <Reference X="1" Y="0" Z="0"/>
+    </Position>
+    <Scale X="1.1" Y="1.1"/>
+    <Label ID="ProcessInstrumentationFunctionLabel-1" ComponentClass="ProcessInstrumentationFunctionLabel" ComponentClassURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionLabel">
+      <Text Font="Calibri" Height="0.005" String="ESV" Width="0" Justification="CenterCenter">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.02" Y="0.0965" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="ProcessInstrumentationFunctionCategoryAssignmentClass" DependantAttributeContents="Value" ItemID="ProcessInstrumentationFunction-1"/>
+          <ObjectAttributesReference DependantAttribute="ProcessInstrumentationFunctionsAssignmentClass" DependantAttributeContents="Value" ItemID="ProcessInstrumentationFunction-1"/>
+        </TextStringFormatSpecification>
+      </Text>
+      <Text Font="Calibri" Height="0.005" String="3712" Width="0" Justification="CenterCenter">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.02" Y="0.0911" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="ProcessInstrumentationFunctionNumberAssignmentClass" DependantAttributeContents="Value" ItemID="ProcessInstrumentationFunction-1"/>
+        </TextStringFormatSpecification>
+      </Text>
+      <Text Font="Calibri" Height="0.005" String="D-13" Width="0" Justification="RightTop">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.012075" Y="0.101925" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+        <TextStringFormatSpecification>
+          <ObjectAttributesReference DependantAttribute="PanelIdentificationCodeAssignmentClass" DependantAttributeContents="Value" ItemID="ProcessInstrumentationFunction-1"/>
+        </TextStringFormatSpecification>
+      </Text>
+    </Label>
+    <ConnectionPoints NumPoints="5">
+      <Node ID="ProcessInstrumentationFunction-1-Node-0"/>
+      <Node ID="ProcessInstrumentationFunction-1-InstrumentationNode-1" Type="signal">
+        <Position>
+          <Location X="0.012575" Y="0.093" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Node>
+      <Node ID="ProcessInstrumentationFunction-1-InstrumentationNode-2" Type="signal">
+        <Position>
+          <Location X="0.027425" Y="0.093" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Node>
+      <Node ID="ProcessInstrumentationFunction-1-InstrumentationNode-3" Type="signal">
+        <Position>
+          <Location X="0.02" Y="0.085575" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Node>
+      <Node ID="ProcessInstrumentationFunction-1-InstrumentationNode-4" Type="signal">
+        <Position>
+          <Location X="0.02" Y="0.100425" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Node>
+    </ConnectionPoints>
+    <ActuatingFunction ID="ActuatingFunction-1" ComponentClass="ActuatingFunction" ComponentClassURI="http://sandbox.dexpi.org/rdl/ActuatingFunction">
+      <Association ItemID="PipingNetworkSegment-2" Type="is located in"/>
+      <Association ItemID="ActuatingSystem-1" Type="is fulfilled by"/>
+      <Association ItemID="SignalConveyingFunction-1" Type="is logical end of"/>
+    </ActuatingFunction>
+    <InformationFlow ID="SignalConveyingFunction-1" ComponentClass="SignalConveyingFunction" ComponentClassURI="http://sandbox.dexpi.org/rdl/SignalConveyingFunction">
+      <Association ItemID="ProcessInstrumentationFunction-1" Type="has logical start"/>
+      <Association ItemID="ActuatingFunction-1" Type="has logical end"/>
+      <CenterLine NumPoints="3">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.027425" Y="0.093"/>
+        <Coordinate X="0.0726" Y="0.093"/>
+        <Coordinate X="0.0726" Y="0.0768"/>
+      </CenterLine>
+      <Connection FromID="ProcessInstrumentationFunction-1" ToID="ControlledActuator-1" FromNode="2" ToNode="1"/>
+    </InformationFlow>
+  </ProcessInstrumentationFunction>
+  <ShapeCatalogue Name="Equinor Shapes">
+    <PipeFlowArrow ComponentName="DIRECTION_OF_FLOW_SHAPE_FOR_PRIMARY_SEGMENT" ID="Shape-1">
+      <Shape NumPoints="4" Filled="Solid">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.001" R="0.0"/>
+        <Coordinate X="-0.01" Y="0.0025"/>
+        <Coordinate X="0.0" Y="0.0"/>
+        <Coordinate X="-0.01" Y="-0.0025"/>
+        <Coordinate X="-0.01" Y="0.0025"/>
+      </Shape>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipeFlowArrow>
+    <PipingComponent ComponentName="REDUCER_GENERAL_SHAPE" ID="Shape-2">
+      <PolyLine NumPoints="5">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="-0.002" Y="-0.003"/>
+        <Coordinate X="-0.002" Y="0.001"/>
+        <Coordinate X="0.002" Y="0.001"/>
+        <Coordinate X="0.002" Y="-0.001"/>
+        <Coordinate X="-0.002" Y="-0.003"/>
+      </PolyLine>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipingComponent>
+    <PipeSlopeSymbol ComponentName="PIPE_SLOPE_SYMBOL_SHAPE" ID="Shape-3">
+      <Shape NumPoints="4">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="-0.005" Y="0.0"/>
+        <Coordinate X="0.005" Y="0.0"/>
+        <Coordinate X="0.005" Y="0.002"/>
+        <Coordinate X="-0.005" Y="0.0"/>
+      </Shape>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipeSlopeSymbol>
+    <PipingComponent ComponentName="FLANGE_SHAPE" ID="Shape-4">
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.0" Y="0.0025"/>
+        <Coordinate X="0.0" Y="-0.0025"/>
+      </PolyLine>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipingComponent>
+    <PipingComponent ComponentName="PLUG_SHAPE" ID="Shape-5">
+      <Shape NumPoints="5" Filled="Solid">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.0" Y="0.0012"/>
+        <Coordinate X="0.0" Y="-0.0012"/>
+        <Coordinate X="0.002" Y="-0.0012"/>
+        <Coordinate X="0.002" Y="0.0012"/>
+        <Coordinate X="0.0" Y="0.0012"/>
+      </Shape>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipingComponent>
+    <PipingComponent ComponentName="BLIND_FLANGE_SHAPE" ID="Shape-6">
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.0" Y="0.0025"/>
+        <Coordinate X="0.0" Y="-0.0025"/>
+      </PolyLine>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipingComponent>
+    <PipingComponent ComponentName="ORIFICE_PLATE_SHAPE" ID="Shape-7">
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="-0.0019" Y="0.0035"/>
+        <Coordinate X="-0.0019" Y="-0.0035"/>
+      </PolyLine>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.0" Y="0.0007"/>
+        <Coordinate X="0.0" Y="0.0035"/>
+      </PolyLine>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.0" Y="-0.0007"/>
+        <Coordinate X="0.0" Y="-0.0035"/>
+      </PolyLine>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.0019" Y="0.0035"/>
+        <Coordinate X="0.0019" Y="-0.0035"/>
+      </PolyLine>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipingComponent>
+    <PipingComponent ComponentName="BALL_VALVE_SHAPE" ID="Shape-8">
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="-0.003" Y="0.003"/>
+        <Coordinate X="-0.003" Y="-0.003"/>
+      </PolyLine>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.003" Y="0.003"/>
+        <Coordinate X="0.003" Y="-0.003"/>
+      </PolyLine>
+      <Circle Radius="0.003">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Position>
+          <Location X="0.0" Y="0.0" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Circle>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipingComponent>
+    <PipingComponent ComponentName="OPERATED_VALVE_SHAPE" ID="Shape-9">
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="-0.003" Y="0.003"/>
+        <Coordinate X="-0.003" Y="-0.003"/>
+      </PolyLine>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.003" Y="0.003"/>
+        <Coordinate X="0.003" Y="-0.003"/>
+      </PolyLine>
+      <Circle Radius="0.003" Filled="Solid">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Position>
+          <Location X="0.0" Y="0.0" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Circle>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipingComponent>
+    <ActuatingSystemComponent ComponentName="CONTROLLED_ACTUATOR_ELECTRICAL_SHAPE" ID="Shape-10">
+      <Shape NumPoints="5">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="-0.003" Y="0.0102"/>
+        <Coordinate X="0.003" Y="0.0102"/>
+        <Coordinate X="0.003" Y="0.0042"/>
+        <Coordinate X="-0.003" Y="0.0042"/>
+        <Coordinate X="-0.003" Y="0.0102"/>
+      </Shape>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="0.0" Y="0.0"/>
+        <Coordinate X="0.0" Y="0.0072"/>
+      </PolyLine>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="-0.003" Y="0.0072"/>
+        <Coordinate X="0.003" Y="0.0072"/>
+      </PolyLine>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </ActuatingSystemComponent>
+    <PipeOffPageConnector ComponentName="SYMBOL_FOR_OUTLET_OF_ESSENTIAL_SUBSTANCES_SHAPE" ID="Shape-11">
+      <Shape NumPoints="5">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0004" R="0.0"/>
+        <Coordinate X="-0.02" Y="0.005"/>
+        <Coordinate X="0.02" Y="0.005"/>
+        <Coordinate X="0.02" Y="-0.005"/>
+        <Coordinate X="-0.02" Y="-0.005"/>
+        <Coordinate X="-0.02" Y="0.005"/>
+      </Shape>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </PipeOffPageConnector>
+    <ActuatingSystemComponent ComponentName="ACTUATING_SYSTEM_LABEL_SHAPE" ID="Shape-12">
+      <Circle Radius="0.00675">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Position>
+          <Location X="0.0" Y="0.0" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Circle>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </ActuatingSystemComponent>
+    <ProcessInstrumentationFunction ComponentName="INSTRUMENTATION_BUBBLE_SHAPE_CENTRAL" ID="Shape-13">
+      <Shape NumPoints="5">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="-0.00675" Y="0.00675"/>
+        <Coordinate X="0.00675" Y="0.00675"/>
+        <Coordinate X="0.00675" Y="-0.00675"/>
+        <Coordinate X="-0.00675" Y="-0.00675"/>
+        <Coordinate X="-0.00675" Y="0.00675"/>
+      </Shape>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="-0.00675" Y="0.0"/>
+        <Coordinate X="0.00675" Y="0.0"/>
+      </PolyLine>
+      <Circle Radius="0.00675">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Position>
+          <Location X="0.0" Y="0.0" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Circle>
+      <GenericAttributes Number="1" Set="DexpiAttributes">
+        <GenericAttribute AttributeURI="http://sandbox.dexpi.org/rdl/SymbolRegistrationNumberAssignmentClass" Format="string" Name="SymbolRegistrationNumberAssignmentClass"/>
+      </GenericAttributes>
+    </ProcessInstrumentationFunction>
+  </ShapeCatalogue>
+  <Drawing Name="DEXPI Example C03" Type="PID">
+    <Presentation B="1.0" G="1.0" R="1.0"/>
+    <Extent>
+      <Min X="0.0" Y="0.0"/>
+      <Max X="0.24" Y="0.125"/>
+    </Extent>
+    <Symbol ID="Symbol-1">
+      <Shape NumPoints="6">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0726" Y="0.1"/>
+        <Coordinate X="0.0646" Y="0.114"/>
+        <Coordinate X="0.0646" Y="0.1195"/>
+        <Coordinate X="0.0806" Y="0.1195"/>
+        <Coordinate X="0.0806" Y="0.114"/>
+        <Coordinate X="0.0726" Y="0.1"/>
+      </Shape>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0646" Y="0.114"/>
+        <Coordinate X="0.0806" Y="0.114"/>
+      </PolyLine>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0726" Y="0.093"/>
+        <Coordinate X="0.0726" Y="0.1"/>
+      </PolyLine>
+      <PolyLine NumPoints="2">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0726" Y="0.093"/>
+        <Coordinate X="0.0726" Y="0.1"/>
+      </PolyLine>
+      <Shape NumPoints="4" Filled="Solid">
+        <Presentation B="0.0" G="0.0" LineType="0" LineWeight="0.0002" R="0.0"/>
+        <Coordinate X="0.0726" Y="0.093"/>
+        <Coordinate X="0.0736" Y="0.096"/>
+        <Coordinate X="0.0716" Y="0.096"/>
+        <Coordinate X="0.0726" Y="0.093"/>
+      </Shape>
+      <Text Font="Calibri" Height="0.005" String="D" Width="0" Justification="RightTop">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.0636" Y="0.1204" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Text>
+      <Text Font="Calibri" Height="0.005" String="ESD" Width="0" Justification="CenterTop">
+        <Presentation B="0.0" G="0.0" R="0.0"/>
+        <Position>
+          <Location X="0.0726" Y="0.1144" Z="0"/>
+          <Axis X="0" Y="0" Z="1"/>
+          <Reference X="1" Y="0" Z="0"/>
+        </Position>
+      </Text>
+    </Symbol>
+  </Drawing>
+</PlantModel>

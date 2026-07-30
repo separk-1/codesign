@@ -18,6 +18,8 @@ export const DecisionLogPanel = () => {
     const decisionLog = useDesignStore(state => state.decisionLog);
     const exportDecisionLogCsv = useDesignStore(state => state.exportDecisionLogCsv);
     const clearDecisionLog = useDesignStore(state => state.clearDecisionLog);
+    const exportUpdatedDexpiJson = useDesignStore(state => state.exportUpdatedDexpiJson);
+    const candidate = useDesignStore(state => state.candidate);
     const generateDecisionLogWithAgent = useDesignStore(state => state.generateDecisionLogWithAgent);
     const agentGenerating = useDesignStore(state => state.agentGenerating);
 
@@ -29,6 +31,20 @@ export const DecisionLogPanel = () => {
         const stamp = new Date().toISOString().replace(/[:.]/g, '-');
         a.href = url;
         a.download = `codesign_decision_log_${stamp}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
+    const handleDexpiExport = () => {
+        const json = exportUpdatedDexpiJson();
+        const blob = new Blob([json], { type: 'application/json;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+        a.href = url;
+        a.download = `codesign_updated_dexpi_${stamp}.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -69,6 +85,21 @@ export const DecisionLogPanel = () => {
                         }}
                     >
                         EXPORT CSV
+                    </button>
+                    <button
+                        onClick={handleDexpiExport}
+                        disabled={!['Ready for Review', 'Assumptions Only'].includes(candidate.status)}
+                        style={{
+                            border: '1px solid #475569',
+                            borderRadius: 4,
+                            background: ['Ready for Review', 'Assumptions Only'].includes(candidate.status) ? '#166534' : '#334155',
+                            color: '#fff',
+                            fontSize: '0.68rem',
+                            padding: '3px 7px',
+                            cursor: ['Ready for Review', 'Assumptions Only'].includes(candidate.status) ? 'pointer' : 'not-allowed'
+                        }}
+                    >
+                        DEXPI JSON
                     </button>
                     <button
                         onClick={clearDecisionLog}

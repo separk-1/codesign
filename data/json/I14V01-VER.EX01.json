@@ -1,0 +1,323 @@
+{
+    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/dexpiModel.py",
+    "id": "c6d55c1d-6b34-4cdd-8702-65639900650d",
+    "composition": {
+        "conceptualModel": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/conceptualModel.py",
+            "id": "0a6b1915-c8f1-4ed3-8689-50dace810f8c",
+            "composition": {
+                "actuatingSystems": [],
+                "instrumentationLoopFunctions": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/instrumentation/instrumentationLoopFunction.py",
+                        "id": "1d71c3df-6a90-44dc-bfe8-5d3e8a1e8153",
+                        "composition": {
+                            "customAttributes": []
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null,
+                            "processInstrumentationFunctions": [
+                                "3b76f694-3913-433e-a6d7-95122d0f97a2",
+                                "6e551b86-22f8-4d44-8b4a-b24b9df30fa9"
+                            ]
+                        },
+                        "data": {
+                            "instrumentationLoopFunctionNumber": "14"
+                        }
+                    }
+                ],
+                "metaData": null,
+                "pipingNetworkSystems": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSystem.py",
+                        "id": "81c1ebaf-4c9e-4fd3-ad03-7ef1e424512d",
+                        "composition": {
+                            "customAttributes": [],
+                            "segments": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSegment.py",
+                                    "id": "ea63dc2a-d1d1-4b2c-a061-9ea92e89d254",
+                                    "composition": {
+                                        "customAttributes": [],
+                                        "connections": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipe.py",
+                                                "id": "439aabee-ec4b-4331-97c8-cf46584ed2fd",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "reference": {
+                                                    "sourceItem": null,
+                                                    "sourceNode": null,
+                                                    "targetItem": "1000eb1c-d0f0-4ba4-b023-55d2a97b99ef",
+                                                    "targetNode": "122067cb-7a1f-44e2-b72f-1b1c02a38520"
+                                                }
+                                            },
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipe.py",
+                                                "id": "fae2fc65-cd11-49db-a262-f4451ef86eaa",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "reference": {
+                                                    "sourceItem": "1000eb1c-d0f0-4ba4-b023-55d2a97b99ef",
+                                                    "sourceNode": "6eb21f35-464d-4a49-b2be-7ca2ebac86b8",
+                                                    "targetItem": null,
+                                                    "targetNode": null
+                                                }
+                                            }
+                                        ],
+                                        "items": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/flowMeasuringElement.py",
+                                                "id": "1000eb1c-d0f0-4ba4-b023-55d2a97b99ef",
+                                                "composition": {
+                                                    "nodes": [
+                                                        {
+                                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                            "id": "122067cb-7a1f-44e2-b72f-1b1c02a38520",
+                                                            "composition": {
+                                                                "customAttributes": []
+                                                            },
+                                                            "data": {
+                                                                "nominalDiameterNumericalValueRepresentation": null,
+                                                                "nominalDiameterRepresentation": null,
+                                                                "nominalDiameterStandard": null,
+                                                                "nominalDiameterTypeRepresentation": null
+                                                            }
+                                                        },
+                                                        {
+                                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                            "id": "6eb21f35-464d-4a49-b2be-7ca2ebac86b8",
+                                                            "composition": {
+                                                                "customAttributes": []
+                                                            },
+                                                            "data": {
+                                                                "nominalDiameterNumericalValueRepresentation": null,
+                                                                "nominalDiameterRepresentation": null,
+                                                                "nominalDiameterStandard": null,
+                                                                "nominalDiameterTypeRepresentation": null
+                                                            }
+                                                        }
+                                                    ],
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "fluidCode": null,
+                                                    "onHold": null,
+                                                    "pipingClassArtefact": null,
+                                                    "pressureTestCircuitNumber": null,
+                                                    "heatTracingType": null,
+                                                    "heatTracingTypeRepresentation": null,
+                                                    "insulationThickness": null,
+                                                    "insulationType": null,
+                                                    "lowerLimitHeatTracingTemperature": null,
+                                                    "pipingComponentName": null,
+                                                    "pipingComponentNumber": null
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "reference": {
+                                        "sourceItem": null,
+                                        "sourceNode": null,
+                                        "targetItem": null,
+                                        "targetNode": null
+                                    },
+                                    "data": {
+                                        "colorCode": null,
+                                        "flowDirection": null,
+                                        "fluidCode": null,
+                                        "heatTracingType": null,
+                                        "heatTracingTypeRepresentation": null,
+                                        "inclination": null,
+                                        "insulationThickness": null,
+                                        "insulationType": null,
+                                        "jacketedPipe": null,
+                                        "lowerLimitHeatTracingTemperature": null,
+                                        "nominalDiameterNumericalValueRepresentation": null,
+                                        "nominalDiameterRepresentation": null,
+                                        "nominalDiameterStandard": null,
+                                        "nominalDiameterTypeRepresentation": null,
+                                        "onHold": null,
+                                        "operatingTemperature": null,
+                                        "pipingClassCode": null,
+                                        "pressureTestCircuitNumber": null,
+                                        "primarySecondaryPipingNetworkSegment": null,
+                                        "segmentNumber": null,
+                                        "siphon": null,
+                                        "slope": null
+                                    }
+                                }
+                            ]
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null
+                        },
+                        "data": {
+                            "fluidCode": null,
+                            "heatTracingType": null,
+                            "heatTracingTypeRepresentation": null,
+                            "insulationThickness": null,
+                            "insulationType": null,
+                            "jacketLineNumber": null,
+                            "jacketedLineNumber": null,
+                            "jacketedPipe": null,
+                            "lineNumber": null,
+                            "lowerLimitHeatTracingTemperature": null,
+                            "nominalDiameterNumericalValueRepresentation": null,
+                            "nominalDiameterRepresentation": null,
+                            "nominalDiameterStandard": null,
+                            "nominalDiameterTypeRepresentation": null,
+                            "onHold": null,
+                            "pipingClassCode": null,
+                            "pipingNetworkSystemGroupNumber": null
+                        }
+                    }
+                ],
+                "plantStructureItems": [],
+                "processInstrumentationFunctions": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/instrumentation/processInstrumentationFunction.py",
+                        "id": "3b76f694-3913-433e-a6d7-95122d0f97a2",
+                        "composition": {
+                            "customAttributes": [],
+                            "actuatingElectricalFunctions": [],
+                            "actuatingFunctions": [],
+                            "processSignalGeneratingFunctions": [],
+                            "signalConnectors": [],
+                            "signalConveyingFunctions": []
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null
+                        },
+                        "data": {
+                            "deviceInformation": null,
+                            "gmpRelevance": null,
+                            "guaranteedSupplyFunction": null,
+                            "location": "central",
+                            "panelIdentificationCode": null,
+                            "processInstrumentationFunctionCategory": "F",
+                            "processInstrumentationFunctionModifier": null,
+                            "processInstrumentationFunctionNumber": "14",
+                            "processInstrumentationFunctions": "I",
+                            "qualityRelevance": null,
+                            "safetyRelevanceClass": null,
+                            "typicalInformation": null,
+                            "vendorCompanyName": null,
+                            "votingSystemRepresentation": null
+                        }
+                    },
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/instrumentation/processInstrumentationFunction.py",
+                        "id": "6e551b86-22f8-4d44-8b4a-b24b9df30fa9",
+                        "composition": {
+                            "customAttributes": [],
+                            "actuatingElectricalFunctions": [],
+                            "actuatingFunctions": [],
+                            "processSignalGeneratingFunctions": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/instrumentation/processSignalGeneratingFunction.py",
+                                    "id": "e0dfbc15-e80d-4ca7-ab14-66ca43b1962b",
+                                    "composition": {
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "plantTrain": null,
+                                        "plantSystem": null,
+                                        "plantArea": null,
+                                        "parentStructure": null,
+                                        "sensingLocation": "1000eb1c-d0f0-4ba4-b023-55d2a97b99ef",
+                                        "systems": null
+                                    },
+                                    "data": {
+                                        "processSignalGeneratingFunctionNumber": null,
+                                        "sensorType": null
+                                    }
+                                }
+                            ],
+                            "signalConnectors": [],
+                            "signalConveyingFunctions": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/instrumentation/measuringLineFunction.py",
+                                    "id": "60f787b4-933f-45fe-8224-1aa6c6ab4a16",
+                                    "composition": {
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "source": "e0dfbc15-e80d-4ca7-ab14-66ca43b1962b",
+                                        "target": "6e551b86-22f8-4d44-8b4a-b24b9df30fa9"
+                                    },
+                                    "data": {
+                                        "portStatus": null,
+                                        "signalConveyingType": null,
+                                        "signalPointNumber": null,
+                                        "signalProcessControlFunctions": null
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/instrumentation/signalLineFunction.py",
+                                    "id": "f8d49c0f-0b7e-4965-947c-f05dec17504d",
+                                    "composition": {
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "source": "6e551b86-22f8-4d44-8b4a-b24b9df30fa9",
+                                        "target": "3b76f694-3913-433e-a6d7-95122d0f97a2"
+                                    },
+                                    "data": {
+                                        "portStatus": null,
+                                        "signalConveyingType": null,
+                                        "signalPointNumber": null,
+                                        "signalProcessControlFunctions": null
+                                    }
+                                }
+                            ]
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null
+                        },
+                        "data": {
+                            "deviceInformation": null,
+                            "gmpRelevance": null,
+                            "guaranteedSupplyFunction": null,
+                            "location": "field",
+                            "panelIdentificationCode": null,
+                            "processInstrumentationFunctionCategory": "F",
+                            "processInstrumentationFunctionModifier": null,
+                            "processInstrumentationFunctionNumber": "14",
+                            "processInstrumentationFunctions": "T",
+                            "qualityRelevance": null,
+                            "safetyRelevanceClass": null,
+                            "typicalInformation": null,
+                            "vendorCompanyName": null,
+                            "votingSystemRepresentation": null
+                        }
+                    }
+                ],
+                "processSignalGeneratingSystems": [],
+                "taggedPlantItems": []
+            }
+        },
+        "diagram": null,
+        "shapeCatalogues": []
+    },
+    "data": {
+        "exportDateTime": null,
+        "originatingSystemName": null,
+        "originatingSystemVendorName": null,
+        "originatingSystemVersion": "0.9"
+    }
+}

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PlantModel>
+  <PlantInformation Application="Dexpi" ApplicationVersion="1.3.1" Date="2019-07-08" Discipline="PID" Is3D="no" OriginatingSystem="P&amp;ID Toolbox" OriginatingSystemVendor="pnb plants &amp; bytes GmbH, Aachen, Germany" OriginatingSystemVersion="0.9" SchemaVersion="4.1.1" Time="03:02:01" Units="mm">
+    <UnitsOfMeasure/>
+  </PlantInformation>
+  <Equipment ID="ProcessColumn-1" ComponentClass="ProcessColumn" ComponentClassURI="http://data.posccaesar.org/rdl/RDS4316825224">
+    <GenericAttributes Set="DexpiAttributes" Number="3">
+      <GenericAttribute Name="TagNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/TagNameAssignmentClass" Format="string" Value="PC321"/>
+      <GenericAttribute Name="TagNamePrefixAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/TagNamePrefixAssignmentClass" Format="string" Value="PC"/>
+      <GenericAttribute Name="TagNameSequenceNumberAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/TagNameSequenceNumberAssignmentClass" Format="string" Value="321"/>
+    </GenericAttributes>
+    <Equipment ID="SubTaggedColumnSection-1" ComponentClass="ColumnSection" ComponentClassURI="http://sandbox.dexpi.org/rdl/ColumnSection">
+      <GenericAttributes Set="DexpiAttributes" Number="1">
+        <GenericAttribute Name="SubTagNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/SubTagNameAssignmentClass" Format="string" Value="S1"/>
+      </GenericAttributes>
+      <Equipment ID="ColumnPackingsArrangement-1" ComponentClass="ColumnPackingsArrangement" ComponentClassURI="http://sandbox.dexpi.org/rdl/ColumnPackingsArrangement">
+        <GenericAttributes Set="DexpiAttributes" Number="1">
+          <GenericAttribute Name="PackingTypeAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/PackingTypeAssignmentClass" Format="string" Value="rings"/>
+        </GenericAttributes>
+      </Equipment>
+    </Equipment>
+    <Equipment ID="SubTaggedColumnSection-2" ComponentClass="ColumnSection" ComponentClassURI="http://sandbox.dexpi.org/rdl/ColumnSection">
+      <GenericAttributes Set="DexpiAttributes" Number="1">
+        <GenericAttribute Name="SubTagNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/SubTagNameAssignmentClass" Format="string" Value="S2"/>
+      </GenericAttributes>
+      <Equipment ID="ColumnTraysArrangement-1" ComponentClass="ColumnTraysArrangement" ComponentClassURI="http://sandbox.dexpi.org/rdl/ColumnTraysArrangement">
+        <GenericAttributes Set="DexpiAttributes" Number="1">
+          <GenericAttribute Name="NumberOfTrays" AttributeURI="http://sandbox.dexpi.org/rdl/NumberOfTrays" Format="integer" Value="8"/>
+        </GenericAttributes>
+      </Equipment>
+    </Equipment>
+    <Nozzle ID="Nozzle-1" ComponentClass="Nozzle" ComponentClassURI="http://data.posccaesar.org/rdl/RDS415214">
+      <GenericAttributes Set="DexpiAttributes" Number="1">
+        <GenericAttribute Name="SubTagNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/SubTagNameAssignmentClass" Format="string" Value="N1"/>
+      </GenericAttributes>
+    </Nozzle>
+    <Nozzle ID="Nozzle-2" ComponentClass="Nozzle" ComponentClassURI="http://data.posccaesar.org/rdl/RDS415214">
+      <GenericAttributes Set="DexpiAttributes" Number="1">
+        <GenericAttribute Name="SubTagNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/SubTagNameAssignmentClass" Format="string" Value="N2"/>
+      </GenericAttributes>
+    </Nozzle>
+    <Nozzle ID="Nozzle-3" ComponentClass="Nozzle" ComponentClassURI="http://data.posccaesar.org/rdl/RDS415214">
+      <GenericAttributes Set="DexpiAttributes" Number="1">
+        <GenericAttribute Name="SubTagNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/SubTagNameAssignmentClass" Format="string" Value="N3"/>
+      </GenericAttributes>
+    </Nozzle>
+    <Nozzle ID="Nozzle-4" ComponentClass="Nozzle" ComponentClassURI="http://data.posccaesar.org/rdl/RDS415214">
+      <GenericAttributes Set="DexpiAttributes" Number="1">
+        <GenericAttribute Name="SubTagNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/SubTagNameAssignmentClass" Format="string" Value="N4"/>
+      </GenericAttributes>
+    </Nozzle>
+  </Equipment>
+</PlantModel>

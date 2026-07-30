@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoDesign Detailed Candidate P&ID Export",
+  "type": "object",
+  "required": ["coDesignExport"],
+  "properties": {
+    "coDesignExport": {
+      "type": "object",
+      "required": ["candidate", "decisionLog"],
+      "properties": {
+        "sourceDesignId": { "type": "string" },
+        "generatedAt": { "type": "string" },
+        "candidate": {
+          "type": "object",
+          "properties": {
+            "fluid": { "type": "string" },
+            "material": { "type": "string" },
+            "lineSize": { "type": "string" },
+            "flowInstrument": { "type": "string" },
+            "pumpDuty": { "type": "string" },
+            "pressureProtection": { "type": "string" },
+            "treatment": { "type": "string" },
+            "heatExchanger": { "type": "string" },
+            "status": { "type": "string" },
+            "reviewItems": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": true
+        },
+        "decisionLog": { "$ref": "decision_log_schema.json" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

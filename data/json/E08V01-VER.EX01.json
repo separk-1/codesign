@@ -1,0 +1,180 @@
+{
+    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/dexpiModel.py",
+    "id": "8e6801ad-6fea-40f9-adf1-b115227c5657",
+    "composition": {
+        "conceptualModel": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/conceptualModel.py",
+            "id": "ddf00343-5951-42db-ae98-b10f7a75cb49",
+            "composition": {
+                "actuatingSystems": [],
+                "instrumentationLoopFunctions": [],
+                "metaData": null,
+                "pipingNetworkSystems": [],
+                "plantStructureItems": [],
+                "processInstrumentationFunctions": [],
+                "processSignalGeneratingSystems": [],
+                "taggedPlantItems": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/processColumn.py",
+                        "id": "f6874f59-f7d1-48da-a223-b5ed241d1232",
+                        "composition": {
+                            "customAttributes": [],
+                            "nozzles": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "9a188c0d-3316-467a-ab3c-54c710ce866b",
+                                    "composition": {
+                                        "nodes": [],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N1"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "c63ecfbd-8e58-47e5-8170-a6c769d75348",
+                                    "composition": {
+                                        "nodes": [],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N2"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "c6646662-1ba7-4e1a-87a1-4c23fe81e158",
+                                    "composition": {
+                                        "nodes": [],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N3"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "d1df3c4a-8b4e-4b44-951d-61c533de85a0",
+                                    "composition": {
+                                        "nodes": [],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": null
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N4"
+                                    }
+                                }
+                            ],
+                            "chambers": [],
+                            "dryingChambers": [],
+                            "gearBoxes": [],
+                            "motors": [],
+                            "sprayNozzles": [],
+                            "columnSections": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/subTaggedColumnSection.py",
+                                    "id": "70d56f0a-81ba-4ba5-bf23-815273a43e26",
+                                    "composition": {
+                                        "customAttributes": [],
+                                        "internals": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/columnPackingsArrangement.py",
+                                            "id": "21a8f7ba-078d-4f98-8249-2a793f3a4957",
+                                            "composition": {
+                                                "customAttributes": []
+                                            },
+                                            "data": {
+                                                "height": null,
+                                                "materialOfConstructionCode": null,
+                                                "numberOfPackings": null,
+                                                "packingType": "rings"
+                                            }
+                                        }
+                                    },
+                                    "data": {
+                                        "height": null,
+                                        "insideDiameter": null,
+                                        "subTagName": "S1"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/subTaggedColumnSection.py",
+                                    "id": "9a6d7635-af23-4ec0-a132-fd0ec3b98ad3",
+                                    "composition": {
+                                        "customAttributes": [],
+                                        "internals": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/columnTraysArrangement.py",
+                                            "id": "77821226-7386-4262-ad25-b59495642562",
+                                            "composition": {
+                                                "customAttributes": []
+                                            },
+                                            "data": {
+                                                "materialOfConstructionCode": null,
+                                                "numberOfTrays": 8,
+                                                "trayType": null
+                                            }
+                                        }
+                                    },
+                                    "data": {
+                                        "height": null,
+                                        "insideDiameter": null,
+                                        "subTagName": "S2"
+                                    }
+                                }
+                            ]
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null
+                        },
+                        "data": {
+                            "tagName": "PC321",
+                            "tagNamePrefix": "PC",
+                            "tagNameSequenceNumber": "321",
+                            "tagNameSuffix": null,
+                            "equipmentDescription": null,
+                            "nominalCapacityVolume": null
+                        }
+                    }
+                ]
+            }
+        },
+        "diagram": null,
+        "shapeCatalogues": []
+    },
+    "data": {
+        "exportDateTime": null,
+        "originatingSystemName": null,
+        "originatingSystemVendorName": null,
+        "originatingSystemVersion": "0.9"
+    }
+}

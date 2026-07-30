@@ -1,0 +1,59 @@
+{
+    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/dexpiModel.py",
+    "id": "9c4a5499-436e-4006-aa0d-2b58483af67d",
+    "composition": {
+        "conceptualModel": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/conceptualModel.py",
+            "id": "fb60f450-0126-4f3d-9c31-f39cc15af357",
+            "composition": {
+                "actuatingSystems": [],
+                "instrumentationLoopFunctions": [],
+                "metaData": null,
+                "pipingNetworkSystems": [],
+                "plantStructureItems": [],
+                "processInstrumentationFunctions": [],
+                "processSignalGeneratingSystems": [],
+                "taggedPlantItems": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/tank.py",
+                        "id": "573cdba1-475a-4dc1-a689-9f1358ae6bd2",
+                        "composition": {
+                            "customAttributes": [],
+                            "nozzles": [],
+                            "chambers": [],
+                            "dryingChambers": [],
+                            "gearBoxes": [],
+                            "motors": [],
+                            "sprayNozzles": []
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null,
+                            "agitator": null,
+                            "columnSections": []
+                        },
+                        "data": {
+                            "tagName": "T1301",
+                            "tagNamePrefix": null,
+                            "tagNameSequenceNumber": null,
+                            "tagNameSuffix": null,
+                            "equipmentDescription": null,
+                            "nominalCapacityVolume": null,
+                            "cylinderLength": null
+                        }
+                    }
+                ]
+            }
+        },
+        "diagram": null,
+        "shapeCatalogues": []
+    },
+    "data": {
+        "exportDateTime": null,
+        "originatingSystemName": null,
+        "originatingSystemVendorName": null,
+        "originatingSystemVersion": "0.9"
+    }
+}

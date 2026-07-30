@@ -12,11 +12,22 @@ export const parseDexpiJson = (data: any) => {
 
   // Helper to add node if unique
   const addNode = (n: any) => {
+     if (!n?.id) return;
      if (!nodeIds.has(n.id)) {
          nodes.push(n);
          nodeIds.add(n.id);
      }
   }
+
+  const ensureNode = (id: string, label = 'Referenced Item') => {
+    if (!id || nodeIds.has(id)) return;
+    addNode({
+      id,
+      name: label,
+      type: 'Reference',
+      attributes: { id, generatedPlaceholder: true }
+    });
+  };
 
   // Traverse nested structure safely
   const conceptualModel = data?.composition?.conceptualModel;
@@ -99,32 +110,50 @@ export const parseDexpiJson = (data: any) => {
   systems.forEach((system: any) => {
       const segments = system.composition?.segments || [];
       segments.forEach((segment: any) => {
-          // Use reference to find source/target nozzles
-          const sourceId = segment.reference?.sourceItem;
-          const targetId = segment.reference?.targetItem;
+          const segmentConnections = segment.composition?.connections || [];
+          const references = segmentConnections.length
+              ? segmentConnections.map((connection: any) => ({
+                  sourceItem: connection.reference?.sourceItem || segment.reference?.sourceItem,
+                  targetItem: connection.reference?.targetItem || segment.reference?.targetItem,
+                  id: connection.id || segment.id,
+                  data: connection.data || segment.data || system.data || {}
+              }))
+              : [{
+                  sourceItem: segment.reference?.sourceItem,
+                  targetItem: segment.reference?.targetItem,
+                  id: segment.id,
+                  data: segment.data || system.data || {}
+              }];
 
-          if (sourceId && targetId) {
-              const pipeId = segment.id;
+          references.forEach((reference: any, index: number) => {
+              const sourceId = reference.sourceItem;
+              const targetId = reference.targetItem;
+              if (!sourceId || !targetId) return;
+
+              ensureNode(sourceId, 'Referenced Source');
+              ensureNode(targetId, 'Referenced Target');
+
+              const pipeId = reference.id || `${segment.id || system.id}-pipe-${index}`;
               const pipeNode = {
                   id: pipeId,
-                  name: segment.data?.lineNumber || 'Pipe Segment',
+                  name: reference.data?.lineNumber || segment.data?.lineNumber || system.data?.lineNumber || 'Pipe Segment',
                   type: 'Pipe',
-                  attributes: segment.data
+                  attributes: { ...(system.data || {}), ...(segment.data || {}), ...(reference.data || {}) }
               };
               addNode(pipeNode);
 
               links.push({
                   source: sourceId,
                   target: pipeId,
-                  label: segment.data?.service || 'connects_to'
+                  label: reference.data?.service || segment.data?.service || system.data?.lineNumber || 'connects_to'
               });
 
               links.push({
                   source: pipeId,
                   target: targetId,
-                  label: segment.data?.service || 'connects_to'
+                  label: reference.data?.service || segment.data?.service || system.data?.lineNumber || 'connects_to'
               });
-          }
+          });
       });
   });
 

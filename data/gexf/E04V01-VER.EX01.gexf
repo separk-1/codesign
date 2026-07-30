@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2025-12-04">
+    <creator>NetworkX 3.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="tagName" type="string" />
+      <attribute id="1" title="tagNamePrefix" type="string" />
+      <attribute id="2" title="tagNameSequenceNumber" type="string" />
+      <attribute id="3" title="dexpi_class" type="string" />
+    </attributes>
+    <nodes>
+      <node id="a84f3b47-cda8-4704-b82a-ec87da31589f" label="a84f3b47-cda8-4704-b82a-ec87da31589f">
+        <attvalues>
+          <attvalue for="0" value="H-1009" />
+          <attvalue for="1" value="H" />
+          <attvalue for="2" value="1009" />
+          <attvalue for="3" value="PlateHeatExchanger" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges />
+  </graph>
+</gexf>

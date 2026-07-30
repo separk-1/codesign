@@ -5,7 +5,10 @@ import { useDesignStore } from '../store/designStore';
 export const DisplayPanel = () => {
     const { conceptualGraph, detailedGraph, activeView, selectNode, selectedNode, decisionLog, candidate } = useDesignStore();
     const containerRef = useRef<HTMLDivElement>(null);
+    const updatedGraphRef = useRef<HTMLDivElement>(null);
+    const updatedForceGraphRef = useRef<any>(null);
     const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+    const [updatedGraphDimensions, setUpdatedGraphDimensions] = useState({ width: 520, height: 278 });
 
     // Deep copy data to avoid layout conflicts with GraphPanel
     const graphData = useMemo(() => {
@@ -26,6 +29,30 @@ export const DisplayPanel = () => {
         resizeObserver.observe(containerRef.current);
         return () => resizeObserver.disconnect();
     }, []);
+
+    useEffect(() => {
+        if (activeView !== 'detailed' || !updatedGraphRef.current) return;
+        const updateDimensions = () => {
+            if (!updatedGraphRef.current) return;
+            const rect = updatedGraphRef.current.getBoundingClientRect();
+            setUpdatedGraphDimensions({
+                width: Math.max(320, Math.floor(rect.width)),
+                height: Math.max(220, Math.floor(rect.height))
+            });
+        };
+        updateDimensions();
+        const resizeObserver = new ResizeObserver(updateDimensions);
+        resizeObserver.observe(updatedGraphRef.current);
+        return () => resizeObserver.disconnect();
+    }, [activeView, detailedGraph.nodes.length, detailedGraph.links.length]);
+
+    useEffect(() => {
+        if (activeView !== 'detailed' || !updatedForceGraphRef.current || !graphData.nodes.length) return;
+        const timer = window.setTimeout(() => {
+            updatedForceGraphRef.current?.zoomToFit?.(450, 34);
+        }, 650);
+        return () => window.clearTimeout(timer);
+    }, [activeView, graphData.nodes.length, graphData.links.length, updatedGraphDimensions.width, updatedGraphDimensions.height]);
 
     const decisionColor = (status?: string) => {
         if (status === 'high') return '#22c55e';
@@ -101,13 +128,33 @@ export const DisplayPanel = () => {
     const lineCount = detailedGraph.links.length;
 
     if (activeView === 'detailed') {
-        const includeHx = candidate.heatExchanger !== 'No heat exchanger';
-        const flowSteps = [
-            { tag: 'FEED', label: candidate.fluid, detail: `Material: ${candidate.material}` },
-            { tag: candidate.lineSize, label: 'Main Process Line', detail: candidate.flowInstrument },
-            { tag: 'P-101', label: candidate.pumpDuty, detail: candidate.pressureProtection },
-            ...(includeHx ? [{ tag: 'E-101', label: candidate.heatExchanger, detail: candidate.bypass }] : []),
-            { tag: 'TREAT', label: candidate.treatment, detail: `Status: ${candidate.status}` }
+        const branchNodes = detailedGraph.nodes.filter((node: any) => node.generatedByDecision || node.attributes?.generatedByDecision);
+        const baseProcessNodes = detailedGraph.nodes
+            .filter((node: any) => !node.generatedByDecision && !node.attributes?.generatedByDecision && !['Nozzle', 'Reference'].includes(node.type))
+            .slice(0, 5);
+        const graphSteps = [
+            ...baseProcessNodes.map((node: any) => ({
+                id: node.id,
+                tag: node.attributes?.tagName || node.attributes?.tag || node.name || node.id,
+                label: node.name || node.type || 'Input P&ID object',
+                detail: node.type || 'Input P&ID object',
+                type: node.type,
+                generated: false
+            })),
+            ...branchNodes.map((node: any) => ({
+                id: node.id,
+                tag: node.type || 'Decision',
+                label: node.name || node.attributes?.decision || 'Decision branch',
+                detail: node.attributes?.decisionTopic || node.attributes?.communicationPurpose || 'Generated from exchange',
+                type: node.type,
+                generated: true
+            }))
+        ];
+        const flowSteps = graphSteps.length ? graphSteps : [
+            { id: 'candidate-feed', tag: 'FEED', label: candidate.fluid, detail: `Material: ${candidate.material}`, type: 'Source', generated: true },
+            { id: 'candidate-line', tag: candidate.lineSize, label: 'Main Process Line', detail: candidate.flowInstrument, type: 'LineSizing', generated: true },
+            { id: 'candidate-pump', tag: 'P-101', label: candidate.pumpDuty, detail: candidate.pressureProtection, type: 'PumpDuty', generated: true },
+            { id: 'candidate-treatment', tag: 'TREAT', label: candidate.treatment, detail: `Status: ${candidate.status}`, type: 'TreatmentTrain', generated: true }
         ];
 
         return (
@@ -126,8 +173,8 @@ export const DisplayPanel = () => {
                             <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>{decisionLog.length}</div>
                         </div>
                         <div style={{ border: '1px solid #334155', borderRadius: 6, padding: 10, background: '#0f172a' }}>
-                            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>GENERATED OBJECTS</div>
-                            <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>{equipmentCount || detailedGraph.nodes.length}</div>
+                            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>GENERATED BRANCHES</div>
+                            <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>{branchNodes.length}</div>
                         </div>
                         <div style={{ border: '1px solid #334155', borderRadius: 6, padding: 10, background: '#0f172a' }}>
                             <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>REVIEW ITEMS</div>
@@ -136,16 +183,16 @@ export const DisplayPanel = () => {
                     </div>
 
                     <div style={{ padding: '4px 0' }}>
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginBottom: 8 }}>CANDIDATE FLOW</div>
+                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginBottom: 8 }}>INPUT GRAPH + DECISION BRANCHES</div>
                         <div style={{ display: 'grid', gridTemplateColumns: `repeat(${flowSteps.length}, minmax(130px, 1fr))`, gap: 10 }}>
                             {flowSteps.map((step, index) => (
                                 <button
-                                    key={step.tag}
-                                    onClick={() => selectNode(detailedGraph.nodes[index] || null)}
+                                    key={step.id || step.tag}
+                                    onClick={() => selectNode(detailedGraph.nodes.find((node: any) => node.id === step.id) || detailedGraph.nodes[index] || null)}
                                     style={{
-                                        border: '1px solid #334155',
+                                        border: `1px solid ${step.generated ? '#38bdf8' : '#334155'}`,
                                         borderRadius: 6,
-                                        background: '#0f172a',
+                                        background: step.generated ? 'rgba(14,116,144,0.22)' : '#0f172a',
                                         color: '#e2e8f0',
                                         textAlign: 'left',
                                         padding: 11,
@@ -154,7 +201,7 @@ export const DisplayPanel = () => {
                                         position: 'relative'
                                     }}
                                 >
-                                    <div style={{ fontSize: '0.68rem', color: '#38bdf8', fontWeight: 700 }}>{step.tag}</div>
+                                    <div style={{ fontSize: '0.68rem', color: step.generated ? '#38bdf8' : '#94a3b8', fontWeight: 700 }}>{step.tag}</div>
                                     <div style={{ fontSize: '0.9rem', fontWeight: 700, marginTop: 5 }}>{step.label}</div>
                                     <div style={{ fontSize: '0.72rem', color: '#94a3b8', lineHeight: 1.35, marginTop: 7 }}>{step.detail}</div>
                                     {index < flowSteps.length - 1 && (
@@ -165,17 +212,42 @@ export const DisplayPanel = () => {
                         </div>
                     </div>
 
-                    <div style={{ minHeight: 0 }}>
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginBottom: 8 }}>HUMAN REVIEW QUEUE</div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }}>
-                            {(candidate.reviewItems.length ? candidate.reviewItems : ['No review items recorded yet.']).map((item, index) => (
-                                <div key={`${item}-${index}`} style={{ border: '1px solid #475569', borderRadius: 6, background: '#111827', padding: 10 }}>
-                                    <div style={{ color: candidate.reviewItems.length ? '#fde047' : '#94a3b8', fontSize: '0.72rem', fontWeight: 700, marginBottom: 6 }}>
-                                        {candidate.reviewItems.length ? `REVIEW ${index + 1}` : 'REVIEW QUEUE'}
+                    <div style={{ minHeight: 0, display: 'grid', gridTemplateColumns: 'minmax(280px, 1fr) minmax(240px, 0.75fr)', gap: 12 }}>
+                        <div style={{ minHeight: 260, border: '1px solid #334155', borderRadius: 6, overflow: 'hidden', background: '#1e293b' }}>
+                            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, padding: '8px 10px', borderBottom: '1px solid #334155', background: '#0f172a' }}>UPDATED P&ID GRAPH</div>
+                            <div ref={updatedGraphRef} style={{ height: 252, minHeight: 0, overflow: 'hidden' }}>
+                                <ForceGraph2D
+                                    ref={updatedForceGraphRef}
+                                    width={updatedGraphDimensions.width}
+                                    height={updatedGraphDimensions.height}
+                                    graphData={graphData}
+                                    dagMode="lr"
+                                    dagLevelDistance={34}
+                                    cooldownTicks={80}
+                                    warmupTicks={30}
+                                    backgroundColor="#1e293b"
+                                    nodeCanvasObject={paintNode}
+                                    linkColor={(link: any) => decisionColor(link.decisionStatus) || '#64748b'}
+                                    linkWidth={(link: any) => link.decisionStatus || link.generatedByDecision ? 2.5 : 1}
+                                    linkDirectionalParticles={(link: any) => link.generatedByDecision ? 3 : 1}
+                                    linkDirectionalParticleWidth={(link: any) => link.decisionStatus ? 3 : 2}
+                                    onNodeClick={selectNode}
+                                />
+                            </div>
+                        </div>
+
+                        <div style={{ minHeight: 0 }}>
+                            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginBottom: 8 }}>HUMAN REVIEW QUEUE</div>
+                            <div style={{ display: 'grid', gap: 8, maxHeight: 300, overflowY: 'auto' }}>
+                                {(candidate.reviewItems.length ? candidate.reviewItems : ['No review items recorded yet.']).map((item, index) => (
+                                    <div key={`${item}-${index}`} style={{ border: '1px solid #475569', borderRadius: 6, background: '#111827', padding: 10 }}>
+                                        <div style={{ color: candidate.reviewItems.length ? '#fde047' : '#94a3b8', fontSize: '0.72rem', fontWeight: 700, marginBottom: 6 }}>
+                                            {candidate.reviewItems.length ? `REVIEW ${index + 1}` : 'REVIEW QUEUE'}
+                                        </div>
+                                        <div style={{ color: '#cbd5e1', fontSize: '0.72rem', lineHeight: 1.35 }}>{item}</div>
                                     </div>
-                                    <div style={{ color: '#cbd5e1', fontSize: '0.72rem', lineHeight: 1.35 }}>{item}</div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

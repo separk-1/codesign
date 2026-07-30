@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2025-12-04">
+    <creator>NetworkX 3.5</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="4" title="dexpi_class" type="string" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="tagName" type="string" />
+      <attribute id="1" title="tagNamePrefix" type="string" />
+      <attribute id="2" title="tagNameSequenceNumber" type="string" />
+      <attribute id="3" title="dexpi_class" type="string" />
+    </attributes>
+    <nodes>
+      <node id="346f04e6-bd27-4e28-820e-0bdce169f44c" label="346f04e6-bd27-4e28-820e-0bdce169f44c">
+        <attvalues>
+          <attvalue for="0" value="P4712" />
+          <attvalue for="1" value="P" />
+          <attvalue for="2" value="4712" />
+          <attvalue for="3" value="CentrifugalPump" />
+        </attvalues>
+      </node>
+      <node id="1ba2d6ff-ba04-4170-8874-3cab1cd2cdc8" label="1ba2d6ff-ba04-4170-8874-3cab1cd2cdc8">
+        <attvalues>
+          <attvalue for="0" value="H1008" />
+          <attvalue for="1" value="H" />
+          <attvalue for="2" value="1008" />
+          <attvalue for="3" value="PlateHeatExchanger" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="346f04e6-bd27-4e28-820e-0bdce169f44c" target="1ba2d6ff-ba04-4170-8874-3cab1cd2cdc8" id="0">
+        <attvalues>
+          <attvalue for="4" value="Pipe" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>

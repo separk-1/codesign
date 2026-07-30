@@ -1,0 +1,65 @@
+{
+    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/dexpiModel.py",
+    "id": "98bf8c7f-c04a-4e0e-a72f-3804b7a5990b",
+    "composition": {
+        "conceptualModel": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/conceptualModel.py",
+            "id": "75cb17df-46b9-484a-abbe-86184b3a41e8",
+            "composition": {
+                "actuatingSystems": [],
+                "instrumentationLoopFunctions": [],
+                "metaData": null,
+                "pipingNetworkSystems": [],
+                "plantStructureItems": [],
+                "processInstrumentationFunctions": [],
+                "processSignalGeneratingSystems": [],
+                "taggedPlantItems": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/tank.py",
+                        "id": "e944fa7c-6fd3-4f58-91f6-f556ea980944",
+                        "composition": {
+                            "customAttributes": [],
+                            "nozzles": [],
+                            "chambers": [],
+                            "dryingChambers": [],
+                            "gearBoxes": [],
+                            "motors": [],
+                            "sprayNozzles": []
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null,
+                            "agitator": null,
+                            "columnSections": []
+                        },
+                        "data": {
+                            "tagName": "T-9",
+                            "tagNamePrefix": null,
+                            "tagNameSequenceNumber": null,
+                            "tagNameSuffix": null,
+                            "equipmentDescription": null,
+                            "nominalCapacityVolume": null,
+                            "cylinderLength": {
+                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/length.py",
+                                "data": {
+                                    "unit": "m",
+                                    "value": 2.0
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "diagram": null,
+        "shapeCatalogues": []
+    },
+    "data": {
+        "exportDateTime": null,
+        "originatingSystemName": null,
+        "originatingSystemVendorName": null,
+        "originatingSystemVersion": "0.9"
+    }
+}

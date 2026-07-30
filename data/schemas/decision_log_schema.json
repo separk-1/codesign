@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoDesign Design Decision Log",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "timestamp", "topic", "question", "decision", "responderType"],
+    "properties": {
+      "id": { "type": "string" },
+      "timestamp": { "type": "string" },
+      "topic": { "type": "string" },
+      "question": { "type": "string" },
+      "decision": { "type": "string" },
+      "selectedOption": { "type": "string" },
+      "responderType": { "enum": ["human", "ai_agent"] },
+      "confidence": { "enum": ["low", "medium", "high"] },
+      "affectedComponent": { "type": "string" },
+      "reviewRequired": { "type": "boolean" },
+      "notes": { "type": "string" }
+    },
+    "additionalProperties": true
+  }
+}

@@ -1,0 +1,174 @@
+{
+    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/dexpiModel.py",
+    "id": "5b274f3e-7a2e-4b15-90d7-3775e037033d",
+    "composition": {
+        "conceptualModel": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/conceptualModel.py",
+            "id": "e61e3df4-ecdc-48e1-bd9d-02ff67010ce9",
+            "composition": {
+                "actuatingSystems": [],
+                "instrumentationLoopFunctions": [],
+                "metaData": null,
+                "pipingNetworkSystems": [],
+                "plantStructureItems": [],
+                "processInstrumentationFunctions": [],
+                "processSignalGeneratingSystems": [],
+                "taggedPlantItems": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/tank.py",
+                        "id": "145a42b1-10f1-45dd-9b18-91bfd67eb85c",
+                        "composition": {
+                            "customAttributes": [],
+                            "nozzles": [],
+                            "chambers": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/chamber.py",
+                                    "id": "8c6776fc-8476-4158-a82e-a8600f04c34f",
+                                    "composition": {
+                                        "customAttributes": []
+                                    },
+                                    "data": {
+                                        "chamberDescription": null,
+                                        "chamberFunction": null,
+                                        "chamberFunctionRepresentation": null,
+                                        "height": null,
+                                        "insideDiameter": null,
+                                        "length": null,
+                                        "lowerLimitDesignPressure": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/pressureGauge.py",
+                                            "data": {
+                                                "unit": "bar",
+                                                "value": -1.0
+                                            }
+                                        },
+                                        "lowerLimitDesignTemperature": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/temperature.py",
+                                            "data": {
+                                                "unit": "°C",
+                                                "value": -45.0
+                                            }
+                                        },
+                                        "materialOfConstructionCode": "1.4306",
+                                        "nominalDiameter": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/length.py",
+                                            "data": {
+                                                "unit": "m",
+                                                "value": 2.0
+                                            }
+                                        },
+                                        "nominalDiameterTypeRepresentation": null,
+                                        "subTagName": "Chamber 1",
+                                        "upperLimitDesignPressure": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/pressureGauge.py",
+                                            "data": {
+                                                "unit": "bar",
+                                                "value": 0.1
+                                            }
+                                        },
+                                        "upperLimitDesignTemperature": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/temperature.py",
+                                            "data": {
+                                                "unit": "°C",
+                                                "value": 100.0
+                                            }
+                                        },
+                                        "width": null
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/chamber.py",
+                                    "id": "a17f9435-55e3-4a8d-8ed2-506bfef8eb82",
+                                    "composition": {
+                                        "customAttributes": []
+                                    },
+                                    "data": {
+                                        "chamberDescription": null,
+                                        "chamberFunction": null,
+                                        "chamberFunctionRepresentation": null,
+                                        "height": null,
+                                        "insideDiameter": null,
+                                        "length": null,
+                                        "lowerLimitDesignPressure": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/pressureGauge.py",
+                                            "data": {
+                                                "unit": "bar",
+                                                "value": -0.1
+                                            }
+                                        },
+                                        "lowerLimitDesignTemperature": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/temperature.py",
+                                            "data": {
+                                                "unit": "°C",
+                                                "value": -45.0
+                                            }
+                                        },
+                                        "materialOfConstructionCode": "1.4305",
+                                        "nominalDiameter": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/length.py",
+                                            "data": {
+                                                "unit": "m",
+                                                "value": 2.0
+                                            }
+                                        },
+                                        "nominalDiameterTypeRepresentation": null,
+                                        "subTagName": "Chamber 2",
+                                        "upperLimitDesignPressure": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/pressureGauge.py",
+                                            "data": {
+                                                "unit": "bar",
+                                                "value": 0.1
+                                            }
+                                        },
+                                        "upperLimitDesignTemperature": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/temperature.py",
+                                            "data": {
+                                                "unit": "°C",
+                                                "value": 100.0
+                                            }
+                                        },
+                                        "width": null
+                                    }
+                                }
+                            ],
+                            "dryingChambers": [],
+                            "gearBoxes": [],
+                            "motors": [],
+                            "sprayNozzles": []
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null,
+                            "agitator": null,
+                            "columnSections": []
+                        },
+                        "data": {
+                            "tagName": "T4750",
+                            "tagNamePrefix": null,
+                            "tagNameSequenceNumber": null,
+                            "tagNameSuffix": null,
+                            "equipmentDescription": null,
+                            "nominalCapacityVolume": null,
+                            "cylinderLength": {
+                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/length.py",
+                                "data": {
+                                    "unit": "m",
+                                    "value": 4.0
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "diagram": null,
+        "shapeCatalogues": []
+    },
+    "data": {
+        "exportDateTime": null,
+        "originatingSystemName": null,
+        "originatingSystemVendorName": null,
+        "originatingSystemVersion": "0.9"
+    }
+}

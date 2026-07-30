@@ -1,0 +1,312 @@
+{
+    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/dexpiModel.py",
+    "id": "57aa3584-ad1c-41f5-ad90-14b724c980a6",
+    "composition": {
+        "conceptualModel": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/conceptualModel.py",
+            "id": "0676f829-8eb6-45a6-91af-29ecc55e8263",
+            "composition": {
+                "actuatingSystems": [],
+                "instrumentationLoopFunctions": [],
+                "metaData": null,
+                "pipingNetworkSystems": [],
+                "plantStructureItems": [],
+                "processInstrumentationFunctions": [],
+                "processSignalGeneratingSystems": [],
+                "taggedPlantItems": [
+                    {
+                        "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/plateHeatExchanger.py",
+                        "id": "e753965d-1aa8-4f9e-bd9f-23ed1113adf3",
+                        "composition": {
+                            "customAttributes": [],
+                            "nozzles": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "984a7d79-69e7-481e-ba23-c790b5688a92",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "d173d8c7-f30e-41e6-8d48-9e8e51dd9c2b",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": "80",
+                                                    "nominalDiameterRepresentation": "DN 80",
+                                                    "nominalDiameterStandard": "DN 80 (DIN 2448)",
+                                                    "nominalDiameterTypeRepresentation": "DN"
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": "51ec85e3-cc07-4348-a5e6-5aa62e0bbdec"
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N1"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "c4d1d171-ddda-4191-9117-861ca4fc071e",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "2aff82fb-a396-4862-8729-64d0a2e8fea0",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": "80",
+                                                    "nominalDiameterRepresentation": "DN 80",
+                                                    "nominalDiameterStandard": "DN 80 (DIN 2448)",
+                                                    "nominalDiameterTypeRepresentation": "DN"
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": "51ec85e3-cc07-4348-a5e6-5aa62e0bbdec"
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N2"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "3367a23d-fe8d-4cfd-888c-1f52f60e4ecf",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "be161b22-d928-448e-ba0f-41b437601dc3",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": "50",
+                                                    "nominalDiameterRepresentation": "DN 50",
+                                                    "nominalDiameterStandard": "DN 50 (DIN 2448)",
+                                                    "nominalDiameterTypeRepresentation": "DN"
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": "b4bdd527-9b65-4728-8edc-260fb90fa7fa"
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N3"
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                                    "id": "3f82125c-4f01-44b5-bdec-68a27ee93062",
+                                    "composition": {
+                                        "nodes": [
+                                            {
+                                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNode.py",
+                                                "id": "0ec1197a-455c-457a-8cd7-9889a6208540",
+                                                "composition": {
+                                                    "customAttributes": []
+                                                },
+                                                "data": {
+                                                    "nominalDiameterNumericalValueRepresentation": "50",
+                                                    "nominalDiameterRepresentation": "DN 50",
+                                                    "nominalDiameterStandard": "DN 50 (DIN 2448)",
+                                                    "nominalDiameterTypeRepresentation": "DN"
+                                                }
+                                            }
+                                        ],
+                                        "customAttributes": []
+                                    },
+                                    "reference": {
+                                        "chamber": "b4bdd527-9b65-4728-8edc-260fb90fa7fa"
+                                    },
+                                    "data": {
+                                        "nominalPressureNumericalValueRepresentation": null,
+                                        "nominalPressureRepresentation": null,
+                                        "nominalPressureStandard": null,
+                                        "nominalPressureTypeRepresentation": null,
+                                        "subTagName": "N4"
+                                    }
+                                }
+                            ],
+                            "chambers": [
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/chamber.py",
+                                    "id": "b4bdd527-9b65-4728-8edc-260fb90fa7fa",
+                                    "composition": {
+                                        "customAttributes": []
+                                    },
+                                    "data": {
+                                        "chamberDescription": null,
+                                        "chamberFunction": null,
+                                        "chamberFunctionRepresentation": null,
+                                        "height": null,
+                                        "insideDiameter": null,
+                                        "length": null,
+                                        "lowerLimitDesignPressure": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/pressureGauge.py",
+                                            "data": {
+                                                "unit": "bar",
+                                                "value": -1.0
+                                            }
+                                        },
+                                        "lowerLimitDesignTemperature": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/temperature.py",
+                                            "data": {
+                                                "unit": "°C",
+                                                "value": -45.0
+                                            }
+                                        },
+                                        "materialOfConstructionCode": null,
+                                        "nominalDiameter": null,
+                                        "nominalDiameterTypeRepresentation": null,
+                                        "subTagName": "Chamber 1",
+                                        "upperLimitDesignPressure": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/pressureGauge.py",
+                                            "data": {
+                                                "unit": "bar",
+                                                "value": 60.0
+                                            }
+                                        },
+                                        "upperLimitDesignTemperature": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/temperature.py",
+                                            "data": {
+                                                "unit": "°C",
+                                                "value": 100.0
+                                            }
+                                        },
+                                        "width": null
+                                    }
+                                },
+                                {
+                                    "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/chamber.py",
+                                    "id": "51ec85e3-cc07-4348-a5e6-5aa62e0bbdec",
+                                    "composition": {
+                                        "customAttributes": []
+                                    },
+                                    "data": {
+                                        "chamberDescription": null,
+                                        "chamberFunction": null,
+                                        "chamberFunctionRepresentation": null,
+                                        "height": null,
+                                        "insideDiameter": null,
+                                        "length": null,
+                                        "lowerLimitDesignPressure": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/pressureGauge.py",
+                                            "data": {
+                                                "unit": "bar",
+                                                "value": -1.0
+                                            }
+                                        },
+                                        "lowerLimitDesignTemperature": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/temperature.py",
+                                            "data": {
+                                                "unit": "°C",
+                                                "value": -45.0
+                                            }
+                                        },
+                                        "materialOfConstructionCode": null,
+                                        "nominalDiameter": null,
+                                        "nominalDiameterTypeRepresentation": null,
+                                        "subTagName": "Chamber 2",
+                                        "upperLimitDesignPressure": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/pressureGauge.py",
+                                            "data": {
+                                                "unit": "bar",
+                                                "value": 30.0
+                                            }
+                                        },
+                                        "upperLimitDesignTemperature": {
+                                            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/temperature.py",
+                                            "data": {
+                                                "unit": "°C",
+                                                "value": 100.0
+                                            }
+                                        },
+                                        "width": null
+                                    }
+                                }
+                            ],
+                            "dryingChambers": [],
+                            "gearBoxes": [],
+                            "motors": [],
+                            "sprayNozzles": []
+                        },
+                        "reference": {
+                            "plantTrain": null,
+                            "plantSystem": null,
+                            "plantArea": null,
+                            "parentStructure": null,
+                            "agitator": null
+                        },
+                        "data": {
+                            "tagName": "H1201",
+                            "tagNamePrefix": "H",
+                            "tagNameSequenceNumber": "1201",
+                            "tagNameSuffix": "",
+                            "equipmentDescription": null,
+                            "designHeatFlowRate": {
+                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/power.py",
+                                "data": {
+                                    "unit": "kW",
+                                    "value": 313.0
+                                }
+                            },
+                            "designHeatTransferArea": {
+                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/area.py",
+                                "data": {
+                                    "unit": "m2",
+                                    "value": 46.8
+                                }
+                            },
+                            "designHeatTransferCoefficient": null,
+                            "numberOfPlates": null,
+                            "plateHeight": {
+                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/length.py",
+                                "data": {
+                                    "unit": "mm",
+                                    "value": 850.0
+                                }
+                            },
+                            "plateWidth": {
+                                "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/physicalQuantities/length.py",
+                                "data": {
+                                    "unit": "mm",
+                                    "value": 1100.0
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "diagram": null,
+        "shapeCatalogues": []
+    },
+    "data": {
+        "exportDateTime": null,
+        "originatingSystemName": null,
+        "originatingSystemVendorName": null,
+        "originatingSystemVersion": "0.9"
+    }
+}

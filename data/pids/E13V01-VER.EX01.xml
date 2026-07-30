@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PlantModel>
+  <PlantInformation Application="Dexpi" ApplicationVersion="1.3.1" Date="2019-07-08" Discipline="PID" Is3D="no" OriginatingSystem="P&amp;ID Toolbox" OriginatingSystemVendor="pnb plants &amp; bytes GmbH, Aachen, Germany" OriginatingSystemVersion="0.9" SchemaVersion="4.1.1" Time="03:02:01" Units="mm">
+    <UnitsOfMeasure/>
+  </PlantInformation>
+  <PlantStructureItem ID="Enterprise-1" ComponentClass="Isa95Enterprise" ComponentClassURI="http://data.posccaesar.org/rdl/RDS10418236543">
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute Name="EnterpriseNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/EnterpriseNameAssignmentClass" Format="string" Value="DEXPI Beer Inc."/>
+    </GenericAttributes>
+    <Association Type="is a collection including" ItemID="Site-1"/>
+  </PlantStructureItem>
+  <PlantStructureItem ID="Site-1" ComponentClass="SiteIsa95" ComponentClassURI="http://data.posccaesar.org/rdl/RDS10418236632">
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute Name="SiteNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/SiteNameAssignmentClass" Format="string" Value="Cologne"/>
+    </GenericAttributes>
+    <Association Type="is a part of" ItemID="Enterprise-1"/>
+    <Association Type="is a collection including" ItemID="ProcessPlant-1"/>
+  </PlantStructureItem>
+  <PlantStructureItem ID="ProcessPlant-1" ComponentClass="ProcessPlant" ComponentClassURI="http://data.posccaesar.org/rdl/RDS7151859">
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute Name="ProcessPlantNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/ProcessPlantNameAssignmentClass" Format="string" Value="KÃ¶lsch Plant"/>
+    </GenericAttributes>
+    <Association Type="is a part of" ItemID="Site-1"/>
+    <Association Type="is a collection including" ItemID="Tank-1"/>
+  </PlantStructureItem>
+  <PlantStructureItem ID="PlantTrain-1" ComponentClass="PlantTrain" ComponentClassURI="http://sandbox.dexpi.org/rdl/PlantTrain">
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute Name="PlantTrainNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/PlantTrainNameAssignmentClass" Format="string" Value="Train 2"/>
+    </GenericAttributes>
+    <Association Type="is the location of" ItemID="Tank-1"/>
+  </PlantStructureItem>
+  <Equipment ID="Tank-1" ComponentClass="Tank" ComponentClassURI="http://data.posccaesar.org/rdl/RDS445139">
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute Name="TagNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/TagNameAssignmentClass" Format="string" Value="T1301"/>
+    </GenericAttributes>
+    <Association Type="is a part of" ItemID="ProcessPlant-1"/>
+    <Association Type="is located in" ItemID="PlantTrain-1"/>
+  </Equipment>
+</PlantModel>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PlantModel>
+  <PlantInformation Application="Dexpi" ApplicationVersion="1.3.1" Date="2019-07-08" Discipline="PID" Is3D="no" OriginatingSystem="P&amp;ID Toolbox" OriginatingSystemVendor="pnb plants &amp; bytes GmbH, Aachen, Germany" OriginatingSystemVersion="0.9" SchemaVersion="4.1.1" Time="03:02:01" Units="mm">
+    <UnitsOfMeasure/>
+  </PlantInformation>
+  <ActuatingSystem ID="ActuatingSystem-1" ComponentClass="ActuatingSystem" ComponentClassURI="http://sandbox.dexpi.org/rdl/ActuatingSystem">
+    <Association Type="fulfills" ItemID="ActuatingFunction-1"/>
+    <ActuatingSystemComponent ID="ControlledActuator-1" ComponentClass="ControlledActuator" ComponentClassURI="http://sandbox.dexpi.org/rdl/ControlledActuator">
+      <GenericAttributes Set="DexpiAttributes" Number="1">
+        <GenericAttribute Name="DeviceTypeNameAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/DeviceTypeNameAssignmentClass" Format="string" Value="Spring-diaphragm with positioner"/>
+      </GenericAttributes>
+    </ActuatingSystemComponent>
+    <ActuatingSystemComponent ID="OperatedValveReference-1" ComponentClass="OperatedValveReference" ComponentClassURI="http://sandbox.dexpi.org/rdl/OperatedValveReference">
+      <Association Type="refers to" ItemID="GlobeValve-1"/>
+    </ActuatingSystemComponent>
+  </ActuatingSystem>
+  <InstrumentationLoopFunction ID="InstrumentationLoopFunction-1" ComponentClass="InstrumentationLoopFunction" ComponentClassURI="http://sandbox.dexpi.org/rdl/InstrumentationLoopFunction">
+    <GenericAttributes Set="DexpiAttributes" Number="1">
+      <GenericAttribute Name="InstrumentationLoopFunctionNumberAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/InstrumentationLoopFunctionNumberAssignmentClass" Format="string" Value="12"/>
+    </GenericAttributes>
+    <Association Type="is a collection including" ItemID="ProcessInstrumentationFunction-1"/>
+  </InstrumentationLoopFunction>
+  <PipingNetworkSystem ID="PipingNetworkSystem-1" ComponentClass="PipingNetworkSystem" ComponentClassURI="http://data.posccaesar.org/rdl/RDS270359">
+    <PipingNetworkSegment ID="PipingNetworkSegment-1" ComponentClass="PipingNetworkSegment" ComponentClassURI="http://data.posccaesar.org/rdl/RDS267704">
+      <CenterLine NumPoints="0"/>
+      <PipingComponent ID="GlobeValve-1" ComponentClass="GlobeValve" ComponentClassURI="http://data.posccaesar.org/rdl/RDS416204">
+        <ConnectionPoints FlowIn="1" FlowOut="2" NumPoints="3">
+          <Node ID="GlobeValve-1-DefaultNode"/>
+          <Node Type="process" ID="PipingNode-1"/>
+          <Node Type="process" ID="PipingNode-2"/>
+        </ConnectionPoints>
+        <GenericAttributes Set="DexpiAttributes" Number="1">
+          <GenericAttribute Name="PipingComponentNumberAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/PipingComponentNumberAssignmentClass" Format="string" Value="HV 12"/>
+        </GenericAttributes>
+        <Association Type="is referenced by" ItemID="OperatedValveReference-1"/>
+      </PipingComponent>
+      <CenterLine NumPoints="0"/>
+    </PipingNetworkSegment>
+  </PipingNetworkSystem>
+  <ProcessInstrumentationFunction ID="ProcessInstrumentationFunction-1" ComponentClass="ProcessInstrumentationFunction" ComponentClassURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunction">
+    <GenericAttributes Set="DexpiAttributes" Number="4">
+      <GenericAttribute Name="LocationSpecialization" AttributeURI="http://sandbox.dexpi.org/rdl/LocationSpecialization" Format="anyURI" Value="CentralLocation" ValueURI="http://sandbox.dexpi.org/rdl/CentralLocation"/>
+      <GenericAttribute Name="ProcessInstrumentationFunctionCategoryAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionCategoryAssignmentClass" Format="string" Value="H"/>
+      <GenericAttribute Name="ProcessInstrumentationFunctionNumberAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionNumberAssignmentClass" Format="string" Value="12"/>
+      <GenericAttribute Name="ProcessInstrumentationFunctionsAssignmentClass" AttributeURI="http://sandbox.dexpi.org/rdl/ProcessInstrumentationFunctionsAssignmentClass" Format="string" Value="C"/>
+    </GenericAttributes>
+    <Association Type="is a part of" ItemID="InstrumentationLoopFunction-1"/>
+    <Association Type="is logical start of" ItemID="SignalLineFunction-1"/>
+    <ActuatingFunction ID="ActuatingFunction-1" ComponentClass="ActuatingFunction" ComponentClassURI="http://sandbox.dexpi.org/rdl/ActuatingFunction">
+      <Association Type="is fulfilled by" ItemID="ActuatingSystem-1"/>
+      <Association Type="is logical end of" ItemID="SignalLineFunction-1"/>
+    </ActuatingFunction>
+    <InformationFlow ID="SignalLineFunction-1" ComponentClass="SignalLineFunction" ComponentClassURI="http://sandbox.dexpi.org/rdl/SignalLineFunction">
+      <Association Type="has logical start" ItemID="ProcessInstrumentationFunction-1"/>
+      <Association Type="has logical end" ItemID="ActuatingFunction-1"/>
+    </InformationFlow>
+  </ProcessInstrumentationFunction>
+</PlantModel>

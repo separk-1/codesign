@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CoDesign Knowledge Graph Export",
+  "type": "object",
+  "properties": {
+    "directed": { "type": "boolean" },
+    "multigraph": { "type": "boolean" },
+    "graph": { "type": "object" },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "type": ["string", "number"] },
+          "label": { "type": "string" },
+          "type": { "type": "string" },
+          "tagName": { "type": "string" },
+          "class": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target"],
+        "properties": {
+          "source": { "type": ["string", "number", "object"] },
+          "target": { "type": ["string", "number", "object"] },
+          "type": { "type": "string" },
+          "lineNumber": { "type": "string" },
+          "nominalDiameter": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": ["nodes", "links"],
+  "additionalProperties": true
+}
