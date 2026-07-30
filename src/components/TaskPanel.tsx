@@ -61,6 +61,7 @@ const TaskItem = ({ task, isLast }: { task: DesignTask; isLast: boolean }) => {
 
 export const TaskPanel = () => {
     const tasks = useDesignStore(state => state.tasks);
+    const restartSession = useDesignStore(state => state.restartSession);
 
     return (
         <div style={{
@@ -70,7 +71,23 @@ export const TaskPanel = () => {
             background: '#1e293b',
             borderRight: '1px solid #334155',
         }}>
-            <div className="panel-title">TASK PROGRESS</div>
+            <div className="panel-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+                <span>TASK PROGRESS</span>
+                <button
+                    onClick={restartSession}
+                    style={{
+                        border: '1px solid #475569',
+                        borderRadius: 4,
+                        background: '#0f172a',
+                        color: '#cbd5e1',
+                        fontSize: '0.68rem',
+                        padding: '3px 7px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    RESTART
+                </button>
+            </div>
 
             {/* Task list */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '14px 12px' }}>

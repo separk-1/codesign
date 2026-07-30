@@ -8,20 +8,11 @@ interface AutoFillRule {
 }
 
 const AUTO_FILL_RULES: AutoFillRule[] = [
-    { keywords: ['process fluid'], answer: 'B (Aqueous solution)', confidence: 'high' },
-    { keywords: ['flow rate'], answer: 'B (50–200 m³/h)', confidence: 'high' },
-    { keywords: ['pressure rise'], answer: 'B (Moderate, 5–15 bar)', confidence: 'medium' },
-    { keywords: ['heat exchanger'], answer: 'B (Plate heat exchanger)', confidence: 'high' },
-    { keywords: ['suction'], answer: 'B (Flooded suction)', confidence: 'high' },
-    { keywords: ['flow arrangement'], answer: 'A (Counter-current)', confidence: 'high' },
-    { keywords: ['distance'], answer: 'A (Close-coupled, < 5 m)', confidence: 'medium' },
-    { keywords: ['sizing'], answer: 'A (Accept standard sizing)', confidence: 'high' },
-    { keywords: ['flange'], answer: 'A (Class 150)', confidence: 'medium' },
-    { keywords: ['operating'], answer: 'A (Accept assumptions)', confidence: 'medium' },
-    { keywords: ['confirm', 'proceed', 'continue', 'ready'], answer: 'Yes, proceed', confidence: 'high' },
-    { keywords: ['convert', 'translate', 'switch to detailed'], answer: 'Convert to detailed design', confidence: 'high' },
-    { keywords: ['accept', 'approve'], answer: 'Yes, accept', confidence: 'high' },
-    { keywords: ['material', 'metallurgy'], answer: 'A (Carbon steel)', confidence: 'medium' },
+    { keywords: ['fluid', 'processed'], answer: 'B', confidence: 'medium' },
+    { keywords: ['flow rate'], answer: 'B', confidence: 'medium' },
+    { keywords: ['pump duty'], answer: 'B', confidence: 'medium' },
+    { keywords: ['treatment configuration'], answer: 'B', confidence: 'medium' },
+    { keywords: ['reviewable p&id candidate'], answer: 'B', confidence: 'medium' },
 ];
 
 function getDefaultAnswer(aiText: string): { answer: string; confidence: 'high' | 'medium' } | null {
@@ -108,7 +99,9 @@ export const ChatPanel = () => {
             </div>
 
             <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {chatMessages.map((msg: ChatMessage) => (
+                {chatMessages.map((msg: ChatMessage) => {
+                    const displayName = msg.sender === 'ai' ? 'AI Assistant' : (msg.source === 'ai_default' ? 'Test Agent' : 'You');
+                    return (
                     <div key={msg.id} style={{
                         alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
                         maxWidth: '85%',
@@ -120,10 +113,11 @@ export const ChatPanel = () => {
                         color: '#fff',
                         fontSize: '0.95rem',
                         lineHeight: '1.5',
+                        whiteSpace: 'pre-wrap',
                         border: msg.source === 'ai_default' ? '1px dashed #64748b' : 'none'
                     }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.75rem', opacity: 0.7, marginBottom: '3px' }}>
-                            <span>{msg.sender === 'user' ? 'You' : 'AI Assistant'}</span>
+                            <span>{displayName}</span>
                             {msg.source && (
                                 <span style={{
                                     fontSize: '0.6rem',
@@ -138,7 +132,8 @@ export const ChatPanel = () => {
                         </div>
                         {msg.text}
                     </div>
-                ))}
+                    );
+                })}
                 <div ref={messagesEndRef} />
             </div>
 

@@ -2,7 +2,8 @@ import { useDesignStore } from '../store/designStore';
 import { DecisionLogPanel } from './DecisionLogPanel';
 
 export const InfoPanel = () => {
-    const { selectedNode, activeView, setActiveView } = useDesignStore();
+    const { selectedNode, activeView, setActiveView, candidate } = useDesignStore();
+    const detailedReady = ['Ready for Review', 'Assumptions Only'].includes(candidate.status);
 
     return (
         <div style={{
@@ -30,15 +31,27 @@ export const InfoPanel = () => {
                 >
                     CONCEPTUAL
                 </button>
-                <button
-                    onClick={() => setActiveView('detailed')}
-                    style={{
-                        background: activeView === 'detailed' ? '#3b82f6' : '#334155',
-                        border: 'none', borderRadius: '4px', color: '#fff', fontSize: '0.8rem', padding: '4px 10px', cursor: 'pointer'
-                    }}
-                >
-                    DETAILED
-                </button>
+                {detailedReady ? (
+                    <button
+                        onClick={() => setActiveView('detailed')}
+                        style={{
+                            background: activeView === 'detailed' ? '#3b82f6' : '#334155',
+                            border: 'none', borderRadius: '4px', color: '#fff', fontSize: '0.8rem', padding: '4px 10px', cursor: 'pointer'
+                        }}
+                    >
+                        DETAILED CANDIDATE
+                    </button>
+                ) : (
+                    <span style={{
+                        border: '1px solid #475569',
+                        borderRadius: '4px',
+                        color: '#64748b',
+                        fontSize: '0.72rem',
+                        padding: '4px 8px'
+                    }}>
+                        DETAILED LOCKED
+                    </span>
+                )}
             </div>
 
             <div style={{ flex: 1, overflowY: 'auto', padding: '12px', minHeight: 0 }}>

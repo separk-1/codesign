@@ -9,9 +9,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "api": "node server/index.js",
+    "dev:full": "concurrently \"npm run api\" \"npm run dev -- --host 127.0.0.1\""
   },
   "dependencies": {
+    "concurrently": "^10.0.4",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "openai": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-force-graph-2d": "^1.25.0",

@@ -21,6 +21,21 @@ export interface DecisionLogEntry {
     outcome: string;
 }
 
+export interface DesignCandidate {
+    fluid: string;
+    material: string;
+    lineSize: string;
+    flowInstrument: string;
+    pumpDuty: string;
+    pressureProtection: string;
+    treatment: string;
+    heatExchanger: string;
+    bypass: string;
+    status: 'Drafting' | 'Ready for Review' | 'Assumptions Only' | 'Blocked' | 'Decision Log Only';
+    reviewItems: string[];
+    updatedTopics: string[];
+}
+
 export interface ChatMessage {
     id: string;
     sender: 'user' | 'ai';
@@ -62,23 +77,62 @@ interface ConversationStep {
 }
 
 const CONVERSATION_SCRIPT: ConversationStep[] = [
-    { message: "Let's start by aligning the design intent. What process fluid will this PFD handle?\n\nA) Hydrocarbon (oil, fuel)\nB) Aqueous solution (water-based)\nC) Corrosive chemical\nD) Slurry or suspension", topic: 'process fluid', affectedComponent: 'system boundary', stakeholderFocus: ['designer', 'engineer', 'operator'], communicationPurpose: 'Align process intent before P&ID details are proposed.' },
-    { message: "What flow rate range should the engineer use when turning this PFD into a P&ID?\n\nA) Low (< 50 m3/h)\nB) Medium (50-200 m3/h)\nC) High (200-500 m3/h)\nD) Very high (> 500 m3/h)", topic: 'flow rate', affectedComponent: 'process line sizing', stakeholderFocus: ['designer', 'engineer'], communicationPurpose: 'Translate a conceptual requirement into sizing assumptions.' },
-    { message: "What pressure rise does the pump need to provide?\n\nA) Low (< 5 bar)\nB) Moderate (5-15 bar)\nC) High (15-40 bar)\nD) Very high (> 40 bar)", topic: 'pressure rise', affectedComponent: 'pump specification', stakeholderFocus: ['engineer', 'operator'], communicationPurpose: 'Make the pump duty explicit for review.' },
-    { message: "For suction conditions, what inlet configuration should be assumed?\n\nA) Flooded suction (tank above pump)\nB) Suction lift required\nC) Booster pump arrangement\nD) Self-priming needed", topic: 'suction', affectedComponent: 'pump inlet and upstream tank', stakeholderFocus: ['engineer', 'operator'], communicationPurpose: 'Surface operating constraints that are often tacit.' },
-    { message: "For the heat exchanger type, which design best fits the application?\n\nA) Shell-and-tube (high pressure/temperature)\nB) Plate heat exchanger (compact, easy cleaning)\nC) Air-cooled exchanger\nD) Spiral heat exchanger", topic: 'heat exchanger', affectedComponent: 'heat exchanger selection', stakeholderFocus: ['designer', 'engineer'], communicationPurpose: 'Record why a conceptual unit becomes a specific equipment type.' },
-    { message: "What flow arrangement should be represented for the heat exchanger?\n\nA) Counter-current (maximum efficiency)\nB) Co-current (parallel flow)\nC) Cross-flow\nD) Multi-pass", topic: 'flow arrangement', affectedComponent: 'heat exchanger connections', stakeholderFocus: ['engineer'], communicationPurpose: 'Convert process intent into connection logic.' },
-    { message: "What is the approximate distance between the pump and heat exchanger in the layout?\n\nA) Close-coupled (< 5 m)\nB) Moderate distance (5-20 m)\nC) Long run (20-50 m)\nD) Remote location (> 50 m)", topic: 'distance', affectedComponent: 'piping route', stakeholderFocus: ['designer', 'engineer'], communicationPurpose: 'Expose layout assumptions that affect line routing.' },
-    { message: "For pipe sizing, the candidate main process line is DN 150 with a design velocity of 2.5 m/s. How should this be handled?\n\nA) Accept standard sizing\nB) Upsize for lower pressure drop\nC) Downsize to reduce cost\nD) Specify custom diameter", topic: 'sizing', affectedComponent: 'pipe diameter', stakeholderFocus: ['engineer', 'operator'], communicationPurpose: 'Separate AI-generated assumptions from human-approved decisions.' },
-    { message: "What flange class should be specified for the piping connections?\n\nA) Class 150 (PN 20, standard)\nB) Class 300 (PN 50, elevated pressure)\nC) Class 600 (PN 100, high pressure)\nD) Class 900+ (very high pressure)", topic: 'flange', affectedComponent: 'piping connections', stakeholderFocus: ['engineer'], communicationPurpose: 'Capture a reviewable mechanical interface decision.' },
-    { message: "For material selection, what should be assumed based on fluid and operating conditions?\n\nA) Carbon steel (CS, standard)\nB) Stainless steel 304/316\nC) Duplex stainless steel\nD) Special alloy (Hastelloy, Inconel)", topic: 'material', affectedComponent: 'material specification', stakeholderFocus: ['engineer', 'operator'], communicationPurpose: 'Preserve the reason for a material choice and flag uncertain chemistry.' },
-    { message: "Please review the compiled operating assumptions:\n\n- Fluid: Aqueous solution\n- Flow rate: 100 m3/h\n- Pump discharge: 10 bar\n- Temperature range: 25 C to 80 C\n- Pipe size: DN 150\n- Material: Carbon steel\n\nA) Accept assumptions and proceed\nB) Modify fluid properties\nC) Adjust pressure/temperature\nD) Change material selection", topic: 'operating', affectedComponent: 'operating envelope', stakeholderFocus: ['designer', 'engineer', 'operator'], communicationPurpose: 'Create a shared checkpoint before detailed P&ID generation.' },
-    { message: "The conceptual design decisions are recorded. Should the tool now generate a candidate detailed P&ID for review?\n\nA) Yes, proceed to detailed design\nB) Review equipment selection first\nC) Modify piping configuration\nD) Export conceptual summary", topic: 'confirm', affectedComponent: 'candidate P&ID package', stakeholderFocus: ['designer', 'engineer', 'operator'], communicationPurpose: 'Confirm that generation is a reviewable candidate, not a final automatic answer.' },
-    { message: "Generating a candidate detailed P&ID for human review...\n\nMapped equipment:\n- Feed Pump -> Centrifugal Pump (P-4713)\n- Pre-Heater -> Plate Heat Exchanger (H-1009)\n\nGenerated piping network with 5 process segments and 2 utility lines. Nozzle assignments are complete but remain review items.\n\nSwitching to Detailed View.", topic: 'translate', affectedComponent: 'detailed P&ID candidate', stakeholderFocus: ['engineer', 'operator'], communicationPurpose: 'Document the AI translation step and keep review responsibility visible.', expectsUserDecision: false }
+    { message: `What type of fluid is being processed?
+
+A) Clean water
+B) PFAS-contaminated water
+C) Corrosive chemical
+D) Slurry / solids-containing stream`, topic: 'process fluid', affectedComponent: 'material schedule and sampling points', stakeholderFocus: ['designer', 'engineer', 'operator'], communicationPurpose: 'Choose fluid assumptions that visibly affect material and sampling needs.' },
+    { message: `What design flow rate should the P&ID use?
+
+A) 25 m3/h
+B) 100 m3/h
+C) 300 m3/h
+D) Unknown, requires confirmation`, topic: 'flow rate', affectedComponent: 'main line size, pump capacity, and flow instrument range', stakeholderFocus: ['designer', 'engineer'], communicationPurpose: 'Translate process capacity into visible line and pump sizing changes.' },
+    { message: `What pump duty should be assumed?
+
+A) Transfer pump, delta P approximately 3 bar
+B) Booster pump, delta P approximately 10 bar
+C) High-pressure feed pump, delta P approximately 25 bar
+D) Unknown, requires vendor or process review`, topic: 'pressure duty', affectedComponent: 'pump duty and pressure protection', stakeholderFocus: ['engineer', 'operator'], communicationPurpose: 'Expose pressure assumptions that affect pump annotation and protection review.' },
+    { message: `What downstream treatment configuration should be shown?
+
+A) Direct treatment without heat exchanger
+B) Plate heat exchanger before treatment
+C) Shell-and-tube heat exchanger before treatment
+D) Configuration uncertain, requires review`, topic: 'treatment configuration', affectedComponent: 'heat exchanger, bypass valves, and treatment train', stakeholderFocus: ['designer', 'engineer', 'operator'], communicationPurpose: 'Show how a treatment choice changes the candidate P&ID layout.' },
+    { message: `Should the system generate a reviewable P&ID candidate now?
+
+A) Yes, generate the candidate
+B) Generate the candidate and flag all assumptions
+C) Do not generate, more information is required
+D) Export the decision log only`, topic: 'review gate', affectedComponent: 'candidate P&ID status', stakeholderFocus: ['designer', 'engineer', 'operator'], communicationPurpose: 'Make the human review gate explicit before showing a detailed candidate.' },
+    { message: `Generating a reviewable P&ID candidate from the recorded decisions...
+
+The candidate layout, equipment annotations, line sizing, material schedule, and review queue now reflect the selected answers.
+
+Switching to Detailed Candidate View.`, topic: 'translate', affectedComponent: 'detailed P&ID candidate', stakeholderFocus: ['engineer', 'operator'], communicationPurpose: 'Document the translation step and keep review responsibility visible.', expectsUserDecision: false }
 ];
 
 
 const DECISION_LOG_STORAGE_KEY = 'codesign.decisionLog.v1';
+
+const INITIAL_CANDIDATE: DesignCandidate = {
+    fluid: 'Not selected',
+    material: 'TBD',
+    lineSize: 'TBD',
+    flowInstrument: 'TBD',
+    pumpDuty: 'TBD',
+    pressureProtection: 'TBD',
+    treatment: 'TBD',
+    heatExchanger: 'Not selected',
+    bypass: 'TBD',
+    status: 'Drafting',
+    reviewItems: [],
+    updatedTopics: []
+};
+
+const WELCOME_MESSAGE = 'Welcome to CoDesign. I help teams refine a conceptual PFD into a reviewable P&ID candidate by asking design questions, separating human decisions from AI assumptions, and logging the decision trail.\n\nSend any message to begin the design conversation.';
 
 function loadStoredDecisionLog(): DecisionLogEntry[] {
     if (typeof window === 'undefined') return [];
@@ -98,6 +152,17 @@ function persistDecisionLog(log: DecisionLogEntry[]) {
 function csvEscape(value: unknown): string {
     const text = String(value ?? '');
     return `"${text.replace(/"/g, '""')}"`;
+}
+
+function needsOptionClarification(step: ConversationStep, response: string): boolean {
+    if (step.expectsUserDecision === false) return false;
+    if (!/\nA\)/.test(step.message)) return false;
+    const normalized = response.trim();
+    return /^[1-9][.)]?$/.test(normalized);
+}
+
+function optionClarificationMessage(response: string): string {
+    return `I saw "${response.trim()}", but this question uses A-D options. Please answer with A, B, C, or D so the decision log can record the exchange without guessing.`;
 }
 
 function inferDecision(step: ConversationStep, response: string): string {
@@ -139,18 +204,11 @@ function createDecisionLogEntry(step: ConversationStep, response: string, source
 
 function nodeIdsForTopic(topic: string): string[] {
     const mapping: Record<string, string[]> = {
-        'process fluid': ['Source-1'],
-        'flow rate': ['Source-1', 'Pump-1'],
-        'pressure rise': ['Pump-1'],
-        suction: ['Source-1', 'Pump-1'],
-        'heat exchanger': ['HEX-1'],
-        'flow arrangement': ['HEX-1'],
-        distance: ['Pump-1', 'HEX-1'],
-        sizing: ['Pump-1', 'HEX-1'],
-        flange: ['Pump-1', 'HEX-1'],
-        material: ['Pump-1', 'HEX-1'],
-        operating: ['Source-1', 'Pump-1', 'HEX-1', 'Sink-1'],
-        confirm: ['Source-1', 'Pump-1', 'HEX-1', 'Sink-1'],
+        'process fluid': ['Source-1', 'Pump-1', 'HEX-1'],
+        'flow rate': ['Source-1', 'Pump-1', 'HEX-1'],
+        'pressure duty': ['Pump-1'],
+        'treatment configuration': ['HEX-1', 'Sink-1'],
+        'review gate': ['Source-1', 'Pump-1', 'HEX-1', 'Sink-1'],
         translate: ['Source-1', 'Pump-1', 'HEX-1', 'Sink-1'],
     };
     return mapping[topic] || [];
@@ -195,6 +253,131 @@ function applyDecisionToGraph(graph: GraphData, entry: DecisionLogEntry): GraphD
     };
 }
 
+function optionLetter(response: string): string {
+    return response.trim().match(/^[A-D]/i)?.[0].toUpperCase() || '';
+}
+
+function inferCandidateOption(entry: DecisionLogEntry): string {
+    const direct = optionLetter(entry.humanOrAiResponse) || optionLetter(entry.decision);
+    if (direct) return direct;
+    const text = `${entry.humanOrAiResponse} ${entry.decision}`.toLowerCase();
+
+    if (entry.topic === 'process fluid') {
+        if (text.includes('clean water')) return 'A';
+        if (text.includes('pfas') || text.includes('water-based') || text.includes('groundwater')) return 'B';
+        if (text.includes('corrosive')) return 'C';
+        if (text.includes('slurry') || text.includes('solids')) return 'D';
+    }
+
+    if (entry.topic === 'flow rate') {
+        if (text.includes('unknown') || text.includes('requires confirmation')) return 'D';
+        if (text.includes('300') || text.includes('dn150')) return 'C';
+        if (text.includes('100') || text.includes('dn100')) return 'B';
+        if (text.includes('25') || text.includes('dn50')) return 'A';
+    }
+
+    if (entry.topic === 'pressure duty') {
+        if (text.includes('unknown') || text.includes('vendor') || text.includes('process review')) return 'D';
+        if (text.includes('25 bar') || text.includes('high-pressure')) return 'C';
+        if (text.includes('10 bar') || text.includes('booster')) return 'B';
+        if (text.includes('3 bar') || text.includes('transfer')) return 'A';
+    }
+
+    if (entry.topic === 'treatment configuration') {
+        if (text.includes('uncertain') || text.includes('unknown') || text.includes('unresolved')) return 'D';
+        if (text.includes('shell')) return 'C';
+        if (text.includes('plate')) return 'B';
+        if (text.includes('direct') || text.includes('no heat')) return 'A';
+    }
+
+    if (entry.topic === 'review gate') {
+        if (text.includes('log only') || text.includes('export')) return 'D';
+        if (text.includes('more information') || text.includes('blocked')) return 'C';
+        if (text.includes('assumption')) return 'B';
+        if (text.includes('ready') || text.includes('yes') || text.includes('generate')) return 'A';
+    }
+
+    return '';
+}
+
+function uniqueReviewItems(items: string[]): string[] {
+    return Array.from(new Set(items.filter(Boolean)));
+}
+
+function applyDecisionToCandidate(candidate: DesignCandidate, entry: DecisionLogEntry): DesignCandidate {
+    const option = inferCandidateOption(entry);
+    const next: DesignCandidate = {
+        ...candidate,
+        reviewItems: [...candidate.reviewItems],
+        updatedTopics: uniqueReviewItems([...candidate.updatedTopics, entry.topic])
+    };
+
+    if (entry.topic === 'process fluid') {
+        if (option === 'A') Object.assign(next, { fluid: 'Clean water', material: 'Carbon steel or PVC', pressureProtection: next.pressureProtection });
+        if (option === 'B') Object.assign(next, { fluid: 'PFAS-contaminated water', material: 'SS316 / HDPE', pressureProtection: next.pressureProtection });
+        if (option === 'C') Object.assign(next, { fluid: 'Corrosive chemical', material: 'Duplex or lined alloy' });
+        if (option === 'D') Object.assign(next, { fluid: 'Slurry / solids stream', material: 'Abrasion-resistant lined pipe' });
+        if (['B', 'C', 'D'].includes(option)) next.reviewItems.push('Confirm fluid chemistry and material compatibility.');
+    }
+
+    if (entry.topic === 'flow rate') {
+        const values: Record<string, [string, string]> = {
+            A: ['DN50', 'FT-101: 0-50 m3/h; pump flow 25 m3/h'],
+            B: ['DN100', 'FT-101: 0-150 m3/h; pump flow 100 m3/h'],
+            C: ['DN150', 'FT-101: 0-400 m3/h; pump flow 300 m3/h'],
+            D: ['TBD', 'Flow basis unknown; confirmation required']
+        };
+        const selected = values[option] || values.B;
+        next.lineSize = selected[0];
+        next.flowInstrument = selected[1];
+        if (option === 'C') next.reviewItems.push('Check pressure drop and pump capacity for 300 m3/h operation.');
+        if (option === 'D') next.reviewItems.push('Confirm design flow before sizing pipe, pump, and flowmeter.');
+    }
+
+    if (entry.topic === 'pressure duty') {
+        const values: Record<string, [string, string]> = {
+            A: ['Transfer pump; delta P approx. 3 bar', 'PI on discharge'],
+            B: ['Booster pump; delta P approx. 10 bar', 'PT + high-pressure alarm'],
+            C: ['High-pressure feed pump; delta P approx. 25 bar', 'PT + interlock / relief review'],
+            D: ['Pump duty unknown', 'Vendor or process review required']
+        };
+        const selected = values[option] || values.B;
+        next.pumpDuty = selected[0];
+        next.pressureProtection = selected[1];
+        if (['C', 'D'].includes(option)) next.reviewItems.push('Confirm pump curve, NPSH, pressure protection, and interlock/relief need.');
+    }
+
+    if (entry.topic === 'treatment configuration') {
+        const values: Record<string, [string, string, string]> = {
+            A: ['Direct treatment train', 'No heat exchanger', 'No HX bypass required'],
+            B: ['Treatment with thermal conditioning', 'Plate heat exchanger', 'HX bypass + isolation valves'],
+            C: ['Treatment with robust thermal conditioning', 'Shell-and-tube heat exchanger', 'HX bypass + maintenance isolation'],
+            D: ['Treatment configuration unresolved', 'Hold for review', 'Bypass strategy TBD']
+        };
+        const selected = values[option] || values.A;
+        next.treatment = selected[0];
+        next.heatExchanger = selected[1];
+        next.bypass = selected[2];
+        if (['B', 'C', 'D'].includes(option)) next.reviewItems.push('Review treatment layout, HX need, and maintenance access.');
+    }
+
+    if (entry.topic === 'review gate') {
+        if (option === 'A') next.status = 'Ready for Review';
+        if (option === 'B') {
+            next.status = 'Assumptions Only';
+            next.reviewItems.push('All AI/human assumptions must be reviewed before use.');
+        }
+        if (option === 'C') {
+            next.status = 'Blocked';
+            next.reviewItems.push('Candidate blocked until missing information is supplied.');
+        }
+        if (option === 'D') next.status = 'Decision Log Only';
+    }
+
+    next.reviewItems = uniqueReviewItems(next.reviewItems);
+    return next;
+}
+
 function mockTokens(estimate: number): number {
     return Math.floor(estimate * (0.7 + Math.random() * 0.3));
 }
@@ -219,11 +402,13 @@ interface DesignState {
     loading: boolean;
     aiResponding: boolean;
     conversationComplete: boolean;
+    agentGenerating: boolean;
     tasks: DesignTask[];
     tokenBudget: TokenBudget;
     terminalLogs: TerminalLog[];
     conversationStep: number;
     decisionLog: DecisionLogEntry[];
+    candidate: DesignCandidate;
 
     // Actions
     loadData: () => Promise<void>;
@@ -235,6 +420,8 @@ interface DesignState {
     advanceConversation: () => void;
     exportDecisionLogCsv: () => string;
     clearDecisionLog: () => void;
+    generateDecisionLogWithAgent: (scenario?: string) => Promise<void>;
+    restartSession: () => void;
 }
 
 function advanceTask(
@@ -273,12 +460,13 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     activeView: 'conceptual',
     selectedNode: null,
     chatMessages: [
-        { id: '1', sender: 'ai', text: 'Welcome to CoDesign. I help teams refine a conceptual PFD into a reviewable P&ID candidate by asking design questions, separating human decisions from AI assumptions, and logging the decision trail.\n\nSend any message to begin the design conversation.', timestamp: Date.now() }
+        { id: '1', sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }
     ],
     assumptionMode: false,
     loading: false,
     aiResponding: false,
     conversationComplete: false,
+    agentGenerating: false,
     tasks: createDefaultTasks(),
     tokenBudget: {
         total: parseInt(import.meta.env.VITE_TOKEN_BUDGET || '20000', 10),
@@ -286,7 +474,8 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     },
     terminalLogs: [],
     conversationStep: 0,
-    decisionLog: loadStoredDecisionLog(),
+    decisionLog: [],
+    candidate: INITIAL_CANDIDATE,
 
     addTerminalLog: (type, message) => {
         const log: TerminalLog = {
@@ -332,10 +521,17 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     setActiveView: (view) => {
         const state = get();
         const { addTerminalLog } = get();
+        const detailedReady = ['Ready for Review', 'Assumptions Only'].includes(state.candidate.status);
+
+        if (view === 'detailed' && !detailedReady) {
+            addTerminalLog('warning', 'Detailed P&ID candidate is locked until the review gate allows generation.');
+            return;
+        }
+
         const updates: Partial<DesignState> = { activeView: view };
 
         if (view === 'detailed') {
-            addTerminalLog('processing', 'Converting conceptual design to detailed P&ID...');
+            addTerminalLog('processing', 'Generating reviewable detailed P&ID candidate...');
 
             setTimeout(() => {
                 addTerminalLog('info', 'Mapping equipment: Feed Pump → Centrifugal Pump P-4713');
@@ -485,12 +681,27 @@ export const useDesignStore = create<DesignState>((set, get) => ({
             }
 
             const answeredStep = state.conversationStep > 0 ? CONVERSATION_SCRIPT[state.conversationStep - 1] : null;
+            if (answeredStep && needsOptionClarification(answeredStep, text)) {
+                addTerminalLog('warning', `Ambiguous option response received: "${text}"`);
+                set({
+                    chatMessages: [...newMessages, {
+                        id: Date.now().toString() + '-clarify',
+                        sender: 'ai' as const,
+                        text: optionClarificationMessage(text),
+                        timestamp: Date.now()
+                    }],
+                    aiResponding: false
+                });
+                return;
+            }
+
             if (answeredStep && answeredStep.expectsUserDecision !== false) {
                 const decisionEntry = createDecisionLogEntry(answeredStep, text, responseSource || 'human');
                 const decisionLog = [...state.decisionLog, decisionEntry];
                 persistDecisionLog(decisionLog);
                 updates.decisionLog = decisionLog;
                 updates.conceptualGraph = applyDecisionToGraph(state.conceptualGraph, decisionEntry);
+                updates.candidate = applyDecisionToCandidate(state.candidate, decisionEntry);
                 updates.selectedNode = updates.conceptualGraph.nodes.find(node => nodeIdsForTopic(decisionEntry.topic).includes(node.id)) || state.selectedNode;
                 addTerminalLog(
                     decisionEntry.confidence === 'review' ? 'warning' : 'success',
@@ -518,27 +729,140 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     },
 
     exportDecisionLogCsv: () => {
-        const header = ['timestamp', 'topic', 'design_question', 'stakeholder_focus', 'human_or_ai_response', 'response_source', 'decision', 'confidence', 'affected_component', 'communication_purpose', 'outcome'];
-        const rows = get().decisionLog.map(entry => [
+        const header = [
+            'timestamp',
+            'exchange_id',
+            'topic',
+            'question_from',
+            'question_text',
+            'response_from',
+            'response_type',
+            'response_text',
+            'decision_extracted',
+            'confidence',
+            'stakeholder_focus',
+            'affected_component',
+            'communication_purpose',
+            'outcome'
+        ];
+        const rows = get().decisionLog.map((entry, index) => [
             new Date(entry.timestamp).toISOString(),
+            `exchange-${index + 1}`,
             entry.topic,
+            'AI Design Assistant',
             entry.designQuestion,
-            entry.stakeholderFocus.join('; '),
+            entry.responseSource === 'ai_default' ? 'Test Agent' : 'Human User',
+            entry.responseSource === 'ai_default' ? 'AI-generated assumption' : 'Human-confirmed response',
             entry.humanOrAiResponse,
-            entry.responseSource,
             entry.decision,
             entry.confidence,
+            entry.stakeholderFocus.join('; '),
             entry.affectedComponent,
             entry.communicationPurpose,
             entry.outcome
         ]);
-        return [header, ...rows].map(row => row.map(csvEscape).join(',')).join('\\n');
+        return [header, ...rows].map(row => row.map(csvEscape).join(',')).join('\n');
     },
 
     clearDecisionLog: () => {
         persistDecisionLog([]);
-        set({ decisionLog: [] });
+        set({ decisionLog: [], candidate: INITIAL_CANDIDATE, activeView: 'conceptual', conversationComplete: false, conversationStep: 0 });
     },
 
-    setAssumptionMode: (enabled) => set({ assumptionMode: enabled })
+    generateDecisionLogWithAgent: async (scenario = 'PFAS treatment process: feed tank, pump, heat exchanger, and downstream treatment unit') => {
+        const { addTerminalLog } = get();
+        set({ agentGenerating: true });
+        addTerminalLog('processing', 'AI agent generating decision-query-outcome log...');
+        try {
+            const response = await fetch('/api/agent/generate-decision-log', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ scenario })
+            });
+            const data = await response.json();
+            if (!response.ok || !data.ok) {
+                throw new Error(data.error || 'Decision-log generation failed');
+            }
+            const entries = (data.entries || []) as DecisionLogEntry[];
+            let graph = get().conceptualGraph;
+            let candidate = get().candidate;
+            for (const entry of entries) {
+                graph = applyDecisionToGraph(graph, entry);
+                candidate = applyDecisionToCandidate(candidate, entry);
+            }
+
+            const now = Date.now();
+            const agentTranscript = entries.flatMap((entry, index) => ([
+                {
+                    id: `agent-question-${now}-${index}`,
+                    sender: 'ai' as const,
+                    text: `Agent test run ${index + 1}/${entries.length}\n\n${entry.designQuestion}`,
+                    timestamp: now + index * 2000
+                },
+                {
+                    id: `agent-answer-${now}-${index}`,
+                    sender: 'user' as const,
+                    text: entry.humanOrAiResponse,
+                    timestamp: now + index * 2000 + 1000,
+                    source: 'ai_default' as const
+                }
+            ]));
+
+            persistDecisionLog(entries);
+            set(state => ({
+                chatMessages: [
+                    ...state.chatMessages,
+                    ...agentTranscript,
+                    {
+                        id: `agent-summary-${now}`,
+                        sender: 'ai' as const,
+                        text: `Agent test run complete. ${entries.length} AI-default responses were converted into decision-log entries for human review.`,
+                        timestamp: now + entries.length * 2000 + 1000
+                    }
+                ],
+                decisionLog: entries,
+                conceptualGraph: graph,
+                candidate,
+                selectedNode: graph.nodes.find(node => node.reviewRequired) || graph.nodes[0] || null,
+                conversationComplete: true,
+                conversationStep: CONVERSATION_SCRIPT.length,
+                agentGenerating: false
+            }));
+            addTerminalLog(
+                data.mode === 'openai' ? 'success' : 'warning',
+                `AI agent generated ${entries.length} decision-log entries (${data.mode}).`
+            );
+        } catch (error) {
+            set({ agentGenerating: false });
+            addTerminalLog('warning', error instanceof Error ? error.message : String(error));
+        }
+    },
+
+    setAssumptionMode: (enabled) => set({ assumptionMode: enabled }),
+
+    restartSession: () => {
+        persistDecisionLog([]);
+        set({
+            activeView: 'conceptual',
+            selectedNode: null,
+            chatMessages: [
+                { id: `welcome-${Date.now()}`, sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }
+            ],
+            assumptionMode: false,
+            loading: false,
+            aiResponding: false,
+            conversationComplete: false,
+            agentGenerating: false,
+            tasks: createDefaultTasks(),
+            tokenBudget: {
+                total: parseInt(import.meta.env.VITE_TOKEN_BUDGET || '20000', 10),
+                used: 0
+            },
+            terminalLogs: [],
+            conversationStep: 0,
+            decisionLog: [],
+            candidate: INITIAL_CANDIDATE
+        });
+        get().loadData();
+    }
 }));

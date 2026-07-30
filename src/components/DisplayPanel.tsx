@@ -3,7 +3,7 @@ import ForceGraph2D from 'react-force-graph-2d';
 import { useDesignStore } from '../store/designStore';
 
 export const DisplayPanel = () => {
-    const { conceptualGraph, detailedGraph, activeView, selectNode, selectedNode } = useDesignStore();
+    const { conceptualGraph, detailedGraph, activeView, selectNode, selectedNode, decisionLog, candidate } = useDesignStore();
     const containerRef = useRef<HTMLDivElement>(null);
     const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 
@@ -33,6 +33,19 @@ export const DisplayPanel = () => {
         if (status === 'review') return '#eab308';
         return null;
     };
+
+    const statusColor = candidate.status === 'Ready for Review' ? '#22c55e'
+        : candidate.status === 'Blocked' ? '#ef4444'
+        : candidate.status === 'Decision Log Only' ? '#94a3b8'
+        : '#eab308';
+
+    const candidateCards = [
+        { label: 'Fluid / Material', value: candidate.fluid, detail: candidate.material, topic: 'process fluid' },
+        { label: 'Line / Flow', value: candidate.lineSize, detail: candidate.flowInstrument, topic: 'flow rate' },
+        { label: 'Pump / Pressure', value: candidate.pumpDuty, detail: candidate.pressureProtection, topic: 'pressure duty' },
+        { label: 'Treatment / HX', value: candidate.treatment, detail: candidate.heatExchanger, topic: 'treatment configuration' },
+        { label: 'Candidate Status', value: candidate.status, detail: `${candidate.reviewItems.length} review item${candidate.reviewItems.length === 1 ? '' : 's'}`, topic: 'review gate' }
+    ];
 
     const paintNode = (node: any, ctx: CanvasRenderingContext2D, globalScale: number) => {
         const isSelected = node.id === selectedNode?.id;
@@ -82,6 +95,94 @@ export const DisplayPanel = () => {
         }
     };
 
+
+    const reviewEntries = decisionLog.filter(entry => entry.confidence === 'review').slice(0, 5);
+    const equipmentCount = detailedGraph.nodes.filter((node: any) => ['Equipment', 'Pump', 'HeatExchanger'].includes(node.type)).length;
+    const lineCount = detailedGraph.links.length;
+
+    if (activeView === 'detailed') {
+        const includeHx = candidate.heatExchanger !== 'No heat exchanger';
+        const flowSteps = [
+            { tag: 'FEED', label: candidate.fluid, detail: `Material: ${candidate.material}` },
+            { tag: candidate.lineSize, label: 'Main Process Line', detail: candidate.flowInstrument },
+            { tag: 'P-101', label: candidate.pumpDuty, detail: candidate.pressureProtection },
+            ...(includeHx ? [{ tag: 'E-101', label: candidate.heatExchanger, detail: candidate.bypass }] : []),
+            { tag: 'TREAT', label: candidate.treatment, detail: `Status: ${candidate.status}` }
+        ];
+
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#162033', color: '#e2e8f0', overflow: 'hidden' }}>
+                <div className="panel-title" style={{ padding: '8px 10px', background: '#1e293b', borderBottom: '1px solid #334155' }}>
+                    <span>REVIEWABLE P&ID CANDIDATE</span>
+                    <span style={{ fontSize: '0.68rem', color: '#94a3b8', textTransform: 'none', letterSpacing: 0 }}>
+                        generated after decision exchange · not final design approval
+                    </span>
+                </div>
+
+                <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: 16, display: 'grid', gap: 14, gridTemplateRows: 'auto auto 1fr' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 10 }}>
+                        <div style={{ border: '1px solid #334155', borderRadius: 6, padding: 10, background: '#0f172a' }}>
+                            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>DECISION EXCHANGES</div>
+                            <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>{decisionLog.length}</div>
+                        </div>
+                        <div style={{ border: '1px solid #334155', borderRadius: 6, padding: 10, background: '#0f172a' }}>
+                            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>GENERATED OBJECTS</div>
+                            <div style={{ fontSize: '1.4rem', fontWeight: 700 }}>{equipmentCount || detailedGraph.nodes.length}</div>
+                        </div>
+                        <div style={{ border: '1px solid #334155', borderRadius: 6, padding: 10, background: '#0f172a' }}>
+                            <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>REVIEW ITEMS</div>
+                            <div style={{ fontSize: '1.4rem', fontWeight: 700, color: statusColor }}>{candidate.reviewItems.length}</div>
+                        </div>
+                    </div>
+
+                    <div style={{ padding: '4px 0' }}>
+                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginBottom: 8 }}>CANDIDATE FLOW</div>
+                        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${flowSteps.length}, minmax(130px, 1fr))`, gap: 10 }}>
+                            {flowSteps.map((step, index) => (
+                                <button
+                                    key={step.tag}
+                                    onClick={() => selectNode(detailedGraph.nodes[index] || null)}
+                                    style={{
+                                        border: '1px solid #334155',
+                                        borderRadius: 6,
+                                        background: '#0f172a',
+                                        color: '#e2e8f0',
+                                        textAlign: 'left',
+                                        padding: 11,
+                                        minHeight: 104,
+                                        cursor: 'pointer',
+                                        position: 'relative'
+                                    }}
+                                >
+                                    <div style={{ fontSize: '0.68rem', color: '#38bdf8', fontWeight: 700 }}>{step.tag}</div>
+                                    <div style={{ fontSize: '0.9rem', fontWeight: 700, marginTop: 5 }}>{step.label}</div>
+                                    <div style={{ fontSize: '0.72rem', color: '#94a3b8', lineHeight: 1.35, marginTop: 7 }}>{step.detail}</div>
+                                    {index < flowSteps.length - 1 && (
+                                        <div style={{ position: 'absolute', right: -9, top: '44%', color: '#64748b', fontWeight: 700 }}>→</div>
+                                    )}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div style={{ minHeight: 0 }}>
+                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginBottom: 8 }}>HUMAN REVIEW QUEUE</div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 8 }}>
+                            {(candidate.reviewItems.length ? candidate.reviewItems : ['No review items recorded yet.']).map((item, index) => (
+                                <div key={`${item}-${index}`} style={{ border: '1px solid #475569', borderRadius: 6, background: '#111827', padding: 10 }}>
+                                    <div style={{ color: candidate.reviewItems.length ? '#fde047' : '#94a3b8', fontSize: '0.72rem', fontWeight: 700, marginBottom: 6 }}>
+                                        {candidate.reviewItems.length ? `REVIEW ${index + 1}` : 'REVIEW QUEUE'}
+                                    </div>
+                                    <div style={{ color: '#cbd5e1', fontSize: '0.72rem', lineHeight: 1.35 }}>{item}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div className="panel-title" style={{ padding: '5px 10px', background: '#1e293b', borderBottom: '1px solid #334155' }}>
@@ -89,6 +190,30 @@ export const DisplayPanel = () => {
                 <span style={{ fontSize: '0.68rem', color: '#94a3b8', textTransform: 'none', letterSpacing: 0 }}>
                     green = confirmed · yellow = review needed
                 </span>
+            </div>
+            <div style={{ flex: '0 0 auto', padding: '10px', borderBottom: '1px solid #334155', background: '#162033' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 8 }}>
+                    <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 700 }}>LIVE P&ID CANDIDATE</div>
+                    <div style={{ fontSize: '0.68rem', color: statusColor, fontWeight: 700 }}>{candidate.status}</div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: 8 }}>
+                    {candidateCards.map(card => {
+                        const active = candidate.updatedTopics.includes(card.topic);
+                        return (
+                            <div key={card.label} style={{
+                                border: `1px solid ${active ? '#38bdf8' : '#334155'}`,
+                                borderRadius: 6,
+                                background: active ? 'rgba(14,116,144,0.22)' : '#0f172a',
+                                padding: 8,
+                                minHeight: 68
+                            }}>
+                                <div style={{ color: '#94a3b8', fontSize: '0.62rem', fontWeight: 700 }}>{card.label}</div>
+                                <div style={{ color: active ? '#e0f2fe' : '#e2e8f0', fontSize: '0.78rem', fontWeight: 700, marginTop: 5, lineHeight: 1.2 }}>{card.value}</div>
+                                <div style={{ color: '#64748b', fontSize: '0.64rem', marginTop: 4, lineHeight: 1.25 }}>{card.detail}</div>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
             <div ref={containerRef} style={{ flex: 1, overflow: 'hidden', background: '#1e293b' }}>
                 <ForceGraph2D
