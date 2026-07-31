@@ -3,36 +3,89 @@ import { useDesignStore, ChatMessage } from '../store/designStore';
 
 interface AutoFillRule {
     keywords: string[];
-    answer: string;
-    confidence: 'high' | 'medium';
+    answers: string[];
+    confidence: 'review';
 }
 
 const AUTO_FILL_RULES: AutoFillRule[] = [
-    { keywords: ['fluid', 'processed'], answer: 'B', confidence: 'medium' },
-    { keywords: ['flow rate'], answer: 'B', confidence: 'medium' },
-    { keywords: ['pump duty'], answer: 'B', confidence: 'medium' },
-    { keywords: ['treatment configuration'], answer: 'B', confidence: 'medium' },
-    { keywords: ['reviewable p&id candidate'], answer: 'B', confidence: 'medium' },
+    {
+        keywords: ['fluid/material basis', 'fluid is being processed', 'fluid/material'],
+        answers: ['B) PFAS-contaminated water', 'A) Clean water', 'C) Corrosive chemical', 'D) Slurry / solids-containing stream'],
+        confidence: 'review'
+    },
+    {
+        keywords: ['flow rate', 'design flow'],
+        answers: ['B) 100 m3/h', 'A) 25 m3/h', 'C) 300 m3/h', 'D) Unknown, requires confirmation'],
+        confidence: 'review'
+    },
+    {
+        keywords: ['pump duty', 'pressure-duty', 'pressure duty'],
+        answers: ['B) Booster pump, delta P approximately 10 bar', 'A) Transfer pump, delta P approximately 3 bar', 'C) High-pressure feed pump, delta P approximately 25 bar', 'D) Unknown, requires vendor or process review'],
+        confidence: 'review'
+    },
+    {
+        keywords: ['treatment configuration', 'downstream treatment'],
+        answers: ['B) Plate heat exchanger before treatment', 'A) Direct treatment without heat exchanger', 'C) Shell-and-tube heat exchanger before treatment', 'D) Configuration uncertain, requires review'],
+        confidence: 'review'
+    },
+    {
+        keywords: ['reviewable p&id candidate', 'generate a reviewable', 'review gate'],
+        answers: ['B) Generate the candidate and flag all assumptions', 'A) Yes, generate the candidate', 'C) Do not generate, more information is required', 'D) Export the decision log only'],
+        confidence: 'review'
+    },
 ];
 
-function getDefaultAnswer(aiText: string): { answer: string; confidence: 'high' | 'medium' } | null {
+function chooseAssumptionAnswer(rule: AutoFillRule, aiText: string): string {
+    const questionOnly = aiText.split(/\n\s*A\)/i)[0] || aiText;
+    const lower = questionOnly.toLowerCase();
+    if (lower.includes('unknown') || lower.includes('uncertain') || lower.includes('requires review')) {
+        return rule.answers.find(answer => answer.startsWith('D)')) || rule.answers[0];
+    }
+    if (lower.includes('pfas')) return rule.answers.find(answer => answer.toLowerCase().includes('pfas')) || rule.answers[0];
+    if (lower.includes('clean water')) return rule.answers.find(answer => answer.toLowerCase().includes('clean water')) || rule.answers[0];
+    if (lower.includes('300')) return rule.answers.find(answer => answer.includes('300')) || rule.answers[0];
+    if (lower.includes('25 bar') || lower.includes('high-pressure')) return rule.answers.find(answer => answer.includes('25 bar') || answer.toLowerCase().includes('high-pressure')) || rule.answers[0];
+    if (lower.includes('shell')) return rule.answers.find(answer => answer.toLowerCase().includes('shell')) || rule.answers[0];
+    if (lower.includes('direct treatment')) return rule.answers.find(answer => answer.toLowerCase().includes('direct')) || rule.answers[0];
+    const seed = Array.from(questionOnly).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+    return rule.answers[seed % Math.min(rule.answers.length, 3)];
+}
+
+function isActiveDesignQuestion(aiText: string): boolean {
+    return /^Design question\s+\d+\/\d+/i.test(aiText.trim());
+}
+
+function getDefaultAnswer(aiText: string): { answer: string; confidence: 'review' } | null {
+    if (!isActiveDesignQuestion(aiText)) return null;
     const lower = aiText.toLowerCase();
     for (const rule of AUTO_FILL_RULES) {
         if (rule.keywords.some(k => lower.includes(k))) {
-            return { answer: rule.answer, confidence: rule.confidence };
+            return { answer: chooseAssumptionAnswer(rule, aiText), confidence: rule.confidence };
         }
     }
     return null;
+}
+
+
+function looksLikeGraphRagQuestion(text: string): boolean {
+    const lower = text.toLowerCase().trim();
+    if (!lower.includes('?') && !/^(what|which|where|how|show|list|find|is|are|does|do)\b/.test(lower)) return false;
+    return [
+        'equipment', 'equipments', 'connected', 'connect', 'connection', 'pipe', 'pipes',
+        'p&id', 'pid', 'graph', 'node', 'link', 'edge', 'nozzle', 'tag', 'line',
+        'pump', 'heat exchanger', 'tank', 'valve', 'instrument', 'note', 'notes', 'annotation', 'evidence', 'review item'
+    ].some(keyword => lower.includes(keyword));
 }
 
 export const ChatPanel = () => {
     const {
         chatMessages, addChatMessage,
         assumptionMode, setAssumptionMode,
+        graphRagMode, setGraphRagMode, askGraphRagQuestion,
         aiResponding
     } = useDesignStore();
     const [input, setInput] = useState('');
-    const [currentConfidence, setCurrentConfidence] = useState<'high' | 'medium' | null>(null);
+    const [currentConfidence, setCurrentConfidence] = useState<'review' | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const scrollToBottom = () => {
@@ -70,32 +123,53 @@ export const ChatPanel = () => {
         const defaultResult = last?.sender === 'ai' ? getDefaultAnswer(last.text) : null;
         const source = (assumptionMode && defaultResult && userMsg === defaultResult.answer) ? 'ai_default' : 'human';
 
-        addChatMessage('user', userMsg, source);
+        if (graphRagMode || looksLikeGraphRagQuestion(userMsg)) {
+            askGraphRagQuestion(userMsg);
+        } else {
+            addChatMessage('user', userMsg, source);
+        }
         setInput('');
         setCurrentConfidence(null);
-        // AI response is now handled by the store's advanceConversation action
+        // Normal design-question responses are handled by the store's advanceConversation action.
     };
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter') handleSend();
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
     };
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0, overflow: 'hidden', background: '#1e293b', borderLeft: '1px solid #334155' }}>
             <div className="panel-title" style={{ padding: '10px', background: '#0f172a', borderBottom: '1px solid #334155', fontWeight: 'bold', color: '#e2e8f0' }}>
                 <span>AI DESIGN ASSISTANT</span>
-                <label style={{
-                    display: 'flex', alignItems: 'center', gap: 6,
-                    fontSize: '0.7rem', fontWeight: 400, color: '#94a3b8', cursor: 'pointer', textTransform: 'none', letterSpacing: 0
-                }}>
-                    <input
-                        type="checkbox"
-                        checked={assumptionMode}
-                        onChange={(e) => setAssumptionMode(e.target.checked)}
-                        style={{ accentColor: '#3b82f6', cursor: 'pointer' }}
-                    />
-                    Assumption Mode
-                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <label style={{
+                        display: 'flex', alignItems: 'center', gap: 6,
+                        fontSize: '0.7rem', fontWeight: 400, color: graphRagMode ? '#38bdf8' : '#94a3b8', cursor: 'pointer', textTransform: 'none', letterSpacing: 0
+                    }}>
+                        <input
+                            type="checkbox"
+                            checked={graphRagMode}
+                            onChange={(e) => setGraphRagMode(e.target.checked)}
+                            style={{ accentColor: '#38bdf8', cursor: 'pointer' }}
+                        />
+                        GraphRAG Mode
+                    </label>
+                    <label style={{
+                        display: 'flex', alignItems: 'center', gap: 6,
+                        fontSize: '0.7rem', fontWeight: 400, color: '#94a3b8', cursor: 'pointer', textTransform: 'none', letterSpacing: 0
+                    }}>
+                        <input
+                            type="checkbox"
+                            checked={assumptionMode}
+                            onChange={(e) => setAssumptionMode(e.target.checked)}
+                            style={{ accentColor: '#3b82f6', cursor: 'pointer' }}
+                        />
+                        Assumption Mode
+                    </label>
+                </div>
             </div>
 
             <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -149,20 +223,19 @@ export const ChatPanel = () => {
                             fontWeight: 700,
                             fontSize: '0.6rem',
                             letterSpacing: '0.03em',
-                            background: currentConfidence === 'high' ? 'rgba(34,197,94,0.2)' : 'rgba(234,179,8,0.2)',
-                            color: currentConfidence === 'high' ? '#22c55e' : '#eab308',
-                            border: `1px solid ${currentConfidence === 'high' ? '#22c55e' : '#eab308'}`,
+                            background: 'rgba(234,179,8,0.2)',
+                            color: '#eab308',
+                            border: '1px solid #eab308',
                         }}>
-                            {currentConfidence === 'high' ? 'HIGH CONF' : 'REVIEW'}
+                            AI ASSUMPTION · REVIEW
                         </span>
                         <span style={{ fontStyle: 'italic' }}>
-                            Auto-filled — edit or press Enter to accept
+                            AI default answer — edit or press Enter to accept
                         </span>
                     </div>
                 )}
                 <div style={{ display: 'flex', gap: '6px' }}>
-                    <input
-                        type="text"
+                    <textarea
                         value={input}
                         onChange={(e) => {
                             setInput(e.target.value);
@@ -174,17 +247,22 @@ export const ChatPanel = () => {
                             }
                         }}
                         onKeyDown={handleKeyDown}
-                        placeholder={aiResponding ? 'Waiting for AI question...' : 'Type a message...'}
+                        placeholder={aiResponding ? (graphRagMode ? 'Retrieving graph evidence...' : 'Waiting for AI question...') : (graphRagMode ? 'Ask a GraphRAG question about the selected P&ID...' : 'Type a message...')}
                         disabled={aiResponding}
+                        rows={1}
                         style={{
                             flex: 1,
+                            minHeight: 42,
+                            maxHeight: 80,
+                            resize: 'none',
                             padding: '10px',
                             borderRadius: '4px',
                             border: '1px solid #475569',
                             background: '#1e293b',
                             color: '#fff',
                             outline: 'none',
-                            fontSize: '0.9rem',
+                            fontSize: '0.85rem',
+                            lineHeight: 1.35,
                             opacity: aiResponding ? 0.6 : 1
                         }}
                     />

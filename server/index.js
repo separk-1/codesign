@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { generateDecisionLog } from './decisionAgent.js';
+import { answerGraphRag } from './graphRag.js';
 
 const app = express();
 const port = Number(process.env.API_PORT || 8787);
@@ -11,7 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, '..');
 const designJsonDir = path.join(projectRoot, 'data', 'json');
 
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '8mb' }));
 
 
 function designIdFromFile(file) {
@@ -59,6 +60,23 @@ app.get('/api/designs/:id', async (req, res) => {
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, hasOpenAIKey: Boolean(process.env.OPENAI_API_KEY) });
+});
+
+
+app.post('/api/graphrag/query', async (req, res) => {
+  try {
+    const { query, graph, candidate, decisionLog, designId } = req.body || {};
+    if (!query || typeof query !== 'string') {
+      return res.status(400).json({ ok: false, error: 'Missing query' });
+    }
+    if (!graph || !Array.isArray(graph.nodes) || !Array.isArray(graph.links)) {
+      return res.status(400).json({ ok: false, error: 'Missing graph.nodes or graph.links' });
+    }
+    const result = await answerGraphRag({ query, graph, candidate, decisionLog, designId });
+    res.json({ ok: true, ...result });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: error instanceof Error ? error.message : String(error) });
+  }
 });
 
 app.post('/api/agent/generate-decision-log', async (req, res) => {

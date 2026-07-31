@@ -8,7 +8,12 @@ This folder is organized as the data package for the CUAHSI final report.
 - `pids/`: normalized DEXPI/Proteus XML files used as conversion inputs.
 - `sample/`: small default PFAS treatment example used by the web app.
 
-Original source: https://gitlab.com/dexpi/TrainingTestCases/-/tree/master
+Original upstream source: DEXPI **Public Example PIDs / TrainingTestCases**
+
+- Repository: https://gitlab.com/dexpi/TrainingTestCases
+- DEXPI 1.3 example PIDs: https://gitlab.com/dexpi/TrainingTestCases/-/tree/master/dexpi%201.3/example%20pids?ref_type=heads
+
+The files in this project are derived or normalized research artifacts created from those public examples; the original P&ID example authorship remains with the upstream DEXPI repository.
 
 ## Transformed Knowledge Graph Data
 
@@ -25,3 +30,14 @@ Original source: https://gitlab.com/dexpi/TrainingTestCases/-/tree/master
 
 - `candidates/`: generated reviewable candidate P&ID JSON files exported from the web app.
 - `schemas/candidate_pid_schema.json`: lightweight schema for exported candidate files.
+
+## Included Sample Outputs
+
+The repository includes one human-run and one AI-agent-run sample output set for report review:
+
+- `design_decisions/sample_human_decision_log.csv`
+- `design_decisions/sample_agent_decision_log.csv`
+- `candidates/sample_human_candidate_pid.json`
+- `candidates/sample_agent_candidate_pid.json`
+
+The human sample demonstrates direct user choices. The agent sample demonstrates AI-default assumptions marked for human review.

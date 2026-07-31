@@ -14,6 +14,7 @@ export interface DecisionLogEntry {
     stakeholderFocus: string[];
     humanOrAiResponse: string;
     responseSource: 'human' | 'ai_default';
+    selectedOption?: string;
     decision: string;
     confidence: 'high' | 'medium' | 'review';
     affectedComponent: string;
@@ -50,6 +51,7 @@ export interface ChatMessage {
     text: string;
     timestamp: number;
     source?: 'human' | 'ai_default';
+    evidence?: any[];
 }
 
 export type TaskStatus = 'pending' | 'running' | 'done';
@@ -125,18 +127,37 @@ Switching to Detailed Candidate View.`, topic: 'translate', affectedComponent: '
 
 function summarizeInputGraph(graph: GraphData) {
     const processNodes = graph.nodes.filter((node: any) => !['Nozzle', 'Reference'].includes(node.type));
-    const hasPump = processNodes.some((node: any) => nodeMatches(node, ['pump']));
-    const hasHx = processNodes.some((node: any) => nodeMatches(node, ['heat', 'exchanger']));
-    const hasColumn = processNodes.some((node: any) => nodeMatches(node, ['column']));
-    const hasTank = processNodes.some((node: any) => nodeMatches(node, ['tank', 'vessel']));
-    return { processNodes, hasPump, hasHx, hasColumn, hasTank };
+    const uniqueNodes: any[] = [];
+    const seen = new Set<string>();
+    processNodes.forEach((node: any) => {
+        const label = node.attributes?.tagName || node.attributes?.tag || node.name || node.id || 'P&ID object';
+        const key = `${label}|${node.type || ''}`.toLowerCase();
+        if (!seen.has(key)) {
+            seen.add(key);
+            uniqueNodes.push(node);
+        }
+    });
+    const priority = (node: any) => {
+        if (nodeMatches(node, ['pump'])) return 0;
+        if (nodeMatches(node, ['heat', 'exchanger'])) return 1;
+        if (nodeMatches(node, ['tank', 'vessel'])) return 2;
+        if (nodeMatches(node, ['column', 'reactor'])) return 3;
+        if (nodeMatches(node, ['pipe', 'line'])) return 5;
+        return 4;
+    };
+    const displayNodes = [...uniqueNodes].sort((a, b) => priority(a) - priority(b)).slice(0, 4);
+    const hasPump = uniqueNodes.some((node: any) => nodeMatches(node, ['pump']));
+    const hasHx = uniqueNodes.some((node: any) => nodeMatches(node, ['heat', 'exchanger']));
+    const hasColumn = uniqueNodes.some((node: any) => nodeMatches(node, ['column']));
+    const hasTank = uniqueNodes.some((node: any) => nodeMatches(node, ['tank', 'vessel']));
+    return { processNodes: uniqueNodes, displayNodes, hasPump, hasHx, hasColumn, hasTank };
 }
 
 function getDynamicConversationStep(index: number, state: Pick<DesignState, 'baseDetailedGraph' | 'detailedGraph' | 'candidate'>): ConversationStep {
     const base = CONVERSATION_SCRIPT[index] || CONVERSATION_SCRIPT[CONVERSATION_SCRIPT.length - 1];
     const graph = state.baseDetailedGraph.nodes.length ? state.baseDetailedGraph : state.detailedGraph;
     const summary = summarizeInputGraph(graph);
-    const equipmentHint = summary.processNodes.slice(0, 4).map((node: any) => node.name || node.id).filter(Boolean).join(', ') || 'the selected P&ID';
+    const equipmentHint = summary.displayNodes.map((node: any) => node.attributes?.tagName || node.attributes?.tag || node.name || node.id).filter(Boolean).join(', ') || 'the selected P&ID';
     const fluidContext = state.candidate.fluid !== 'Not selected' ? ` The current fluid basis is ${state.candidate.fluid}.` : '';
     const flowContext = state.candidate.lineSize !== 'TBD' ? ` The current line basis is ${state.candidate.lineSize}.` : '';
     const pumpContext = state.candidate.pumpDuty !== 'TBD' ? ` The current pump basis is ${state.candidate.pumpDuty}.` : '';
@@ -294,6 +315,7 @@ function createDecisionLogEntry(step: ConversationStep, response: string, source
         stakeholderFocus: step.stakeholderFocus,
         humanOrAiResponse: response,
         responseSource: source,
+        selectedOption: inferDecision(step, response).match(/^[A-D]\)/)?.[0] || undefined,
         decision: inferDecision(step, response),
         confidence,
         affectedComponent: step.affectedComponent,
@@ -740,8 +762,9 @@ function updateDexpiObject(value: any, candidate: DesignCandidate): any {
     return next;
 }
 
-function buildUpdatedDexpi(sourceDexpi: any, candidate: DesignCandidate, decisionLog: DecisionLogEntry[]) {
+function buildUpdatedDexpi(sourceDexpi: any, candidate: DesignCandidate, decisionLog: DecisionLogEntry[], updatedGraph: GraphData) {
     const updated = updateDexpiObject(sourceDexpi || {}, candidate);
+    const decisionBranches = updatedGraph.nodes.filter((node: any) => node.generatedByDecision || node.attributes?.generatedByDecision);
     return {
         ...updated,
         coDesignExport: {
@@ -749,6 +772,13 @@ function buildUpdatedDexpi(sourceDexpi: any, candidate: DesignCandidate, decisio
             note: 'Reviewable P&ID candidate generated from CoDesign decision exchanges. Not final design approval.',
             candidate,
             decisionLog,
+            updatedGraph,
+            decisionBranches,
+            graphSchema: {
+                nodes: 'P&ID objects plus generated decision-branch nodes.',
+                links: 'Original P&ID links plus generated decision-branch links.',
+                generatedByDecision: 'true when the node/link was added by the CoDesign decision process.'
+            }
         }
     };
 }
@@ -779,6 +809,7 @@ interface DesignState {
     selectedNode: any | null;
     chatMessages: ChatMessage[];
     assumptionMode: boolean;
+    graphRagMode: boolean;
     loading: boolean;
     aiResponding: boolean;
     conversationComplete: boolean;
@@ -797,6 +828,8 @@ interface DesignState {
     selectNode: (node: any | null) => void;
     addChatMessage: (sender: 'user' | 'ai', text: string, source?: 'human' | 'ai_default') => void;
     setAssumptionMode: (enabled: boolean) => void;
+    setGraphRagMode: (enabled: boolean) => void;
+    askGraphRagQuestion: (query: string) => Promise<void>;
     addTerminalLog: (type: TerminalLog['type'], message: string) => void;
     advanceConversation: () => void;
     exportDecisionLogCsv: () => string;
@@ -850,6 +883,7 @@ export const useDesignStore = create<DesignState>((set, get) => ({
         { id: '1', sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }
     ],
     assumptionMode: false,
+    graphRagMode: false,
     loading: false,
     aiResponding: false,
     conversationComplete: false,
@@ -936,6 +970,7 @@ export const useDesignStore = create<DesignState>((set, get) => ({
                 { id: `welcome-${Date.now()}`, sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }
             ],
             assumptionMode: false,
+            graphRagMode: false,
             aiResponding: false,
             conversationComplete: false,
             agentGenerating: false,
@@ -963,19 +998,22 @@ export const useDesignStore = create<DesignState>((set, get) => ({
         const updates: Partial<DesignState> = { activeView: view };
 
         if (view === 'detailed') {
+            const summary = summarizeInputGraph(state.detailedGraph.nodes.length ? state.detailedGraph : state.baseDetailedGraph);
+            const branchCount = state.detailedGraph.nodes.filter((node: any) => node.generatedByDecision || node.attributes?.generatedByDecision).length;
+            const equipmentHint = summary.displayNodes.map((node: any) => node.attributes?.tagName || node.attributes?.tag || node.name || node.id).filter(Boolean).join(', ') || 'selected P&ID objects';
             addTerminalLog('processing', 'Generating reviewable detailed P&ID candidate...');
 
             setTimeout(() => {
-                addTerminalLog('info', 'Mapping equipment: Feed Pump → Centrifugal Pump P-4713');
+                addTerminalLog('info', `Using selected input graph objects: ${equipmentHint}`);
             }, 300);
             setTimeout(() => {
-                addTerminalLog('info', 'Mapping equipment: Pre-Heater → Plate Heat Exchanger H-1009');
+                addTerminalLog('info', `Applying ${state.decisionLog.length} decision exchange(s) to the P&ID graph.`);
             }, 600);
             setTimeout(() => {
-                addTerminalLog('info', 'Generating piping network (5 process + 2 utility segments)...');
+                addTerminalLog('info', `Updated graph contains ${state.detailedGraph.nodes.length} node(s), ${state.detailedGraph.links.length} link(s), and ${branchCount} decision branch node(s).`);
             }, 900);
             setTimeout(() => {
-                addTerminalLog('success', 'Detailed design generated successfully.');
+                addTerminalLog('success', 'Detailed candidate graph generated from the selected input P&ID.');
             }, 1200);
 
             // detailed-design → done, update-graph → running → done (after 2s)
@@ -1177,6 +1215,7 @@ export const useDesignStore = create<DesignState>((set, get) => ({
             'response_from',
             'response_type',
             'response_text',
+            'selected_option',
             'decision_extracted',
             'confidence',
             'stakeholder_focus',
@@ -1193,6 +1232,7 @@ export const useDesignStore = create<DesignState>((set, get) => ({
             entry.responseSource === 'ai_default' ? 'Test Agent' : 'Human User',
             entry.responseSource === 'ai_default' ? 'AI-generated assumption' : 'Human-confirmed response',
             entry.humanOrAiResponse,
+            entry.selectedOption || entry.decision.match(/^[A-D]\)/)?.[0] || '',
             entry.decision,
             entry.confidence,
             entry.stakeholderFocus.join('; '),
@@ -1204,8 +1244,8 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     },
 
     exportUpdatedDexpiJson: () => {
-        const { rawDexpiModel, candidate, decisionLog } = get();
-        return JSON.stringify(buildUpdatedDexpi(rawDexpiModel, candidate, decisionLog), null, 2);
+        const { rawDexpiModel, candidate, decisionLog, detailedGraph } = get();
+        return JSON.stringify(buildUpdatedDexpi(rawDexpiModel, candidate, decisionLog, detailedGraph), null, 2);
     },
 
     clearDecisionLog: () => {
@@ -1286,6 +1326,76 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     },
 
     setAssumptionMode: (enabled) => set({ assumptionMode: enabled }),
+    setGraphRagMode: (enabled) => set({ graphRagMode: enabled }),
+
+    askGraphRagQuestion: async (query) => {
+        const state = get();
+        const { addTerminalLog } = get();
+        const trimmed = query.trim();
+        if (!trimmed) return;
+        const userMessage: ChatMessage = {
+            id: `graphrag-user-${Date.now()}`,
+            sender: 'user',
+            text: trimmed,
+            timestamp: Date.now(),
+            source: 'human'
+        };
+        set({ chatMessages: [...state.chatMessages, userMessage], aiResponding: true });
+        addTerminalLog('processing', `GraphRAG retrieving evidence for: ${trimmed.substring(0, 70)}${trimmed.length > 70 ? '...' : ''}`);
+        try {
+            const graph = state.activeView === 'detailed' ? state.detailedGraph : state.conceptualGraph;
+            const response = await fetch('/api/graphrag/query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    query: trimmed,
+                    graph,
+                    candidate: state.candidate,
+                    decisionLog: state.decisionLog,
+                    designId: state.selectedInputDesignId
+                })
+            });
+            const raw = await response.text();
+            let data: any = null;
+            try {
+                data = raw ? JSON.parse(raw) : null;
+            } catch {
+                throw new Error(`GraphRAG API returned a non-JSON response${raw ? `: ${raw.slice(0, 120)}` : '. Is the API server running on port 8787?'}`);
+            }
+            if (!response.ok || !data?.ok) throw new Error(data?.error || 'GraphRAG query failed');
+            const evidence = Array.isArray(data.evidence) ? data.evidence : [];
+            const evidenceText = evidence.length
+                ? `\n\nEvidence retrieved (${evidence.length}):\n${evidence.slice(0, 5).map((item: any, index: number) => `${index + 1}. [${item.kind}] ${item.label || item.id}`).join('\n')}`
+                : '\n\nEvidence retrieved: none';
+            const modeLabel = data.mode === 'openai' ? 'LLM-grounded' : 'evidence-based';
+            const aiMessage: ChatMessage = {
+                id: `graphrag-ai-${Date.now()}`,
+                sender: 'ai',
+                text: `GraphRAG answer (${modeLabel})\n\n${data.answer}${evidenceText}`,
+                timestamp: Date.now(),
+                evidence
+            };
+            const firstNodeEvidence = evidence.find((item: any) => item.kind === 'node');
+            const selectedNode = firstNodeEvidence ? graph.nodes.find((node: any) => node.id === firstNodeEvidence.id) || state.selectedNode : state.selectedNode;
+            set(current => ({
+                chatMessages: [...current.chatMessages, aiMessage],
+                aiResponding: false,
+                selectedNode
+            }));
+            addTerminalLog('success', `GraphRAG answer generated from ${evidence.length} retrieved evidence item(s) using ${data.mode}.`);
+        } catch (error) {
+            set(current => ({
+                chatMessages: [...current.chatMessages, {
+                    id: `graphrag-error-${Date.now()}`,
+                    sender: 'ai',
+                    text: `GraphRAG query failed: ${error instanceof Error ? error.message : String(error)}`,
+                    timestamp: Date.now()
+                }],
+                aiResponding: false
+            }));
+            addTerminalLog('warning', error instanceof Error ? error.message : String(error));
+        }
+    },
 
     restartSession: () => {
         persistDecisionLog([]);
@@ -1296,6 +1406,7 @@ export const useDesignStore = create<DesignState>((set, get) => ({
                 { id: `welcome-${Date.now()}`, sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }
             ],
             assumptionMode: false,
+            graphRagMode: false,
             loading: false,
             aiResponding: false,
             conversationComplete: false,

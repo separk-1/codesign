@@ -33,3 +33,27 @@ The web app records each design exchange as a decision log entry. Exported logs 
 ## 5. Detailed Candidate P&ID Dataset
 
 The web app can export reviewable candidate P&ID JSON files after the review gate allows candidate generation. These should be saved in `data/candidates/`. Candidate files include the selected design assumptions, generated object annotations, review items, and a copy of the decision trail.
+
+## 6. Included Sample Outputs
+
+The report package now includes example outputs that can be cited or inspected directly:
+
+- Human decision log: `data/design_decisions/sample_human_decision_log.csv`
+- Agent decision log: `data/design_decisions/sample_agent_decision_log.csv`
+- Human candidate P&ID JSON: `data/candidates/sample_human_candidate_pid.json`
+- Agent candidate P&ID JSON: `data/candidates/sample_agent_candidate_pid.json`
+
+The agent candidate is marked as `Assumptions Only`, which reflects the research stance that AI-generated design decisions require human review before use.
+
+
+## 7. Final Report Support Documents
+
+The following documents connect the final package to the mid-term report commitments:
+
+- `docs/final_report_draft.md`: full final report draft.
+- `docs/query_demo.md`: GraphRAG/query workflow and decision-query-outcome demo explanation.
+- `docs/hydroshare_metadata.md`: HydroShare-style metadata draft.
+- `docs/data_quality_summary.md`: inventory and quality notes, including known GEXF limitations.
+- `docs/method.md`: AI-mediated graph refinement method.
+- `docs/limitations.md`: scope and engineering-use limitations.
+- `docs/evaluation_plan.md`: suggested evaluation metrics.

@@ -1,0 +1,2039 @@
+{
+  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/dexpiModel.py",
+  "id": "2753d86f-e9bf-4d38-9b31-337d22d62c72",
+  "composition": {
+    "conceptualModel": {
+      "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/dexpiModel/conceptualModel.py",
+      "id": "eb223f69-c565-44a7-aab6-3b82cbf7b1c6",
+      "composition": {
+        "actuatingSystems": [],
+        "instrumentationLoopFunctions": [],
+        "metaData": null,
+        "boundaryItems": [
+          {
+            "id": "bnd-feed-tank",
+            "componentType": "Source",
+            "data": {
+              "tagName": "Feed Tank",
+              "description": "Elevated feed tank (flooded suction)",
+              "fluid": "Aqueous solution",
+              "temperature": "25°C",
+              "material": "Carbon steel or PVC",
+              "nominalDiameter": "DN50",
+              "coDesignCandidateStatus": "Ready for Review"
+            },
+            "composition": {
+              "nozzles": [
+                {
+                  "id": "bnd-feed-tank-n1",
+                  "data": {
+                    "subTagName": "OUT",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "bnd-reactor-feed",
+            "componentType": "Sink",
+            "data": {
+              "tagName": "Reactor Feed",
+              "description": "Downstream reactor inlet",
+              "temperature": "80°C",
+              "pressure": "~8 barg",
+              "material": "Carbon steel or PVC",
+              "nominalDiameter": "DN50",
+              "coDesignCandidateStatus": "Ready for Review"
+            },
+            "composition": {
+              "nozzles": [
+                {
+                  "id": "bnd-reactor-feed-n1",
+                  "data": {
+                    "subTagName": "IN",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "bnd-steam-header",
+            "componentType": "Source",
+            "data": {
+              "tagName": "Steam Header",
+              "description": "LP saturated steam supply",
+              "fluid": "LP Steam",
+              "pressure": "3.5 barg",
+              "temperature": "~148°C",
+              "material": "Carbon steel or PVC",
+              "coDesignCandidateStatus": "Ready for Review"
+            },
+            "composition": {
+              "nozzles": [
+                {
+                  "id": "bnd-steam-header-n1",
+                  "data": {
+                    "subTagName": "OUT",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "bnd-condensate-return",
+            "componentType": "Sink",
+            "data": {
+              "tagName": "Condensate Return",
+              "description": "Condensate collection header",
+              "fluid": "Condensate",
+              "material": "Carbon steel or PVC",
+              "coDesignCandidateStatus": "Ready for Review"
+            },
+            "composition": {
+              "nozzles": [
+                {
+                  "id": "bnd-condensate-return-n1",
+                  "data": {
+                    "subTagName": "IN",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "pipingNetworkSystems": [
+          {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSystem.py",
+            "id": "pns-process-lines",
+            "composition": {
+              "customAttributes": [],
+              "segments": [
+                {
+                  "id": "seg-L001",
+                  "reference": {
+                    "sourceItem": "bnd-feed-tank-n1",
+                    "targetItem": "521d6320-62b5-4adc-975a-8fd397f973ef"
+                  },
+                  "data": {
+                    "lineNumber": "L-001",
+                    "service": "Liquid Feed (Suction)",
+                    "fluidCode": "Water",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "material": "Carbon steel or PVC",
+                    "insulation": "None",
+                    "designVelocity": "1.0–1.5 m/s",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                },
+                {
+                  "id": "seg-L002",
+                  "reference": {
+                    "sourceItem": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+                    "targetItem": "f62d6687-e6f5-4619-b19f-a18dd626c3a7"
+                  },
+                  "data": {
+                    "lineNumber": "L-002",
+                    "service": "High Pressure Feed",
+                    "fluidCode": "Water",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "material": "Carbon steel or PVC",
+                    "insulation": "None",
+                    "designVelocity": "2.0–3.0 m/s",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                },
+                {
+                  "id": "seg-L003",
+                  "reference": {
+                    "sourceItem": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
+                    "targetItem": "bnd-reactor-feed-n1"
+                  },
+                  "data": {
+                    "lineNumber": "L-003",
+                    "service": "Heated Feed",
+                    "fluidCode": "Water",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "material": "Carbon steel or PVC",
+                    "insulation": "Yes (heat conservation)",
+                    "designVelocity": "2.0–3.0 m/s",
+                    "equipmentType": "No heat exchanger",
+                    "bypass": "No HX bypass required",
+                    "includedInCandidate": "No",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                }
+              ]
+            },
+            "reference": {
+              "plantTrain": null,
+              "plantSystem": null,
+              "plantArea": null,
+              "parentStructure": null
+            },
+            "data": {
+              "fluidCode": "Water",
+              "lineNumber": "Process Lines",
+              "nominalDiameterNumericalValueRepresentation": null,
+              "pipingClassCode": null,
+              "material": "Carbon steel or PVC",
+              "nominalDiameter": "DN50",
+              "coDesignCandidateStatus": "Ready for Review"
+            }
+          },
+          {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/piping/pipingNetworkSystem.py",
+            "id": "pns-utility-lines",
+            "composition": {
+              "customAttributes": [],
+              "segments": [
+                {
+                  "id": "seg-L004",
+                  "reference": {
+                    "sourceItem": "bnd-steam-header-n1",
+                    "targetItem": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f"
+                  },
+                  "data": {
+                    "lineNumber": "L-004",
+                    "service": "LP Steam Supply",
+                    "fluidCode": "Steam",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "material": "Carbon steel or PVC",
+                    "insulation": "Yes (personnel protection)",
+                    "designVelocity": "15–25 m/s",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                },
+                {
+                  "id": "seg-L005",
+                  "reference": {
+                    "sourceItem": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
+                    "targetItem": "bnd-condensate-return-n1"
+                  },
+                  "data": {
+                    "lineNumber": "L-005",
+                    "service": "Condensate Return",
+                    "fluidCode": "Condensate",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "material": "Carbon steel or PVC",
+                    "insulation": "Yes",
+                    "designVelocity": "1.0–2.0 m/s",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                }
+              ]
+            },
+            "reference": {
+              "plantTrain": null,
+              "plantSystem": null,
+              "plantArea": null,
+              "parentStructure": null
+            },
+            "data": {
+              "fluidCode": "Utility",
+              "lineNumber": "Utility Lines",
+              "nominalDiameterNumericalValueRepresentation": null,
+              "pipingClassCode": null,
+              "material": "Carbon steel or PVC",
+              "nominalDiameter": "DN50",
+              "coDesignCandidateStatus": "Ready for Review"
+            }
+          }
+        ],
+        "plantStructureItems": [],
+        "processInstrumentationFunctions": [],
+        "processSignalGeneratingSystems": [],
+        "taggedPlantItems": [
+          {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/centrifugalPump.py",
+            "id": "ea1c8cca-b174-453f-be02-16447104dd9f",
+            "componentType": "Pump",
+            "composition": {
+              "customAttributes": [],
+              "nozzles": [
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "521d6320-62b5-4adc-975a-8fd397f973ef",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "S1",
+                    "function": "Suction inlet",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                },
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "D1",
+                    "function": "Discharge outlet",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                }
+              ],
+              "chambers": [],
+              "dryingChambers": [],
+              "gearBoxes": [],
+              "motors": [],
+              "sprayNozzles": [],
+              "impellers": []
+            },
+            "reference": {
+              "plantTrain": null,
+              "plantSystem": null,
+              "plantArea": null,
+              "parentStructure": null
+            },
+            "data": {
+              "tagName": "P-4713",
+              "tagNamePrefix": "P",
+              "tagNameSequenceNumber": "4713",
+              "tagNameSuffix": null,
+              "equipmentType": "Single-stage centrifugal pump",
+              "equipmentDescription": "Feed pump — aqueous service",
+              "service": "Liquid feed pressurization",
+              "fluid": "Aqueous solution",
+              "designFlowRate": "100 m³/h",
+              "differentialPressure": "8 bar",
+              "designPressure": "12 barg",
+              "designTemperature": "120°C",
+              "casingMaterial": "Carbon steel",
+              "sealType": "Single mechanical seal",
+              "suctionCondition": "Flooded (elevated tank)",
+              "estimatedCost": "$12,000",
+              "material": "Carbon steel or PVC",
+              "nominalDiameter": "DN50",
+              "dutyNote": "Transfer pump; delta P approx. 3 bar",
+              "pressureProtection": "PI on discharge",
+              "coDesignCandidateStatus": "Ready for Review"
+            }
+          },
+          {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/plateHeatExchanger.py",
+            "id": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+            "componentType": "HeatExchanger",
+            "composition": {
+              "customAttributes": [],
+              "nozzles": [
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "N1",
+                    "function": "Cold-side inlet (process fluid IN)",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                },
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "N2",
+                    "function": "Cold-side outlet (process fluid OUT)",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                },
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "N3",
+                    "function": "Hot-side inlet (LP steam IN)",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                },
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "N4",
+                    "function": "Hot-side outlet (condensate OUT)",
+                    "nominalDiameter": "DN50",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)",
+                    "coDesignCandidateStatus": "Ready for Review"
+                  }
+                }
+              ],
+              "chambers": [],
+              "dryingChambers": [],
+              "gearBoxes": [],
+              "motors": [],
+              "sprayNozzles": []
+            },
+            "reference": {
+              "plantTrain": null,
+              "plantSystem": null,
+              "plantArea": null,
+              "parentStructure": null,
+              "agitator": null
+            },
+            "data": {
+              "tagName": "H-1009",
+              "tagNamePrefix": "H",
+              "tagNameSequenceNumber": "1009",
+              "tagNameSuffix": null,
+              "equipmentType": "No heat exchanger",
+              "equipmentDescription": "Pre-heater — aqueous feed heating",
+              "service": "Feed pre-heating before reactor",
+              "flowArrangement": "Counter-current",
+              "coldSideFluid": "Aqueous process fluid",
+              "hotSideFluid": "LP saturated steam (3.5 barg)",
+              "coldInletTemperature": "25°C",
+              "coldOutletTemperature": "80°C",
+              "hotInletTemperature": "~148°C",
+              "estimatedDuty": "~6.4 MW",
+              "gasketMaterial": "EPDM",
+              "plateMaterial": "AISI 316 SS",
+              "frameMaterial": "Carbon steel",
+              "designPressure": "12 barg",
+              "designTemperatureColdSide": "120°C",
+              "designTemperatureHotSide": "180°C",
+              "estimatedCost": "$15,000",
+              "material": "Carbon steel or PVC",
+              "nominalDiameter": "DN50",
+              "bypass": "No HX bypass required",
+              "includedInCandidate": "No",
+              "coDesignCandidateStatus": "Ready for Review"
+            }
+          }
+        ]
+      }
+    },
+    "diagram": null,
+    "shapeCatalogues": []
+  },
+  "data": {
+    "exportDateTime": null,
+    "originatingSystemName": "Design Refinement Workshop",
+    "originatingSystemVendorName": null,
+    "originatingSystemVersion": "1.0",
+    "coDesignCandidateStatus": "Ready for Review"
+  },
+  "coDesignDecisionSummary": {
+    "generatedAt": "2026-07-31T01:39:29.839Z",
+    "candidate": {
+      "fluid": "Clean water",
+      "material": "Carbon steel or PVC",
+      "lineSize": "DN50",
+      "flowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+      "pumpDuty": "Transfer pump; delta P approx. 3 bar",
+      "pressureProtection": "PI on discharge",
+      "treatment": "Direct treatment train",
+      "heatExchanger": "No heat exchanger",
+      "bypass": "No HX bypass required",
+      "status": "Ready for Review",
+      "reviewItems": [],
+      "updatedTopics": [
+        "process fluid",
+        "flow rate",
+        "pressure duty",
+        "treatment configuration",
+        "review gate"
+      ]
+    }
+  },
+  "coDesignExport": {
+    "generatedAt": "2026-07-31T01:39:29.839Z",
+    "note": "Reviewable P&ID candidate generated from CoDesign decision exchanges. Not final design approval.",
+    "candidate": {
+      "fluid": "Clean water",
+      "material": "Carbon steel or PVC",
+      "lineSize": "DN50",
+      "flowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+      "pumpDuty": "Transfer pump; delta P approx. 3 bar",
+      "pressureProtection": "PI on discharge",
+      "treatment": "Direct treatment train",
+      "heatExchanger": "No heat exchanger",
+      "bypass": "No HX bypass required",
+      "status": "Ready for Review",
+      "reviewItems": [],
+      "updatedTopics": [
+        "process fluid",
+        "flow rate",
+        "pressure duty",
+        "treatment configuration",
+        "review gate"
+      ]
+    },
+    "decisionLog": [
+      {
+        "id": "1785461957989wckvty",
+        "timestamp": 1785461957989,
+        "topic": "process fluid",
+        "designQuestion": "The selected input P&ID includes P-4713, H-1009, Feed Tank, Reactor Feed. What fluid/material basis should the refinement branch use first?",
+        "stakeholderFocus": [
+          "designer",
+          "engineer",
+          "operator"
+        ],
+        "humanOrAiResponse": "A",
+        "responseSource": "human",
+        "selectedOption": "A)",
+        "decision": "A) Clean water",
+        "confidence": "medium",
+        "affectedComponent": "material schedule and sampling points",
+        "communicationPurpose": "Start the branching refinement from the selected input P&ID rather than a generic template.",
+        "outcome": "Captured as stakeholder-confirmed design decision"
+      },
+      {
+        "id": "1785461959888ekhud8",
+        "timestamp": 1785461959888,
+        "topic": "flow rate",
+        "designQuestion": "The current fluid basis is Clean water. What design flow rate should size the main process-line branch?",
+        "stakeholderFocus": [
+          "designer",
+          "engineer"
+        ],
+        "humanOrAiResponse": "A",
+        "responseSource": "human",
+        "selectedOption": "A)",
+        "decision": "A) 25 m3/h",
+        "confidence": "medium",
+        "affectedComponent": "main line size, pump capacity, and flow instrument range",
+        "communicationPurpose": "Use the fluid decision to make the next sizing question more contextual.",
+        "outcome": "Captured as stakeholder-confirmed design decision"
+      },
+      {
+        "id": "1785461961771in9yok",
+        "timestamp": 1785461961771,
+        "topic": "pressure duty",
+        "designQuestion": "The current line basis is DN50. What pressure-duty detail should be attached to the pump/equipment branch already present in the selected P&ID?",
+        "stakeholderFocus": [
+          "engineer",
+          "operator"
+        ],
+        "humanOrAiResponse": "A",
+        "responseSource": "human",
+        "selectedOption": "A)",
+        "decision": "A) Transfer pump, delta P approximately 3 bar",
+        "confidence": "medium",
+        "affectedComponent": "pump duty and pressure protection",
+        "communicationPurpose": "Ask pressure duty only after a flow basis exists, because the pump/protection branch depends on both.",
+        "outcome": "Captured as stakeholder-confirmed design decision"
+      },
+      {
+        "id": "1785461963653hkphwb",
+        "timestamp": 1785461963654,
+        "topic": "treatment configuration",
+        "designQuestion": "The current pump basis is Transfer pump; delta P approx. 3 bar. What downstream treatment configuration should update the existing heat-exchanger branch?",
+        "stakeholderFocus": [
+          "designer",
+          "engineer",
+          "operator"
+        ],
+        "humanOrAiResponse": "A",
+        "responseSource": "human",
+        "selectedOption": "A)",
+        "decision": "A) Direct treatment without heat exchanger",
+        "confidence": "medium",
+        "affectedComponent": "heat exchanger, bypass valves, and treatment train",
+        "communicationPurpose": "Make the treatment question depend on whether the selected input P&ID already contains heat-transfer equipment.",
+        "outcome": "Captured as stakeholder-confirmed design decision"
+      },
+      {
+        "id": "17854619655375qdehx",
+        "timestamp": 1785461965537,
+        "topic": "review gate",
+        "designQuestion": "The graph now has branches for process fluid, flow rate, pressure duty, treatment configuration. Should the system generate a reviewable P&ID candidate now?",
+        "stakeholderFocus": [
+          "designer",
+          "engineer",
+          "operator"
+        ],
+        "humanOrAiResponse": "A",
+        "responseSource": "human",
+        "selectedOption": "A)",
+        "decision": "A) Yes, generate the candidate",
+        "confidence": "medium",
+        "affectedComponent": "candidate P&ID status",
+        "communicationPurpose": "Use the visible branch history as the basis for the human review gate.",
+        "outcome": "Captured as stakeholder-confirmed design decision"
+      }
+    ],
+    "updatedGraph": {
+      "nodes": [
+        {
+          "id": "bnd-feed-tank",
+          "name": "Feed Tank",
+          "type": "Source",
+          "attributes": {
+            "tagName": "Feed Tank",
+            "description": "Elevated feed tank (flooded suction)",
+            "fluid": "Clean water",
+            "temperature": "25°C",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "material": "Carbon steel or PVC",
+            "samplingPoint": "SP-101 feed sample",
+            "contaminationReview": "Not flagged"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "bnd-feed-tank-n1",
+          "name": "Feed Tank:OUT",
+          "type": "Nozzle",
+          "parentId": "bnd-feed-tank",
+          "attributes": {
+            "subTagName": "OUT",
+            "nominalDiameter": "DN 150",
+            "flangeClass": "Class 150",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "fluid": "Clean water",
+            "material": "Carbon steel or PVC",
+            "samplingPoint": "SP-101 feed sample",
+            "contaminationReview": "Not flagged"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "bnd-reactor-feed",
+          "name": "Reactor Feed",
+          "type": "Sink",
+          "attributes": {
+            "tagName": "Reactor Feed",
+            "description": "Downstream reactor inlet",
+            "temperature": "80°C",
+            "pressure": "~8 barg",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "treatmentConfiguration": "Direct treatment train"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "bnd-reactor-feed-n1",
+          "name": "Reactor Feed:IN",
+          "type": "Nozzle",
+          "parentId": "bnd-reactor-feed",
+          "attributes": {
+            "subTagName": "IN",
+            "nominalDiameter": "DN 100",
+            "flangeClass": "Class 150",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "treatmentConfiguration": "Direct treatment train"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "bnd-steam-header",
+          "name": "Steam Header",
+          "type": "Source",
+          "attributes": {
+            "tagName": "Steam Header",
+            "description": "LP saturated steam supply",
+            "fluid": "LP Steam",
+            "pressure": "3.5 barg",
+            "temperature": "~148°C"
+          }
+        },
+        {
+          "id": "bnd-steam-header-n1",
+          "name": "Steam Header:OUT",
+          "type": "Nozzle",
+          "parentId": "bnd-steam-header",
+          "attributes": {
+            "subTagName": "OUT",
+            "nominalDiameter": "DN 50",
+            "flangeClass": "Class 150"
+          }
+        },
+        {
+          "id": "bnd-condensate-return",
+          "name": "Condensate Return",
+          "type": "Sink",
+          "attributes": {
+            "tagName": "Condensate Return",
+            "description": "Condensate collection header",
+            "fluid": "Condensate"
+          }
+        },
+        {
+          "id": "bnd-condensate-return-n1",
+          "name": "Condensate Return:IN",
+          "type": "Nozzle",
+          "parentId": "bnd-condensate-return",
+          "attributes": {
+            "subTagName": "IN",
+            "nominalDiameter": "DN 50",
+            "flangeClass": "Class 150"
+          }
+        },
+        {
+          "id": "ea1c8cca-b174-453f-be02-16447104dd9f",
+          "name": "P-4713",
+          "type": "Pump",
+          "attributes": {
+            "tagName": "P-4713",
+            "tagNamePrefix": "P",
+            "tagNameSequenceNumber": "4713",
+            "tagNameSuffix": null,
+            "equipmentType": "Transfer pump; delta P approx. 3 bar",
+            "equipmentDescription": "Feed pump — aqueous service",
+            "service": "Liquid feed pressurization",
+            "fluid": "Aqueous solution",
+            "designFlowRate": "25 m3/h",
+            "differentialPressure": "approx. 3 bar",
+            "designPressure": "12 barg",
+            "designTemperature": "120°C",
+            "casingMaterial": "Carbon steel",
+            "sealType": "Single mechanical seal",
+            "suctionCondition": "Flooded (elevated tank)",
+            "estimatedCost": "$12,000",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "pressureProtection": "PI on discharge"
+          },
+          "raw": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/centrifugalPump.py",
+            "id": "ea1c8cca-b174-453f-be02-16447104dd9f",
+            "componentType": "Pump",
+            "composition": {
+              "customAttributes": [],
+              "nozzles": [
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "521d6320-62b5-4adc-975a-8fd397f973ef",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "S1",
+                    "function": "Suction inlet",
+                    "nominalDiameter": "DN 150 (6\")",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)"
+                  }
+                },
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "D1",
+                    "function": "Discharge outlet",
+                    "nominalDiameter": "DN 100 (4\")",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)"
+                  }
+                }
+              ],
+              "chambers": [],
+              "dryingChambers": [],
+              "gearBoxes": [],
+              "motors": [],
+              "sprayNozzles": [],
+              "impellers": []
+            },
+            "reference": {
+              "plantTrain": null,
+              "plantSystem": null,
+              "plantArea": null,
+              "parentStructure": null
+            },
+            "data": {
+              "tagName": "P-4713",
+              "tagNamePrefix": "P",
+              "tagNameSequenceNumber": "4713",
+              "tagNameSuffix": null,
+              "equipmentType": "Single-stage centrifugal pump",
+              "equipmentDescription": "Feed pump — aqueous service",
+              "service": "Liquid feed pressurization",
+              "fluid": "Aqueous solution",
+              "designFlowRate": "100 m³/h",
+              "differentialPressure": "8 bar",
+              "designPressure": "12 barg",
+              "designTemperature": "120°C",
+              "casingMaterial": "Carbon steel",
+              "sealType": "Single mechanical seal",
+              "suctionCondition": "Flooded (elevated tank)",
+              "estimatedCost": "$12,000"
+            }
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "521d6320-62b5-4adc-975a-8fd397f973ef",
+          "name": "P-4713:S1",
+          "type": "Nozzle",
+          "parentId": "ea1c8cca-b174-453f-be02-16447104dd9f",
+          "attributes": {
+            "subTagName": "S1",
+            "function": "Suction inlet",
+            "nominalDiameter": "DN 150 (6\")",
+            "flangeClass": "Class 150",
+            "flangeType": "RF (Raised Face)",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "designFlowRate": "25 m3/h",
+            "differentialPressure": "approx. 3 bar",
+            "equipmentType": "Transfer pump; delta P approx. 3 bar",
+            "pressureProtection": "PI on discharge"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+          "name": "P-4713:D1",
+          "type": "Nozzle",
+          "parentId": "ea1c8cca-b174-453f-be02-16447104dd9f",
+          "attributes": {
+            "subTagName": "D1",
+            "function": "Discharge outlet",
+            "nominalDiameter": "DN 100 (4\")",
+            "flangeClass": "Class 150",
+            "flangeType": "RF (Raised Face)",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "designFlowRate": "25 m3/h",
+            "differentialPressure": "approx. 3 bar",
+            "equipmentType": "Transfer pump; delta P approx. 3 bar",
+            "pressureProtection": "PI on discharge"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "name": "H-1009",
+          "type": "HeatExchanger",
+          "attributes": {
+            "tagName": "H-1009",
+            "tagNamePrefix": "H",
+            "tagNameSequenceNumber": "1009",
+            "tagNameSuffix": null,
+            "equipmentType": "No heat exchanger",
+            "equipmentDescription": "Pre-heater — aqueous feed heating",
+            "service": "Feed pre-heating before reactor",
+            "flowArrangement": "Counter-current",
+            "coldSideFluid": "Aqueous process fluid",
+            "hotSideFluid": "LP saturated steam (3.5 barg)",
+            "coldInletTemperature": "25°C",
+            "coldOutletTemperature": "80°C",
+            "hotInletTemperature": "~148°C",
+            "estimatedDuty": "~6.4 MW",
+            "gasketMaterial": "EPDM",
+            "plateMaterial": "AISI 316 SS",
+            "frameMaterial": "Carbon steel",
+            "designPressure": "12 barg",
+            "designTemperatureColdSide": "120°C",
+            "designTemperatureHotSide": "180°C",
+            "estimatedCost": "$15,000",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "bypass": "No HX bypass required",
+            "includedInCandidate": "No"
+          },
+          "raw": {
+            "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/plateHeatExchanger.py",
+            "id": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+            "componentType": "HeatExchanger",
+            "composition": {
+              "customAttributes": [],
+              "nozzles": [
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "N1",
+                    "function": "Cold-side inlet (process fluid IN)",
+                    "nominalDiameter": "DN 100 (4\")",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)"
+                  }
+                },
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "N2",
+                    "function": "Cold-side outlet (process fluid OUT)",
+                    "nominalDiameter": "DN 100 (4\")",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)"
+                  }
+                },
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "N3",
+                    "function": "Hot-side inlet (LP steam IN)",
+                    "nominalDiameter": "DN 50 (2\")",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)"
+                  }
+                },
+                {
+                  "uri": "https://pyDEXPI.org/schemas/pydexpi_1_3/equipment/nozzle.py",
+                  "id": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
+                  "composition": {
+                    "nodes": [],
+                    "customAttributes": []
+                  },
+                  "reference": {
+                    "chamber": null
+                  },
+                  "data": {
+                    "subTagName": "N4",
+                    "function": "Hot-side outlet (condensate OUT)",
+                    "nominalDiameter": "DN 50 (2\")",
+                    "flangeClass": "Class 150",
+                    "flangeType": "RF (Raised Face)"
+                  }
+                }
+              ],
+              "chambers": [],
+              "dryingChambers": [],
+              "gearBoxes": [],
+              "motors": [],
+              "sprayNozzles": []
+            },
+            "reference": {
+              "plantTrain": null,
+              "plantSystem": null,
+              "plantArea": null,
+              "parentStructure": null,
+              "agitator": null
+            },
+            "data": {
+              "tagName": "H-1009",
+              "tagNamePrefix": "H",
+              "tagNameSequenceNumber": "1009",
+              "tagNameSuffix": null,
+              "equipmentType": "Gasketed plate heat exchanger",
+              "equipmentDescription": "Pre-heater — aqueous feed heating",
+              "service": "Feed pre-heating before reactor",
+              "flowArrangement": "Counter-current",
+              "coldSideFluid": "Aqueous process fluid",
+              "hotSideFluid": "LP saturated steam (3.5 barg)",
+              "coldInletTemperature": "25°C",
+              "coldOutletTemperature": "80°C",
+              "hotInletTemperature": "~148°C",
+              "estimatedDuty": "~6.4 MW",
+              "gasketMaterial": "EPDM",
+              "plateMaterial": "AISI 316 SS",
+              "frameMaterial": "Carbon steel",
+              "designPressure": "12 barg",
+              "designTemperatureColdSide": "120°C",
+              "designTemperatureHotSide": "180°C",
+              "estimatedCost": "$15,000"
+            }
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
+          "name": "H-1009:N1",
+          "type": "Nozzle",
+          "parentId": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "attributes": {
+            "subTagName": "N1",
+            "function": "Cold-side inlet (process fluid IN)",
+            "nominalDiameter": "DN 100 (4\")",
+            "flangeClass": "Class 150",
+            "flangeType": "RF (Raised Face)",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "equipmentType": "No heat exchanger",
+            "bypass": "No HX bypass required",
+            "includedInCandidate": "No"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
+          "name": "H-1009:N2",
+          "type": "Nozzle",
+          "parentId": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "attributes": {
+            "subTagName": "N2",
+            "function": "Cold-side outlet (process fluid OUT)",
+            "nominalDiameter": "DN 100 (4\")",
+            "flangeClass": "Class 150",
+            "flangeType": "RF (Raised Face)",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "equipmentType": "No heat exchanger",
+            "bypass": "No HX bypass required",
+            "includedInCandidate": "No"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f",
+          "name": "H-1009:N3",
+          "type": "Nozzle",
+          "parentId": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "attributes": {
+            "subTagName": "N3",
+            "function": "Hot-side inlet (LP steam IN)",
+            "nominalDiameter": "DN 50 (2\")",
+            "flangeClass": "Class 150",
+            "flangeType": "RF (Raised Face)",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "equipmentType": "No heat exchanger",
+            "bypass": "No HX bypass required",
+            "includedInCandidate": "No"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
+          "name": "H-1009:N4",
+          "type": "Nozzle",
+          "parentId": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "attributes": {
+            "subTagName": "N4",
+            "function": "Hot-side outlet (condensate OUT)",
+            "nominalDiameter": "DN 50 (2\")",
+            "flangeClass": "Class 150",
+            "flangeType": "RF (Raised Face)",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "equipmentType": "No heat exchanger",
+            "bypass": "No HX bypass required",
+            "includedInCandidate": "No"
+          },
+          "decisionStatus": "medium",
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "seg-L001",
+          "name": "L-001",
+          "type": "Pipe",
+          "attributes": {
+            "fluidCode": "Water",
+            "lineNumber": "L-001",
+            "nominalDiameterNumericalValueRepresentation": null,
+            "pipingClassCode": null,
+            "service": "Liquid Feed (Suction)",
+            "nominalDiameter": "DN 150 (6\")",
+            "flangeClass": "Class 150",
+            "material": "Carbon steel",
+            "insulation": "None",
+            "designVelocity": "1.0–1.5 m/s"
+          }
+        },
+        {
+          "id": "seg-L002",
+          "name": "L-002",
+          "type": "Pipe",
+          "attributes": {
+            "fluidCode": "Water",
+            "lineNumber": "L-002",
+            "nominalDiameterNumericalValueRepresentation": null,
+            "pipingClassCode": null,
+            "service": "High Pressure Feed",
+            "nominalDiameter": "DN 100 (4\")",
+            "flangeClass": "Class 150",
+            "material": "Carbon steel",
+            "insulation": "None",
+            "designVelocity": "2.0–3.0 m/s"
+          }
+        },
+        {
+          "id": "seg-L003",
+          "name": "L-003",
+          "type": "Pipe",
+          "attributes": {
+            "fluidCode": "Water",
+            "lineNumber": "L-003",
+            "nominalDiameterNumericalValueRepresentation": null,
+            "pipingClassCode": null,
+            "service": "Heated Feed",
+            "nominalDiameter": "DN 100 (4\")",
+            "flangeClass": "Class 150",
+            "material": "Carbon steel",
+            "insulation": "Yes (heat conservation)",
+            "designVelocity": "2.0–3.0 m/s"
+          }
+        },
+        {
+          "id": "seg-L004",
+          "name": "L-004",
+          "type": "Pipe",
+          "attributes": {
+            "fluidCode": "Steam",
+            "lineNumber": "L-004",
+            "nominalDiameterNumericalValueRepresentation": null,
+            "pipingClassCode": null,
+            "service": "LP Steam Supply",
+            "nominalDiameter": "DN 50 (2\")",
+            "flangeClass": "Class 150",
+            "material": "Carbon steel",
+            "insulation": "Yes (personnel protection)",
+            "designVelocity": "15–25 m/s"
+          }
+        },
+        {
+          "id": "seg-L005",
+          "name": "L-005",
+          "type": "Pipe",
+          "attributes": {
+            "fluidCode": "Condensate",
+            "lineNumber": "L-005",
+            "nominalDiameterNumericalValueRepresentation": null,
+            "pipingClassCode": null,
+            "service": "Condensate Return",
+            "nominalDiameter": "DN 50 (2\")",
+            "flangeClass": "Class 150",
+            "material": "Carbon steel",
+            "insulation": "Yes",
+            "designVelocity": "1.0–2.0 m/s"
+          }
+        },
+        {
+          "id": "decision-fluid-basis",
+          "name": "Fluid basis: Clean water",
+          "type": "DecisionBranch",
+          "attributes": {
+            "fluid": "Clean water",
+            "generatedByDecision": true,
+            "decisionTopic": "process fluid",
+            "decision": "A) Clean water",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Start the branching refinement from the selected input P&ID rather than a generic template."
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461957989
+        },
+        {
+          "id": "decision-material-spec",
+          "name": "Material: Carbon steel or PVC",
+          "type": "MaterialSpec",
+          "attributes": {
+            "material": "Carbon steel or PVC",
+            "generatedByDecision": true,
+            "decisionTopic": "process fluid",
+            "decision": "A) Clean water",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Start the branching refinement from the selected input P&ID rather than a generic template."
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461957989
+        },
+        {
+          "id": "decision-sampling-point",
+          "name": "Feed sample point",
+          "type": "SamplingPoint",
+          "attributes": {
+            "samplingPoint": "SP-101",
+            "generatedByDecision": true,
+            "decisionTopic": "process fluid",
+            "decision": "A) Clean water",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Start the branching refinement from the selected input P&ID rather than a generic template."
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461957989
+        },
+        {
+          "id": "decision-line-size",
+          "name": "Line size: DN50",
+          "type": "LineSizing",
+          "attributes": {
+            "lineSize": "DN50",
+            "generatedByDecision": true,
+            "decisionTopic": "flow rate",
+            "decision": "A) 25 m3/h",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Use the fluid decision to make the next sizing question more contextual."
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461959888
+        },
+        {
+          "id": "decision-flow-meter",
+          "name": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+          "type": "FlowInstrument",
+          "attributes": {
+            "instrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "generatedByDecision": true,
+            "decisionTopic": "flow rate",
+            "decision": "A) 25 m3/h",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Use the fluid decision to make the next sizing question more contextual.",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "designFlowRate": "25 m3/h",
+            "differentialPressure": "approx. 3 bar",
+            "equipmentType": "Transfer pump; delta P approx. 3 bar",
+            "pressureProtection": "PI on discharge"
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "decision-pump-capacity",
+          "name": "Pump capacity basis: DN50",
+          "type": "PumpSizing",
+          "attributes": {
+            "flowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "generatedByDecision": true,
+            "decisionTopic": "flow rate",
+            "decision": "A) 25 m3/h",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Use the fluid decision to make the next sizing question more contextual.",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "designFlowRate": "25 m3/h",
+            "differentialPressure": "approx. 3 bar",
+            "equipmentType": "Transfer pump; delta P approx. 3 bar",
+            "pressureProtection": "PI on discharge"
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "decision-pump-duty",
+          "name": "Transfer pump; delta P approx. 3 bar",
+          "type": "PumpDuty",
+          "attributes": {
+            "pumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "generatedByDecision": true,
+            "decisionTopic": "pressure duty",
+            "decision": "A) Transfer pump, delta P approximately 3 bar",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Ask pressure duty only after a flow basis exists, because the pump/protection branch depends on both.",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "designFlowRate": "25 m3/h",
+            "differentialPressure": "approx. 3 bar",
+            "equipmentType": "Transfer pump; delta P approx. 3 bar",
+            "pressureProtection": "PI on discharge"
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "decision-pressure-protection",
+          "name": "PI on discharge",
+          "type": "PressureProtection",
+          "attributes": {
+            "pressureProtection": "PI on discharge",
+            "generatedByDecision": true,
+            "decisionTopic": "pressure duty",
+            "decision": "A) Transfer pump, delta P approximately 3 bar",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Ask pressure duty only after a flow basis exists, because the pump/protection branch depends on both."
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461961771
+        },
+        {
+          "id": "decision-treatment-train",
+          "name": "Direct treatment train",
+          "type": "TreatmentTrain",
+          "attributes": {
+            "treatment": "Direct treatment train",
+            "generatedByDecision": true,
+            "decisionTopic": "treatment configuration",
+            "decision": "A) Direct treatment without heat exchanger",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Make the treatment question depend on whether the selected input P&ID already contains heat-transfer equipment.",
+            "candidateFluid": "Clean water",
+            "candidateMaterial": "Carbon steel or PVC",
+            "candidateLineSize": "DN50",
+            "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+            "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+            "candidatePressureProtection": "PI on discharge",
+            "candidateTreatment": "Direct treatment train",
+            "candidateHeatExchanger": "No heat exchanger",
+            "candidateBypass": "No HX bypass required",
+            "candidateStatus": "Ready for Review",
+            "candidateReviewItems": "",
+            "treatmentConfiguration": "Direct treatment train"
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "decision-candidate-status",
+          "name": "Candidate status: Ready for Review",
+          "type": "ReviewGate",
+          "attributes": {
+            "status": "Ready for Review",
+            "generatedByDecision": true,
+            "decisionTopic": "review gate",
+            "decision": "A) Yes, generate the candidate",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Use the visible branch history as the basis for the human review gate."
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461965537
+        },
+        {
+          "id": "decision-review-queue",
+          "name": "0 review item(s)",
+          "type": "ReviewQueue",
+          "attributes": {
+            "reviewItems": [],
+            "generatedByDecision": true,
+            "decisionTopic": "review gate",
+            "decision": "A) Yes, generate the candidate",
+            "responseSource": "human",
+            "confidence": "medium",
+            "communicationPurpose": "Use the visible branch history as the basis for the human review gate."
+          },
+          "decisionStatus": "medium",
+          "reviewRequired": false,
+          "generatedByDecision": true,
+          "updatedAt": 1785461965537
+        }
+      ],
+      "links": [
+        {
+          "source": "bnd-feed-tank",
+          "target": "bnd-feed-tank-n1",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "bnd-reactor-feed",
+          "target": "bnd-reactor-feed-n1",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "bnd-steam-header",
+          "target": "bnd-steam-header-n1",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "bnd-condensate-return",
+          "target": "bnd-condensate-return-n1",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "ea1c8cca-b174-453f-be02-16447104dd9f",
+          "target": "521d6320-62b5-4adc-975a-8fd397f973ef",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "ea1c8cca-b174-453f-be02-16447104dd9f",
+          "target": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "target": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "target": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "target": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "2e3f1585-05b9-4866-b812-b1b77e0e3d8f",
+          "target": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
+          "label": "has_nozzle"
+        },
+        {
+          "source": "bnd-feed-tank-n1",
+          "target": "seg-L001",
+          "label": "Liquid Feed (Suction) (DN50)",
+          "candidateLineSize": "DN50",
+          "candidateMaterial": "Carbon steel or PVC",
+          "decisionStatus": "medium"
+        },
+        {
+          "source": "seg-L001",
+          "target": "521d6320-62b5-4adc-975a-8fd397f973ef",
+          "label": "Liquid Feed (Suction) (DN50)",
+          "candidateLineSize": "DN50",
+          "candidateMaterial": "Carbon steel or PVC",
+          "decisionStatus": "medium"
+        },
+        {
+          "source": "3ac32ac9-e31a-433e-a7b3-ef18cd41c9f7",
+          "target": "seg-L002",
+          "label": "High Pressure Feed (DN50)",
+          "candidateLineSize": "DN50",
+          "candidateMaterial": "Carbon steel or PVC",
+          "decisionStatus": "medium"
+        },
+        {
+          "source": "seg-L002",
+          "target": "f62d6687-e6f5-4619-b19f-a18dd626c3a7",
+          "label": "High Pressure Feed (DN50)",
+          "candidateLineSize": "DN50",
+          "candidateMaterial": "Carbon steel or PVC",
+          "decisionStatus": "medium"
+        },
+        {
+          "source": "b2baf7b2-bce1-4ae7-a4e1-aa23dcdabff5",
+          "target": "seg-L003",
+          "label": "Heated Feed (DN50)",
+          "candidateLineSize": "DN50",
+          "candidateMaterial": "Carbon steel or PVC",
+          "decisionStatus": "medium"
+        },
+        {
+          "source": "seg-L003",
+          "target": "bnd-reactor-feed-n1",
+          "label": "Heated Feed (DN50)",
+          "candidateLineSize": "DN50",
+          "candidateMaterial": "Carbon steel or PVC",
+          "decisionStatus": "medium"
+        },
+        {
+          "source": "bnd-steam-header-n1",
+          "target": "seg-L004",
+          "label": "LP Steam Supply"
+        },
+        {
+          "source": "seg-L004",
+          "target": "6f138334-4f26-42ad-a3a5-2bc6cfa7722f",
+          "label": "LP Steam Supply"
+        },
+        {
+          "source": "3f7b0b3c-f525-4e0a-bc99-b256d545831e",
+          "target": "seg-L005",
+          "label": "Condensate Return"
+        },
+        {
+          "source": "seg-L005",
+          "target": "bnd-condensate-return-n1",
+          "label": "Condensate Return"
+        },
+        {
+          "source": "bnd-feed-tank",
+          "target": "decision-fluid-basis",
+          "label": "sets_fluid_basis",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "process fluid",
+          "generatedByDecision": true
+        },
+        {
+          "source": "decision-fluid-basis",
+          "target": "decision-material-spec",
+          "label": "selects_material",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "process fluid",
+          "generatedByDecision": true
+        },
+        {
+          "source": "decision-fluid-basis",
+          "target": "decision-sampling-point",
+          "label": "requires_sampling",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "process fluid",
+          "generatedByDecision": true
+        },
+        {
+          "source": "seg-L001",
+          "target": "decision-line-size",
+          "label": "sizes_line",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "flow rate",
+          "generatedByDecision": true
+        },
+        {
+          "source": "decision-line-size",
+          "target": "decision-flow-meter",
+          "label": "sets_measurement_range",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "flow rate",
+          "generatedByDecision": true
+        },
+        {
+          "source": "decision-line-size",
+          "target": "decision-pump-capacity",
+          "label": "sets_pump_capacity",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "flow rate",
+          "generatedByDecision": true
+        },
+        {
+          "source": "ea1c8cca-b174-453f-be02-16447104dd9f",
+          "target": "decision-pump-duty",
+          "label": "sets_pressure_duty",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "pressure duty",
+          "generatedByDecision": true
+        },
+        {
+          "source": "decision-pump-duty",
+          "target": "decision-pressure-protection",
+          "label": "requires_protection",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "pressure duty",
+          "generatedByDecision": true
+        },
+        {
+          "source": "bnd-reactor-feed",
+          "target": "decision-treatment-train",
+          "label": "sets_downstream_treatment",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "treatment configuration",
+          "generatedByDecision": true
+        },
+        {
+          "source": "bnd-reactor-feed",
+          "target": "decision-candidate-status",
+          "label": "sets_candidate_state",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "review gate",
+          "generatedByDecision": true
+        },
+        {
+          "source": "decision-candidate-status",
+          "target": "decision-review-queue",
+          "label": "documents_review_queue",
+          "decisionStatus": "medium",
+          "lastDecisionTopic": "review gate",
+          "generatedByDecision": true
+        }
+      ]
+    },
+    "decisionBranches": [
+      {
+        "id": "decision-fluid-basis",
+        "name": "Fluid basis: Clean water",
+        "type": "DecisionBranch",
+        "attributes": {
+          "fluid": "Clean water",
+          "generatedByDecision": true,
+          "decisionTopic": "process fluid",
+          "decision": "A) Clean water",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Start the branching refinement from the selected input P&ID rather than a generic template."
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461957989
+      },
+      {
+        "id": "decision-material-spec",
+        "name": "Material: Carbon steel or PVC",
+        "type": "MaterialSpec",
+        "attributes": {
+          "material": "Carbon steel or PVC",
+          "generatedByDecision": true,
+          "decisionTopic": "process fluid",
+          "decision": "A) Clean water",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Start the branching refinement from the selected input P&ID rather than a generic template."
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461957989
+      },
+      {
+        "id": "decision-sampling-point",
+        "name": "Feed sample point",
+        "type": "SamplingPoint",
+        "attributes": {
+          "samplingPoint": "SP-101",
+          "generatedByDecision": true,
+          "decisionTopic": "process fluid",
+          "decision": "A) Clean water",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Start the branching refinement from the selected input P&ID rather than a generic template."
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461957989
+      },
+      {
+        "id": "decision-line-size",
+        "name": "Line size: DN50",
+        "type": "LineSizing",
+        "attributes": {
+          "lineSize": "DN50",
+          "generatedByDecision": true,
+          "decisionTopic": "flow rate",
+          "decision": "A) 25 m3/h",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Use the fluid decision to make the next sizing question more contextual."
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461959888
+      },
+      {
+        "id": "decision-flow-meter",
+        "name": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+        "type": "FlowInstrument",
+        "attributes": {
+          "instrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+          "generatedByDecision": true,
+          "decisionTopic": "flow rate",
+          "decision": "A) 25 m3/h",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Use the fluid decision to make the next sizing question more contextual.",
+          "candidateFluid": "Clean water",
+          "candidateMaterial": "Carbon steel or PVC",
+          "candidateLineSize": "DN50",
+          "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+          "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+          "candidatePressureProtection": "PI on discharge",
+          "candidateTreatment": "Direct treatment train",
+          "candidateHeatExchanger": "No heat exchanger",
+          "candidateBypass": "No HX bypass required",
+          "candidateStatus": "Ready for Review",
+          "candidateReviewItems": "",
+          "designFlowRate": "25 m3/h",
+          "differentialPressure": "approx. 3 bar",
+          "equipmentType": "Transfer pump; delta P approx. 3 bar",
+          "pressureProtection": "PI on discharge"
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461965537
+      },
+      {
+        "id": "decision-pump-capacity",
+        "name": "Pump capacity basis: DN50",
+        "type": "PumpSizing",
+        "attributes": {
+          "flowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+          "generatedByDecision": true,
+          "decisionTopic": "flow rate",
+          "decision": "A) 25 m3/h",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Use the fluid decision to make the next sizing question more contextual.",
+          "candidateFluid": "Clean water",
+          "candidateMaterial": "Carbon steel or PVC",
+          "candidateLineSize": "DN50",
+          "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+          "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+          "candidatePressureProtection": "PI on discharge",
+          "candidateTreatment": "Direct treatment train",
+          "candidateHeatExchanger": "No heat exchanger",
+          "candidateBypass": "No HX bypass required",
+          "candidateStatus": "Ready for Review",
+          "candidateReviewItems": "",
+          "designFlowRate": "25 m3/h",
+          "differentialPressure": "approx. 3 bar",
+          "equipmentType": "Transfer pump; delta P approx. 3 bar",
+          "pressureProtection": "PI on discharge"
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461965537
+      },
+      {
+        "id": "decision-pump-duty",
+        "name": "Transfer pump; delta P approx. 3 bar",
+        "type": "PumpDuty",
+        "attributes": {
+          "pumpDuty": "Transfer pump; delta P approx. 3 bar",
+          "generatedByDecision": true,
+          "decisionTopic": "pressure duty",
+          "decision": "A) Transfer pump, delta P approximately 3 bar",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Ask pressure duty only after a flow basis exists, because the pump/protection branch depends on both.",
+          "candidateFluid": "Clean water",
+          "candidateMaterial": "Carbon steel or PVC",
+          "candidateLineSize": "DN50",
+          "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+          "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+          "candidatePressureProtection": "PI on discharge",
+          "candidateTreatment": "Direct treatment train",
+          "candidateHeatExchanger": "No heat exchanger",
+          "candidateBypass": "No HX bypass required",
+          "candidateStatus": "Ready for Review",
+          "candidateReviewItems": "",
+          "designFlowRate": "25 m3/h",
+          "differentialPressure": "approx. 3 bar",
+          "equipmentType": "Transfer pump; delta P approx. 3 bar",
+          "pressureProtection": "PI on discharge"
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461965537
+      },
+      {
+        "id": "decision-pressure-protection",
+        "name": "PI on discharge",
+        "type": "PressureProtection",
+        "attributes": {
+          "pressureProtection": "PI on discharge",
+          "generatedByDecision": true,
+          "decisionTopic": "pressure duty",
+          "decision": "A) Transfer pump, delta P approximately 3 bar",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Ask pressure duty only after a flow basis exists, because the pump/protection branch depends on both."
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461961771
+      },
+      {
+        "id": "decision-treatment-train",
+        "name": "Direct treatment train",
+        "type": "TreatmentTrain",
+        "attributes": {
+          "treatment": "Direct treatment train",
+          "generatedByDecision": true,
+          "decisionTopic": "treatment configuration",
+          "decision": "A) Direct treatment without heat exchanger",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Make the treatment question depend on whether the selected input P&ID already contains heat-transfer equipment.",
+          "candidateFluid": "Clean water",
+          "candidateMaterial": "Carbon steel or PVC",
+          "candidateLineSize": "DN50",
+          "candidateFlowInstrument": "FT-101: 0-50 m3/h; pump flow 25 m3/h",
+          "candidatePumpDuty": "Transfer pump; delta P approx. 3 bar",
+          "candidatePressureProtection": "PI on discharge",
+          "candidateTreatment": "Direct treatment train",
+          "candidateHeatExchanger": "No heat exchanger",
+          "candidateBypass": "No HX bypass required",
+          "candidateStatus": "Ready for Review",
+          "candidateReviewItems": "",
+          "treatmentConfiguration": "Direct treatment train"
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461965537
+      },
+      {
+        "id": "decision-candidate-status",
+        "name": "Candidate status: Ready for Review",
+        "type": "ReviewGate",
+        "attributes": {
+          "status": "Ready for Review",
+          "generatedByDecision": true,
+          "decisionTopic": "review gate",
+          "decision": "A) Yes, generate the candidate",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Use the visible branch history as the basis for the human review gate."
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461965537
+      },
+      {
+        "id": "decision-review-queue",
+        "name": "0 review item(s)",
+        "type": "ReviewQueue",
+        "attributes": {
+          "reviewItems": [],
+          "generatedByDecision": true,
+          "decisionTopic": "review gate",
+          "decision": "A) Yes, generate the candidate",
+          "responseSource": "human",
+          "confidence": "medium",
+          "communicationPurpose": "Use the visible branch history as the basis for the human review gate."
+        },
+        "decisionStatus": "medium",
+        "reviewRequired": false,
+        "generatedByDecision": true,
+        "updatedAt": 1785461965537
+      }
+    ],
+    "graphSchema": {
+      "nodes": "P&ID objects plus generated decision-branch nodes.",
+      "links": "Original P&ID links plus generated decision-branch links.",
+      "generatedByDecision": "true when the node/link was added by the CoDesign decision process."
+    }
+  }
+}
