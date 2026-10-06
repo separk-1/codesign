@@ -213,13 +213,12 @@ function describeConnections(nodeEvidence, evidence) {
     return `${label}: I did not retrieve direct connection evidence for this node.`;
   }
 
-  const rows = connected.slice(0, 8).map((item, index) => formatEvidenceLine(item, index));
-  const onlyNozzleLinks = connected.every(item => String(item.payload?.label || '').toLowerCase() === 'has_nozzle');
-  const limitation = onlyNozzleLinks
-    ? `\n\nNo pipe-to-equipment or equipment-to-equipment connection was retrieved for ${label}. In the selected source graph, ${label} appears to be connected only to its nozzle child nodes.`
-    : '';
-
-  return `${label} is directly connected to:\n${rows.join('\n')}${limitation}`;
+  const rows = connected.slice(0, 8).map(item => {
+    const payload = item.payload || {};
+    const other = payload.source === nodeEvidence.id ? endpointLabel(item, 'target') : endpointLabel(item, 'source');
+    return `${other}${payload.label && payload.label !== 'connects_to' ? ` via ${payload.label}` : ''}`;
+  });
+  return `${label} is connected to ${rows.join('; ')}.`;
 }
 
 function describeNodeRole(nodeEvidence, evidence) {
@@ -251,22 +250,13 @@ function fallbackAnswer(query, evidence, candidate, decisionLog) {
   if (!evidence.length) {
     return `I could not find matching graph evidence for: "${query}". Try asking about a tag, equipment type, line, nozzle, material, pump duty, flow rate, treatment configuration, or review item.`;
   }
-  const lines = evidence.slice(0, 5).map((item, index) => formatEvidenceLine(item, index));
-  const candidateLine = candidate?.status
-    ? `Current candidate status is ${candidate.status}; fluid=${candidate.fluid}, line=${candidate.lineSize}, pump=${candidate.pumpDuty}.`
-    : 'No candidate state was provided.';
-  const logLine = Array.isArray(decisionLog) && decisionLog.length
-    ? `The decision log contains ${decisionLog.length} exchange(s); latest topic: ${decisionLog[decisionLog.length - 1]?.topic}.`
-    : 'No decision-log exchanges are recorded yet.';
-  const definitionQuestion = /\bwhat\s+is\b|\bdefine\b|\bdescribe\b/i.test(query);
-  const connectionQuestion = /\bconnected\b|\bconnects?\b|\bconnection\b|\blinked\b|\battached\b|\bneighbor/i.test(query);
   const mainNode = findMainNodeForQuery(query, evidence);
-  const directAnswer = connectionQuestion && mainNode
-    ? `\n\nAnswer:\n${describeConnections(mainNode, evidence)}\n`
-    : definitionQuestion && mainNode
-      ? `\n\nAnswer:\n${describeNodeRole(mainNode, evidence)}\n`
-      : '';
-  return `GraphRAG answer based on retrieved graph evidence:${directAnswer}\n${candidateLine}\n${logLine}\n\nMost relevant evidence:\n${lines.join('\n')}\n\nInterpretation: the answer above is grounded in the retrieved nodes/links and should be reviewed against the source P&ID before engineering use.`;
+  const connectionQuestion = /\bconnected\b|\bconnects?\b|\bconnection\b|\blinked\b|\battached\b|\bneighbor/i.test(query);
+  const wantsEvidence = /\bevidence\b|\bcitation\b|\bsources?\b/i.test(query);
+  const answer = connectionQuestion && mainNode ? describeConnections(mainNode, evidence)
+    : mainNode ? `${mainNode.label}: ${mainNode.payload?.attributes?.description || mainNode.type || 'Equipment in the diagram'}.`
+    : 'I could not identify the equipment. Which equipment or tag do you mean?';
+  return answer + (wantsEvidence ? `\n\nEvidence: ${evidence.slice(0, 5).map((item, index) => formatEvidenceLine(item, index)).join('\n')}` : '');
 }
 
 export async function answerGraphRag({ query, graph, candidate, decisionLog, designId, model = process.env.OPENAI_MODEL || 'gpt-5-mini' }) {
@@ -275,20 +265,20 @@ export async function answerGraphRag({ query, graph, candidate, decisionLog, des
     return { mode: 'fallback', answer: fallbackAnswer(query, evidence, candidate, decisionLog), evidence };
   }
 
-  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY, timeout: 25000, maxRetries: 0 });
   const evidenceText = evidence.map((item, index) => `${index + 1}. [${item.kind}] ${item.label || item.id} | ${JSON.stringify(item.payload)}`).join('\n');
-  const prompt = `Question: ${query}\n\nSelected design id: ${designId || 'unknown'}\n\nCandidate state:\n${JSON.stringify(candidate || {}, null, 2)}\n\nDecision log summary:\n${JSON.stringify((decisionLog || []).map(entry => ({ topic: entry.topic, selectedOption: entry.selectedOption, decision: entry.decision, confidence: entry.confidence, responseSource: entry.responseSource })), null, 2)}\n\nRetrieved graph evidence:\n${evidenceText || 'No matching graph evidence.'}\n\nAnswer using only the retrieved graph evidence and candidate/decision-log context. If evidence is insufficient, say so. Include a short Evidence Used section with node/link identifiers.`;
+  const prompt = `Question: ${query}\n\nSelected design id: ${designId || 'unknown'}\n\nCandidate state:\n${JSON.stringify(candidate || {}, null, 2)}\n\nDecision log summary:\n${JSON.stringify((decisionLog || []).map(entry => ({ topic: entry.topic, selectedOption: entry.selectedOption, decision: entry.decision, confidence: entry.confidence, responseSource: entry.responseSource })), null, 2)}\n\nRetrieved graph evidence:\n${evidenceText || 'No matching graph evidence.'}\n\nAnswer using only the retrieved graph evidence and candidate/decision-log context. If evidence is insufficient, say so. For simple connection questions, name the connected equipment and relevant line in one or two sentences. Do not add headings, evidence lists, retrieval counts, item numbers, source node IDs, GraphRAG terminology or engineering-approval disclaimers. Give sources only if explicitly requested. Do not infer that no other connections exist merely because retrieval is limited.`;
 
   try {
     const completion = await Promise.race([
       client.chat.completions.create({
         model,
         messages: [
-          { role: 'system', content: 'You are a GraphRAG assistant for DEXPI-derived P&ID graphs. Be concise, evidence-grounded, and explicit about uncertainty. Do not claim final engineering approval.' },
+          { role: 'system', content: 'Help users understand the equipment and connections in their diagram. Answer in natural English only and ground factual claims in the supplied evidence. Answer the actual question directly and briefly. Do not narrate internal retrieval or append generic disclaimers. If the relevant connection is missing, say you cannot identify it from the diagram.' },
           { role: 'user', content: prompt }
         ]
       }),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('GraphRAG LLM timeout; using retrieved evidence fallback')), 8000))
+      new Promise((_, reject) => setTimeout(() => reject(new Error('GraphRAG LLM timeout; using retrieved evidence fallback')), 26000))
     ]);
     const answer = completion.choices?.[0]?.message?.content || fallbackAnswer(query, evidence, candidate, decisionLog);
     return { mode: 'openai', model, answer, evidence };

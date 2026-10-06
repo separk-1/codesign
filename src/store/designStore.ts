@@ -1385,14 +1385,10 @@ export const useDesignStore = create<DesignState>((set, get) => ({
             }
             if (!response.ok || !data?.ok) throw new Error(data?.error || 'GraphRAG query failed');
             const evidence = Array.isArray(data.evidence) ? data.evidence : [];
-            const evidenceText = evidence.length
-                ? `\n\nEvidence retrieved (${evidence.length}):\n${evidence.slice(0, 5).map((item: any, index: number) => `${index + 1}. [${item.kind}] ${item.label || item.id}`).join('\n')}`
-                : '\n\nEvidence retrieved: none';
-            const modeLabel = data.mode === 'openai' ? 'LLM-grounded' : 'evidence-based';
             const aiMessage: ChatMessage = {
                 id: `graphrag-ai-${Date.now()}`,
                 sender: 'ai',
-                text: `GraphRAG answer (${modeLabel})\n\n${data.answer}${evidenceText}`,
+                text: data.answer,
                 timestamp: Date.now(),
                 evidence
             };

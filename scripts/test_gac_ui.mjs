@@ -22,7 +22,7 @@ try {
   await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
   await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('33.333 m³', { exact: true }).waitFor();
   await page.getByRole('button', { name: 'Accept and apply', exact: true }).click();
-  await page.getByRole('status').filter({ hasText: 'Applied to explicit vessel IDs' }).waitFor();
+  await page.getByRole('status').filter({ hasText: 'Sizing applied to the design' }).waitFor();
   await page.getByRole('button', { name: 'GAC T1 / V1', exact: true }).last().click();
   assert.match(await page.getByRole('button', { name: 'GAC T1 / V1', exact: true }).last().locator('title').textContent(), /GAC volume/);
   await page.getByRole('textbox', { name: 'flow', exact: true }).fill('101');
@@ -51,7 +51,7 @@ try {
   await chat.fill('calculate'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
   await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('50.000 m³', { exact: true }).waitFor();
   await page.getByRole('button', { name: 'Accept and apply', exact: true }).click();
-  await page.getByRole('status').filter({ hasText: 'Applied to explicit vessel IDs' }).waitFor();
+  await page.getByRole('status').filter({ hasText: 'Sizing applied to the design' }).waitFor();
   await page.screenshot({ path: 'docs/gac-workflow.png', fullPage: true });
   assert.equal(await page.getByRole('button', { name: 'Find reference conditions', exact: true }).count(), 0);
   assert.equal(await page.getByRole('button', { name: 'Use reference basis', exact: true }).count(), 0);
@@ -120,6 +120,27 @@ try {
     assert.ok(layout.scrollWidth <= layout.width + 1, `Horizontal overflow at ${width}px: ${layout.scrollWidth}`);
     await page.screenshot({ path: `docs/layout-${width}.png`, fullPage: true });
   }
+  await page.setViewportSize({ width: 1500, height: 1000 });
+  await page.reload();
+  await page.getByRole('button', { name: 'Design basis +', exact: true }).click();
+  await page.getByRole('textbox', { name: 'averageFlow', exact: true }).fill('150');
+  await page.getByRole('button', { name: 'Calculate GAC sizing', exact: true }).click();
+  await page.locator('.input-review').getByText(/Average flow.*exceeds design flow/).waitFor();
+  assert.equal(await page.getByRole('button', { name: 'Accept and apply', exact: true }).count(), 0);
+  await page.getByRole('textbox', { name: 'averageFlow', exact: true }).fill('100');
+  for (const name of ['diameterFt', 'heightFt', 'bedDepthFt']) await page.getByRole('textbox', { name, exact: true }).fill('?');
+  await page.getByRole('button', { name: 'Calculate GAC sizing', exact: true }).click();
+  await page.locator('.input-review').getByText(/Use calculated dimensions/).waitFor();
+  assert.equal(await page.getByRole('textbox', { name: 'diameterFt', exact: true }).inputValue(), '?');
+  await page.getByRole('button', { name: 'Use suggested inputs', exact: true }).click();
+  assert.notEqual(await page.getByRole('textbox', { name: 'diameterFt', exact: true }).inputValue(), '?');
+  await page.getByRole('button', { name: 'Calculate GAC sizing', exact: true }).click();
+  await page.getByRole('button', { name: 'Accept and apply', exact: true }).waitFor();
+  await page.getByRole('textbox', { name: 'totalEbctMinutes', exact: true }).fill('?');
+  await page.getByRole('button', { name: 'Calculate GAC sizing', exact: true }).click();
+  await page.locator('.input-review').getByText('What is the source water type?', { exact: true }).waitFor();
+  assert.equal(await page.getByRole('button', { name: 'Use as comparison scenario', exact: true }).count(), 2);
+  assert.equal(await page.getByRole('textbox', { name: 'totalEbctMinutes', exact: true }).inputValue(), '?');
   assert.equal(await page.getByText('HUMAN', { exact: true }).count(), 0);
   assert.equal(errors.length, 0, errors.join('\n'));
   console.log('GAC UI passed: missing inputs, calculate, accept, edit/invalidate, recalculate, reject, JSON export and chat tool commands.');

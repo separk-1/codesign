@@ -72,7 +72,6 @@ export function GacResearchPanel() {
       </div>}
       {!result && <p className="basis-summary">{form.species || 'PFAS'} · {form.flow || '—'} {form.flowUnit} · {form.totalEbctMinutes || '—'} min EBCT</p>}
       {proposal && <div className="research-actions"><button onClick={() => gacCommand('accept')}>Accept and apply</button><button onClick={() => gacCommand('reject')}>Reject</button></div>}
-      {result && <p>PFAS performance: unverified{stale ? ' · Applied sizing: stale' : ''}</p>}
     </div>}
   </div>;
 }

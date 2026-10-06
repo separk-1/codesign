@@ -57,7 +57,8 @@ export function GacPanel() {
   }
   async function explain(query: string) {
     const context = { form, proposal, accepted, graph };
-    const local = answerWorkbookQuestion(query, context, workbookModel);
+    const asksReview = /review|valid|suitable|recommend|suggest|unknown|don't know|do not know|can i|too|next|missing|모르|추천|적정|검토/i.test(query);
+    const local = asksReview && !review.canCalculate ? { mode: 'local_context', action: 'review_inputs', fields: [...review.missing, ...review.issues.map((i: any) => i.field)], message: [...review.issues.map((i: any) => i.message), ...review.questions.slice(0, 2).map((q: any) => q.text), ...review.suggestions.map((s: any) => `${s.label}. ${s.reason}`)].join('\n') } : answerWorkbookQuestion(query, context, workbookModel);
     useGacWorkflowStore.setState({ highlightedFields: local.fields || [] });
     useDesignStore.setState({ aiResponding: true });
     try {
@@ -133,7 +134,7 @@ export function GacPanel() {
       }
       setProposal(result); setMessage('Sizing calculated. Review the proposed change, then select Accept and apply.');
       record('Calculate GAC proposal', { designState: agent.designState, toolCall: { name: 'calculate_gac_workbook', arguments: workbook.inputs }, tool: result.version, result });
-      useDesignStore.getState().addChatMessage('ai', `The proposed design has ${result.vesselCount} GAC vessels: ${result.inputs.series} in series per train, with ${result.inputs.parallel} operating train(s). Each vessel contains ${result.mediaPerVesselM3.toFixed(3)} m³ of GAC. Total operating GAC volume is ${result.totalMediaM3.toFixed(3)} m³. This is a proposal; your design has not changed yet. Review it under Architecture, then select Accept and apply. These sizing results do not predict PFAS removal.`);
+      useDesignStore.getState().addChatMessage('ai', `The proposed design has ${result.vesselCount} GAC vessels: ${result.inputs.series} in series per train, with ${result.inputs.parallel} operating train(s). Each vessel contains ${result.mediaPerVesselM3.toFixed(3)} m³ of GAC. Total operating GAC volume is ${result.totalMediaM3.toFixed(3)} m³. This is a proposal; your design has not changed yet. Review it under Architecture, then select Accept and apply.`);
     } catch (e) { setMessage(e instanceof Error ? e.message : String(e)); }
   }
   useEffect(() => {
@@ -191,7 +192,7 @@ export function GacPanel() {
       treatment: 'GAC', heatExchanger: 'Not specified', material: 'TBD', lineSize: 'TBD', pumpDuty: 'TBD',
       flowInstrument: 'TBD', pressureProtection: 'TBD', bypass: 'TBD', status: 'Assumptions Only',
       updatedTopics: ['GAC design'], reviewItems: proposal.assumptions } });
-    setMessage('Applied to explicit vessel IDs. PFAS performance and remaining sizing require review.');
+    setMessage('Sizing applied to the design.');
   }
   function exportCase() {
     const blob = new Blob([JSON.stringify({ schemaVersion: 'gac-case/1', form, proposal, accepted, graph, history,
@@ -218,9 +219,9 @@ export function GacPanel() {
     {reviewOpen && <div className="input-review">
       {review.issues.map((issue: any, i: number) => <p key={`issue-${i}`}><strong>Needs correction:</strong> {issue.message}</p>)}
       {review.questions.slice(0, 4).map((question: any, i: number) => <p key={`question-${i}`}>{question.text}</p>)}
-      {review.canCalculate && <p>Inputs satisfy the supported sizing checks. PFAS performance still requires project evidence.</p>}
+      {review.canCalculate && <p>Inputs are ready for sizing.</p>}
       {review.suggestions.map((suggestion: any) => <div key={suggestion.id} className="input-suggestion"><p><strong>{suggestion.label}</strong></p><p>{suggestion.reason}</p><details><summary>Evidence</summary><p>{suggestion.source}</p></details><button onClick={() => useSuggestion(suggestion)}>{suggestion.kind === 'study_scenario' ? 'Use as comparison scenario' : 'Use suggested inputs'}</button></div>)}
-      {review.warnings.map((warning: string) => <p key={warning}>{warning}</p>)}
+      <details><summary>Calculation scope</summary>{review.warnings.map((warning: string) => <p key={warning}>{warning}</p>)}</details>
     </div>}
     {message && <p role="status">{message}</p>}
     <button title="Run the supported Excel pressure-vessel formulas and generate a sizing proposal. Approval is required to apply changes." onClick={calculate}>Calculate GAC sizing</button>
