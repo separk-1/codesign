@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { generateDecisionLog } from './decisionAgent.js';
 import { answerGraphRag } from './graphRag.js';
+import { answerGacAssistant } from './gacAssistant.js';
 
 const app = express();
 const port = Number(process.env.API_PORT || 8787);
@@ -60,6 +61,12 @@ app.get('/api/designs/:id', async (req, res) => {
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, hasOpenAIKey: Boolean(process.env.OPENAI_API_KEY) });
+});
+app.post('/api/gac/assistant', async (req, res) => {
+  const { query, context } = req.body || {};
+  if (typeof query !== 'string' || !query.trim() || query.length > 6000 || !context?.form || !Array.isArray(context?.graph?.nodes)) return res.status(400).json({ error: 'Missing query or design context.' });
+  try { res.json(await answerGacAssistant(query, context)); }
+  catch { res.status(500).json({ error: 'Workbook assistant failed.' }); }
 });
 
 

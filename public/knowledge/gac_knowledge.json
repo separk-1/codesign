@@ -1,0 +1,3339 @@
+{
+  "schemaVersion": "gac-knowledge/1",
+  "source": {
+    "file": "granular-activated-carbon-gac-.xlsm.xlsm",
+    "sha256": "73d9d4d9d2a7f5af6c839401cf192199359d90da91ddd6b60da51c89d9c7f95c",
+    "release": "March 2023",
+    "extraction": "cached workbook values; no macros or recalculation",
+    "path": "docs/granular-activated-carbon-gac-.xlsm.xlsm"
+  },
+  "records": [
+    {
+      "id": "pfas-r12-c6",
+      "species": "PFOA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 1274.7752808988766,
+      "influentRaw": 1274.7752808988766,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": 2787.0,
+        "status": "observed",
+        "raw": 2787
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!F12:H12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c9",
+      "species": "PFOS",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 6071.235955056179,
+      "influentRaw": 6071.235955056179,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!I12:K12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c12",
+      "species": "PFBA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 73.6,
+      "influentRaw": 73.6,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": 722.0,
+        "status": "observed",
+        "raw": 722
+      },
+      "bv10pct": {
+        "value": 1394.0,
+        "status": "observed",
+        "raw": 1394
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!L12:N12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c15",
+      "species": "PFPeA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 277.27659574468083,
+      "influentRaw": 277.27659574468083,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": 1497.0,
+        "status": "observed",
+        "raw": 1497
+      },
+      "bv10pct": {
+        "value": 2170.0,
+        "status": "observed",
+        "raw": 2170
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!O12:Q12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c18",
+      "species": "PFHxA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 631.0851063829789,
+      "influentRaw": 631.0851063829789,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": 1803.0,
+        "status": "observed",
+        "raw": 1803
+      },
+      "bv10pct": {
+        "value": 2403.0,
+        "status": "observed",
+        "raw": 2403
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!R12:T12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c21",
+      "species": "PFHpA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 149.4659574468085,
+      "influentRaw": 149.4659574468085,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": 2189.0,
+        "status": "observed",
+        "raw": 2189
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "see note"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!U12:W12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c24",
+      "species": "PFNA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 17.927659574468088,
+      "influentRaw": 17.927659574468088,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!X12:Z12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c27",
+      "species": "PFDA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 1.002127659574468,
+      "influentRaw": 1.002127659574468,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!AA12:AC12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c30",
+      "species": "PFUnA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!AD12:AF12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c33",
+      "species": "PFDoA",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!AG12:AI12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c42",
+      "species": "PFBS",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 22.51148936170213,
+      "influentRaw": 22.51148936170213,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": 1977.0,
+        "status": "observed",
+        "raw": 1977
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "see note"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!AP12:AR12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c48",
+      "species": "PFHxS",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 2071.0851063829787,
+      "influentRaw": 2071.0851063829787,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": 2351.0,
+        "status": "observed",
+        "raw": 2351
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!AV12:AX12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c51",
+      "species": "PFHpS",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": 93.54255319148939,
+      "influentRaw": 93.54255319148939,
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!AY12:BA12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r12-c57",
+      "species": "PFDS",
+      "site": "A",
+      "series": 2.0,
+      "totalEbctMinutes": 35.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 1.39,
+      "tocRaw": 1.39,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC at Site A changed out 15 times in approximately 3.5 years of operation. PFHpA and PFBS reached 10% breakthrough only once in 12 runs during which these compounds were monitored",
+      "contextCitation": "PFAS Reference!A12:E12",
+      "notesCitation": "PFAS Reference!BZ12",
+      "citation": "PFAS Reference!BE12:BG12",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r13-c6",
+      "species": "PFOA",
+      "site": "C",
+      "series": 3.0,
+      "totalEbctMinutes": 47.7,
+      "influentNgL": 966.0,
+      "influentRaw": 966,
+      "tocMgL": null,
+      "tocRaw": "see note",
+      "bv1pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "see note"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Site C treats landfill leachate. PFOA and PFOS detected (about 2% breakthrough) in system effluent at 158 days of operation, but then returned to non-detect. Influent TOC is not monitored, but effluent TOC ranged from 2.03 to 10.8 mg/L. GAC changed out twice in just over 2 years of operation.",
+      "contextCitation": "PFAS Reference!A13:E13",
+      "notesCitation": "PFAS Reference!BZ13",
+      "citation": "PFAS Reference!F13:H13",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "landfill leachate",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r13-c9",
+      "species": "PFOS",
+      "site": "C",
+      "series": 3.0,
+      "totalEbctMinutes": 47.7,
+      "influentNgL": 3411.0,
+      "influentRaw": 3411,
+      "tocMgL": null,
+      "tocRaw": "see note",
+      "bv1pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "see note"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Site C treats landfill leachate. PFOA and PFOS detected (about 2% breakthrough) in system effluent at 158 days of operation, but then returned to non-detect. Influent TOC is not monitored, but effluent TOC ranged from 2.03 to 10.8 mg/L. GAC changed out twice in just over 2 years of operation.",
+      "contextCitation": "PFAS Reference!A13:E13",
+      "notesCitation": "PFAS Reference!BZ13",
+      "citation": "PFAS Reference!I13:K13",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "landfill leachate",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r14-c6",
+      "species": "PFOA",
+      "site": "C (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 15.9,
+      "influentNgL": 966.0,
+      "influentRaw": 966,
+      "tocMgL": null,
+      "tocRaw": "see note",
+      "bv1pct": {
+        "value": 5344.0,
+        "status": "observed",
+        "raw": 5344
+      },
+      "bv10pct": {
+        "value": 5633.0,
+        "status": "observed",
+        "raw": 5633
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for the lead vessel in series",
+      "contextCitation": "PFAS Reference!A14:E14",
+      "notesCitation": "PFAS Reference!BZ14",
+      "citation": "PFAS Reference!F14:H14",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "landfill leachate",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r14-c9",
+      "species": "PFOS",
+      "site": "C (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 15.9,
+      "influentNgL": 3411.0,
+      "influentRaw": 3411,
+      "tocMgL": null,
+      "tocRaw": "see note",
+      "bv1pct": {
+        "value": 5367.0,
+        "status": "observed",
+        "raw": 5367
+      },
+      "bv10pct": {
+        "value": 5659.0,
+        "status": "observed",
+        "raw": 5659
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for the lead vessel in series",
+      "contextCitation": "PFAS Reference!A14:E14",
+      "notesCitation": "PFAS Reference!BZ14",
+      "citation": "PFAS Reference!I14:K14",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "landfill leachate",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c6",
+      "species": "PFOA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 22.0,
+      "influentRaw": 22,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "see note"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!F15:H15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c9",
+      "species": "PFOS",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 277.0,
+      "influentRaw": 277,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!I15:K15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c12",
+      "species": "PFBA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 7.249,
+      "influentRaw": 7.249,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": 17874.0,
+        "status": "observed",
+        "raw": 17874
+      },
+      "bv10pct": {
+        "value": 19781.0,
+        "status": "observed",
+        "raw": 19781
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!L15:N15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c15",
+      "species": "PFPeA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 18.78,
+      "influentRaw": 18.78,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": 18891.0,
+        "status": "observed",
+        "raw": 18891
+      },
+      "bv10pct": {
+        "value": 30435.0,
+        "status": "observed",
+        "raw": 30435
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!O15:Q15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c18",
+      "species": "PFHxA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 23.05666666666667,
+      "influentRaw": 23.05666666666667,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": 38406.0,
+        "status": "observed",
+        "raw": 38406
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!R15:T15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c21",
+      "species": "PFHpA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 9.586749999999999,
+      "influentRaw": 9.586749999999999,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!U15:W15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c24",
+      "species": "PFNA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 0.82495,
+      "influentRaw": 0.82495,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "see note"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!X15:Z15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c27",
+      "species": "PFDA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!AA15:AC15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c30",
+      "species": "PFUnA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!AD15:AF15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c33",
+      "species": "PFDoA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!AG15:AI15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c36",
+      "species": "PFTriA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!AJ15:AL15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c39",
+      "species": "PFTeA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!AM15:AO15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c42",
+      "species": "PFBS",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 11.428749999999999,
+      "influentRaw": 11.428749999999999,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "see note"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!AP15:AR15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c48",
+      "species": "PFHxS",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 171.65,
+      "influentRaw": 171.65,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!AV15:AX15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c51",
+      "species": "PFHpS",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": 5.004,
+      "influentRaw": 5.004,
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!AY15:BA15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c57",
+      "species": "PFDS",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!BE15:BG15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c63",
+      "species": "6:2 FTS",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!BK15:BM15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c66",
+      "species": "8:2 FTS",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!BN15:BP15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c69",
+      "species": "PFOSA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!BQ15:BS15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c72",
+      "species": "n-EtFOSAA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!BT15:BV15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r15-c75",
+      "species": "n-MeFOSAA",
+      "site": "D",
+      "series": 2.0,
+      "totalEbctMinutes": 14.92,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": null,
+      "tocRaw": "<1",
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Average flow not reported, so bed volumes calculated based on design flow. PFOA and PFNA detected (3% and 48% breakthrough) in system effluent at 61 days of operation, but then returned to non-detect. PFBS detected (3% breakthrough) in system effluent at 548 days of operation, but then returned to non-detect. GAC has not been changed out through almost 2 years of operation (64,568 bed volumes, based on design flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A15:E15",
+      "notesCitation": "PFAS Reference!BZ15",
+      "citation": "PFAS Reference!BW15:BY15",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r16-c6",
+      "species": "PFOA",
+      "site": "E",
+      "series": 2.0,
+      "totalEbctMinutes": 32.0,
+      "influentNgL": 3894.0,
+      "influentRaw": 3894,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "PFOS reached 2% breakthrough in system effluent at the end of one run (after 88 days or 2,263 bed volumes), but in this instance effluent concentration was 77 times higher than effluent from the lead vessel. PFOS did not reach 1% breakthrough in system effluent during any other run. GAC changed out 5 times in approximately 1.5 years of operation",
+      "contextCitation": "PFAS Reference!A16:E16",
+      "notesCitation": "PFAS Reference!BZ16",
+      "citation": "PFAS Reference!F16:H16",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r16-c9",
+      "species": "PFOS",
+      "site": "E",
+      "series": 2.0,
+      "totalEbctMinutes": 32.0,
+      "influentNgL": 11336.0,
+      "influentRaw": 11336,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "see note"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "PFOS reached 2% breakthrough in system effluent at the end of one run (after 88 days or 2,263 bed volumes), but in this instance effluent concentration was 77 times higher than effluent from the lead vessel. PFOS did not reach 1% breakthrough in system effluent during any other run. GAC changed out 5 times in approximately 1.5 years of operation",
+      "contextCitation": "PFAS Reference!A16:E16",
+      "notesCitation": "PFAS Reference!BZ16",
+      "citation": "PFAS Reference!I16:K16",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r16-c21",
+      "species": "PFHpA",
+      "site": "E",
+      "series": 2.0,
+      "totalEbctMinutes": 32.0,
+      "influentNgL": 686.0,
+      "influentRaw": 686,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "PFOS reached 2% breakthrough in system effluent at the end of one run (after 88 days or 2,263 bed volumes), but in this instance effluent concentration was 77 times higher than effluent from the lead vessel. PFOS did not reach 1% breakthrough in system effluent during any other run. GAC changed out 5 times in approximately 1.5 years of operation",
+      "contextCitation": "PFAS Reference!A16:E16",
+      "notesCitation": "PFAS Reference!BZ16",
+      "citation": "PFAS Reference!U16:W16",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r16-c24",
+      "species": "PFNA",
+      "site": "E",
+      "series": 2.0,
+      "totalEbctMinutes": 32.0,
+      "influentNgL": 28.0,
+      "influentRaw": 28,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "PFOS reached 2% breakthrough in system effluent at the end of one run (after 88 days or 2,263 bed volumes), but in this instance effluent concentration was 77 times higher than effluent from the lead vessel. PFOS did not reach 1% breakthrough in system effluent during any other run. GAC changed out 5 times in approximately 1.5 years of operation",
+      "contextCitation": "PFAS Reference!A16:E16",
+      "notesCitation": "PFAS Reference!BZ16",
+      "citation": "PFAS Reference!X16:Z16",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r16-c42",
+      "species": "PFBS",
+      "site": "E",
+      "series": 2.0,
+      "totalEbctMinutes": 32.0,
+      "influentNgL": 824.0,
+      "influentRaw": 824,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "PFOS reached 2% breakthrough in system effluent at the end of one run (after 88 days or 2,263 bed volumes), but in this instance effluent concentration was 77 times higher than effluent from the lead vessel. PFOS did not reach 1% breakthrough in system effluent during any other run. GAC changed out 5 times in approximately 1.5 years of operation",
+      "contextCitation": "PFAS Reference!A16:E16",
+      "notesCitation": "PFAS Reference!BZ16",
+      "citation": "PFAS Reference!AP16:AR16",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r16-c48",
+      "species": "PFHxS",
+      "site": "E",
+      "series": 2.0,
+      "totalEbctMinutes": 32.0,
+      "influentNgL": 12592.0,
+      "influentRaw": 12592,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "PFOS reached 2% breakthrough in system effluent at the end of one run (after 88 days or 2,263 bed volumes), but in this instance effluent concentration was 77 times higher than effluent from the lead vessel. PFOS did not reach 1% breakthrough in system effluent during any other run. GAC changed out 5 times in approximately 1.5 years of operation",
+      "contextCitation": "PFAS Reference!A16:E16",
+      "notesCitation": "PFAS Reference!BZ16",
+      "citation": "PFAS Reference!AV16:AX16",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r17-c6",
+      "species": "PFOA",
+      "site": "E (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 16.0,
+      "influentNgL": 3894.0,
+      "influentRaw": 3894,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 2536.0,
+        "status": "observed",
+        "raw": 2536
+      },
+      "bv10pct": {
+        "value": 3422.0,
+        "status": "observed",
+        "raw": 3422
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for the lead vessel in series. PFOS reached 1% breakthrough in 3 runs and 10% breakthrough in only 2 runs; this results in an average bed life to 1% breakthrough that is slightly longer than average bed life to 10% breakthrough.",
+      "contextCitation": "PFAS Reference!A17:E17",
+      "notesCitation": "PFAS Reference!BZ17",
+      "citation": "PFAS Reference!F17:H17",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r17-c9",
+      "species": "PFOS",
+      "site": "E (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 16.0,
+      "influentNgL": 11336.0,
+      "influentRaw": 11336,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "2,281 (see note)"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "note_required",
+        "raw": "2,089 (see note)"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for the lead vessel in series. PFOS reached 1% breakthrough in 3 runs and 10% breakthrough in only 2 runs; this results in an average bed life to 1% breakthrough that is slightly longer than average bed life to 10% breakthrough.",
+      "contextCitation": "PFAS Reference!A17:E17",
+      "notesCitation": "PFAS Reference!BZ17",
+      "citation": "PFAS Reference!I17:K17",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r17-c21",
+      "species": "PFHpA",
+      "site": "E (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 16.0,
+      "influentNgL": 686.0,
+      "influentRaw": 686,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 1825.0,
+        "status": "observed",
+        "raw": 1825
+      },
+      "bv10pct": {
+        "value": 3631.0,
+        "status": "observed",
+        "raw": 3631
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for the lead vessel in series. PFOS reached 1% breakthrough in 3 runs and 10% breakthrough in only 2 runs; this results in an average bed life to 1% breakthrough that is slightly longer than average bed life to 10% breakthrough.",
+      "contextCitation": "PFAS Reference!A17:E17",
+      "notesCitation": "PFAS Reference!BZ17",
+      "citation": "PFAS Reference!U17:W17",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r17-c24",
+      "species": "PFNA",
+      "site": "E (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 16.0,
+      "influentNgL": 28.0,
+      "influentRaw": 28,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 1404.0,
+        "status": "observed",
+        "raw": 1404
+      },
+      "bv10pct": {
+        "value": 2641.0,
+        "status": "observed",
+        "raw": 2641
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for the lead vessel in series. PFOS reached 1% breakthrough in 3 runs and 10% breakthrough in only 2 runs; this results in an average bed life to 1% breakthrough that is slightly longer than average bed life to 10% breakthrough.",
+      "contextCitation": "PFAS Reference!A17:E17",
+      "notesCitation": "PFAS Reference!BZ17",
+      "citation": "PFAS Reference!X17:Z17",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r17-c42",
+      "species": "PFBS",
+      "site": "E (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 16.0,
+      "influentNgL": 824.0,
+      "influentRaw": 824,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 1707.0,
+        "status": "observed",
+        "raw": 1707
+      },
+      "bv10pct": {
+        "value": 3109.0,
+        "status": "observed",
+        "raw": 3109
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for the lead vessel in series. PFOS reached 1% breakthrough in 3 runs and 10% breakthrough in only 2 runs; this results in an average bed life to 1% breakthrough that is slightly longer than average bed life to 10% breakthrough.",
+      "contextCitation": "PFAS Reference!A17:E17",
+      "notesCitation": "PFAS Reference!BZ17",
+      "citation": "PFAS Reference!AP17:AR17",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r17-c48",
+      "species": "PFHxS",
+      "site": "E (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 16.0,
+      "influentNgL": 12592.0,
+      "influentRaw": 12592,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_monitored",
+        "raw": null
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_monitored",
+        "raw": null
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for the lead vessel in series. PFOS reached 1% breakthrough in 3 runs and 10% breakthrough in only 2 runs; this results in an average bed life to 1% breakthrough that is slightly longer than average bed life to 10% breakthrough.",
+      "contextCitation": "PFAS Reference!A17:E17",
+      "notesCitation": "PFAS Reference!BZ17",
+      "citation": "PFAS Reference!AV17:AX17",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r18-c6",
+      "species": "PFOA",
+      "site": "F",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 34.0,
+      "influentRaw": 34,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC has not been changed out through just over 1 year of operation (8,420 bed volumes, based on average flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A18:E18",
+      "notesCitation": "PFAS Reference!BZ18",
+      "citation": "PFAS Reference!F18:H18",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r18-c9",
+      "species": "PFOS",
+      "site": "F",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 225.0,
+      "influentRaw": 225,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC has not been changed out through just over 1 year of operation (8,420 bed volumes, based on average flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A18:E18",
+      "notesCitation": "PFAS Reference!BZ18",
+      "citation": "PFAS Reference!I18:K18",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r18-c18",
+      "species": "PFHxA",
+      "site": "F",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 49.0,
+      "influentRaw": 49,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 7059.0,
+        "status": "observed",
+        "raw": 7059
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC has not been changed out through just over 1 year of operation (8,420 bed volumes, based on average flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A18:E18",
+      "notesCitation": "PFAS Reference!BZ18",
+      "citation": "PFAS Reference!R18:T18",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r18-c21",
+      "species": "PFHpA",
+      "site": "F",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 14.0,
+      "influentRaw": 14,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC has not been changed out through just over 1 year of operation (8,420 bed volumes, based on average flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A18:E18",
+      "notesCitation": "PFAS Reference!BZ18",
+      "citation": "PFAS Reference!U18:W18",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r18-c42",
+      "species": "PFBS",
+      "site": "F",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 11.0,
+      "influentRaw": 11,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC has not been changed out through just over 1 year of operation (8,420 bed volumes, based on average flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A18:E18",
+      "notesCitation": "PFAS Reference!BZ18",
+      "citation": "PFAS Reference!AP18:AR18",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r18-c48",
+      "species": "PFHxS",
+      "site": "F",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 97.0,
+      "influentRaw": 97,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "GAC has not been changed out through just over 1 year of operation (8,420 bed volumes, based on average flow and total EBCT)",
+      "contextCitation": "PFAS Reference!A18:E18",
+      "notesCitation": "PFAS Reference!BZ18",
+      "citation": "PFAS Reference!AV18:AX18",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "not reported"
+    },
+    {
+      "id": "pfas-r19-c6",
+      "species": "PFOA",
+      "site": "F (train A, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 34.0,
+      "influentRaw": 34,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 7295.0,
+        "status": "observed",
+        "raw": 7295
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train A contains bituminous coal-based GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A19:E19",
+      "notesCitation": "PFAS Reference!BZ19",
+      "citation": "PFAS Reference!F19:H19",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "bituminous coal"
+    },
+    {
+      "id": "pfas-r19-c9",
+      "species": "PFOS",
+      "site": "F (train A, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 225.0,
+      "influentRaw": 225,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train A contains bituminous coal-based GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A19:E19",
+      "notesCitation": "PFAS Reference!BZ19",
+      "citation": "PFAS Reference!I19:K19",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "bituminous coal"
+    },
+    {
+      "id": "pfas-r19-c18",
+      "species": "PFHxA",
+      "site": "F (train A, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 49.0,
+      "influentRaw": 49,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 4930.0,
+        "status": "observed",
+        "raw": 4930
+      },
+      "bv10pct": {
+        "value": 7047.0,
+        "status": "observed",
+        "raw": 7047
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train A contains bituminous coal-based GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A19:E19",
+      "notesCitation": "PFAS Reference!BZ19",
+      "citation": "PFAS Reference!R19:T19",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "bituminous coal"
+    },
+    {
+      "id": "pfas-r19-c21",
+      "species": "PFHpA",
+      "site": "F (train A, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 14.0,
+      "influentRaw": 14,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 6954.0,
+        "status": "observed",
+        "raw": 6954
+      },
+      "bv10pct": {
+        "value": 15143.0,
+        "status": "observed",
+        "raw": 15143
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train A contains bituminous coal-based GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A19:E19",
+      "notesCitation": "PFAS Reference!BZ19",
+      "citation": "PFAS Reference!U19:W19",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "bituminous coal"
+    },
+    {
+      "id": "pfas-r19-c42",
+      "species": "PFBS",
+      "site": "F (train A, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 11.0,
+      "influentRaw": 11,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 6853.0,
+        "status": "observed",
+        "raw": 6853
+      },
+      "bv10pct": {
+        "value": 8236.0,
+        "status": "observed",
+        "raw": 8236
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train A contains bituminous coal-based GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A19:E19",
+      "notesCitation": "PFAS Reference!BZ19",
+      "citation": "PFAS Reference!AP19:AR19",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "bituminous coal"
+    },
+    {
+      "id": "pfas-r19-c48",
+      "species": "PFHxS",
+      "site": "F (train A, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 97.0,
+      "influentRaw": 97,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 7976.0,
+        "status": "observed",
+        "raw": 7976
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train A contains bituminous coal-based GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A19:E19",
+      "notesCitation": "PFAS Reference!BZ19",
+      "citation": "PFAS Reference!AV19:AX19",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "bituminous coal"
+    },
+    {
+      "id": "pfas-r20-c6",
+      "species": "PFOA",
+      "site": "F (train B, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 34.0,
+      "influentRaw": 34,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 14920.0,
+        "status": "observed",
+        "raw": 14920
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train B contains coconut shell based-GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A20:E20",
+      "notesCitation": "PFAS Reference!BZ20",
+      "citation": "PFAS Reference!F20:H20",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "coconut shell"
+    },
+    {
+      "id": "pfas-r20-c9",
+      "species": "PFOS",
+      "site": "F (train B, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 225.0,
+      "influentRaw": 225,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train B contains coconut shell based-GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A20:E20",
+      "notesCitation": "PFAS Reference!BZ20",
+      "citation": "PFAS Reference!I20:K20",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "coconut shell"
+    },
+    {
+      "id": "pfas-r20-c18",
+      "species": "PFHxA",
+      "site": "F (train B, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 49.0,
+      "influentRaw": 49,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 6970.0,
+        "status": "observed",
+        "raw": 6970
+      },
+      "bv10pct": {
+        "value": 9141.0,
+        "status": "observed",
+        "raw": 9141
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train B contains coconut shell based-GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A20:E20",
+      "notesCitation": "PFAS Reference!BZ20",
+      "citation": "PFAS Reference!R20:T20",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "coconut shell"
+    },
+    {
+      "id": "pfas-r20-c21",
+      "species": "PFHpA",
+      "site": "F (train B, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 14.0,
+      "influentRaw": 14,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 13714.0,
+        "status": "observed",
+        "raw": 13714
+      },
+      "bv10pct": {
+        "value": 16131.0,
+        "status": "observed",
+        "raw": 16131
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train B contains coconut shell based-GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A20:E20",
+      "notesCitation": "PFAS Reference!BZ20",
+      "citation": "PFAS Reference!U20:W20",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "coconut shell"
+    },
+    {
+      "id": "pfas-r20-c42",
+      "species": "PFBS",
+      "site": "F (train B, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 11.0,
+      "influentRaw": 11,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 8648.0,
+        "status": "observed",
+        "raw": 8648
+      },
+      "bv10pct": {
+        "value": 13602.0,
+        "status": "observed",
+        "raw": 13602
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train B contains coconut shell based-GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A20:E20",
+      "notesCitation": "PFAS Reference!BZ20",
+      "citation": "PFAS Reference!AP20:AR20",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "coconut shell"
+    },
+    {
+      "id": "pfas-r20-c48",
+      "species": "PFHxS",
+      "site": "F (train B, lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 97.0,
+      "influentRaw": 97,
+      "tocMgL": null,
+      "tocRaw": "not reported",
+      "bv1pct": {
+        "value": 15905.0,
+        "status": "observed",
+        "raw": 15905
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Treatment train B contains coconut shell based-GAC, data for the lead vessel",
+      "contextCitation": "PFAS Reference!A20:E20",
+      "notesCitation": "PFAS Reference!BZ20",
+      "citation": "PFAS Reference!AV20:AX20",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "coconut shell"
+    },
+    {
+      "id": "pfas-r21-c6",
+      "species": "PFOA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 11.98,
+      "influentRaw": 11.98,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 13211.0,
+        "status": "observed",
+        "raw": 13211
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!F21:H21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c9",
+      "species": "PFOS",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 14.56,
+      "influentRaw": 14.56,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!I21:K21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c12",
+      "species": "PFBA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 11.72,
+      "influentRaw": 11.72,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 6042.0,
+        "status": "observed",
+        "raw": 6042
+      },
+      "bv10pct": {
+        "value": 6214.0,
+        "status": "observed",
+        "raw": 6214
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!L21:N21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c15",
+      "species": "PFPeA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 25.61,
+      "influentRaw": 25.61,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 4086.0,
+        "status": "observed",
+        "raw": 4086
+      },
+      "bv10pct": {
+        "value": 4721.0,
+        "status": "observed",
+        "raw": 4721
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!O21:Q21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c18",
+      "species": "PFHxA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 27.65,
+      "influentRaw": 27.65,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 5107.0,
+        "status": "observed",
+        "raw": 5107
+      },
+      "bv10pct": {
+        "value": 5897.0,
+        "status": "observed",
+        "raw": 5897
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!R21:T21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c21",
+      "species": "PFHpA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 18.8,
+      "influentRaw": 18.8,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 9068.0,
+        "status": "observed",
+        "raw": 9068
+      },
+      "bv10pct": {
+        "value": 9378.0,
+        "status": "observed",
+        "raw": 9378
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!U21:W21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c24",
+      "species": "PFNA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 2.56,
+      "influentRaw": 2.56,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!X21:Z21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c27",
+      "species": "PFDA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 1.45,
+      "influentRaw": 1.45,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AA21:AC21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c30",
+      "species": "PFUnA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AD21:AF21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c33",
+      "species": "PFDoA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AG21:AI21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c36",
+      "species": "PFTriA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AJ21:AL21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c39",
+      "species": "PFTeA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AM21:AO21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c42",
+      "species": "PFBS",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 4.08,
+      "influentRaw": 4.08,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 11086.0,
+        "status": "observed",
+        "raw": 11086
+      },
+      "bv10pct": {
+        "value": 11491.0,
+        "status": "observed",
+        "raw": 11491
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AP21:AR21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c45",
+      "species": "PFPeS",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 0.44,
+      "influentRaw": 0.44,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AS21:AU21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c48",
+      "species": "PFHxS",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 6.3,
+      "influentRaw": 6.3,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AV21:AX21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c51",
+      "species": "PFHpS",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!AY21:BA21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c54",
+      "species": "PFNS",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!BB21:BD21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c57",
+      "species": "PFDS",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!BE21:BG21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c60",
+      "species": "GenX",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": 19.87,
+      "influentRaw": 19.87,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 7040.0,
+        "status": "observed",
+        "raw": 7040
+      },
+      "bv10pct": {
+        "value": 7166.0,
+        "status": "observed",
+        "raw": 7166
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!BH21:BJ21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c69",
+      "species": "PFOSA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!BQ21:BS21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c72",
+      "species": "n-EtFOSAA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!BT21:BV21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r21-c75",
+      "species": "n-MeFOSAA",
+      "site": "CFPUA",
+      "series": 2.0,
+      "totalEbctMinutes": 20.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for column 10+11 series using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A21:E21",
+      "notesCitation": "PFAS Reference!BZ21",
+      "citation": "PFAS Reference!BW21:BY21",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c6",
+      "species": "PFOA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 11.98,
+      "influentRaw": 11.98,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 4108.0,
+        "status": "observed",
+        "raw": 4108
+      },
+      "bv10pct": {
+        "value": 4942.0,
+        "status": "observed",
+        "raw": 4942
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!F22:H22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c9",
+      "species": "PFOS",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 14.56,
+      "influentRaw": 14.56,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 8112.0,
+        "status": "observed",
+        "raw": 8112
+      },
+      "bv10pct": {
+        "value": 8848.0,
+        "status": "observed",
+        "raw": 8848
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!I22:K22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c12",
+      "species": "PFBA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 11.72,
+      "influentRaw": 11.72,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 4044.0,
+        "status": "observed",
+        "raw": 4044
+      },
+      "bv10pct": {
+        "value": 4310.0,
+        "status": "observed",
+        "raw": 4310
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!L22:N22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c15",
+      "species": "PFPeA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 25.61,
+      "influentRaw": 25.61,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 254.0,
+        "status": "observed",
+        "raw": 254
+      },
+      "bv10pct": {
+        "value": 2543.0,
+        "status": "observed",
+        "raw": 2543
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!O22:Q22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c18",
+      "species": "PFHxA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 27.65,
+      "influentRaw": 27.65,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 301.0,
+        "status": "observed",
+        "raw": 301
+      },
+      "bv10pct": {
+        "value": 3011.0,
+        "status": "observed",
+        "raw": 3011
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!R22:T22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c21",
+      "species": "PFHpA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 18.8,
+      "influentRaw": 18.8,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 4087.0,
+        "status": "observed",
+        "raw": 4087
+      },
+      "bv10pct": {
+        "value": 4740.0,
+        "status": "observed",
+        "raw": 4740
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!U22:W22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c24",
+      "species": "PFNA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 2.56,
+      "influentRaw": 2.56,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!X22:Z22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c27",
+      "species": "PFDA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 1.45,
+      "influentRaw": 1.45,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "not_reached",
+        "raw": "no"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AA22:AC22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c30",
+      "species": "PFUnA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AD22:AF22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c33",
+      "species": "PFDoA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AG22:AI22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c36",
+      "species": "PFTriA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AJ22:AL22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c39",
+      "species": "PFTeA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AM22:AO22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c42",
+      "species": "PFBS",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 4.08,
+      "influentRaw": 4.08,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 18091.0,
+        "status": "observed",
+        "raw": 18091
+      },
+      "bv10pct": {
+        "value": 18305.0,
+        "status": "observed",
+        "raw": 18305
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AP22:AR22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c45",
+      "species": "PFPeS",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 0.44,
+      "influentRaw": 0.44,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 22121.0,
+        "status": "observed",
+        "raw": 22121
+      },
+      "bv10pct": {
+        "value": 22465.0,
+        "status": "observed",
+        "raw": 22465
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AS22:AU22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c48",
+      "species": "PFHxS",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 6.3,
+      "influentRaw": 6.3,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 14099.0,
+        "status": "observed",
+        "raw": 14099
+      },
+      "bv10pct": {
+        "value": 14521.0,
+        "status": "observed",
+        "raw": 14521
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AV22:AX22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c51",
+      "species": "PFHpS",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!AY22:BA22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c54",
+      "species": "PFNS",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!BB22:BD22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c57",
+      "species": "PFDS",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!BE22:BG22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c60",
+      "species": "GenX",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": 19.87,
+      "influentRaw": 19.87,
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": 111.0,
+        "status": "observed",
+        "raw": 111
+      },
+      "bv10pct": {
+        "value": 1113.0,
+        "status": "observed",
+        "raw": 1113
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!BH22:BJ22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c69",
+      "species": "PFOSA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!BQ22:BS22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c72",
+      "species": "n-EtFOSAA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!BT22:BV22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    },
+    {
+      "id": "pfas-r22-c75",
+      "species": "n-MeFOSAA",
+      "site": "CFPUA (lead vessel)",
+      "series": 1.0,
+      "totalEbctMinutes": 10.0,
+      "influentNgL": null,
+      "influentRaw": "<dl",
+      "tocMgL": 2.4,
+      "tocRaw": 2.4,
+      "bv1pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bv10pct": {
+        "value": null,
+        "status": "non_detect",
+        "raw": "<dl"
+      },
+      "bvDefinition": "total series media volume",
+      "notes": "Data for lead column in series (column 10) using the best performing carbon (Calgon F400) in the pilot test. BV calculated using actual totalized flow.",
+      "contextCitation": "PFAS Reference!A22:E22",
+      "notesCitation": "PFAS Reference!BZ22",
+      "citation": "PFAS Reference!BW22:BY22",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm",
+      "waterType": "not reported",
+      "media": "Calgon F400"
+    }
+  ],
+  "guidance": [
+    {
+      "id": "guidance-0",
+      "citation": "INPUT!I36",
+      "text": "Guidance: Carbon life is best determined by pilot or RSSCT tests. Use theoretical calculation methods (e.g., Freundlich isotherms) only in the absence of such data for initial assessment of carbon life and suitability of GAC for treatment.",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm"
+    },
+    {
+      "id": "guidance-1",
+      "citation": "INPUT!I46",
+      "text": "Guidance: EBCT is best determined by pilot tests, but may be calculated for radon if a steady state rate constant (Kss) is available. Use the theoretical calculation method for radon only in the absence of pilot data for initial assessment of EBCT and suitability of GAC for treatment.",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm"
+    },
+    {
+      "id": "guidance-2",
+      "citation": "INPUT!I49",
+      "text": "Consider multiple vessels in series for long EBCTs (>10 minutes)",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm"
+    },
+    {
+      "id": "guidance-3",
+      "citation": "Critical Design Assumptions!E69",
+      "text": "Different studies may use different defintions for \"bed volumes.\" This assumption applies only when vessels are in series and the input for carbon life is in bed volumes.",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm"
+    },
+    {
+      "id": "guidance-4",
+      "citation": "PFAS Reference!A3",
+      "text": "• Bed volumes (BV) to breakthrough are calculated based on average flow and, where vessel are in series, total EBCT for the series",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm"
+    },
+    {
+      "id": "guidance-5",
+      "citation": "PFAS Reference!A5",
+      "text": "• “<dl” indicates that the specified compound was not detected in influent or detected only infrequently",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm"
+    },
+    {
+      "id": "guidance-6",
+      "citation": "PFAS Reference!A6",
+      "text": "• “no” indicates that the specified compound was detected in influent, but did not reach the specified breakthrough % (except as noted below)",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm"
+    },
+    {
+      "id": "guidance-7",
+      "citation": "PFAS Reference!A7",
+      "text": "• Blank cells indicate that the specified compound was not monitored",
+      "workbook": "granular-activated-carbon-gac-.xlsm.xlsm"
+    }
+  ]
+}

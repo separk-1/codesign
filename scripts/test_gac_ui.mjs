@@ -1,0 +1,126 @@
+import { chromium } from 'playwright';
+import assert from 'node:assert/strict';
+const browser = await chromium.launch({ headless: true, channel: process.env.GAC_BROWSER_CHANNEL || 'msedge' });
+try {
+  const page = await browser.newPage({ viewport: { width: 1500, height: 1000 } });
+  const errors = []; page.on('pageerror', e => errors.push(e.message));
+  await page.goto(process.env.GAC_TEST_URL || 'http://127.0.0.1:4173');
+  await page.getByRole('button', { name: 'Design basis +', exact: true }).click();
+  assert.equal(await page.getByRole('textbox', { name: 'flow', exact: true }).inputValue(), '100');
+  assert.equal(await page.getByRole('combobox', { name: 'species', exact: true }).inputValue(), 'PFOA');
+  assert.ok(await page.getByRole('combobox', { name: 'species', exact: true }).getAttribute('title'));
+  await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
+  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('33.333 m³', { exact: true }).waitFor();
+  assert.equal(await page.locator('.change-table tbody tr').nth(0).locator('td').nth(1).textContent(), 'Unresolved');
+  await page.getByRole('combobox', { name: 'species', exact: true }).selectOption('');
+  await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
+  await page.getByRole('status').filter({ hasText: 'Please provide' }).waitFor();
+  for (const [field, value] of Object.entries({ species: 'PFOA', flow: '100', totalEbctMinutes: '20' })) {
+    if (field === 'species') await page.getByRole('combobox', { name: field, exact: true }).selectOption(value);
+    else await page.getByRole('textbox', { name: field, exact: true }).or(page.getByRole('textbox', { name: field, exact: true })).fill(value);
+  }
+  await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
+  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('33.333 m³', { exact: true }).waitFor();
+  await page.getByRole('button', { name: 'Accept and apply', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: 'Applied to explicit vessel IDs' }).waitFor();
+  await page.getByRole('button', { name: 'GAC T1 / V1', exact: true }).last().click();
+  assert.match(await page.getByRole('button', { name: 'GAC T1 / V1', exact: true }).last().locator('title').textContent(), /GAC volume/);
+  await page.getByRole('textbox', { name: 'flow', exact: true }).fill('101');
+  await page.getByRole('textbox', { name: 'flow', exact: true }).fill('100');
+  assert.equal(await page.getByRole('textbox', { name: 'flow', exact: true }).inputValue(), '100');
+  await page.getByRole('status').filter({ hasText: 'Applied values are stale' }).waitFor();
+  await page.getByRole('textbox', { name: 'flow', exact: true }).fill('200');
+  await page.getByRole('status').filter({ hasText: 'Applied values are stale' }).waitFor();
+  await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
+  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('66.667 m³', { exact: true }).waitFor();
+  await page.getByRole('button', { name: 'Reject', exact: true }).click();
+  await page.getByText('Case data', { exact: true }).click();
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export case + history' }).click();
+  const download = await downloadPromise;
+  const stream = await download.createReadStream(); const chunks = [];
+  for await (const chunk of stream) chunks.push(chunk);
+  const saved = JSON.parse(Buffer.concat(chunks).toString());
+  assert.equal(saved.state, 'stale'); assert.equal(saved.accepted.inputs.flow, 100);
+  assert.equal(saved.form.flow, '200');
+  assert.ok(saved.history.some(e => e.action === 'User rejected proposal'));
+  assert.equal(saved.graph.nodes.find(n => n.id === 'gac-t1-v1').attributes.calculationState, 'stale');
+  const chat = page.locator('.chat-section textarea');
+  await chat.fill('flow=150'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
+  assert.equal(await page.getByRole('textbox', { name: 'flow', exact: true }).inputValue(), '150');
+  await chat.fill('calculate'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
+  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('50.000 m³', { exact: true }).waitFor();
+  await page.getByRole('button', { name: 'Accept and apply', exact: true }).click();
+  await page.getByRole('status').filter({ hasText: 'Applied to explicit vessel IDs' }).waitFor();
+  await page.screenshot({ path: 'docs/gac-workflow.png', fullPage: true });
+  assert.equal(await page.getByRole('button', { name: 'Find reference conditions', exact: true }).count(), 0);
+  assert.equal(await page.getByRole('button', { name: 'Use reference basis', exact: true }).count(), 0);
+  assert.equal(await page.getByRole('textbox', { name: 'ebctSource', exact: true }).count(), 0);
+  assert.equal(await page.getByRole('button', { name: 'Database', exact: true }).count(), 0);
+  assert.equal(await page.locator('.info-section, .terminal-section').count(), 0);
+  assert.equal(await page.getByText('Assumption Mode', { exact: true }).count(), 0);
+  await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
+  await page.getByRole('button', { name: 'Accept and apply', exact: true }).click();
+  const evidenceDownload = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export case + history' }).click();
+  const evidenceStream = await (await evidenceDownload).createReadStream(); const evidenceChunks = [];
+  for await (const chunk of evidenceStream) evidenceChunks.push(chunk);
+  const evidenceCase = JSON.parse(Buffer.concat(evidenceChunks).toString());
+  assert.equal(evidenceCase.accepted.inputs.species, 'PFOA');
+  assert.equal(evidenceCase.accepted.workbook.version, 'epa-wbs-gac-pressure/1');
+  assert.ok(evidenceCase.accepted.workbook.formulaTrace.some(f => f.citation === 'Contactor Constraints!C80'));
+  assert.ok(evidenceCase.graph.nodes.find(n => n.id === 'gac-t1-v1').attributes.diameter > 0);
+
+  await page.getByRole('combobox', { name: 'carbonLifeMode', exact: true }).selectOption('bv');
+  await page.getByRole('textbox', { name: 'carbonLifeValue', exact: true }).fill('10000');
+  await chat.fill('source=Synthetic test BV, not a PFAS performance claim'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
+  await page.getByRole('button', { name: 'Calculate GAC sizing', exact: true }).click();
+  await page.locator('.change-table').getByText(/months \/ .*kg\/year/).waitFor();
+  await page.getByRole('button', { name: 'Accept and apply', exact: true }).click();
+
+  await page.route('**/api/gac/assistant', async route => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    await route.fulfill({ status: 503, body: '{}' });
+  });
+  await chat.fill('What should I do next?'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
+  assert.equal(await chat.evaluate(el => document.activeElement === el), true, 'Sending must keep the typing cursor');
+  assert.equal(await chat.isEnabled(), true, 'Input must remain editable while waiting');
+  await chat.fill('Next question draft');
+  await page.locator('.chat-section').getByText(/Sizing and carbon-life inputs have been applied/).waitFor();
+  assert.equal(await chat.inputValue(), 'Next question draft', 'Reply must preserve the next message draft');
+  assert.equal(await chat.evaluate(el => document.activeElement === el), true, 'Reply must preserve input focus');
+  await page.getByRole('button', { name: 'Graph', exact: true }).click();
+  await page.getByRole('button', { name: 'Vessel area', exact: true }).waitFor();
+  await page.screenshot({ path: 'docs/excel-knowledge-graph.png', fullPage: true });
+  await chat.fill('What is EBCT?'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
+  await page.getByText(/Empty Bed Contact Time/).last().waitFor();
+  await page.getByRole('button', { name: 'Architecture', exact: true }).click();
+  await chat.fill('What is average flow?');
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.getByRole('button', { name: 'SEND', exact: true }).evaluate(button => button.click());
+  await page.locator('.chat-section').getByText(/The average operating flow/).waitFor();
+  assert.equal(await page.evaluate(() => window.scrollY), 0, 'Chat response must not scroll the document');
+  await chat.fill('Find PFOS reference conditions'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
+  await page.getByText(/Found 5 PFOS reference observations/).waitFor();
+  assert.equal(await page.getByRole('combobox', { name: 'species', exact: true }).inputValue(), 'PFOA');
+  for (const width of [1500, 1024, 768, 375]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.waitForTimeout(700);
+    const layout = await page.evaluate(() => {
+      const selectors = ['.workspace-sidebar', '.graph-section', '.info-section', '.log-section', '.assistant-section'];
+      const rectangles = selectors.filter(selector => document.querySelector(selector)).map(selector => ({ selector, rect: document.querySelector(selector).getBoundingClientRect() }));
+      const overlaps = [];
+      for (let i = 0; i < rectangles.length; i++) for (let j = i + 1; j < rectangles.length; j++) {
+        const a = rectangles[i].rect, b = rectangles[j].rect;
+        if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1) overlaps.push([rectangles[i].selector, rectangles[j].selector]);
+      }
+      return { overlaps, scrollWidth: document.documentElement.scrollWidth, width: window.innerWidth };
+    });
+    assert.deepEqual(layout.overlaps, [], `Panel overlap at ${width}px`);
+    assert.ok(layout.scrollWidth <= layout.width + 1, `Horizontal overflow at ${width}px: ${layout.scrollWidth}`);
+    await page.screenshot({ path: `docs/layout-${width}.png`, fullPage: true });
+  }
+  assert.equal(await page.getByText('HUMAN', { exact: true }).count(), 0);
+  assert.equal(errors.length, 0, errors.join('\n'));
+  console.log('GAC UI passed: missing inputs, calculate, accept, edit/invalidate, recalculate, reject, JSON export and chat tool commands.');
+} finally { await browser.close(); }

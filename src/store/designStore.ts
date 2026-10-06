@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { parseConceptualJson, parseDexpiJson } from '../utils/graphParsers';
+import { gacConcept } from '../utils/gacDesign';
 
 interface GraphData {
     nodes: any[];
@@ -211,9 +212,10 @@ function getDynamicConversationStep(index: number, state: Pick<DesignState, 'bas
 const DECISION_LOG_STORAGE_KEY = 'codesign.decisionLog.v1';
 
 const FALLBACK_INPUT_DESIGNS: InputDesign[] = [
+    { id: 'gac-workspace', label: 'PFAS / GAC design workspace', description: 'GAC sizing and reviewable graph changes.', dexpiPath: '' },
     {
         id: 'sample-pfas',
-        label: 'PFAS Treatment Example',
+        label: 'P&ID CoDesign Example',
         description: 'Feed tank, pump, heat exchanger, and downstream treatment boundary.',
         conceptualPath: '/sample/conceptual_design.json',
         dexpiPath: '/sample/dexpi_model_output.json'
@@ -245,7 +247,8 @@ const INITIAL_CANDIDATE: DesignCandidate = {
     updatedTopics: []
 };
 
-const WELCOME_MESSAGE = 'Welcome to CoDesign. I help teams refine a conceptual PFD into a reviewable P&ID candidate by asking design questions, separating human decisions from AI assumptions, and logging the decision trail.\n\nSend any message to begin the design conversation.';
+const WELCOME_MESSAGE = 'Ask about equipment and connections in the diagram, or work through design decisions with me. Your decisions and resulting changes are recorded in the log. Try: "What is connected to the feed pump?"';
+const GAC_WELCOME_MESSAGE = 'Ask about GAC inputs, calculations or your next step. Start with the example values in Design basis below, calculate sizing, then review and apply the change. Try: "What is EBCT?"';
 
 function loadStoredDecisionLog(): DecisionLogEntry[] {
     if (typeof window === 'undefined') return [];
@@ -809,7 +812,6 @@ interface DesignState {
     selectedNode: any | null;
     chatMessages: ChatMessage[];
     assumptionMode: boolean;
-    graphRagMode: boolean;
     loading: boolean;
     aiResponding: boolean;
     conversationComplete: boolean;
@@ -828,7 +830,6 @@ interface DesignState {
     selectNode: (node: any | null) => void;
     addChatMessage: (sender: 'user' | 'ai', text: string, source?: 'human' | 'ai_default') => void;
     setAssumptionMode: (enabled: boolean) => void;
-    setGraphRagMode: (enabled: boolean) => void;
     askGraphRagQuestion: (query: string) => Promise<void>;
     addTerminalLog: (type: TerminalLog['type'], message: string) => void;
     advanceConversation: () => void;
@@ -883,7 +884,6 @@ export const useDesignStore = create<DesignState>((set, get) => ({
         { id: '1', sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }
     ],
     assumptionMode: false,
-    graphRagMode: false,
     loading: false,
     aiResponding: false,
     conversationComplete: false,
@@ -909,6 +909,16 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     },
 
     loadData: async (designId) => {
+        if ((designId || get().selectedInputDesignId) === 'gac-workspace') {
+            const graph = gacConcept();
+            set({ selectedInputDesignId: 'gac-workspace', conceptualGraph: graph, detailedGraph: graph,
+                chatMessages: get().selectedInputDesignId !== 'gac-workspace' || !get().chatMessages.some(m => m.sender === 'user')
+                    ? [{ id: `welcome-${Date.now()}`, sender: 'ai', text: GAC_WELCOME_MESSAGE, timestamp: Date.now() }] : get().chatMessages,
+                baseConceptualGraph: graph, baseDetailedGraph: graph, rawDexpiModel: null,
+                candidate: INITIAL_CANDIDATE, loading: false, activeView: 'conceptual', selectedNode: null,
+                aiResponding: false, assumptionMode: false });
+            return;
+        }
         const { addTerminalLog } = get();
         let availableDesigns = get().inputDesigns;
 
@@ -925,7 +935,9 @@ export const useDesignStore = create<DesignState>((set, get) => ({
 
         const requestedId = designId || get().selectedInputDesignId;
         const selectedDesign = availableDesigns.find(design => design.id === requestedId) || availableDesigns[0] || FALLBACK_INPUT_DESIGNS[0];
-        set({ loading: true, selectedInputDesignId: selectedDesign.id });
+        set({ loading: true, selectedInputDesignId: selectedDesign.id,
+            chatMessages: get().selectedInputDesignId !== selectedDesign.id || !get().chatMessages.some(m => m.sender === 'user')
+                ? [{ id: `welcome-${Date.now()}`, sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }] : get().chatMessages });
         addTerminalLog('info', `Loading input design: ${selectedDesign.label}`);
 
         try {
@@ -970,7 +982,6 @@ export const useDesignStore = create<DesignState>((set, get) => ({
                 { id: `welcome-${Date.now()}`, sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }
             ],
             assumptionMode: false,
-            graphRagMode: false,
             aiResponding: false,
             conversationComplete: false,
             agentGenerating: false,
@@ -1130,6 +1141,12 @@ export const useDesignStore = create<DesignState>((set, get) => ({
 
         const updates: Partial<DesignState> = { chatMessages: newMessages };
 
+        if (sender === 'user' && state.selectedInputDesignId === 'gac-workspace') {
+            set({ chatMessages: newMessages, aiResponding: false });
+            window.dispatchEvent(new CustomEvent('gac-agent-message', { detail: text }));
+            return;
+        }
+
         if (sender === 'user') {
             addTerminalLog('info', `User message received: "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}"`);
 
@@ -1249,11 +1266,16 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     },
 
     clearDecisionLog: () => {
+        if (get().selectedInputDesignId === 'gac-workspace') { set({ decisionLog: [] }); return; }
         persistDecisionLog([]);
         set(state => ({ decisionLog: [], candidate: INITIAL_CANDIDATE, activeView: 'conceptual', conversationComplete: false, conversationStep: 0, conceptualGraph: state.baseConceptualGraph, detailedGraph: state.baseDetailedGraph }));
     },
 
     generateDecisionLogWithAgent: async (scenario = 'PFAS treatment process: feed tank, pump, heat exchanger, and downstream treatment unit') => {
+        if (get().selectedInputDesignId === 'gac-workspace') {
+            window.dispatchEvent(new CustomEvent('gac-agent-message', { detail: 'calculate' }));
+            return;
+        }
         const { addTerminalLog } = get();
         set({ agentGenerating: true });
         addTerminalLog('processing', 'AI agent generating decision-query-outcome log...');
@@ -1326,7 +1348,6 @@ export const useDesignStore = create<DesignState>((set, get) => ({
     },
 
     setAssumptionMode: (enabled) => set({ assumptionMode: enabled }),
-    setGraphRagMode: (enabled) => set({ graphRagMode: enabled }),
 
     askGraphRagQuestion: async (query) => {
         const state = get();
@@ -1406,7 +1427,6 @@ export const useDesignStore = create<DesignState>((set, get) => ({
                 { id: `welcome-${Date.now()}`, sender: 'ai', text: WELCOME_MESSAGE, timestamp: Date.now() }
             ],
             assumptionMode: false,
-            graphRagMode: false,
             loading: false,
             aiResponding: false,
             conversationComplete: false,

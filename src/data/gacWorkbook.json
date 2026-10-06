@@ -1,0 +1,1597 @@
+{
+  "version": "epa-wbs-gac-pressure/1",
+  "source": {
+    "file": "granular-activated-carbon-gac-.xlsm.xlsm",
+    "sha256": "73d9d4d9d2a7f5af6c839401cf192199359d90da91ddd6b60da51c89d9c7f95c"
+  },
+  "formulas": {
+    "Contactor Constraints!C6": {
+      "formula": "=IF(df_units=\"gpm\",(1-bp_pct)*design_flow_I*24*60/1000000,(1-bp_pct)*design_flow_I)",
+      "cached": 0.03
+    },
+    "Contactor Constraints!C7": {
+      "formula": "=(1-bp_pct)*IF(af_units=\"gpm\",average_flow_I*24*60/1000000,IF(af_units=\"fraction of design flow\",average_flow_I*design_flow,average_flow_I))",
+      "cached": 0.007
+    },
+    "Contactor Constraints!C8": {
+      "formula": "=design_flow*1000000/(24*60)",
+      "cached": 20.833333333333332
+    },
+    "Contactor Constraints!C9": {
+      "formula": "=average_flow*1000000/(24*60)",
+      "cached": 4.861111111111111
+    },
+    "Contactor Constraints!C10": {
+      "formula": "=bp_pct/(1-bp_pct)*design_flow_rate",
+      "cached": 0
+    },
+    "Contactor Constraints!C11": {
+      "formula": "=IF(EBCT_type_I=\"contaminant removal %\",1,IF(EBCT_type_I=\"influent and effluent concentrations\",2, 3))",
+      "cached": 3
+    },
+    "Contactor Constraints!C14": {
+      "formula": "=IF(EBCT_type=1,(LN(1/(1-EBCT_I))/Kss)*60,IF(EBCT_type=2,(LN(EBCT_I/EBCT_O)/Kss)*60,EBCT_I))",
+      "cached": 7.5
+    },
+    "Contactor Constraints!C18": {
+      "formula": "=IF(design_type=2,1,Num_tanks_I)",
+      "cached": 1
+    },
+    "Contactor Constraints!C19": {
+      "formula": "=IF(tank_geom_I=\"upright\",1,2)",
+      "cached": 1
+    },
+    "Contactor Constraints!C22": {
+      "formula": "=IF(design_type=2,\"-\",max_vessel_diam_cl)",
+      "cached": 14
+    },
+    "Contactor Constraints!C23": {
+      "formula": "=IF(design_type=2,\"-\",min_vessel_diam_cl)",
+      "cached": 1.5
+    },
+    "Contactor Constraints!C24": {
+      "formula": "=IF(design_type=2,\"-\",IF(max_diam_override>0,max_diam_override,max_diam_std_size))",
+      "cached": 14
+    },
+    "Contactor Constraints!C27": {
+      "formula": "=IF(design_type=2,\"-\",EBCT/Num_tanks)",
+      "cached": 7.5
+    },
+    "Contactor Constraints!C28": {
+      "formula": "=IF(tank_geom=1,(comm_diam-(2*Vessel_thickness))^2*PI()/4,IF(tank_geom=2,(comm_diam-(2*Vessel_thickness))*comm_height_length))",
+      "cached": 3.141592653589793
+    },
+    "Contactor Constraints!C29": {
+      "formula": "=IF(design_type=2,\"-\",IF(tank_geom=2,comm_diam-bed_depth-horiz_underdrain,\"NA\"))",
+      "cached": "NA"
+    },
+    "Contactor Constraints!C30": {
+      "formula": "=IF(design_type=2,\"-\",IF(tank_geom=2,comm_height_length*(comm_diam*comm_diam/2*ASIN(SQRT(distance_above/comm_diam))-(comm_diam/2-distance_above)*SQRT((comm_diam-distance_above)*distance_above)),\"NA\"))",
+      "cached": "NA"
+    },
+    "Contactor Constraints!C31": {
+      "formula": "=IF(design_type=2,\"-\",IF(tank_geom=1,(max_sa*bed_depth*7.48)/EBCT_tank,media_volume*7.48/EBCT_tank))",
+      "cached": 10.65293124881275
+    },
+    "Contactor Constraints!C32": {
+      "formula": "=IF(design_type=2,\"-\",ROUNDUP(design_flow_rate/flow_per_vessel,0))",
+      "cached": 2
+    },
+    "Contactor Constraints!C33": {
+      "formula": "=IF(design_type=2,\"-\",ROUNDUP(design_flow_rate/flow_per_vessel,0)*Num_tanks)",
+      "cached": 2
+    },
+    "Contactor Constraints!C34": {
+      "formula": "=IF(design_type=2,\"-\",IF(NRD_I<>\"\",NRD_I,IF(design_flow>=1,ROUNDUP(num_treat_lines/redund_freq,0),IF(op_num_tanks=1,NRD_small_1,NRD_small))))",
+      "cached": 0
+    },
+    "Contactor Constraints!C35": {
+      "formula": "=IF(design_type=2,0,op_num_tanks+NRD)",
+      "cached": 2
+    },
+    "Contactor Constraints!C38": {
+      "formula": "=IF(design_type=2,\"-\",design_flow_rate*EBCT/(7.481))",
+      "cached": 20.886245154391126
+    },
+    "Contactor Constraints!C39": {
+      "formula": "=IF(design_type=2,\"-\",contact_material/op_num_tanks)",
+      "cached": 10.443122577195563
+    },
+    "Contactor Constraints!C40": {
+      "formula": "=IF(design_type=2,\"-\",contact_mat_per_vessel/(bed_depth))",
+      "cached": 3.0715066403516365
+    },
+    "Contactor Constraints!C43": {
+      "formula": "=IF(design_type=2,\"-\",IF(tank_geom=1,(comm_diam-(2*Vessel_thickness))^2*PI()/4,IF(tank_geom=2,(comm_diam-(2*Vessel_thickness))*comm_height_length)))",
+      "cached": 3.141592653589793
+    },
+    "Contactor Constraints!C44": {
+      "formula": "=IF(design_type=2,\"-\",(design_flow_rate/num_treat_lines)/comm_SA)",
+      "cached": 3.3157279810811526
+    },
+    "Contactor Constraints!C45": {
+      "formula": "=IF(design_type=2,\"-\",PI()*comm_diam^2/4*comm_height_length)",
+      "cached": 18.84955592153876
+    },
+    "Contactor Constraints!C46": {
+      "formula": "=IF(design_type=2,\"-\",comm_vol*7.48)",
+      "cached": 140.99467829310993
+    },
+    "Contactor Constraints!C50": {
+      "formula": "=IF(design_type=2,\"-\",bed_depth*(1+bed_expansion)+free_board)",
+      "cached": 5.6
+    },
+    "Contactor Constraints!C51": {
+      "formula": "=IF(design_type=2,\"-\",(SA*4/PI())^0.5+(2*Vessel_thickness))",
+      "cached": 1.9775650978949713
+    },
+    "Contactor Constraints!C52": {
+      "formula": "=IF(design_type=2,\"-\",VLOOKUP(comm_diam,vessel_size_table_cl,2))",
+      "cached": 3.5
+    },
+    "Contactor Constraints!C53": {
+      "formula": "=IF(design_type=2,\"-\",VLOOKUP(comm_diam,vessel_size_table_cl,3))",
+      "cached": 7.5
+    },
+    "Contactor Constraints!C80": {
+      "formula": "=IF(design_type=1,IF(tank_geom=1,comm_SA*bed_depth,IF(tank_geom=2,comm_vol-underdrain_horiz_void-void_above)),basin_width*basin_length*basin_op_depth)",
+      "cached": 10.681415022205297
+    },
+    "Contactor Constraints!C81": {
+      "formula": "=media_volume*GAC_density",
+      "cached": 320.4424506661589
+    },
+    "Contactor Constraints!C82": {
+      "formula": "=GAC_each*IF(design_type=1,final_num_tanks,total_num_basins)",
+      "cached": 640.8849013323178
+    },
+    "Contactor Constraints!C83": {
+      "formula": "=media_volume*(1+bed_expansion)",
+      "cached": 16.022122533307943
+    },
+    "Backwash and Regeneration!C13": {
+      "formula": "=ROUND(h2oflush_backwash_rate*IF(design_type=1,comm_SA,basin_width*basin_length),0)",
+      "cached": 38
+    },
+    "Backwash and Regeneration!C14": {
+      "formula": "=water_flush*backwash_time",
+      "cached": 380
+    },
+    "Backwash and Regeneration!C31": {
+      "formula": "=IF(design_type=1,GAC_each*num_treat_lines,GAC)*453.59",
+      "cached": 290698.982395326
+    },
+    "Backwash and Regeneration!C32": {
+      "formula": "=average_flow_rate*3.785",
+      "cached": 18.399305555555554
+    },
+    "Backwash and Regeneration!C33": {
+      "formula": "=freund_1*GAC_density*453.59/0.02832",
+      "cached": 32001158898.305084
+    },
+    "Backwash and Regeneration!C34": {
+      "formula": "=QL*0.001/IF(design_type=1,comm_SA*num_treat_lines*0.093,basin_width*basin_length*total_num_basins*0.093)",
+      "cached": 0.03148753149058966
+    },
+    "Backwash and Regeneration!C35": {
+      "formula": "=IF(design_type=1,bed_depth,basin_op_depth)*0.3048",
+      "cached": 1.0363200000000001
+    },
+    "Backwash and Regeneration!C36": {
+      "formula": "=CHOOSE(freund_type,freund_1,(M*(freund_1/1000)*(C_0*1000)^freund_2/(QL*(C_0-C_b)))/(30*24*60),(N_0_e/(1000*v*C_0)*D-LOG(C_0/C_b-1)/(freund_2*C_0))/(30*24*60),freund_1*IF(design_type=1,media_volume*num_treat_lines*IF(BV_definition=\"EBCT per vessel\",1,Num_tanks),media_volume*op_num_basins)*7.48/average_flow_rate/60/24/30)",
+      "cached": 50.67751579792352
+    },
+    "Backwash and Regeneration!C38": {
+      "formula": "=GAC_each*IF(design_type=1,num_treat_lines,op_num_basins)/(bed_life/12)/365",
+      "cached": 0.4157699564629459
+    },
+    "Backwash and Regeneration!C43": {
+      "formula": "=regen_day*365",
+      "cached": 151.75603410897526
+    },
+    "Pumps Pipe Structure!C23": {
+      "formula": "=design_flow_rate",
+      "cached": 20.833333333333332
+    },
+    "Pumps Pipe Structure!C24": {
+      "formula": "=VLOOKUP(in_out_pipe_flow,pipe_size_table_cl,2)",
+      "cached": 1.5
+    },
+    "Pumps Pipe Structure!C26": {
+      "formula": "=IF(design_type=1,flow_per_vessel,design_flow_rate/op_num_basins)",
+      "cached": 10.65293124881275
+    },
+    "Pumps Pipe Structure!C27": {
+      "formula": "=VLOOKUP(proc_pipe_flow,pipe_size_table_cl,2)",
+      "cached": 1.5
+    },
+    "Pumps Pipe Structure!C29": {
+      "formula": "=water_flush",
+      "cached": 38
+    },
+    "Pumps Pipe Structure!C30": {
+      "formula": "=VLOOKUP(back_pipe_flow,pipe_size_table_cl,2)",
+      "cached": 2
+    },
+    "AutoSize!C18": {
+      "formula": "=design_flow_rate*EBCT/7.481",
+      "cached": 20.886245154391126
+    },
+    "AutoSize!C23": {
+      "formula": "=IF(design_flow_I<=0.1,target_bed_depth_under,target_bed_depth_over)",
+      "cached": 4
+    },
+    "AutoSize!C24": {
+      "formula": "=comp_vol_required_stg1/comp_target_bed_depth_vert",
+      "cached": 5.2222593582887695
+    },
+    "AutoSize!C58": {
+      "formula": "=2*(SQRT(comp_sa_required_vert/comp_in_nlines/PI())+Vessel_thickness)",
+      "cached": 1.8233468029747573
+    },
+    "AutoSize!E58": {
+      "formula": "=IF(C58<comp_min_vert_diam,comp_min_vert_diam,IF(C58>comp_max_vert_diam,comp_max_vert_diam,ROUNDUP(2*C58,0)/2))",
+      "cached": 2
+    },
+    "AutoSize!C59": {
+      "formula": "=(comp_vert_diam-2*Vessel_thickness)*(comp_vert_diam-2*Vessel_thickness)*PI()/4",
+      "cached": 3.141592653589793
+    },
+    "AutoSize!C60": {
+      "formula": "=comp_in_nlines*C59",
+      "cached": 6.283185307179586
+    },
+    "AutoSize!C61": {
+      "formula": "=comp_vol_required/Num_tanks/IF(comp_round_sa=1,ROUND(C59,0)*comp_in_nlines,C60)",
+      "cached": 3.3241491589504943
+    },
+    "AutoSize!E61": {
+      "formula": "=IF(comp_min_vert_bed_depth<=comp_max_vert_bed_depth,IF(C61<comp_min_vert_bed_depth, comp_min_vert_bed_depth, IF(C61>comp_max_vert_bed_depth, comp_max_vert_bed_depth, ROUNDUP(C61,1))),-1)",
+      "cached": 3.4
+    },
+    "AutoSize!C62": {
+      "formula": "=(1+bed_expansion)*comp_vert_bed_depth+free_board",
+      "cached": 5.6
+    },
+    "AutoSize!E62": {
+      "formula": "=IF(comp_min_vert_height>comp_max_vert_height,-1,IF(C62>comp_max_vert_height,comp_max_vert_height,IF(C62<comp_min_vert_height,comp_min_vert_height,ROUNDUP(2*C62,0)/2)))",
+      "cached": 6
+    },
+    "AutoSize!C82": {
+      "formula": "=VLOOKUP(comp_vert_diam,vessel_size_table_cl,2)",
+      "cached": 3.5
+    },
+    "AutoSize!C83": {
+      "formula": "=VLOOKUP(comp_vert_diam,vessel_size_table_cl,3)",
+      "cached": 7.5
+    },
+    "AutoSize!C84": {
+      "formula": "=max_height",
+      "cached": 14
+    },
+    "AutoSize!C85": {
+      "formula": "=MIN(C83:C84)",
+      "cached": 7.5
+    },
+    "AutoSize!C88": {
+      "formula": "=2*(SQRT(comp_vol_required/Num_tanks/PI()/comp_max_vert_bed_depth/comp_in_nlines)+Vessel_thickness)",
+      "cached": 1.2507219861203922
+    },
+    "AutoSize!C89": {
+      "formula": "=2*(SQRT(comp_min_sa_vessel/PI())+Vessel_thickness)",
+      "cached": 1.1516471649044515
+    },
+    "AutoSize!C90": {
+      "formula": "=min_diam",
+      "cached": 1.5
+    },
+    "AutoSize!C91": {
+      "formula": "=ROUNDUP(2*MAX(C88:C90),0)/2",
+      "cached": 1.5
+    },
+    "AutoSize!C92": {
+      "formula": "=max_diam",
+      "cached": 14
+    },
+    "AutoSize!C93": {
+      "formula": "=2*(SQRT(comp_max_sa_vessel/PI())+Vessel_thickness)",
+      "cached": 5.1503226936425275
+    },
+    "AutoSize!C94": {
+      "formula": "=max_diam",
+      "cached": 14
+    },
+    "AutoSize!C95": {
+      "formula": "=MAX(0.5,ROUNDDOWN(2*MIN(C92:C94),0)/2)",
+      "cached": 5
+    },
+    "AutoSize!C98": {
+      "formula": "=IF(comp_round_sa=1,comp_vol_required/Num_tanks/C60,0)",
+      "cached": 0
+    },
+    "AutoSize!C99": {
+      "formula": "=min_bed_depth",
+      "cached": 2
+    },
+    "AutoSize!C100": {
+      "formula": "=ROUNDUP(MAX(C98:C99),1)",
+      "cached": 2
+    },
+    "AutoSize!C101": {
+      "formula": "=(max_height-free_board)/(1+bed_expansion)",
+      "cached": 9
+    },
+    "AutoSize!C102": {
+      "formula": "=max_bed_depth",
+      "cached": 8.5
+    },
+    "AutoSize!C103": {
+      "formula": "=ROUNDDOWN(MIN(C101:C102),1)",
+      "cached": 8.5
+    }
+  },
+  "tables": {
+    "pipe_size_table_cl": {
+      "citation": "Engineering Data!$A$130:$B$150",
+      "rows": [
+        [
+          0,
+          0.5
+        ],
+        [
+          2.1,
+          0.75
+        ],
+        [
+          4.1,
+          1
+        ],
+        [
+          7.1,
+          1.5
+        ],
+        [
+          21.1,
+          2
+        ],
+        [
+          41.1,
+          2.5
+        ],
+        [
+          66.1,
+          3
+        ],
+        [
+          116.1,
+          4
+        ],
+        [
+          238.1,
+          6
+        ],
+        [
+          697.1,
+          8
+        ],
+        [
+          1435.1,
+          10
+        ],
+        [
+          2608.1,
+          12
+        ],
+        [
+          4132.1,
+          14
+        ],
+        [
+          5299.1,
+          16
+        ],
+        [
+          7528.1,
+          18
+        ],
+        [
+          10265.1,
+          20
+        ],
+        [
+          13643.1,
+          24
+        ],
+        [
+          22174.1,
+          30
+        ],
+        [
+          50561.1,
+          36
+        ],
+        [
+          81777.1,
+          42
+        ],
+        [
+          122025.1,
+          48
+        ]
+      ]
+    },
+    "vessel_size_table_cl": {
+      "citation": "Engineering Data!$A$230:$C$252",
+      "rows": [
+        [
+          1.5,
+          3,
+          6
+        ],
+        [
+          2,
+          3.5,
+          7.5
+        ],
+        [
+          2.5,
+          4,
+          9
+        ],
+        [
+          3,
+          4,
+          10
+        ],
+        [
+          3.5,
+          4.5,
+          10
+        ],
+        [
+          4,
+          4.5,
+          12
+        ],
+        [
+          4.5,
+          4.5,
+          15
+        ],
+        [
+          5,
+          4.5,
+          15
+        ],
+        [
+          5.5,
+          4.5,
+          15
+        ],
+        [
+          6,
+          4.5,
+          18
+        ],
+        [
+          6.5,
+          5.5,
+          18
+        ],
+        [
+          7,
+          5.5,
+          18
+        ],
+        [
+          7.5,
+          6,
+          18
+        ],
+        [
+          8,
+          6,
+          20
+        ],
+        [
+          8.5,
+          6,
+          20
+        ],
+        [
+          9,
+          6,
+          20
+        ],
+        [
+          9.5,
+          6,
+          20
+        ],
+        [
+          10,
+          6,
+          24
+        ],
+        [
+          10.5,
+          6,
+          24
+        ],
+        [
+          11,
+          6,
+          24
+        ],
+        [
+          11.5,
+          6,
+          24
+        ],
+        [
+          12,
+          6,
+          24
+        ],
+        [
+          14,
+          6,
+          24
+        ]
+      ]
+    }
+  },
+  "assumptions": {
+    "Range Name": {
+      "value": "Value",
+      "citation": "Critical Design Assumptions!C4"
+    },
+    "curve": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C5"
+    },
+    "min_avg_flow": {
+      "value": 0.1,
+      "citation": "Critical Design Assumptions!C6"
+    },
+    "NRD_small_1": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C9"
+    },
+    "NRD_small": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C10"
+    },
+    "bed_expansion": {
+      "value": 0.5,
+      "citation": "Critical Design Assumptions!C11"
+    },
+    "load_min": {
+      "value": 0.5,
+      "citation": "Critical Design Assumptions!C12"
+    },
+    "load_max": {
+      "value": 10,
+      "citation": "Critical Design Assumptions!C13"
+    },
+    "redund_freq": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C16"
+    },
+    "max_height": {
+      "value": 14,
+      "citation": "Critical Design Assumptions!C17"
+    },
+    "max_diam_override": {
+      "value": null,
+      "citation": "Critical Design Assumptions!C18"
+    },
+    "max_length": {
+      "value": 53,
+      "citation": "Critical Design Assumptions!C19"
+    },
+    "free_board": {
+      "value": 0.5,
+      "citation": "Critical Design Assumptions!C20"
+    },
+    "horiz_underdrain": {
+      "value": 1.5,
+      "citation": "Critical Design Assumptions!C21"
+    },
+    "length_diam_ratio": {
+      "value": 2.5,
+      "citation": "Critical Design Assumptions!C22"
+    },
+    "min_bed_depth": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C23"
+    },
+    "max_bed_depth": {
+      "value": 8.5,
+      "citation": "Critical Design Assumptions!C24"
+    },
+    "target_bed_depth_under": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C25"
+    },
+    "target_bed_depth_over": {
+      "value": 7,
+      "citation": "Critical Design Assumptions!C26"
+    },
+    "target_bed_depth_horiz": {
+      "value": 8,
+      "citation": "Critical Design Assumptions!C27"
+    },
+    "Vessel_thickness": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C28"
+    },
+    "NRD_basins_medium": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C31"
+    },
+    "NRD_basins_large": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C32"
+    },
+    "basin_freeboard": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C33"
+    },
+    "max_depth": {
+      "value": 10,
+      "citation": "Critical Design Assumptions!C34"
+    },
+    "min_depth": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C35"
+    },
+    "max_width": {
+      "value": 30,
+      "citation": "Critical Design Assumptions!C36"
+    },
+    "min_width": {
+      "value": 6,
+      "citation": "Critical Design Assumptions!C37"
+    },
+    "max_length_g": {
+      "value": 30,
+      "citation": "Critical Design Assumptions!C38"
+    },
+    "min_length_g": {
+      "value": 6,
+      "citation": "Critical Design Assumptions!C39"
+    },
+    "target_bed_depth_under_g": {
+      "value": 6,
+      "citation": "Critical Design Assumptions!C40"
+    },
+    "target_bed_depth_under_g_UVAOP": {
+      "value": 5.4,
+      "citation": "Critical Design Assumptions!C41"
+    },
+    "target_bed_depth_over_g": {
+      "value": 8,
+      "citation": "Critical Design Assumptions!C42"
+    },
+    "target_bed_depth_over_g_UVAOP": {
+      "value": 5.4,
+      "citation": "Critical Design Assumptions!C43"
+    },
+    "risers": {
+      "value": 15,
+      "citation": "Critical Design Assumptions!C46"
+    },
+    "overexcavate": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C47"
+    },
+    "conc_thick": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C48"
+    },
+    "pump_safety_factor": {
+      "value": 0.25,
+      "citation": "Critical Design Assumptions!C51"
+    },
+    "NRD_pumps": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C52"
+    },
+    "NRD_back_pumps": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C53"
+    },
+    "NRD_cm_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C54"
+    },
+    "min_chem_flow": {
+      "value": 0.13,
+      "citation": "Critical Design Assumptions!C55"
+    },
+    "bp_pct": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C58"
+    },
+    "h2oflush_backwash_rate": {
+      "value": 12,
+      "citation": "Critical Design Assumptions!C61"
+    },
+    "backwash_time": {
+      "value": 10,
+      "citation": "Critical Design Assumptions!C62"
+    },
+    "back_multiplier": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C63"
+    },
+    "back_basins_default": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C64"
+    },
+    "back_ratio": {
+      "value": 0.6,
+      "citation": "Critical Design Assumptions!C65"
+    },
+    "back_freeboard": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C66"
+    },
+    "BV_definition": {
+      "value": "EBCT per vessel",
+      "citation": "Critical Design Assumptions!C69"
+    },
+    "GAC_density": {
+      "value": 30,
+      "citation": "Critical Design Assumptions!C70"
+    },
+    "regen_runtime": {
+      "value": 0.85,
+      "citation": "Critical Design Assumptions!C71"
+    },
+    "regen_redund": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C72"
+    },
+    "makeup_rate": {
+      "value": 0.1,
+      "citation": "Critical Design Assumptions!C73"
+    },
+    "makeup_rate_off": {
+      "value": 0.3,
+      "citation": "Critical Design Assumptions!C74"
+    },
+    "transfer_time": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C75"
+    },
+    "htransfer_time": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C76"
+    },
+    "NRD_eductors": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C77"
+    },
+    "virgin_storage_bv": {
+      "value": 1.33,
+      "citation": "Critical Design Assumptions!C78"
+    },
+    "spent_storage_bv": {
+      "value": 1.33,
+      "citation": "Critical Design Assumptions!C79"
+    },
+    "regen_storage_bv": {
+      "value": 1.33,
+      "citation": "Critical Design Assumptions!C80"
+    },
+    "storage_basins": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C81"
+    },
+    "storage_ratio": {
+      "value": 0.6,
+      "citation": "Critical Design Assumptions!C82"
+    },
+    "storage_freeboard": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C83"
+    },
+    "in_out_pipe_mult": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C86"
+    },
+    "proc_pipe_mult": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C87"
+    },
+    "bp_pipe_mult": {
+      "value": 2.5,
+      "citation": "Critical Design Assumptions!C88"
+    },
+    "back_pipe_mult": {
+      "value": 2.5,
+      "citation": "Critical Design Assumptions!C89"
+    },
+    "chem_pipe_mult": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C90"
+    },
+    "in_man": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C94"
+    },
+    "in_man_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C95"
+    },
+    "proc_man_vessel": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C96"
+    },
+    "back_chv_no_back": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C97"
+    },
+    "back_chv_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C98"
+    },
+    "in_chv": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C99"
+    },
+    "in_chv_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C100"
+    },
+    "tot_bp_chv": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C101"
+    },
+    "coag_chv_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C102"
+    },
+    "polymer_chv_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C103"
+    },
+    "fm_in": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C105"
+    },
+    "fm_in_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C106"
+    },
+    "fm_proc": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C107"
+    },
+    "tot_fm_back": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C108"
+    },
+    "level_switch": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C109"
+    },
+    "level_switch_small": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C110"
+    },
+    "level_switch_g": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C111"
+    },
+    "level_switch_small_g": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C112"
+    },
+    "alarm_back": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C113"
+    },
+    "pH_controls_g": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C114"
+    },
+    "pH_controls_small_g": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C115"
+    },
+    "add_pH_controls": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C116"
+    },
+    "add_pH_controls_small": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C117"
+    },
+    "temp_meters": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C118"
+    },
+    "temp_meters_small": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C119"
+    },
+    "turb_tank": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C120"
+    },
+    "turb_tank_g": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C121"
+    },
+    "add_turb": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C122"
+    },
+    "add_turb_small": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C123"
+    },
+    "add_turb_p": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C124"
+    },
+    "add_turb_small_p": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C125"
+    },
+    "head_tank": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C126"
+    },
+    "head_tank_small": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C127"
+    },
+    "ports_tank": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C128"
+    },
+    "ports_bp": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C129"
+    },
+    "add_ports": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C130"
+    },
+    "elec_encl": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C131"
+    },
+    "S_booster_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C137"
+    },
+    "S_back_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C138"
+    },
+    "S_eductor": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C139"
+    },
+    "S_slurry": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C140"
+    },
+    "plc_rack_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C142"
+    },
+    "plc_cpu_standalone": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C143"
+    },
+    "plc_cpu_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C144"
+    },
+    "plc_ethernet_standalone": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C145"
+    },
+    "plc_ethernet_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C146"
+    },
+    "plc_interface_standalone": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C147"
+    },
+    "plc_interface_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C148"
+    },
+    "ups_standalone": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C149"
+    },
+    "ups_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C150"
+    },
+    "workstation_ratio": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C151"
+    },
+    "shifts_day": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C152"
+    },
+    "workstation_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C153"
+    },
+    "printer_ratio": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C154"
+    },
+    "printer_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C155"
+    },
+    "max_space_vessels_cust": {
+      "value": 6,
+      "citation": "Critical Design Assumptions!C158"
+    },
+    "max_space_vessels_pre": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C159"
+    },
+    "space_pumps_cust": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C160"
+    },
+    "space_pumps_pre": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C161"
+    },
+    "non_fire_buffer": {
+      "value": 10,
+      "citation": "Critical Design Assumptions!C162"
+    },
+    "fire_buffer": {
+      "value": 40,
+      "citation": "Critical Design Assumptions!C163"
+    },
+    "Top_bottom_Vessel_space": {
+      "value": 6,
+      "citation": "Critical Design Assumptions!C164"
+    },
+    "Building_height_g": {
+      "value": 20,
+      "citation": "Critical Design Assumptions!C165"
+    },
+    "space_office": {
+      "value": 100,
+      "citation": "Critical Design Assumptions!C166"
+    },
+    "space_office_small": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C167"
+    },
+    "pad_thick": {
+      "value": 0.5,
+      "citation": "Critical Design Assumptions!C168"
+    },
+    "pad_thick_small": {
+      "value": 0.3333333333333333,
+      "citation": "Critical Design Assumptions!C169"
+    },
+    "ceiling_clearance": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C170"
+    },
+    "add_2nd_building": {
+      "value": 10000,
+      "citation": "Critical Design Assumptions!C171"
+    },
+    "coag_res": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C174"
+    },
+    "coag_type": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C175"
+    },
+    "res_coag_settle_time": {
+      "value": 90,
+      "citation": "Critical Design Assumptions!C176"
+    },
+    "polymer_dose": {
+      "value": 100,
+      "citation": "Critical Design Assumptions!C177"
+    },
+    "polymer_density": {
+      "value": 9.6,
+      "citation": "Critical Design Assumptions!C178"
+    },
+    "polymer_spf": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C179"
+    },
+    "cmix_hp_per": {
+      "value": 0.25,
+      "citation": "Critical Design Assumptions!C180"
+    },
+    "min_cmix_hp": {
+      "value": 0.3333333333333333,
+      "citation": "Critical Design Assumptions!C181"
+    },
+    "include_cmix": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C182"
+    },
+    "coag_dose": {
+      "value": 10,
+      "citation": "Critical Design Assumptions!C183"
+    },
+    "coag_density": {
+      "value": 11.85,
+      "citation": "Critical Design Assumptions!C184"
+    },
+    "coag_pct": {
+      "value": 0.4,
+      "citation": "Critical Design Assumptions!C185"
+    },
+    "coag_spf": {
+      "value": 0.99,
+      "citation": "Critical Design Assumptions!C186"
+    },
+    "cstore_days": {
+      "value": 30,
+      "citation": "Critical Design Assumptions!C187"
+    },
+    "solids_storage_height": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C188"
+    },
+    "ht_solids_density": {
+      "value": 25,
+      "citation": "Critical Design Assumptions!C189"
+    },
+    "htank_TSSrem": {
+      "value": 0.25,
+      "citation": "Critical Design Assumptions!C190"
+    },
+    "coag_TSSrem": {
+      "value": 0.5,
+      "citation": "Critical Design Assumptions!C191"
+    },
+    "htank_clean_pct": {
+      "value": 0.1,
+      "citation": "Critical Design Assumptions!C192"
+    },
+    "res_cap_factor": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C193"
+    },
+    "hbasins_default": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C194"
+    },
+    "holding_ratio": {
+      "value": 0.6,
+      "citation": "Critical Design Assumptions!C195"
+    },
+    "holding_freeboard": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C196"
+    },
+    "hmix_hp_per": {
+      "value": 0.25,
+      "citation": "Critical Design Assumptions!C197"
+    },
+    "min_hmix_hp": {
+      "value": 0.3333333333333333,
+      "citation": "Critical Design Assumptions!C198"
+    },
+    "res_transfer_method": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C199"
+    },
+    "res_pump_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C200"
+    },
+    "NRD_res_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C201"
+    },
+    "min_res_pipe_size": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C202"
+    },
+    "res_pipe_mult": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C203"
+    },
+    "add_res_pipe_length": {
+      "value": 40,
+      "citation": "Critical Design Assumptions!C204"
+    },
+    "include_add_res_pipe_addon": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C205"
+    },
+    "res_chv_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C206"
+    },
+    "res_chv_no_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C207"
+    },
+    "S_res_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C208"
+    },
+    "S_mixer": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C209"
+    },
+    "tot_fm_res": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C210"
+    },
+    "alarm_res": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C211"
+    },
+    "include_sec_cont": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C213"
+    },
+    "sec_cont_pct_of_largest": {
+      "value": 1.1,
+      "citation": "Critical Design Assumptions!C214"
+    },
+    "sec_cont_pct_of_total": {
+      "value": 0.1,
+      "citation": "Critical Design Assumptions!C215"
+    },
+    "sec_cont_freeboard": {
+      "value": 6,
+      "citation": "Critical Design Assumptions!C216"
+    },
+    "sec_cont_max_thick": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C217"
+    },
+    "sec_cont_coating_cvg": {
+      "value": 125,
+      "citation": "Critical Design Assumptions!C218"
+    },
+    "influent_TSS": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C220"
+    },
+    "effluent_TSS": {
+      "value": 0.5,
+      "citation": "Critical Design Assumptions!C221"
+    },
+    "POTW_rate_type": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C222"
+    },
+    "POTW_base_fee": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C223"
+    },
+    "POTW_volume_fee": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C224"
+    },
+    "POTW_TSS_fee": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C225"
+    },
+    "POTW_TSS_limit": {
+      "value": 250,
+      "citation": "Critical Design Assumptions!C226"
+    },
+    "solids_method": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C227"
+    },
+    "max_waste_ship": {
+      "value": 18,
+      "citation": "Critical Design Assumptions!C228"
+    },
+    "non_haz_miles": {
+      "value": 10,
+      "citation": "Critical Design Assumptions!C229"
+    },
+    "haz_miles": {
+      "value": 200,
+      "citation": "Critical Design Assumptions!C230"
+    },
+    "rad_miles": {
+      "value": 700,
+      "citation": "Critical Design Assumptions!C231"
+    },
+    "hazrad_miles": {
+      "value": 700,
+      "citation": "Critical Design Assumptions!C232"
+    },
+    "min_sept_disch_time": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C234"
+    },
+    "min_sept_tank_vol": {
+      "value": 1000,
+      "citation": "Critical Design Assumptions!C235"
+    },
+    "sept_tank_sf": {
+      "value": 1.5,
+      "citation": "Critical Design Assumptions!C236"
+    },
+    "sept_LTAR": {
+      "value": 0.5,
+      "citation": "Critical Design Assumptions!C237"
+    },
+    "sept_trench_w": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C238"
+    },
+    "sept_trench_d": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C239"
+    },
+    "sept_gravel_d_below": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C240"
+    },
+    "sept_min_trenches": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C241"
+    },
+    "sept_max_trench_l": {
+      "value": 100,
+      "citation": "Critical Design Assumptions!C242"
+    },
+    "sept_trench_dist": {
+      "value": 8,
+      "citation": "Critical Design Assumptions!C243"
+    },
+    "sept_gravel_d": {
+      "value": 2.3333333333333335,
+      "citation": "Critical Design Assumptions!C244"
+    },
+    "sept_buffer": {
+      "value": 10,
+      "citation": "Critical Design Assumptions!C245"
+    },
+    "sept_overexcav": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C246"
+    },
+    "sept_dist_connections": {
+      "value": 7,
+      "citation": "Critical Design Assumptions!C247"
+    },
+    "sept_pipe_diam": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C248"
+    },
+    "pan_evap": {
+      "value": 180,
+      "citation": "Critical Design Assumptions!C250"
+    },
+    "evap_ratio": {
+      "value": 0.7,
+      "citation": "Critical Design Assumptions!C251"
+    },
+    "precip": {
+      "value": 70,
+      "citation": "Critical Design Assumptions!C252"
+    },
+    "winter_days": {
+      "value": 180,
+      "citation": "Critical Design Assumptions!C253"
+    },
+    "ep_safety_factor": {
+      "value": 1.1,
+      "citation": "Critical Design Assumptions!C254"
+    },
+    "max_ep_cell_area": {
+      "value": 5,
+      "citation": "Critical Design Assumptions!C255"
+    },
+    "min_ep_cells": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C256"
+    },
+    "ep_freeboard": {
+      "value": 0.5,
+      "citation": "Critical Design Assumptions!C257"
+    },
+    "ep_overexcavate": {
+      "value": 4,
+      "citation": "Critical Design Assumptions!C258"
+    },
+    "dredging_freq": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C259"
+    },
+    "ep_solids_density": {
+      "value": 25,
+      "citation": "Critical Design Assumptions!C260"
+    },
+    "dike_xsection": {
+      "value": 35.63,
+      "citation": "Critical Design Assumptions!C261"
+    },
+    "Lookup name": {
+      "value": "Discrete Inputs",
+      "citation": "Critical Design Assumptions!C295"
+    },
+    "proc_MOV_vessel_par": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C267"
+    },
+    "proc_MOV_vessel_ser": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C268"
+    },
+    "proc_MOV_pump": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C269"
+    },
+    "back_MOV_vessel": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C270"
+    },
+    "back_MOV_pump": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C271"
+    },
+    "back_MOV_tank": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C272"
+    },
+    "back_MOV_no_back": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C273"
+    },
+    "res_MOV_pump": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C274"
+    },
+    "res_MOV_tank": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C275"
+    },
+    "res_MOV_ep": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C276"
+    },
+    "chem_MOV_pump": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C277"
+    },
+    "tot_bp_MOVs": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C278"
+    },
+    "proc_man_vessel_par": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C279"
+    },
+    "proc_man_vessel_ser": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C280"
+    },
+    "proc_man_pump": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C281"
+    },
+    "back_man_vessel": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C282"
+    },
+    "back_man_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C283"
+    },
+    "back_man_tank": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C284"
+    },
+    "back_man_no_back": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C285"
+    },
+    "res_man_pump": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C286"
+    },
+    "res_man_tank": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C287"
+    },
+    "res_man_ep": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C288"
+    },
+    "chem_man_pump": {
+      "value": 2,
+      "citation": "Critical Design Assumptions!C289"
+    },
+    "tot_bp_man": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C290"
+    },
+    "alarm": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C296"
+    },
+    "flow_mag": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C297"
+    },
+    "flow_op": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C298"
+    },
+    "flow_prop": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C299"
+    },
+    "flow_ven": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C300"
+    },
+    "head": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C301"
+    },
+    "ph": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C302"
+    },
+    "port": {
+      "value": 1,
+      "citation": "Critical Design Assumptions!C303"
+    },
+    "switch": {
+      "value": 3,
+      "citation": "Critical Design Assumptions!C304"
+    },
+    "temp": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C305"
+    },
+    "turb": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C306"
+    },
+    "valve": {
+      "value": 0,
+      "citation": "Critical Design Assumptions!C307"
+    }
+  },
+  "baseline": {
+    "contaminant": "TCE",
+    "flowGpm": 20.833333333333332,
+    "averageFlowGpm": 4.861111111111111,
+    "totalEbctMinutes": 7.5,
+    "series": 1,
+    "diameterFt": 2,
+    "heightFt": 6,
+    "bedDepthFt": 3.4,
+    "densityLbFt3": 30,
+    "carbonLifeMode": "bv",
+    "carbonLifeValue": 66600,
+    "bvDefinition": "per_vessel",
+    "redundantVessels": null
+  }
+}

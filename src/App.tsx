@@ -1,91 +1,29 @@
 import { useEffect } from 'react';
 import { TaskPanel } from './components/TaskPanel';
 import { DisplayPanel } from './components/DisplayPanel';
-import { InfoPanel } from './components/InfoPanel';
+import { DecisionLogPanel } from './components/DecisionLogPanel';
 import { ChatPanel } from './components/ChatPanel';
-import { TerminalPanel } from './components/TerminalPanel';
+import { GacPanel } from './components/GacPanel';
+import { GacApiStatus } from './components/GacApiStatus';
 import { useDesignStore } from './store/designStore';
 import './App.css';
-
+import { GacResearchPanel, GacProgress, GacDecisionTrail } from './components/GacResearchPanel';
 function App() {
   const loadData = useDesignStore(state => state.loadData);
-
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
-
-  return (
-    <div className="app-container" style={{
-      display: 'flex',
-      width: '100vw',
-      height: '100vh',
-      maxHeight: '100vh',
-      overflowX: 'auto',
-      overflowY: 'hidden',
-      background: '#0f172a',
-      color: '#fff',
-      minWidth: '1000px',
-      position: 'relative'
-    }}>
-      {/* Left Sidebar: Task Progress (Fixed 260px) */}
-      <div style={{
-        flex: '0 0 260px',
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: 0,
-        overflow: 'hidden',
-        borderRight: '1px solid #334155'
-      }}>
-        <TaskPanel />
-      </div>
-
-      {/* Center Column: Visuals & Info (Dynamic Flex) */}
-      <div style={{
-        flex: 1,
-        minWidth: '400px',
-        minHeight: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-        borderRight: '1px solid #334155'
-      }}>
-        {/* Top: Schematic Display (Dynamic ~65% of column) */}
-        <div style={{ flex: 6.5, minHeight: 0, position: 'relative', borderBottom: '1px solid #334155' }}>
-          <DisplayPanel />
-        </div>
-        {/* Bottom: Component Info (Dynamic ~35% of column) */}
-        <div style={{ flex: 3.5, minHeight: 0, position: 'relative' }}>
-          <InfoPanel />
-        </div>
-      </div>
-
-      {/* Right Column: AI & Knowledge Graph (Fixed 350px) */}
-      <div style={{
-        flex: '0 0 350px',
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: 0,
-        overflow: 'hidden'
-      }}>
-        {/* Top: AI Chat (Dynamic ~40% of column) */}
-        <div style={{ flex: 4, minHeight: 0, position: 'relative', borderBottom: '1px solid #334155' }}>
-          <ChatPanel />
-        </div>
-        {/* Bottom: Terminal (Dynamic ~60% of column) */}
-        <div style={{ flex: 6, minHeight: 0, position: 'relative' }}>
-          <TerminalPanel />
-        </div>
-      </div>
-
-      {/* Footer */}
-      <footer className="app-footer" style={{
-          position: 'absolute', bottom: 0, right: 0, left: 0,
-          padding: '4px 10px', background: '#020617', fontSize: '0.7rem', color: '#64748b', textAlign: 'center', zIndex: 100
-      }}>
-        CoDesign · Human-AI Collaborative Design Refinement
-      </footer>
+  const isGac = useDesignStore(state => state.selectedInputDesignId === 'gac-workspace');
+  useEffect(() => { loadData(); }, [loadData]);
+  return <div className={`app-container ${isGac ? 'gac-workspace' : ''}`}>
+    <header className="app-heading">CoDesign</header>
+    <div className="workspace-layout">
+      <aside className="workspace-sidebar">{isGac ? <GacProgress /> : <TaskPanel />}</aside>
+      <main className="workspace-main">
+        <section className="graph-section">{isGac ? <GacResearchPanel /> : <DisplayPanel />}</section>
+        <section className="log-section">{isGac ? <GacDecisionTrail /> : <DecisionLogPanel />}</section>
+      </main>
+      <aside className="workspace-tools">
+        <section className="assistant-section"><div className="panel-title">Assistant <GacApiStatus /></div><div className="chat-section"><ChatPanel /></div>{isGac && <GacPanel />}</section>
+      </aside>
     </div>
-  );
+  </div>;
 }
-
 export default App;

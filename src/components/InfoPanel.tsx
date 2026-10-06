@@ -1,8 +1,10 @@
 import { useDesignStore } from '../store/designStore';
-import { DecisionLogPanel } from './DecisionLogPanel';
+import { useGacWorkflowStore } from '../store/gacWorkflowStore';
 
 export const InfoPanel = () => {
+    const consultation = useGacWorkflowStore(s => s.consultation);
     const { selectedNode, activeView, setActiveView, candidate } = useDesignStore();
+    const isGac = useDesignStore(s => s.selectedInputDesignId === 'gac-workspace');
     const detailedReady = ['Ready for Review', 'Assumptions Only'].includes(candidate.status);
 
     return (
@@ -17,10 +19,10 @@ export const InfoPanel = () => {
             borderRight: '1px solid #334155'
         }}>
             <div className="panel-title" style={{ padding: '10px', background: '#0f172a', borderBottom: '1px solid #334155', fontWeight: 'bold' }}>
-                COMPONENT INFO
+                Info
             </div>
 
-            <div style={{ padding: '10px', borderBottom: '1px solid #334155', display: 'flex', gap: '10px', alignItems: 'center' }}>
+            {!isGac && <div style={{ padding: '10px', borderBottom: '1px solid #334155', display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' }}>
                 <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>VIEW MODE:</span>
                 <button
                     onClick={() => setActiveView('conceptual')}
@@ -52,7 +54,7 @@ export const InfoPanel = () => {
                         DETAILED LOCKED
                     </span>
                 )}
-            </div>
+            </div>}
 
             <div style={{ flex: 1, overflowY: 'auto', padding: '12px', minHeight: 0 }}>
                 {selectedNode ? (
@@ -83,11 +85,10 @@ export const InfoPanel = () => {
                     </div>
                 ) : (
                     <div style={{ color: '#64748b', fontStyle: 'italic', textAlign: 'center', marginTop: '20px', fontSize: '0.9rem' }}>
-                        Select a component from the graph to view details.
+                        {isGac ? <div style={{ textAlign: 'left' }}><strong>Unresolved design items</strong>{consultation?.state.unresolved.map((item: string) => <p key={item}>{item}</p>)}</div> : 'Select a component from the graph to view details.'}
                     </div>
                 )}
             </div>
-            <DecisionLogPanel />
         </div>
     );
 };

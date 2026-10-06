@@ -78,18 +78,23 @@ function looksLikeGraphRagQuestion(text: string): boolean {
 }
 
 export const ChatPanel = () => {
+    const isGac = useDesignStore(s => s.selectedInputDesignId === 'gac-workspace');
     const {
         chatMessages, addChatMessage,
-        assumptionMode, setAssumptionMode,
-        graphRagMode, setGraphRagMode, askGraphRagQuestion,
+        assumptionMode,
+        askGraphRagQuestion,
         aiResponding
     } = useDesignStore();
+    useEffect(() => { useDesignStore.setState({ assumptionMode: false }); }, []);
     const [input, setInput] = useState('');
     const [currentConfidence, setCurrentConfidence] = useState<'review' | null>(null);
-    const messagesEndRef = useRef<HTMLDivElement>(null);
+    const messagesRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
+    const followLatestRef = useRef(true);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        const messages = messagesRef.current;
+        if (messages && followLatestRef.current) messages.scrollTop = messages.scrollHeight;
     };
 
     useEffect(() => {
@@ -118,18 +123,20 @@ export const ChatPanel = () => {
         if (!input.trim() || aiResponding) return;
 
         const userMsg = input.trim();
+        followLatestRef.current = true;
         // Determine source: if assumption mode is on and the input matches a default, mark as ai_default
         const last = chatMessages[chatMessages.length - 1];
         const defaultResult = last?.sender === 'ai' ? getDefaultAnswer(last.text) : null;
         const source = (assumptionMode && defaultResult && userMsg === defaultResult.answer) ? 'ai_default' : 'human';
 
-        if (graphRagMode || looksLikeGraphRagQuestion(userMsg)) {
+        if (!isGac && looksLikeGraphRagQuestion(userMsg)) {
             askGraphRagQuestion(userMsg);
         } else {
             addChatMessage('user', userMsg, source);
         }
         setInput('');
         setCurrentConfidence(null);
+        inputRef.current?.focus({ preventScroll: true });
         // Normal design-question responses are handled by the store's advanceConversation action.
     };
 
@@ -142,41 +149,15 @@ export const ChatPanel = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0, overflow: 'hidden', background: '#1e293b', borderLeft: '1px solid #334155' }}>
-            <div className="panel-title" style={{ padding: '10px', background: '#0f172a', borderBottom: '1px solid #334155', fontWeight: 'bold', color: '#e2e8f0' }}>
-                <span>AI DESIGN ASSISTANT</span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <label style={{
-                        display: 'flex', alignItems: 'center', gap: 6,
-                        fontSize: '0.7rem', fontWeight: 400, color: graphRagMode ? '#38bdf8' : '#94a3b8', cursor: 'pointer', textTransform: 'none', letterSpacing: 0
-                    }}>
-                        <input
-                            type="checkbox"
-                            checked={graphRagMode}
-                            onChange={(e) => setGraphRagMode(e.target.checked)}
-                            style={{ accentColor: '#38bdf8', cursor: 'pointer' }}
-                        />
-                        GraphRAG Mode
-                    </label>
-                    <label style={{
-                        display: 'flex', alignItems: 'center', gap: 6,
-                        fontSize: '0.7rem', fontWeight: 400, color: '#94a3b8', cursor: 'pointer', textTransform: 'none', letterSpacing: 0
-                    }}>
-                        <input
-                            type="checkbox"
-                            checked={assumptionMode}
-                            onChange={(e) => setAssumptionMode(e.target.checked)}
-                            style={{ accentColor: '#3b82f6', cursor: 'pointer' }}
-                        />
-                        Assumption Mode
-                    </label>
-                </div>
-            </div>
-
-            <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div ref={messagesRef} className="chat-messages" onScroll={e => {
+                const messages = e.currentTarget;
+                followLatestRef.current = messages.scrollHeight - messages.scrollTop - messages.clientHeight < 50;
+            }} style={{ flex: 1, minHeight: 0, overflowY: 'auto', overscrollBehavior: 'contain', padding: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {chatMessages.map((msg: ChatMessage) => {
                     const displayName = msg.sender === 'ai' ? 'AI Assistant' : (msg.source === 'ai_default' ? 'Test Agent' : 'You');
                     return (
                     <div key={msg.id} style={{
+                        flexShrink: 0,
                         alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start',
                         maxWidth: '85%',
                         padding: '10px 14px',
@@ -192,23 +173,12 @@ export const ChatPanel = () => {
                     }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.75rem', opacity: 0.7, marginBottom: '3px' }}>
                             <span>{displayName}</span>
-                            {msg.source && (
-                                <span style={{
-                                    fontSize: '0.6rem',
-                                    padding: '1px 5px',
-                                    borderRadius: 3,
-                                    background: msg.source === 'ai_default' ? 'rgba(100,116,139,0.4)' : 'rgba(59,130,246,0.3)',
-                                    marginLeft: 8
-                                }}>
-                                    {msg.source === 'ai_default' ? 'AI DEFAULT' : 'HUMAN'}
-                                </span>
-                            )}
+
                         </div>
                         {msg.text}
                     </div>
                     );
                 })}
-                <div ref={messagesEndRef} />
             </div>
 
             <div style={{ flex: '0 0 auto', padding: '10px', borderTop: '1px solid #334155', background: '#0f172a' }}>
@@ -236,6 +206,7 @@ export const ChatPanel = () => {
                 )}
                 <div style={{ display: 'flex', gap: '6px' }}>
                     <textarea
+                        ref={inputRef}
                         value={input}
                         onChange={(e) => {
                             setInput(e.target.value);
@@ -247,8 +218,8 @@ export const ChatPanel = () => {
                             }
                         }}
                         onKeyDown={handleKeyDown}
-                        placeholder={aiResponding ? (graphRagMode ? 'Retrieving graph evidence...' : 'Waiting for AI question...') : (graphRagMode ? 'Ask a GraphRAG question about the selected P&ID...' : 'Type a message...')}
-                        disabled={aiResponding}
+                        placeholder={aiResponding ? 'Replying... You can type your next message.' : 'Type a message...'}
+                        aria-busy={aiResponding}
                         rows={1}
                         style={{
                             flex: 1,
@@ -263,7 +234,7 @@ export const ChatPanel = () => {
                             outline: 'none',
                             fontSize: '0.85rem',
                             lineHeight: 1.35,
-                            opacity: aiResponding ? 0.6 : 1
+                            opacity: 1
                         }}
                     />
                     <button

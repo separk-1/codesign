@@ -1,10 +1,24 @@
+import { nodeTooltipHtml } from '../utils/nodeTooltip';
 import { useRef, useEffect, useState, useMemo } from 'react';
 import ForceGraph2D from 'react-force-graph-2d';
 import { useDesignStore } from '../store/designStore';
 
+// Fit the data without enlarging small examples to fill the entire panel.
+function fitSchematic(graph: any, width: number, height: number) {
+    const bounds = graph?.getGraphBbox?.();
+    if (!bounds || width <= 0 || height <= 0) return;
+    const scale = Math.min(1.25,
+        Math.max(1, width - 120) / Math.max(80, bounds.x[1] - bounds.x[0] + 40),
+        Math.max(1, height - 120) / Math.max(80, bounds.y[1] - bounds.y[0] + 40));
+    graph.centerAt((bounds.x[0] + bounds.x[1]) / 2, (bounds.y[0] + bounds.y[1]) / 2, 0);
+    graph.zoom(scale, 0);
+}
+
 export const DisplayPanel = () => {
     const { conceptualGraph, detailedGraph, activeView, selectNode, selectedNode, decisionLog, candidate } = useDesignStore();
     const containerRef = useRef<HTMLDivElement>(null);
+    const conceptualForceGraphRef = useRef<any>(null);
+    const labelBounds = useRef(new WeakMap<CanvasRenderingContext2D, { x: number; y: number; width: number; height: number }[]>());
     const updatedGraphRef = useRef<HTMLDivElement>(null);
     const updatedForceGraphRef = useRef<any>(null);
     const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
@@ -18,6 +32,12 @@ export const DisplayPanel = () => {
             links: sourceData.links.map(l => ({ ...l }))
         };
     }, [conceptualGraph, detailedGraph, activeView]);
+
+    useEffect(() => {
+        if (activeView !== 'conceptual') return;
+        const timer = window.setTimeout(() => fitSchematic(conceptualForceGraphRef.current, dimensions.width, dimensions.height), 400);
+        return () => window.clearTimeout(timer);
+    }, [activeView, graphData, dimensions.width, dimensions.height]);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -49,15 +69,15 @@ export const DisplayPanel = () => {
     useEffect(() => {
         if (activeView !== 'detailed' || !updatedForceGraphRef.current || !graphData.nodes.length) return;
         const timer = window.setTimeout(() => {
-            updatedForceGraphRef.current?.zoomToFit?.(450, 34);
+            fitSchematic(updatedForceGraphRef.current, updatedGraphDimensions.width, updatedGraphDimensions.height);
         }, 650);
         return () => window.clearTimeout(timer);
     }, [activeView, graphData.nodes.length, graphData.links.length, updatedGraphDimensions.width, updatedGraphDimensions.height]);
 
     const decisionColor = (status?: string) => {
-        if (status === 'high') return '#22c55e';
-        if (status === 'medium') return '#3b82f6';
-        if (status === 'review') return '#eab308';
+        if (status === 'high') return '#444';
+        if (status === 'medium') return '#666';
+        if (status === 'review') return '#888';
         return null;
     };
 
@@ -66,40 +86,25 @@ export const DisplayPanel = () => {
         : candidate.status === 'Decision Log Only' ? '#94a3b8'
         : '#eab308';
 
-    const candidateCards = [
-        { label: 'Fluid / Material', value: candidate.fluid, detail: candidate.material, topic: 'process fluid' },
-        { label: 'Line / Flow', value: candidate.lineSize, detail: candidate.flowInstrument, topic: 'flow rate' },
-        { label: 'Pump / Pressure', value: candidate.pumpDuty, detail: candidate.pressureProtection, topic: 'pressure duty' },
-        { label: 'Treatment / HX', value: candidate.treatment, detail: candidate.heatExchanger, topic: 'treatment configuration' },
-        { label: 'Candidate Status', value: candidate.status, detail: `${candidate.reviewItems.length} review item${candidate.reviewItems.length === 1 ? '' : 's'}`, topic: 'review gate' }
-    ];
-
     const paintNode = (node: any, ctx: CanvasRenderingContext2D, globalScale: number) => {
         const isSelected = node.id === selectedNode?.id;
         const statusColor = decisionColor(node.decisionStatus);
         const size = node.decisionStatus ? 13 : 10;
 
-        if (node.decisionStatus) {
-            ctx.beginPath();
-            ctx.arc(node.x, node.y, size + 8, 0, 2 * Math.PI, false);
-            ctx.fillStyle = node.reviewRequired ? 'rgba(234,179,8,0.18)' : 'rgba(34,197,94,0.14)';
-            ctx.fill();
-        }
-
         // Box shape for schematic feel
         ctx.beginPath();
         if (node.type === 'Equipment' || node.type === 'Pump' || node.type === 'HeatExchanger') {
             ctx.rect(node.x - size, node.y - size, size * 2, size * 2);
-            ctx.fillStyle = isSelected ? '#ef4444' : (statusColor || '#3b82f6');
+            ctx.fillStyle = isSelected ? '#222' : (statusColor || '#888');
         } else if (node.type === 'Pipe') {
              ctx.rect(node.x - size/2, node.y - size/2, size, size);
-             ctx.fillStyle = isSelected ? '#ef4444' : (statusColor || '#22c55e');
+             ctx.fillStyle = isSelected ? '#222' : (statusColor || '#888');
         } else {
              ctx.arc(node.x, node.y, size/1.5, 0, 2 * Math.PI, false);
-             ctx.fillStyle = isSelected ? '#ef4444' : (statusColor || '#94a3b8');
+             ctx.fillStyle = isSelected ? '#222' : (statusColor || '#888');
         }
         ctx.fill();
-        ctx.strokeStyle = node.reviewRequired ? '#facc15' : '#fff';
+        ctx.strokeStyle = '#444';
         ctx.lineWidth = node.decisionStatus ? 2 : 1;
         ctx.stroke();
 
@@ -107,18 +112,36 @@ export const DisplayPanel = () => {
             ctx.font = `${Math.max(10 / globalScale, 4)}px Sans-Serif`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillStyle = '#facc15';
+            ctx.fillStyle = '#222';
             ctx.fillText('!', node.x + size + 8, node.y - size - 4);
         }
 
-        // Label
-        const label = node.name;
-        if (globalScale > 0.8 || node.decisionStatus) {
-            ctx.font = '5px Sans-Serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            ctx.fillStyle = '#fff';
-            ctx.fillText(label, node.x, node.y + size + 2);
+        // Screen-sized wrapped labels with per-frame collision avoidance.
+        const fontSize = 11 / globalScale;
+        ctx.font = `${fontSize}px Arial`;
+        const maxWidth = 100 / globalScale;
+        const lines: string[] = [];
+        for (const word of String(node.name || node.id).split(/\s+/)) {
+            const last = lines.length - 1;
+            if (last >= 0 && ctx.measureText(`${lines[last]} ${word}`).width <= maxWidth) lines[last] += ` ${word}`;
+            else lines.push(word);
+        }
+        const visible = lines.slice(0, 3);
+        if (lines.length > 3) visible[2] += '…';
+        const width = Math.max(...visible.map(line => ctx.measureText(line).width)) + 6 / globalScale;
+        const height = visible.length * fontSize * 1.3;
+        const placed = labelBounds.current.get(ctx) || [];
+        const intersects = (a: { x: number; y: number; width: number; height: number }, b: { x: number; y: number; width: number; height: number }) =>
+            a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+        for (let row = 0; row < 4; row++) {
+            const box = { x: node.x - width / 2, y: node.y + size + 6 / globalScale + row * (height + 4 / globalScale), width, height };
+            if (placed.some(other => intersects(box, other))) continue;
+            if (graphData.nodes.some((other: any) => other.id !== node.id && Number.isFinite(other.x) && intersects(box, { x: other.x - 14, y: other.y - 14, width: 28, height: 28 }))) continue;
+            placed.push(box); labelBounds.current.set(ctx, placed);
+            ctx.fillStyle = '#fff'; ctx.fillRect(box.x, box.y, box.width, box.height);
+            ctx.fillStyle = '#222'; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+            visible.forEach((line, index) => ctx.fillText(line, node.x, box.y + index * fontSize * 1.3));
+            break;
         }
     };
 
@@ -184,7 +207,7 @@ export const DisplayPanel = () => {
 
                     <div style={{ padding: '4px 0' }}>
                         <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, marginBottom: 8 }}>INPUT GRAPH + DECISION BRANCHES</div>
-                        <div style={{ display: 'grid', gridTemplateColumns: `repeat(${flowSteps.length}, minmax(130px, 1fr))`, gap: 10 }}>
+                        <div className="candidate-flow" style={{ display: 'grid', gridTemplateColumns: `repeat(${flowSteps.length}, minmax(130px, 1fr))`, gap: 10 }}>
                             {flowSteps.map((step, index) => (
                                 <button
                                     key={step.id || step.tag}
@@ -212,7 +235,7 @@ export const DisplayPanel = () => {
                         </div>
                     </div>
 
-                    <div style={{ minHeight: 0, display: 'grid', gridTemplateColumns: 'minmax(280px, 1fr) minmax(240px, 0.75fr)', gap: 12 }}>
+                    <div className="candidate-detail" style={{ minHeight: 0, display: 'grid', gridTemplateColumns: 'minmax(280px, 1fr) minmax(240px, 0.75fr)', gap: 12 }}>
                         <div style={{ minHeight: 260, border: '1px solid #334155', borderRadius: 6, overflow: 'hidden', background: '#1e293b' }}>
                             <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, padding: '8px 10px', borderBottom: '1px solid #334155', background: '#0f172a' }}>UPDATED P&ID GRAPH</div>
                             <div ref={updatedGraphRef} style={{ height: 252, minHeight: 0, overflow: 'hidden' }}>
@@ -225,11 +248,14 @@ export const DisplayPanel = () => {
                                     dagLevelDistance={34}
                                     cooldownTicks={80}
                                     warmupTicks={30}
-                                    backgroundColor="#1e293b"
+                                    onEngineStop={() => fitSchematic(updatedForceGraphRef.current, updatedGraphDimensions.width, updatedGraphDimensions.height)}
+                                    backgroundColor="#ffffff"
                                     nodeCanvasObject={paintNode}
+                                    nodeLabel={nodeTooltipHtml}
+                                    onRenderFramePre={(ctx) => labelBounds.current.set(ctx, [])}
                                     linkColor={(link: any) => decisionColor(link.decisionStatus) || '#64748b'}
                                     linkWidth={(link: any) => link.decisionStatus || link.generatedByDecision ? 2.5 : 1}
-                                    linkDirectionalParticles={(link: any) => link.generatedByDecision ? 3 : 1}
+                                    linkDirectionalParticles={0}
                                     linkDirectionalParticleWidth={(link: any) => link.decisionStatus ? 3 : 2}
                                     onNodeClick={selectNode}
                                 />
@@ -258,47 +284,26 @@ export const DisplayPanel = () => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
             <div className="panel-title" style={{ padding: '5px 10px', background: '#1e293b', borderBottom: '1px solid #334155' }}>
-                <span>DESIGN SCHEMATIC (DAG VIEW)</span>
-                <span style={{ fontSize: '0.68rem', color: '#94a3b8', textTransform: 'none', letterSpacing: 0 }}>
-                    green = confirmed · yellow = review needed
-                </span>
-            </div>
-            <div style={{ flex: '0 0 auto', padding: '10px', borderBottom: '1px solid #334155', background: '#162033' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 8 }}>
-                    <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 700 }}>LIVE P&ID CANDIDATE</div>
-                    <div style={{ fontSize: '0.68rem', color: statusColor, fontWeight: 700 }}>{candidate.status}</div>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: 8 }}>
-                    {candidateCards.map(card => {
-                        const active = candidate.updatedTopics.includes(card.topic);
-                        return (
-                            <div key={card.label} style={{
-                                border: `1px solid ${active ? '#38bdf8' : '#334155'}`,
-                                borderRadius: 6,
-                                background: active ? 'rgba(14,116,144,0.22)' : '#0f172a',
-                                padding: 8,
-                                minHeight: 68
-                            }}>
-                                <div style={{ color: '#94a3b8', fontSize: '0.62rem', fontWeight: 700 }}>{card.label}</div>
-                                <div style={{ color: active ? '#e0f2fe' : '#e2e8f0', fontSize: '0.78rem', fontWeight: 700, marginTop: 5, lineHeight: 1.2 }}>{card.value}</div>
-                                <div style={{ color: '#64748b', fontSize: '0.64rem', marginTop: 4, lineHeight: 1.25 }}>{card.detail}</div>
-                            </div>
-                        );
-                    })}
-                </div>
+                <span>Process graph</span>
             </div>
             <div ref={containerRef} style={{ flex: 1, overflow: 'hidden', background: '#1e293b' }}>
                 <ForceGraph2D
+                    ref={conceptualForceGraphRef}
                     width={dimensions.width}
                     height={dimensions.height}
                     graphData={graphData}
                     dagMode="lr"
                     dagLevelDistance={50}
-                    backgroundColor="#1e293b"
+                    cooldownTicks={80}
+                    warmupTicks={30}
+                    onEngineStop={() => fitSchematic(conceptualForceGraphRef.current, dimensions.width, dimensions.height)}
+                    backgroundColor="#ffffff"
                     nodeCanvasObject={paintNode}
+                    nodeLabel={nodeTooltipHtml}
+                    onRenderFramePre={(ctx) => labelBounds.current.set(ctx, [])}
                     linkColor={(link: any) => decisionColor(link.decisionStatus) || '#64748b'}
                     linkWidth={(link: any) => link.decisionStatus ? 2.5 : 1}
-                    linkDirectionalParticles={2}
+                    linkDirectionalParticles={0}
                     linkDirectionalParticleWidth={(link: any) => link.decisionStatus ? 3 : 2}
                     onNodeClick={selectNode}
                 />
