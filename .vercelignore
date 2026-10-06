@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+docs
+tmp
+.claude
+node_modules
+dist
+*.log
+verification_screenshot.png

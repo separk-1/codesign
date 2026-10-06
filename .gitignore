@@ -17,3 +17,6 @@ yarn-error.log*
 
 docs/
 hydroshare_kg_dataset/
+.vercel
+.env*
+!.env.example

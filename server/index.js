@@ -95,6 +95,11 @@ app.post('/api/agent/generate-decision-log', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`[codesign-api] listening on http://127.0.0.1:${port}`);
-});
+// Vercel imports the app; only the local CLI starts a persistent listener.
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  app.listen(port, () => {
+    console.log(`[codesign-api] listening on http://127.0.0.1:${port}`);
+  });
+}
+
+export default app;
