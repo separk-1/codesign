@@ -200,11 +200,3 @@ https://gitlab.com/dexpi/TrainingTestCases/-/tree/master/dexpi%201.3/example%20p
 This project does not claim authorship of the original P&ID examples. CoDesign creates derived research artifacts from those public examples, including normalized XML inputs, pyDEXPI JSON exports, GEXF graph exports, SQLite tables, decision logs, and candidate graph datasets.
 
 The interface, workbook explanations, follow-up questions and generated replies use English. The Assistant header distinguishes an online API with a missing key from a configured AI API. Configure OPENAI_API_KEY in the local .env file and restart the API to enable AI generation. Do not enter credentials in chat.
-
-## Commissioning prototype
-
-Open the main **Commissioning** tab next to **Design**. This local-only workbench contains three curated Scaife Hall VAV examples: occupied cooling modulation, occupancy transition conflict review, and high-temperature alarm observability. Source links and version uncertainty are retained; examples are paraphrases, and stimulus inputs are synthetic. No API key is required for this tab.
-
-Edit prerequisites, stimulus, observations, expected response, criteria and restoration. Enter reviewer and review notes, acknowledge open limitations, then approve the local demonstration draft. Any edit or specification-version change invalidates approval. The contradictory transition test cannot be approved. Missing CFM / evidence remain disclosed: local draft approval is not execution readiness, field authorization or certification. Field status always remains NOT EXECUTED / NOT ASSESSED. Browser local storage saves drafts and selected specification version; JSON export includes source records, all drafts and review history. Browser data are local and are not a shared approval system.
-
-Verification: `npm run build`, `node scripts/test_gac.mjs`, and (with local preview at port 4173) `node scripts/test_commissioning_ui.mjs`. The browser test uses installed Microsoft Edge, verifies review gates, approval invalidation, conflict blocking, export, persistence, mobile overflow and return to Design. Screenshots are saved to ignored `docs/commissioning-desktop.png` and `docs/commissioning-mobile.png`.
