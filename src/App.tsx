@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { CommissioningPanel } from './components/CommissioningPanel';
+import { useEffect, useState } from 'react';
 import { TaskPanel } from './components/TaskPanel';
 import { DisplayPanel } from './components/DisplayPanel';
 import { DecisionLogPanel } from './components/DecisionLogPanel';
@@ -9,12 +10,13 @@ import { useDesignStore } from './store/designStore';
 import './App.css';
 import { GacResearchPanel, GacProgress, GacDecisionTrail } from './components/GacResearchPanel';
 function App() {
+  const [tab, setTab] = useState('design');
   const loadData = useDesignStore(state => state.loadData);
   const isGac = useDesignStore(state => state.selectedInputDesignId === 'gac-workspace');
   useEffect(() => { loadData(); }, [loadData]);
   return <div className={`app-container ${isGac ? 'gac-workspace' : ''}`}>
     <header className="app-heading">CoDesign</header>
-    <div className="workspace-layout">
+    <div className="workspace-tabs" role="tablist" aria-label="CoDesign workspace"><button role="tab" aria-selected={tab === 'design'} onClick={() => setTab('design')}>Design</button><button role="tab" aria-selected={tab === 'commissioning'} onClick={() => setTab('commissioning')}>Commissioning</button></div><div hidden={tab !== 'commissioning'}><CommissioningPanel /></div><div hidden={tab !== 'design'}><div className="workspace-layout">
       <aside className="workspace-sidebar">{isGac ? <GacProgress /> : <TaskPanel />}</aside>
       <main className="workspace-main">
         <section className="graph-section">{isGac ? <GacResearchPanel /> : <DisplayPanel />}</section>
@@ -24,6 +26,6 @@ function App() {
         <section className="assistant-section"><div className="panel-title">Assistant <GacApiStatus /></div><div className="chat-section"><ChatPanel /></div>{isGac && <GacPanel />}</section>
       </aside>
     </div>
-  </div>;
+  </div></div>;
 }
 export default App;
