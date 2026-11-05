@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { generateDecisionLog } from './decisionAgent.js';
 import { answerGraphRag } from './graphRag.js';
 import { answerGacAssistant } from './gacAssistant.js';
+import { runGacCalculationAgent } from './gacToolAgent.js';
 
 const app = express();
 const port = Number(process.env.API_PORT || 8787);
@@ -62,6 +63,14 @@ app.get('/api/designs/:id', async (req, res) => {
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, hasOpenAIKey: Boolean(process.env.OPENAI_API_KEY) });
 });
+app.post('/api/gac/calculate', async (req, res) => {
+  // Local desktop execution only. Remote deployments return an explicit unavailable error.
+  const origin = req.headers.origin;
+  if (origin && !/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return res.status(403).json({ error: 'Excel tools accept local app requests only.', code: 'local_only' });
+  try { res.json(await runGacCalculationAgent(req.body?.inputs)); }
+  catch (error) { res.status(error.status || 503).json({ error: error.message || 'Native Excel calculation failed.', code: error.code || 'excel_execution_failed', fallbackUsed: false }); }
+});
+
 app.post('/api/gac/assistant', async (req, res) => {
   const { query, context } = req.body || {};
   if (typeof query !== 'string' || !query.trim() || query.length > 6000 || !context?.form || !Array.isArray(context?.graph?.nodes)) return res.status(400).json({ error: 'Missing query or design context.' });

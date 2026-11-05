@@ -1,0 +1,11 @@
+export type UnitSystem = 'si' | 'us';
+export type Quantity = 'flow' | 'length' | 'area' | 'volume' | 'mass' | 'density' | 'pipe';
+export const FT_M: number, FT3_M3: number, LB_KG: number, GPM_M3H: number;
+export function unitLabel(quantity: Quantity, system?: UnitSystem): string;
+export function displayNumber(value: number, quantity: Quantity, system?: UnitSystem): number;
+export function quantity(value: unknown, kind: Quantity, system?: UnitSystem, digits?: number): string;
+export function fieldDisplay(key: string, value: unknown, system?: UnitSystem, flowUnit?: string): string;
+export function fieldCanonical(key: string, value: string, system?: UnitSystem, flowUnit?: string): string;
+export function fieldLabel(key: string, fallback: string, system?: UnitSystem): string;
+export function fieldValue(key: string, form: Record<string, string>, system?: UnitSystem): string;
+export function fieldDefinition(key: string, definition: string, system?: UnitSystem): string;

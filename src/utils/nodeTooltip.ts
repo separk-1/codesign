@@ -1,4 +1,5 @@
-export function nodeTooltip(node: any): string {
+import { quantity, UnitSystem } from '../../shared/gacUnits.js';
+export function nodeTooltip(node: any, unitSystem: UnitSystem = 'si'): string {
   const attributes = node.attributes || {};
   const lines = [String(node.name || node.id || 'Item')];
   const fields: [string, string, string?][] = [
@@ -11,9 +12,10 @@ export function nodeTooltip(node: any): string {
     const value = attributes[key];
     if (value == null || value === '' || typeof value === 'object') continue;
     if (/^(TBD|Not selected|Not specified|Unresolved)$/i.test(String(value))) continue;
-    const text = typeof value === 'number' ? String(Number(value.toFixed(3))) : String(value);
+    const converted = typeof value === 'number' && key === 'mediaVolumeM3' ? quantity(value, 'volume', unitSystem) : typeof value === 'number' && key === 'diameter' ? quantity(value, 'length', unitSystem) : null;
+    const text = converted ?? (typeof value === 'number' ? String(Number(value.toFixed(3))) : String(value));
     const concise = text.length > 100 ? `${text.slice(0, 97)}…` : text;
-    lines.push(`${label ? `${label}: ` : ''}${concise}${unit ? ` ${unit}` : ''}`);
+    lines.push(`${label ? `${label}: ` : ''}${concise}${unit && !converted ? ` ${unit}` : ''}`);
     if (lines.length === 4) break;
   }
   return lines.join('\n');

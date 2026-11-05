@@ -1,3 +1,4 @@
+import { fieldLabel, fieldValue, quantity, UnitSystem } from '../../shared/gacUnits.js';
 import { nodeTooltip } from '../utils/nodeTooltip';
 import { useGacWorkflowStore, gacCommand } from '../store/gacWorkflowStore';
 import { useDesignStore } from '../store/designStore';
@@ -5,6 +6,7 @@ import { buildGacGraph, GacGraph } from '../utils/gacDesign';
 import { GacFormulaGraph } from './GacFormulaGraph';
 
 function ProcessDiagram({ graph }: { graph: GacGraph }) {
+  const unitSystem = useGacWorkflowStore(s => s.unitSystem);
   const selectNode = useDesignStore(s => s.selectNode);
   const vessels = graph.nodes.filter(n => n.type === 'Equipment');
   const trains = Math.max(1, ...vessels.map(n => Number(n.id.match(/gac-t(\d+)/)?.[1] || 1)));
@@ -24,22 +26,22 @@ function ProcessDiagram({ graph }: { graph: GacGraph }) {
         return <g key={`${index}-${node.id}`}>
           {position < nodes.length - 1 && <><line x1={x + 105} y1={y + 20} x2={x + 125} y2={y + 20} stroke="#555" /><path d={`M${x + 120},${y + 16} l5,4 l-5,4`} fill="none" stroke="#555" /></>}
           <g role="button" tabIndex={0} aria-label={node.name} onClick={() => selectNode(node)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectNode(node); } }} style={{ cursor: 'pointer' }}>
-            <title>{nodeTooltip(node)}</title>
+            <title>{nodeTooltip(node, unitSystem)}</title>
             <rect x={x} y={y} width={105} height={40} fill="#fff" stroke="#555" strokeDasharray={stale ? '4 3' : undefined} />
             <text x={x + 52.5} y={y + 24} textAnchor="middle" fontSize={12}>{label}</text>
           </g>
-          <text x={x + 52.5} y={y + 58} textAnchor="middle" fontSize={11}>{node.type === 'Equipment' ? `${node.attributes.mediaVolumeM3.toFixed(2)} m³ media` : node.id === 'gac-concept' ? 'Sizing unresolved' : ''}</text>
+          <text x={x + 52.5} y={y + 58} textAnchor="middle" fontSize={11}>{node.type === 'Equipment' ? `${quantity(node.attributes.mediaVolumeM3, 'volume', unitSystem, 2)} media` : node.id === 'gac-concept' ? 'Sizing unresolved' : ''}</text>
         </g>;
       })}</g>;
     })}
-  </svg>{graph.nodes.some(n => n.type === 'SpareEquipment') && <div className="spare-vessels">{graph.nodes.filter(n => n.type === 'SpareEquipment').map(n => <span key={n.id} title={nodeTooltip(n)}>{n.name} (unconnected spare)</span>)}</div>}</div>;
+  </svg>{graph.nodes.some(n => n.type === 'SpareEquipment') && <div className="spare-vessels">{graph.nodes.filter(n => n.type === 'SpareEquipment').map(n => <span key={n.id} title={nodeTooltip(n, unitSystem)}>{n.name} (unconnected spare)</span>)}</div>}</div>;
 }
-function media(graph: GacGraph) {
+function media(graph: GacGraph, unitSystem: UnitSystem) {
   const vessels = graph.nodes.filter(n => n.type === 'Equipment');
-  return vessels.length ? `${vessels.reduce((sum, n) => sum + n.attributes.mediaVolumeM3, 0).toFixed(3)} m³` : 'Unresolved';
+  return vessels.length ? quantity(vessels.reduce((sum, n) => sum + n.attributes.mediaVolumeM3, 0), 'volume', unitSystem) : 'Unresolved';
 }
 export function GacResearchPanel() {
-  const { proposal, accepted, graph, beforeGraph, form, graphTab } = useGacWorkflowStore();
+  const { proposal, accepted, graph, beforeGraph, form, graphTab, unitSystem } = useGacWorkflowStore();
   const stale = graph.nodes.some(n => n.attributes?.calculationState === 'stale');
   const before = proposal ? graph : accepted ? beforeGraph : graph;
   const after = proposal ? buildGacGraph(proposal) : graph;
@@ -53,24 +55,25 @@ export function GacResearchPanel() {
       </div>
       {result && <table className="change-table"><thead><tr><th>Design item</th><th>Before</th><th>{proposal ? 'Proposed' : 'Current'}</th></tr></thead><tbody>
         <tr><td>Vessels</td><td>{before.nodes.filter(n => n.type === 'Equipment').length || 'Unresolved'}</td><td>{result?.vesselCount || 'Unresolved'}</td></tr>
-        <tr><td>Required media volume</td><td>{before.nodes.find(n => n.id === 'gac-calculation') ? `${(before.nodes.find(n => n.id === 'gac-calculation')!.attributes.requiredMediaM3 ?? before.nodes.find(n => n.id === 'gac-calculation')!.attributes.totalMediaM3).toFixed(3)} m³` : 'Unresolved'}</td><td>{result ? `${(result.requiredMediaM3 ?? result.totalMediaM3).toFixed(3)} m³` : 'Unresolved'}</td></tr>
-        <tr><td>Media per vessel</td><td>{before.nodes.find(n => n.type === 'Equipment') ? `${before.nodes.find(n => n.type === 'Equipment')!.attributes.mediaVolumeM3.toFixed(3)} m³` : 'Unresolved'}</td><td>{result ? `${result.mediaPerVesselM3.toFixed(3)} m³` : 'Unresolved'}</td></tr>
-        {result?.workbook && <><tr><td>Installed operating media</td><td>{media(before)}</td><td>{result.workbook.operatingMediaM3.toFixed(3)} m³</td></tr>
-          <tr><td>Diameter × straight height</td><td>—</td><td>{result.workbook.diameterM.toFixed(3)} × {result.workbook.heightM.toFixed(3)} m</td></tr>
-          <tr><td>GAC mass incl. spare vessels</td><td>—</td><td>{result.workbook.installedCarbonKg.toFixed(1)} kg</td></tr>
+        <tr><td>Required media volume</td><td>{before.nodes.find(n => n.id === 'gac-calculation') ? quantity(before.nodes.find(n => n.id === 'gac-calculation')!.attributes.requiredMediaM3 ?? before.nodes.find(n => n.id === 'gac-calculation')!.attributes.totalMediaM3, 'volume', unitSystem) : 'Unresolved'}</td><td>{result ? quantity(result.requiredMediaM3 ?? result.totalMediaM3, 'volume', unitSystem) : 'Unresolved'}</td></tr>
+        <tr><td>Media per vessel</td><td>{before.nodes.find(n => n.type === 'Equipment') ? quantity(before.nodes.find(n => n.type === 'Equipment')!.attributes.mediaVolumeM3, 'volume', unitSystem) : 'Unresolved'}</td><td>{result ? quantity(result.mediaPerVesselM3, 'volume', unitSystem) : 'Unresolved'}</td></tr>
+        {result?.workbook && <><tr><td>Installed operating media</td><td>{media(before, unitSystem)}</td><td>{quantity(result.workbook.operatingMediaM3, 'volume', unitSystem)}</td></tr>
+          <tr><td>Diameter × straight height</td><td>—</td><td>{quantity(result.workbook.diameterM, 'length', unitSystem)} × {quantity(result.workbook.heightM, 'length', unitSystem)}</td></tr>
+          <tr><td>GAC mass incl. spare vessels</td><td>—</td><td>{quantity(result.workbook.installedCarbonKg, 'mass', unitSystem, 1)}</td></tr>
           <tr><td>Redundant vessels</td><td>—</td><td>{result.workbook.redundantVessels}</td></tr>
-          <tr><td>Process / inlet pipe size</td><td>—</td><td>{result.workbook.processPipeInches} / {result.workbook.influentPipeInches} in</td></tr>
-          <tr><td>Carbon life / annual carbon</td><td>—</td><td>{result.workbook.carbonLifeMonths ? `${result.workbook.carbonLifeMonths.toFixed(2)} months / ${result.workbook.annualCarbonKg.toFixed(1)} kg/year` : 'Carbon-life input required'}</td></tr></>}
+          <tr><td title="Workbook lookup sizes; mm values are converted inches, not nominal DN designations.">Process / inlet pipe size</td><td>—</td><td>{quantity(result.workbook.processPipeInches * 0.0254, 'pipe', unitSystem, 1)} / {quantity(result.workbook.influentPipeInches * 0.0254, 'pipe', unitSystem, 1)}</td></tr>
+          <tr><td>Carbon life / annual carbon</td><td>—</td><td>{result.workbook.carbonLifeMonths ? `${result.workbook.carbonLifeMonths.toFixed(2)} months / ${quantity(result.workbook.annualCarbonKg, 'mass', unitSystem, 1)}/year` : 'Carbon-life input required'}</td></tr></>}
         <tr><td>Sampling / hydraulic verification</td><td>Unresolved</td><td>Further design required</td></tr>
       </tbody></table>}
       {result && <div className="calculation-evidence"><h3>Calculation basis</h3>
-        <p>{result.flowM3H.toFixed(3)} m³/h × {result.inputs.totalEbctMinutes} min ÷ 60 = {(result.requiredMediaM3 ?? result.totalMediaM3).toFixed(3)} m³ required{result.inputs.flowUnit === 'gpm' ? ` (${result.inputs.flow} US gpm converted)` : ''}</p>
+        <p>{quantity(result.flowM3H, 'flow', unitSystem)} × {result.inputs.totalEbctMinutes} min {unitSystem === 'si' ? '÷ 60 min/h' : '÷ 7.480519 US gal/ft³'} = {quantity(result.theoreticalMediaM3 ?? result.requiredMediaM3 ?? result.totalMediaM3, 'volume', unitSystem)} theoretical media</p>
+        {result.workbook && <p>Excel required media: {quantity(result.requiredMediaM3, 'volume', unitSystem)}. Original workbook conversion: 7.481 US gal/ft³; the theoretical conversion above uses exact unit factors.</p>}
         <p>{result.inputs.series} series × {result.inputs.parallel} parallel; {result.ebctPerVesselMinutes.toFixed(2)} min per vessel</p>
         <details><summary>Source</summary><p>{result.inputs.ebctSource}</p></details>
-        {result.workbook && <details><summary>Excel formulas</summary><p>{result.workbook.source.file}</p><p>{result.workbook.inputs.geometryMode === 'auto' ? 'AutoSize upright dimensions for requested trains' : 'Manual upright vessel dimensions'}; installed total EBCT: {result.workbook.actualTotalEbctMinutes.toFixed(3)} min</p>{result.workbook.formulaTrace.map((f: any) => <p key={f.citation}><strong>{f.citation}</strong><br /><code>{f.formula}</code></p>)}<p>{result.workbook.assumptions.constants}</p></details>}
+        {result.workbook && <details><summary>Excel formulas (original workbook units)</summary><p>{result.workbook.source.file}</p><p>{result.workbook.inputs.geometryMode === 'auto' ? 'AutoSize upright dimensions for requested trains' : 'Manual upright vessel dimensions'}; installed total EBCT: {result.workbook.actualTotalEbctMinutes.toFixed(3)} min</p>{result.workbook.formulaTrace.map((f: any) => <p key={f.citation}><strong>{f.citation}</strong><br /><code>{f.formula}</code></p>)}<p>{result.workbook.assumptions.constants}</p></details>}
         <details><summary>Calculation assumptions</summary><ul>{result.assumptions.map(a => <li key={a}>{a}</li>)}</ul><p>{result.version}</p></details>
       </div>}
-      {!result && <p className="basis-summary">{form.species || 'PFAS'} · {form.flow || '—'} {form.flowUnit} · {form.totalEbctMinutes || '—'} min EBCT</p>}
+      {!result && <p className="basis-summary">{form.species || 'PFAS'} · {fieldValue('flow', form, unitSystem)} · {form.totalEbctMinutes || '—'} min EBCT</p>}
       {proposal && <div className="research-actions"><button onClick={() => gacCommand('accept')}>Accept and apply</button><button onClick={() => gacCommand('reject')}>Reject</button></div>}
     </div>}
   </div>;
@@ -86,15 +89,15 @@ export function GacProgress() {
   </ol></div>;
 }
 export function GacDecisionTrail() {
-  const { history } = useGacWorkflowStore();
+  const { history, unitSystem } = useGacWorkflowStore();
   return <div className="research-trail"><div className="panel-title">Log</div><div className="trail-entries">
     {history.length === 0 && <p>No decisions yet.</p>}
     {history.slice().reverse().map((event, index) => {
       const result = event.calculation || event.result;
-      const description = event.action === 'User accepted GAC proposal' ? `${result.inputs.flow} ${result.inputs.flowUnit}, ${result.inputs.totalEbctMinutes} min → ${result.vesselCount} vessels × ${result.mediaPerVesselM3.toFixed(3)} m³ → user accepted → ${event.changedVesselIds.join(', ')}`
-        : event.action === 'Calculate GAC proposal' ? `${result.inputs.flow} ${result.inputs.flowUnit}, ${result.inputs.totalEbctMinutes} min → ${result.totalMediaM3.toFixed(3)} m³ → proposed`
-        : event.field ? `${event.field}: ${event.before} → ${event.after} → sizing requires review` : event.action;
-      return <div className="trail-entry" key={`${event.timestamp}-${index}`}><p>{description}</p><details><summary>Evidence</summary><pre>{JSON.stringify(event, null, 2)}</pre></details></div>;
+      const description = event.action === 'User accepted GAC proposal' ? `${quantity(result.flowM3H, 'flow', unitSystem)}, ${result.inputs.totalEbctMinutes} min → ${result.vesselCount} vessels × ${quantity(result.mediaPerVesselM3, 'volume', unitSystem)} → user accepted → ${event.changedVesselIds.join(', ')}`
+        : event.action === 'Calculate GAC proposal' ? `${quantity(result.flowM3H, 'flow', unitSystem)}, ${result.inputs.totalEbctMinutes} min → ${quantity(result.totalMediaM3, 'volume', unitSystem)} → proposed`
+        : event.field ? `${fieldLabel(event.field, event.field, unitSystem)}: ${fieldValue(event.field, { [event.field]: event.before, flowUnit: 'm3/h' }, unitSystem)} → ${fieldValue(event.field, { [event.field]: event.after, flowUnit: 'm3/h' }, unitSystem)} → sizing requires review` : event.action;
+      return <div className="trail-entry" key={`${event.timestamp}-${index}`}><p>{description}</p><details><summary>Evidence (stored units)</summary><pre>{JSON.stringify(event, null, 2)}</pre></details></div>;
     })}
   </div></div>;
 }

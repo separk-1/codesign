@@ -109,3 +109,10 @@ body { margin: 0; background: #eee; color: #222; font-family: Arial, sans-serif;
 .basis-inputs { max-height: 430px; overflow-y: auto; padding: 8px 5px 8px 0; border-bottom: 1px solid #aaa; }
 .basis-inputs > label { display: block; margin-top: 10px; }
 .basis-inputs > label input, .basis-inputs > label select { display: block; width: 100%; }
+
+/* One display-unit setting for the GAC workspace. */
+.app-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.unit-toggle { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid #999; border-radius: 6px; background: #fff; color: #555; }
+.unit-toggle span { padding: 3px 12px; border-radius: 3px; }
+.app-container .unit-toggle .selected { background: #333; color: white !important; font-weight: bold; }
+.unit-toggle:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }

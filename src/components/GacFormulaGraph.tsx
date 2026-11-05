@@ -4,9 +4,9 @@ import { useGacWorkflowStore } from '../store/gacWorkflowStore';
 import { buildWorkbookGraph } from '../../shared/gacContext.js';
 import model from '../data/gacWorkbook.json';
 export function GacFormulaGraph() {
-  const { form, proposal, accepted, graph, highlightedFields } = useGacWorkflowStore();
+  const { form, proposal, accepted, graph, highlightedFields, unitSystem } = useGacWorkflowStore();
   const [selected, setSelected] = useState<string | null>(null);
-  const kg = buildWorkbookGraph(form, proposal || accepted, model, graph);
+  const kg = buildWorkbookGraph(form, proposal || accepted, model, graph, unitSystem);
   const focus = selected ? [selected] : highlightedFields;
   const related = new Set(focus);
   // Highlight downstream dependencies transitively.
@@ -25,11 +25,11 @@ export function GacFormulaGraph() {
         return <path key={i} d={`M${x(a) + 170},${y(a) + 25} C${x(a) + 185},${y(a) + 25} ${x(b) - 15},${y(b) + 25} ${x(b)},${y(b) + 25}`} fill="none" stroke={strong ? '#222' : '#bbb'} strokeWidth={strong ? 2 : 1} opacity={focus.length && !strong ? 0.25 : 1} markerEnd="url(#formula-arrow)"><title>{l.source} → {l.target}\n{l.citation}</title></path>;
       })}
       {kg.nodes.map((n: any) => <g key={n.id} role="button" tabIndex={0} aria-label={n.name} onClick={() => setSelected(selected === n.id ? null : n.id)} onKeyDown={e => { if (e.key === 'Enter') setSelected(selected === n.id ? null : n.id); }} style={{ cursor: 'pointer' }}>
-        <title>{nodeTooltip(n)}</title>
+        <title>{nodeTooltip(n, unitSystem)}</title>
         <rect x={x(n)} y={y(n)} width={170} height={53} fill={related.has(n.id) ? '#eee' : '#fff'} stroke={related.has(n.id) ? '#222' : '#999'} />
         <text x={x(n) + 8} y={y(n) + 19} fontSize={11}>{n.name}</text><text x={x(n) + 8} y={y(n) + 39} fontSize={10} fill="#555">{n.value}</text>
       </g>)}
     </svg>
-    {selected && <div className="formula-selection"><strong>{byId.get(selected).name}</strong><pre>{JSON.stringify(byId.get(selected).attributes, null, 2)}</pre></div>}
+    {selected && <div className="formula-selection"><strong>{byId.get(selected).name}</strong><p>Displayed values use selected units. Formulas and stored values retain original workbook units.</p><pre>{JSON.stringify(byId.get(selected).attributes, null, 2)}</pre></div>}
   </div>;
 }

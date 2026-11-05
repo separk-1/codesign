@@ -1,16 +1,26 @@
+import fs from 'node:fs';
+import { GPM_M3H, FT3_M3 } from '../shared/gacUnits.js';
+import { calculateWorkbook } from '../shared/gacWorkbookEngine.js';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
+const required = flow => (flow / GPM_M3H * 20 / 7.481 * FT3_M3).toFixed(3) + ' m³';
 const browser = await chromium.launch({ headless: true, channel: process.env.GAC_BROWSER_CHANNEL || 'msedge' });
 try {
   const page = await browser.newPage({ viewport: { width: 1500, height: 1000 } });
   const errors = []; page.on('pageerror', e => errors.push(e.message));
+  // Isolate UI behavior from Excel/LLM availability. Native Excel is tested separately.
+  const model = JSON.parse(fs.readFileSync('src/data/gacWorkbook.json'));
+  await page.route('**/api/gac/calculate', route => {
+    const result = calculateWorkbook(route.request().postDataJSON().inputs, model);
+    return route.fulfill({ json: { ...result, execution: { engine: 'microsoft_excel', recalculated: true, testFixture: true }, toolCalls: [] } });
+  });
   await page.goto(process.env.GAC_TEST_URL || 'http://127.0.0.1:4173');
   await page.getByRole('button', { name: 'Design basis +', exact: true }).click();
   assert.equal(await page.getByRole('textbox', { name: 'flow', exact: true }).inputValue(), '100');
   assert.equal(await page.getByRole('combobox', { name: 'species', exact: true }).inputValue(), 'PFOA');
   assert.ok(await page.getByRole('combobox', { name: 'species', exact: true }).getAttribute('title'));
   await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
-  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('33.333 m³', { exact: true }).waitFor();
+  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText(required(100), { exact: true }).waitFor();
   assert.equal(await page.locator('.change-table tbody tr').nth(0).locator('td').nth(1).textContent(), 'Unresolved');
   await page.getByRole('combobox', { name: 'species', exact: true }).selectOption('');
   await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
@@ -20,7 +30,7 @@ try {
     else await page.getByRole('textbox', { name: field, exact: true }).or(page.getByRole('textbox', { name: field, exact: true })).fill(value);
   }
   await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
-  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('33.333 m³', { exact: true }).waitFor();
+  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText(required(100), { exact: true }).waitFor();
   await page.getByRole('button', { name: 'Accept and apply', exact: true }).click();
   await page.getByRole('status').filter({ hasText: 'Sizing applied to the design' }).waitFor();
   await page.getByRole('button', { name: 'GAC T1 / V1', exact: true }).last().click();
@@ -32,7 +42,7 @@ try {
   await page.getByRole('textbox', { name: 'flow', exact: true }).fill('200');
   await page.getByRole('status').filter({ hasText: 'Applied values are stale' }).waitFor();
   await page.getByRole('button', { name: 'Calculate GAC sizing' }).click();
-  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('66.667 m³', { exact: true }).waitFor();
+  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText(required(200), { exact: true }).waitFor();
   await page.getByRole('button', { name: 'Reject', exact: true }).click();
   await page.getByText('Case data', { exact: true }).click();
   const downloadPromise = page.waitForEvent('download');
@@ -49,7 +59,7 @@ try {
   await chat.fill('flow=150'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
   assert.equal(await page.getByRole('textbox', { name: 'flow', exact: true }).inputValue(), '150');
   await chat.fill('calculate'); await page.getByRole('button', { name: 'SEND', exact: true }).click();
-  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText('50.000 m³', { exact: true }).waitFor();
+  await page.locator('.change-table tbody tr').nth(1).locator('td').nth(2).getByText(required(150), { exact: true }).waitFor();
   await page.getByRole('button', { name: 'Accept and apply', exact: true }).click();
   await page.getByRole('status').filter({ hasText: 'Sizing applied to the design' }).waitFor();
   await page.screenshot({ path: 'docs/gac-workflow.png', fullPage: true });

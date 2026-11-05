@@ -7,6 +7,7 @@ export interface GacBasis {
 export interface GacCalculation {
   workbook?: any;
   requiredMediaM3?: number;
+  theoreticalMediaM3?: number;
   evidence?: any;
   version: string; inputs: GacBasis; flowM3H: number; totalMediaM3: number;
   mediaPerVesselM3: number; ebctPerVesselMinutes: number; flowPerTrainM3H: number;

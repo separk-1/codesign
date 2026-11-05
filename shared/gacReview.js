@@ -1,3 +1,4 @@
+import { quantity, fieldValue, FT_M, LB_KG, FT3_M3 } from './gacUnits.js';
 import { calculateWorkbook } from './gacWorkbookEngine.js';
 import { searchKnowledge } from './gacKnowledgeEngine.js';
 
@@ -9,7 +10,7 @@ export function workbookInputs(form) {
     redundantVessels: unknownValue(form.redundantVessels) ? '' : form.redundantVessels,
     influentMgL: Number(form.influentNgL) / 1e6, targetMgL: Number(form.targetNgL) / 1e6 };
 }
-export function reviewGacInputs(form, model, corpus) {
+export function reviewGacInputs(form, model, corpus, unitSystem = 'us') {
   const issues = [], suggestions = [], questions = [];
   const add = (field, message, source = 'Input consistency') => issues.push({ field, message, source, severity: 'blocking' });
   const required = ['species', 'flow', 'averageFlow', 'totalEbctMinutes', 'series', 'densityLbFt3'];
@@ -24,16 +25,16 @@ export function reviewGacInputs(form, model, corpus) {
   }
   if (!unknownValue(form.series) && Number.isFinite(Number(form.series)) && !Number.isInteger(Number(form.series))) add('series', 'Vessel count must be a whole number because vessels are discrete pieces of equipment.');
   if (!unknownValue(form.redundantVessels) && (!Number.isSafeInteger(Number(form.redundantVessels)) || Number(form.redundantVessels) < 0 || Number(form.redundantVessels) > 20)) add('redundantVessels', 'Spare vessel count must be a whole number from 0 to 20 within the supported calculation range.');
-  if (Number(form.averageFlow) > Number(form.flow)) add('averageFlow', `Average flow (${form.averageFlow}) exceeds design flow (${form.flow}). The design must accommodate the operating flow; confirm which value is incorrect.`);
+  if (Number(form.averageFlow) > Number(form.flow)) add('averageFlow', `Average flow (${fieldValue('averageFlow', form, unitSystem)}) exceeds design flow (${fieldValue('flow', form, unitSystem)}). The design must accommodate the operating flow; confirm which value is incorrect.`);
   if (form.carbonLifeMode === 'freundlich' && !unknownValue(form.targetNgL) && !unknownValue(form.influentNgL) && Number(form.targetNgL) >= Number(form.influentNgL)) add('targetNgL', 'Breakthrough concentration must be below influent concentration; otherwise this removal-capacity calculation has no valid positive concentration difference.');
   const expansion = model.assumptions.bed_expansion.value, freeboard = model.assumptions.free_board.value;
-  if (form.geometryMode !== 'auto' && Number(form.heightFt) > 0 && Number(form.bedDepthFt) > 0 && Number(form.heightFt) < Number(form.bedDepthFt) * (1 + expansion) + freeboard) add('heightFt', `The expanded GAC bed needs at least ${(Number(form.bedDepthFt) * (1 + expansion) + freeboard).toFixed(2)} ft of straight height (${expansion * 100}% expansion plus ${freeboard} ft freeboard). The entered height is too small.`, 'Workbook expanded-bed and freeboard constraints');
-  if (missing.includes('densityLbFt3')) suggestions.push({ id: 'density', label: `Use workbook density assumption: ${model.assumptions.GAC_density.value} lb/ft³`, patch: { densityLbFt3: String(model.assumptions.GAC_density.value) }, reason: 'A documented workbook assumption, not a measurement of your selected carbon. Confirm against the supplier specification.', source: model.assumptions.GAC_density.citation, sourceHash: model.source.sha256, kind: 'assumption' });
+  if (form.geometryMode !== 'auto' && Number(form.heightFt) > 0 && Number(form.bedDepthFt) > 0 && Number(form.heightFt) < Number(form.bedDepthFt) * (1 + expansion) + freeboard) add('heightFt', `The expanded GAC bed needs at least ${quantity((Number(form.bedDepthFt) * (1 + expansion) + freeboard) * FT_M, 'length', unitSystem, 2)} of straight height (${expansion * 100}% expansion plus ${quantity(freeboard * FT_M, 'length', unitSystem, 2)} freeboard). The entered height is too small.`, 'Workbook expanded-bed and freeboard constraints');
+  if (missing.includes('densityLbFt3')) suggestions.push({ id: 'density', label: `Use workbook density assumption: ${quantity(model.assumptions.GAC_density.value * LB_KG / FT3_M3, 'density', unitSystem, 3)}`, patch: { densityLbFt3: String(model.assumptions.GAC_density.value) }, reason: 'A documented workbook assumption, not a measurement of your selected carbon. Confirm against the supplier specification.', source: model.assumptions.GAC_density.citation, sourceHash: model.source.sha256, kind: 'assumption' });
   const geometryMissing = ['diameterFt', 'heightFt', 'bedDepthFt'].some(k => unknownValue(form[k]));
   if (geometryMissing && !['flow', 'averageFlow', 'totalEbctMinutes', 'series', 'densityLbFt3'].some(k => unknownValue(form[k])) && !issues.length) {
     try {
       const sizing = calculateWorkbook({ ...workbookInputs(form), geometryMode: 'auto', carbonLifeMode: 'none' }, model);
-      suggestions.push({ id: 'geometry', label: `Use calculated dimensions: ${sizing.diameterFt} ft diameter, ${sizing.heightFt} ft height, ${sizing.bedDepthFt} ft bed`, patch: { diameterFt: String(sizing.diameterFt), heightFt: String(sizing.heightFt), bedDepthFt: String(sizing.bedDepthFt), geometryMode: 'manual' }, reason: 'The workbook AutoSize formulas satisfy the supported geometry, expansion and loading constraints for the requested train count. PFAS removal performance is not determined by this sizing.', source: sizing.formulaTrace.filter(f => f.citation.startsWith('AutoSize!')).map(f => f.citation).join(', '), sourceHash: model.source.sha256, kind: 'calculated' });
+      suggestions.push({ id: 'geometry', label: `Use calculated dimensions: ${quantity(sizing.diameterFt * FT_M, 'length', unitSystem)} diameter, ${quantity(sizing.heightFt * FT_M, 'length', unitSystem)} height, ${quantity(sizing.bedDepthFt * FT_M, 'length', unitSystem)} bed`, patch: { diameterFt: String(sizing.diameterFt), heightFt: String(sizing.heightFt), bedDepthFt: String(sizing.bedDepthFt), geometryMode: 'manual' }, reason: 'The workbook AutoSize formulas satisfy the supported geometry, expansion and loading constraints for the requested train count. PFAS removal performance is not determined by this sizing.', source: sizing.formulaTrace.filter(f => f.citation.startsWith('AutoSize!')).map(f => f.citation).join(', '), sourceHash: model.source.sha256, kind: 'calculated' });
     } catch (error) { questions.push({ field: 'geometry', text: `Automatic sizing could not supply dimensions: ${error.message}` }); }
   }
   if ((missing.includes('totalEbctMinutes') || missing.includes('series')) && corpus && !unknownValue(form.species)) {

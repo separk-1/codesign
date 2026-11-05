@@ -1,3 +1,4 @@
+import { fieldLabel, fieldValue, fieldDefinition, displayNumber, unitLabel, FT_M, GPM_M3H } from './gacUnits.js';
 export const workbookFields = {
   species: { label: 'PFAS species', citation: 'INPUT!E4 (contaminant selection)', definition: 'The PFAS compound selected for the design. It identifies compound-specific PFAS Reference records; the name alone does not predict removal performance.', aliases: ['pfas species', 'species'] },
   flow: { label: 'Design flow', citation: 'INPUT!G29', definition: 'The maximum design treatment flow. Flow and EBCT determine required media volume. Flow divided by vessel capacity determines parallel train count.', aliases: ['design flow', 'flow'] },
@@ -38,11 +39,11 @@ function calculationRelations(form) {
   }
   return edges;
 }
-export function buildWorkbookGraph(form, result, model, designGraph) {
+export function buildWorkbookGraph(form, result, model, designGraph, unitSystem = 'si') {
   const w = result?.workbook;
   const inputKeys = ['flow', 'totalEbctMinutes', 'series', 'diameterFt', 'bedDepthFt', 'heightFt', 'densityLbFt3', 'averageFlow', 'carbonLifeValue'];
-  const nodes = inputKeys.map((key, i) => ({ id: key, name: workbookFields[key].label, type: 'ExcelInput', column: 0, row: i,
-    value: form[key] ? `${form[key]}${['flow', 'averageFlow'].includes(key) ? ' ' + form.flowUnit : ''}` : 'Not specified', citation: workbookFields[key].citation, attributes: { ...workbookFields[key], value: form[key] || null } }));
+  const nodes = inputKeys.map((key, i) => ({ id: key, name: fieldLabel(key, workbookFields[key].label, unitSystem), type: 'ExcelInput', column: 0, row: i,
+    value: fieldValue(key, form, unitSystem), citation: workbookFields[key].citation, attributes: { ...workbookFields[key], definition: fieldDefinition(key, workbookFields[key].definition, unitSystem), value: fieldValue(key, form, unitSystem), storedValue: form[key] || null, storedField: key } }));
   const calculations = [
     ['required', 'Required media', w?.requiredMediaM3, 'm³', 'Contactor Constraints!C38', 1],
     ['perEbct', 'EBCT per vessel', result ? result.inputs.totalEbctMinutes / result.inputs.series : null, 'min', 'Contactor Constraints!C27', 1],
@@ -56,17 +57,21 @@ export function buildWorkbookGraph(form, result, model, designGraph) {
     ['count', 'Operating vessels', w?.operatingVessels, '', 'Contactor Constraints!C33', 4],
     ['life', 'Carbon life', w?.carbonLifeMonths, 'months', 'Backwash and Regeneration!C36', 4]
   ];
+  const conversions = { required: ['volume', 1], area: ['area', FT_M ** 2], media: ['volume', 1], capacity: ['flow', GPM_M3H], mass: ['mass', 1], pipe: ['pipe', 0.0254] };
   const slots = {};
   for (const [id, name, value, unit, citation, column] of calculations) {
     const row = slots[column] || 0; slots[column] = row + 1;
+    const conversion = conversions[id];
+    const shown = conversion && typeof value === 'number' ? displayNumber(value * conversion[1], conversion[0], unitSystem) : value;
+    const shownUnit = conversion ? unitLabel(conversion[0], unitSystem) : unit;
     nodes.push({ id, name, type: 'ExcelCalculation', column, row,
-      value: value == null ? 'Not calculated' : `${typeof value === 'number' ? Number(value.toFixed(3)) : value} ${unit}`.trim(), citation,
-      attributes: { citation, formula: model.formulas[citation]?.formula, value: value ?? null, unit, state: designGraph?.nodes.some(n => n.attributes?.calculationState === 'stale') ? 'stale result' : result ? 'proposal or applied result' : 'pending', mode: form.carbonLifeMode } });
+      value: shown == null ? 'Not calculated' : `${typeof shown === 'number' ? Number(shown.toFixed(3)) : shown} ${shownUnit}`.trim(), citation,
+      attributes: { citation, formula: model.formulas[citation]?.formula, value: shown ?? null, unit: shownUnit, storedValue: value ?? null, storedUnit: unit, formulaUnits: 'original workbook units', state: designGraph?.nodes.some(n => n.attributes?.calculationState === 'stale') ? 'stale result' : result ? 'proposal or applied result' : 'pending', mode: form.carbonLifeMode } });
   }
   const links = calculationRelations(form).map(([source, target, citation]) => ({ source, target, citation, label: 'input_to_formula' }));
   if (form.carbonLifeMode === 'freundlich') for (const key of ['freundlichExponent', 'influentNgL', 'targetNgL']) {
-    nodes.push({ id: key, name: workbookFields[key].label, type: 'ExcelInput', column: 0, row: nodes.filter(n => n.column === 0).length,
-      value: form[key] || 'Not specified', citation: workbookFields[key].citation, attributes: { ...workbookFields[key], value: form[key] } });
+    nodes.push({ id: key, name: fieldLabel(key, workbookFields[key].label, unitSystem), type: 'ExcelInput', column: 0, row: nodes.filter(n => n.column === 0).length,
+      value: fieldValue(key, form, unitSystem), citation: workbookFields[key].citation, attributes: { ...workbookFields[key], value: fieldValue(key, form, unitSystem), storedValue: form[key], storedField: key } });
     links.push({ source: key, target: 'life', citation: 'Backwash and Regeneration!C36', label: 'input_to_formula' });
   }
   const vessels = (designGraph?.nodes || []).filter(n => n.type === 'Equipment');
@@ -80,14 +85,14 @@ export function buildWorkbookGraph(form, result, model, designGraph) {
     for (const source of ['count', 'media', 'mass', 'pipe', 'life']) links.push({ source, target: v.id, label: 'maps_to_vessel', citation: 'design mapping' }); });
   return { nodes, links };
 }
-export function nextWorkbookStep({ form, proposal, accepted, graph }) {
+export function nextWorkbookStep({ form, proposal, accepted, graph, unitSystem = 'si' }) {
   const required = ['species', 'flow', 'averageFlow', 'totalEbctMinutes', 'series', 'diameterFt', 'heightFt', 'bedDepthFt', 'densityLbFt3'];
   if (form.carbonLifeMode !== 'none') required.push('carbonLifeValue', 'carbonLifeSource');
   if (form.carbonLifeMode === 'freundlich') required.push('freundlichExponent', 'influentNgL', 'targetNgL');
   const missing = required.filter(k => (!String(form[k] ?? '').trim() || String(form[k]).trim() === '?'));
-  if (missing.length) return { fields: missing, action: 'complete_inputs', message: `First enter ${missing.map(k => workbookFields[k]?.label || k).join(', ')}. These inputs are required by the selected workbook calculation method.` };
+  if (missing.length) return { fields: missing, action: 'complete_inputs', message: `First enter ${missing.map(k => fieldLabel(k, workbookFields[k]?.label || k, unitSystem)).join(', ')}. These inputs are required by the selected workbook calculation method.` };
   const invalid = required.filter(k => !['species', 'carbonLifeSource'].includes(k) && (!Number.isFinite(Number(form[k])) || Number(form[k]) <= 0));
-  if (invalid.length) return { fields: invalid, action: 'correct_inputs', message: `${invalid.map(k => workbookFields[k]?.label || k).join(', ')} must be positive numeric values. Correct these inputs first.` };
+  if (invalid.length) return { fields: invalid, action: 'correct_inputs', message: `${invalid.map(k => fieldLabel(k, workbookFields[k]?.label || k, unitSystem)).join(', ')} must be positive numeric values. Correct these inputs first.` };
   if (form.carbonLifeMode === 'freundlich' && Number(form.targetNgL) >= Number(form.influentNgL)) return { fields: ['influentNgL', 'targetNgL'], action: 'correct_inputs', message: 'Freundlich breakthrough concentration must be below influent concentration. Check both inputs.' };
   if (Number(form.averageFlow) > Number(form.flow)) return { fields: ['averageFlow'], action: 'correct_inputs', message: 'Average flow exceeds design flow. Check the average operating flow first.' };
   if ((graph?.nodes || []).some(n => n.attributes?.calculationState === 'stale')) return { fields: [], action: 'recalculate', message: 'Inputs have changed and applied results are stale. Recalculate with Calculate GAC sizing, then review the changes.' };
@@ -97,6 +102,7 @@ export function nextWorkbookStep({ form, proposal, accepted, graph }) {
 }
 export function answerWorkbookQuestion(query, context, model) {
   const q = query.toLowerCase();
+  const unitSystem = context.unitSystem || 'si';
   const next = nextWorkbookStep(context);
   if (/다음|뭐.*해|무엇.*해|이제|필요.*값|빠진|어떤.*입력|무슨.*값|넣어야|next|missing|what.*need/.test(q)) return { mode: 'local_context', message: next.message, fields: next.fields, action: next.action };
   const matched = Object.entries(workbookFields).filter(([key, f]) => q.includes(key.toLowerCase()) || f.aliases.some(a => q.includes(a.toLowerCase())));
@@ -110,8 +116,8 @@ export function answerWorkbookQuestion(query, context, model) {
     const parts = fields.map(([key, f]) => {
       const labels = { required: 'required media volume', perEbct: 'EBCT per vessel', area: 'vessel area', media: 'media per vessel', capacity: 'vessel flow capacity', trains: 'parallel trains', count: 'operating vessel count', mass: 'carbon mass', pipe: 'pipe size', life: 'carbon life', fit: 'expanded-bed height check' };
       const downstream = calculationRelations(context.form).filter(r => r[0] === key).map(r => `${labels[r[1]]}${showSource ? ` [${r[2]}]` : ''}`);
-      const definition = key === 'totalEbctMinutes' ? 'EBCT means Empty Bed Contact Time: the media bed volume divided by the flow rate. Total EBCT includes all vessels in a series train.' : f.definition;
-      return `${definition}${showCurrent ? '\nCurrent input: ' + (context.form[key] || 'Not specified') : ''}${showSource ? '\nSource: ' + f.citation : ''}${showDependencies && downstream.length ? '\nIt affects ' + downstream.join(', ') + '.' : ''}`;
+      const definition = key === 'totalEbctMinutes' ? 'EBCT means Empty Bed Contact Time: the media bed volume divided by the flow rate. Total EBCT includes all vessels in a series train.' : fieldDefinition(key, f.definition, unitSystem);
+      return `${definition}${showCurrent ? '\nCurrent input: ' + fieldValue(key, context.form, unitSystem) : ''}${showSource ? '\nSource: ' + f.citation : ''}${showDependencies && downstream.length ? '\nIt affects ' + downstream.join(', ') + '.' : ''}`;
     });
     if (showFormula) {
       const citations = [...new Set(fields.flatMap(([key]) => calculationRelations(context.form).filter(r => r[0] === key).map(r => r[2])))];

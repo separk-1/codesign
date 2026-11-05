@@ -14,11 +14,11 @@ export async function askWorkbookAssistant(query: string, context: any, fallback
   try {
     const response = await fetch('/api/gac/assistant', { method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query, context }), signal: AbortSignal.timeout(30000) });
-    if (!response.ok) { report('Local reply · API request failed'); return fallback; }
+    if (!response.ok) { report('Local reply 쨌 API request failed'); return fallback; }
     const result = await response.json();
-    report(result.mode === 'llm_workbook_context' ? 'AI API connected'
-      : result.apiError?.code === 'invalid_api_key' ? 'Local reply · invalid API key'
-      : result.apiError ? 'Local reply · API request failed' : 'Local reply · AI unavailable');
+    report((result.mode === 'llm_workbook_context' || result.mode === 'llm_workbook_tools') ? 'AI API connected'
+      : result.apiError?.code === 'invalid_api_key' ? 'Local reply 쨌 invalid API key'
+      : result.apiError ? 'Local reply 쨌 API request failed' : 'Local reply 쨌 AI unavailable');
     return typeof result.message === 'string' ? result : fallback;
-  } catch { report('Local reply · API unavailable'); return fallback; }
+  } catch { report('Local reply 쨌 API unavailable'); return fallback; }
 }

@@ -1,7 +1,9 @@
+import { UnitSystem } from '../../shared/gacUnits.js';
 import { create } from 'zustand';
 import { GacCalculation, GacGraph, gacConcept } from '../utils/gacDesign';
 
 interface Workflow {
+  unitSystem: UnitSystem;
   consultation: any;
   corpus: any;
   graphTab: 'architecture' | 'graph';
@@ -13,7 +15,7 @@ interface Workflow {
   form: Record<string, string>;
   history: { timestamp: string; action: string; [key: string]: any }[];
 }
-export const useGacWorkflowStore = create<Workflow>(() => ({ consultation: null, corpus: null, graphTab: 'architecture', highlightedFields: [], proposal: null, accepted: null,
+export const useGacWorkflowStore = create<Workflow>(() => ({ unitSystem: 'si', consultation: null, corpus: null, graphTab: 'architecture', highlightedFields: [], proposal: null, accepted: null,
   graph: gacConcept(), beforeGraph: gacConcept(), form: {}, history: [] }));
 export function gacCommand(command: string) {
   window.dispatchEvent(new CustomEvent('gac-review-command', { detail: command }));
