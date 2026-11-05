@@ -88,7 +88,7 @@ try {
  // A slow result cannot overwrite a newer edit or double-submit.
  delay=1000;
  const before=requests.length;await page.getByRole('button',{name:'Calculate GAC sizing',exact:true}).click();
- assert.equal(await page.getByRole('button',{name:'Calculating in Excel…',exact:true}).isDisabled(),true);
+ assert.equal(await page.getByRole('button',{name:'Calculating...',exact:true}).isDisabled(),true);
  await input('flow').fill('120');
  await page.waitForTimeout(1400);
  assert.equal(requests.length,before+1);assert.equal((await snapshot()).proposal,null);

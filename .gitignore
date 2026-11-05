@@ -20,3 +20,6 @@ hydroshare_kg_dataset/
 .vercel
 .env*
 !.env.example
+
+# Generated online backup verification artifacts
+tmp/online-backup-*

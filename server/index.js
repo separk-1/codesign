@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { generateDecisionLog } from './decisionAgent.js';
 import { answerGraphRag } from './graphRag.js';
 import { answerGacAssistant } from './gacAssistant.js';
-import { runGacCalculationAgent } from './gacToolAgent.js';
+import { calculationCapability, calculationOriginAllowed, runGacCalculation } from './gacCalculation.js';
 
 const app = express();
 const port = Number(process.env.API_PORT || 8787);
@@ -61,14 +61,14 @@ app.get('/api/designs/:id', async (req, res) => {
 });
 
 app.get('/api/health', (_req, res) => {
-  res.json({ ok: true, hasOpenAIKey: Boolean(process.env.OPENAI_API_KEY) });
+  res.json({ ok: true, hasOpenAIKey: Boolean(process.env.OPENAI_API_KEY), gacCalculation: calculationCapability() });
 });
 app.post('/api/gac/calculate', async (req, res) => {
-  // Local desktop execution only. Remote deployments return an explicit unavailable error.
-  const origin = req.headers.origin;
-  if (origin && !/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return res.status(403).json({ error: 'Excel tools accept local app requests only.', code: 'local_only' });
-  try { res.json(await runGacCalculationAgent(req.body?.inputs)); }
-  catch (error) { res.status(error.status || 503).json({ error: error.message || 'Native Excel calculation failed.', code: error.code || 'excel_execution_failed', fallbackUsed: false }); }
+  const capability = calculationCapability();
+  if (!calculationOriginAllowed(req, capability)) return res.status(403).json({ error: capability.nativeExcel ? 'Excel tools accept local app requests only.' : 'Use this deployment to call the formula backup.', code: 'origin_not_allowed' });
+  if (!req.body || Object.keys(req.body).some(key => key !== 'inputs')) return res.status(400).json({ error: 'Only the fixed workbook inputs are accepted.', code: 'invalid_inputs' });
+  try { res.json(await runGacCalculation(req.body.inputs, { capability })); }
+  catch (error) { res.status(error.status || 503).json({ error: error.message || 'GAC calculation failed.', code: error.code || 'calculation_failed', engine: capability.engine, fallbackUsed: false }); }
 });
 
 app.post('/api/gac/assistant', async (req, res) => {
@@ -106,7 +106,7 @@ app.post('/api/agent/generate-decision-log', async (req, res) => {
 
 // Vercel imports the app; only the local CLI starts a persistent listener.
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  app.listen(port, () => {
+  app.listen(port, '127.0.0.1', () => {
     console.log(`[codesign-api] listening on http://127.0.0.1:${port}`);
   });
 }

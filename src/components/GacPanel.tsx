@@ -23,6 +23,8 @@ export function GacPanel() {
   const help = (key: string) => fieldDefinition(key, fieldHelp[key] || '', unitSystem);
   const [open, setOpen] = useState(false);
   const [calculating, setCalculating] = useState(false);
+  const [calculationMode, setCalculationMode] = useState<{ label: string; description: string } | null>(null);
+  useEffect(() => { const controller = new AbortController(); fetch('/api/health', { signal: controller.signal }).then(r => r.json()).then(data => setCalculationMode(data.gacCalculation || null)).catch(() => {}); return () => controller.abort(); }, []);
   const pendingCalculation = useRef<{ controller: AbortController; signature: string } | null>(null);
   const [form, setForm] = useState<Record<string, string>>({ ...example, ...excelExample, waterType: '', tocMgL: '', media: '', referenceId: '' });
   const corpus = useGacWorkflowStore(s => s.corpus);
@@ -55,7 +57,7 @@ export function GacPanel() {
     const pending = pendingCalculation.current;
     if (pending && (!active || pending.signature !== JSON.stringify(form))) {
       pending.controller.abort(); pendingCalculation.current = null; setCalculating(false);
-      setMessage('Inputs changed while Excel was calculating. Calculate again with the updated inputs.');
+      setMessage('Inputs changed while the calculation was running. Calculate again with the updated inputs.');
     }
   }, [form, active]);
   useEffect(() => () => { pendingCalculation.current?.controller.abort(); pendingCalculation.current = null; }, []);
@@ -130,7 +132,7 @@ export function GacPanel() {
       if (form.carbonLifeMode !== 'none' && !form.carbonLifeSource.trim()) throw new Error('Provide the carbon life / isotherm source.');
       request = { controller: new AbortController(), signature: JSON.stringify(form) };
       pendingCalculation.current = request; setCalculating(true);
-      setMessage('Calculating with the original Excel workbook...');
+      setMessage(calculationMode ? 'Calculating: ' + calculationMode.label + '...' : 'Requesting calculation from the configured engine...');
       const workbook = await executeExcelWorkbook({
         flowGpm: result.flowM3H / (0.003785411784 * 60),
         averageFlowGpm: Number(form.averageFlow) * (form.flowUnit === 'gpm' ? 1 : 1 / (0.003785411784 * 60)),
@@ -151,11 +153,11 @@ export function GacPanel() {
       result.flowPerTrainM3H = result.flowM3H / workbook.parallel;
       result.ebctPerVesselMinutes = workbook.actualTotalEbctMinutes / workbook.series;
       result.version = workbook.version;
-      result.assumptions = ['Original workbook recalculated in Microsoft Excel; macros disabled, no VBA cost optimization; upright pressure design without bypass.', 'Required media volume and installed volume differ because dimensions are rounded.', 'Excel defaults for expansion, freeboard, density and redundancy require project review.', 'Workbook pipe-size lookups do not replace hydraulic verification.', 'Carbon life requires an entered source; PFAS effluent concentration is not predicted.'];
+      result.assumptions = [workbook.execution.engine === 'microsoft_excel' ? 'Original workbook recalculated in Microsoft Excel; macros disabled, no VBA cost optimization; upright pressure design without bypass.' : 'Online Plan B: JavaScript port of supported workbook formulas, not Microsoft Excel. Upright pressure design only; no macros, cost optimization or PFAS removal prediction.', 'Required media volume and installed volume differ because dimensions are rounded.', 'Excel defaults for expansion, freeboard, density and redundancy require project review.', 'Workbook pipe-size lookups do not replace hydraulic verification.', 'Carbon life requires an entered source; PFAS effluent concentration is not predicted.'];
       if (form.referenceId && corpus) {
         result.evidence = { record: corpus.records.find((r: any) => r.id === form.referenceId), source: corpus.source, conditions: { waterType: form.waterType, tocMgL: form.tocMgL, media: form.media } };
       }
-      setProposal(result); setMessage('Sizing calculated. Review the proposed change, then select Accept and apply.');
+      setProposal(result); setMessage((workbook.execution.engine === 'microsoft_excel' ? 'Native Excel sizing calculated.' : 'Online Plan B formulas evaluated; Microsoft Excel was not run.') + ' Review the proposed change, then select Accept and apply.');
       record('Calculate GAC proposal', { designState: agent.designState, toolCall: workbook.toolCalls?.[0], tool: result.version, execution: workbook.execution, toolCalls: workbook.toolCalls, result });
       const displayUnits = useGacWorkflowStore.getState().unitSystem;
       useDesignStore.getState().addChatMessage('ai', `The proposed design has ${result.vesselCount} GAC vessels: ${result.inputs.series} in series per train, with ${result.inputs.parallel} operating train(s). Each vessel contains ${quantity(result.mediaPerVesselM3, 'volume', displayUnits)} of GAC. Total operating GAC volume is ${quantity(result.totalMediaM3, 'volume', displayUnits)}. This is a proposal; your design has not changed yet. Review it under Architecture, then select Accept and apply.`);
@@ -256,8 +258,9 @@ export function GacPanel() {
       {review.suggestions.map((suggestion: any) => <div key={suggestion.id} className="input-suggestion"><p><strong>{suggestion.label}</strong></p><p>{suggestion.reason}</p><details><summary>Evidence (original workbook units)</summary><p>{suggestion.source}</p></details><button onClick={() => useSuggestion(suggestion)}>{suggestion.kind === 'study_scenario' ? 'Use as comparison scenario' : 'Use suggested inputs'}</button></div>)}
       <details><summary>Calculation scope</summary>{review.warnings.map((warning: string) => <p key={warning}>{warning}</p>)}</details>
     </div>}
+    <p className="calculation-mode" title={calculationMode?.description}>{calculationMode?.label || 'Calculation engine will be confirmed by the API'}</p>
     {message && <p role="status">{message}</p>}
-    <button title="Call the original Excel workbook through the calculation tool and generate a sizing proposal. Approval is required to apply changes." disabled={calculating} onClick={calculate}>{calculating ? 'Calculating in Excel…' : 'Calculate GAC sizing'}</button>
+    <button title="Use the configured engine: local Excel tool-calling agent or online Plan B workbook formulas. Review and accept before applying changes." disabled={calculating} onClick={calculate}>{calculating ? 'Calculating...' : 'Calculate GAC sizing'}</button>
     <details className="case-export"><summary title="Export inputs, evidence, calculations, graph and decision history as JSON.">Case data</summary><button onClick={exportCase}>Export case + history</button></details>
   </section>;
 }

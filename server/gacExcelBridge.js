@@ -20,7 +20,7 @@ export function normalizeExcelInputs(input) {
   const out = {};
   const number = (key, max, integer = false) => {
     const raw = input[key], n = Number(raw);
-    if (raw === '' || raw == null || typeof raw === 'boolean' || !Number.isFinite(n) || n <= 0 || n > max || (integer && !Number.isInteger(n))) throw new ExcelToolError('Invalid ' + key + '.', 'invalid_inputs', 400);
+    if (!['number', 'string'].includes(typeof raw) || raw === '' || raw == null || typeof raw === 'boolean' || !Number.isFinite(n) || n <= 0 || n > max || (integer && !Number.isInteger(n))) throw new ExcelToolError('Invalid ' + key + '.', 'invalid_inputs', 400);
     out[key] = n;
   };
   number('flowGpm', 1e7); number('averageFlowGpm', 1e7); number('totalEbctMinutes', 1440); number('series', 20, true); number('parallel', 20, true); number('densityLbFt3', 200);
@@ -29,7 +29,7 @@ export function normalizeExcelInputs(input) {
   if (!['manual','auto'].includes(out.geometryMode)) throw new ExcelToolError('Choose manual or auto geometry.', 'invalid_inputs', 400);
   if (out.geometryMode === 'manual') { number('diameterFt', 1000); number('heightFt', 1000); number('bedDepthFt', 1000); }
   out.redundantVessels = input.redundantVessels === '' || input.redundantVessels == null ? null : Number(input.redundantVessels);
-  if (typeof input.redundantVessels === 'boolean' || (out.redundantVessels !== null && (!Number.isInteger(out.redundantVessels) || out.redundantVessels < 0 || out.redundantVessels > 20))) throw new ExcelToolError('Redundant vessels must be a whole number from 0 to 20.', 'invalid_inputs', 400);
+  if ((input.redundantVessels != null && !['number', 'string'].includes(typeof input.redundantVessels)) || (out.redundantVessels !== null && (!Number.isInteger(out.redundantVessels) || out.redundantVessels < 0 || out.redundantVessels > 20))) throw new ExcelToolError('Redundant vessels must be a whole number from 0 to 20.', 'invalid_inputs', 400);
   out.carbonLifeMode = input.carbonLifeMode || 'none';
   if (!['none','months','bv','freundlich'].includes(out.carbonLifeMode)) throw new ExcelToolError('Unsupported carbon-life method.', 'invalid_inputs', 400);
   if (out.carbonLifeMode !== 'none') {

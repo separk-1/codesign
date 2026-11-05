@@ -23,7 +23,7 @@ The default input is now **PFAS / GAC design workspace**. Open **GAC / PFAS desi
 The research view shows the next design decision, before/proposed or before/applied process diagrams, a change table, calculation evidence and a concise decision trail. **Design basis** is collapsed initially. Process connections and calculation evidence are shown separately; clicking a vessel opens its attributes. Other P&ID inputs retain the legacy graph view.
 
 1. Start with prefilled demonstration inputs (PFOA, 100 → 4 ng/L, 100 m³/h, 20 min total EBCT, 2 series vessels, 1 parallel train), or edit PFAS species, concentrations, design flow, total EBCT, configuration and EBCT source. **Load example inputs** restores the example and flags any applied sizing for review.
-2. Run the bounded GAC tool-calling agent. It asks for missing inputs and calls `calculate_gac_excel` through the local API. The tool recalculates a disposable copy in Microsoft Excel with macros disabled.
+2. Run the bounded GAC tool-calling agent. It asks for missing inputs and calls `calculate_gac_excel` through the local API. Locally on Windows, the tool recalculates a disposable copy in Microsoft Excel with macros disabled. Online, the explicitly labeled Plan B engine evaluates the supported workbook formulas in JavaScript; Microsoft Excel is not running. Calculation exports identify the actual engine and tool call.
 3. Review total/per-vessel media volumes and assumptions, then accept or reject the proposal. Only acceptance changes the candidate graph.
 4. Change an input to flag previously applied sizing as stale. Recalculate and review a new proposal.
 5. Export the case JSON to save inputs, tool version, proposals, accepted results, graph, before/after changes and decision history. Session data are not automatically saved across reloads.
@@ -97,7 +97,7 @@ The local API server provides:
 - `GET /api/designs/:id`: load one pyDEXPI JSON model.
 - `POST /api/graphrag/query`: answer a graph-grounded question using retrieved graph evidence.
 - `POST /api/gac/assistant`: read-only workbook inspection/review function calls and grounded explanations.
-- `POST /api/gac/calculate`: bounded native Excel calculation tool, returning a reviewable result and execution provenance.
+- `POST /api/gac/calculate`: bounded local Excel agent or online Plan B formula tool, returning a reviewable result and explicit execution provenance.
 - `POST /api/agent/generate-decision-log`: generate sample AI-agent decision-log entries for review.
 - `GET /api/health`: check API status and whether an OpenAI key is configured.
 

@@ -1,0 +1,46 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import express from 'express';
+import app from '../api/index.js';
+const external=process.env.GAC_TEST_URL;
+const native=process.argv.includes('--native');
+if(!external){if(native)delete process.env.VERCEL;else process.env.VERCEL='1';}
+app.use(express.static('dist'));
+const server=external?null:app.listen(0,'127.0.0.1');
+if(server)await new Promise(resolve=>server.once('listening',resolve));
+const base=external||'http://127.0.0.1:'+server.address().port;
+const browser=await chromium.launch({headless:true,channel:process.env.GAC_BROWSER_CHANNEL||'msedge'});
+try {
+ const page=await browser.newPage({viewport:{width:1500,height:1000}});page.setDefaultTimeout(120000);
+ const errors=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto(base);
+ await page.getByText(native?'Local Excel tool-calling agent':'Online Plan B: workbook formulas',{exact:true}).waitFor();
+ await page.getByRole('button',{name:'Design basis +',exact:true}).click();
+ const button=page.getByRole('button',{name:'Calculate GAC sizing',exact:true});
+ await button.click();await page.getByRole('button',{name:'Accept and apply',exact:true}).waitFor();
+ assert.match(await page.locator('.execution-provenance').innerText(),native?/Microsoft Excel/:/Plan B.*Microsoft Excel was not run/);
+ const snapshot=async()=>{
+  if(!await page.getByRole('button',{name:'Export case + history'}).isVisible())await page.getByText('Case data',{exact:true}).click();
+  const pending=page.waitForEvent('download');await page.getByRole('button',{name:'Export case + history'}).click();
+  const stream=await(await pending).createReadStream();const chunks=[];for await(const c of stream)chunks.push(c);
+  return JSON.parse(Buffer.concat(chunks).toString());
+ };
+ const proposed=await snapshot(),w=proposed.proposal.workbook;
+ assert.equal(w.execution.engine,native?'microsoft_excel':'javascript_formula_port');
+ assert.equal(w.execution.recalculated,native);assert.equal(w.execution.testFixture,undefined);
+ assert.equal(w.operatingVessels,2);assert.ok(Math.abs(w.operatingMediaM3-33.3466549602622)<1e-8);
+ assert.equal(w.toolCalls[0].name,native?'calculate_gac_excel':'calculate_gac_formula_backup');
+ assert.deepEqual(proposed.history.find(e=>e.action==='Calculate GAC proposal').execution,w.execution);
+ const toggle=page.getByRole('switch',{name:'Use US customary units'});await toggle.click();await toggle.click();
+ assert.deepEqual((await snapshot()).proposal,proposed.proposal);
+ await page.getByRole('button',{name:'Reject',exact:true}).click();assert.equal((await snapshot()).proposal,null);
+ await button.click();await page.getByRole('button',{name:'Accept and apply',exact:true}).waitFor();
+ await page.getByRole('button',{name:'Accept and apply',exact:true}).click();assert.equal((await snapshot()).state,'applied');
+ await page.getByRole('textbox',{name:'totalEbctMinutes',exact:true}).fill('30');assert.equal((await snapshot()).state,'stale');
+ await button.click();await page.getByRole('button',{name:'Accept and apply',exact:true}).waitFor();
+ const changed=await snapshot();assert.equal(changed.proposal.workbook.operatingVessels,4);
+ assert.ok(Math.abs(changed.proposal.requiredMediaM3/proposed.proposal.requiredMediaM3-1.5)<1e-10);
+ await page.screenshot({path:'tmp/online-backup-'+(native?'native':'formula')+'.png',fullPage:true});
+ assert.deepEqual(errors,[]);
+ console.log(JSON.stringify({passed:true,url:base,engine:w.execution.engine,agentMode:w.execution.agentMode,toolCall:w.toolCalls[0].name,operatingMediaM3:w.operatingMediaM3,ebct30Vessels:changed.proposal.workbook.operatingVessels,flows:['calculate','export provenance','unit toggle','reject','recalculate','accept','stale on edit','changed EBCT']},null,2));
+} finally {await browser.close();if(server)await new Promise(resolve=>server.close(resolve));}
