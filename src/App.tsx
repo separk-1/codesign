@@ -15,7 +15,7 @@ function App() {
   const isGac = useDesignStore(state => state.selectedInputDesignId === 'gac-workspace');
   useEffect(() => { loadData(); }, [loadData]);
   return <div className={`app-container ${isGac ? 'gac-workspace' : ''}`}>
-    <header className="app-heading"><span>CoDesign</span>{isGac && <button className="unit-toggle" role="switch" aria-label="Use US customary units" aria-checked={unitSystem === 'us'} title="Switch all GAC inputs and results between SI and US customary units. Calculation values are unchanged." onClick={() => useGacWorkflowStore.setState({ unitSystem: unitSystem === 'si' ? 'us' : 'si' })}><span aria-hidden="true" className={unitSystem === 'si' ? 'selected' : ''}>SI</span><span aria-hidden="true" className={unitSystem === 'us' ? 'selected' : ''}>US</span></button>}</header>
+    <header className="app-heading"><span>CoDesign</span>{isGac && <button className="unit-toggle" role="switch" aria-label="Use US customary units" aria-checked={unitSystem === 'us'} title="Switch all GAC inputs and results between SI and US customary units. Calculation values are unchanged." onClick={() => useGacWorkflowStore.setState({ unitSystem: unitSystem === 'si' ? 'us' : 'si' })}><span aria-hidden="true" className={unitSystem === 'us' ? 'selected' : ''}>US</span><span aria-hidden="true" className={unitSystem === 'si' ? 'selected' : ''}>SI</span></button>}</header>
     <div className="workspace-layout">
       <aside className="workspace-sidebar">{isGac ? <GacProgress /> : <TaskPanel />}</aside>
       <main className="workspace-main">

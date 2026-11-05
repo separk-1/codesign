@@ -1,7 +1,7 @@
 // Live opt-in test: requires the local API, source .xlsm and Microsoft Excel.
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
-import { GPM_M3H } from '../shared/gacUnits.js';
+import { formatNumber, GPM_M3H } from '../shared/gacUnits.js';
 const browser = await chromium.launch({headless:true,channel:process.env.GAC_BROWSER_CHANNEL||'msedge'});
 try {
  const page=await browser.newPage({viewport:{width:1500,height:1000}});
@@ -16,9 +16,9 @@ try {
  await page.goto(process.env.GAC_TEST_URL||'http://127.0.0.1:4175');
  await page.getByRole('button',{name:'Design basis +',exact:true}).click();
  const toggle=page.getByRole('switch',{name:'Use US customary units'});
- await toggle.click();
+ assert.equal(await toggle.getAttribute('aria-checked'),'true');
  const flow=Number(await page.getByRole('textbox',{name:'flow',exact:true}).inputValue());
- assert.ok(Math.abs(flow-100/GPM_M3H)<1e-8);
+ assert.equal(String(flow),formatNumber(100/GPM_M3H));
  await page.getByRole('button',{name:'Calculate GAC sizing',exact:true}).click();
  await toggle.click();
  await page.getByRole('button',{name:'Accept and apply',exact:true}).waitFor();

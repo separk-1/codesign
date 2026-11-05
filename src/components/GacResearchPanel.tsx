@@ -1,4 +1,4 @@
-import { fieldLabel, fieldValue, quantity, UnitSystem } from '../../shared/gacUnits.js';
+import { formatNumber, fieldLabel, fieldValue, quantity, UnitSystem } from '../../shared/gacUnits.js';
 import { nodeTooltip } from '../utils/nodeTooltip';
 import { useGacWorkflowStore, gacCommand } from '../store/gacWorkflowStore';
 import { useDesignStore } from '../store/designStore';
@@ -30,7 +30,7 @@ function ProcessDiagram({ graph }: { graph: GacGraph }) {
             <rect x={x} y={y} width={105} height={40} fill="#fff" stroke="#555" strokeDasharray={stale ? '4 3' : undefined} />
             <text x={x + 52.5} y={y + 24} textAnchor="middle" fontSize={12}>{label}</text>
           </g>
-          <text x={x + 52.5} y={y + 58} textAnchor="middle" fontSize={11}>{node.type === 'Equipment' ? `${quantity(node.attributes.mediaVolumeM3, 'volume', unitSystem, 2)} media` : node.id === 'gac-concept' ? 'Sizing unresolved' : ''}</text>
+          <text x={x + 52.5} y={y + 58} textAnchor="middle" fontSize={11}>{node.type === 'Equipment' ? `${quantity(node.attributes.mediaVolumeM3, 'volume', unitSystem)} media` : node.id === 'gac-concept' ? 'Sizing unresolved' : ''}</text>
         </g>;
       })}</g>;
     })}
@@ -59,22 +59,22 @@ export function GacResearchPanel() {
         <tr><td>Media per vessel</td><td>{before.nodes.find(n => n.type === 'Equipment') ? quantity(before.nodes.find(n => n.type === 'Equipment')!.attributes.mediaVolumeM3, 'volume', unitSystem) : 'Unresolved'}</td><td>{result ? quantity(result.mediaPerVesselM3, 'volume', unitSystem) : 'Unresolved'}</td></tr>
         {result?.workbook && <><tr><td>Installed operating media</td><td>{media(before, unitSystem)}</td><td>{quantity(result.workbook.operatingMediaM3, 'volume', unitSystem)}</td></tr>
           <tr><td>Diameter × straight height</td><td>—</td><td>{quantity(result.workbook.diameterM, 'length', unitSystem)} × {quantity(result.workbook.heightM, 'length', unitSystem)}</td></tr>
-          <tr><td>GAC mass incl. spare vessels</td><td>—</td><td>{quantity(result.workbook.installedCarbonKg, 'mass', unitSystem, 1)}</td></tr>
+          <tr><td>GAC mass incl. spare vessels</td><td>—</td><td>{quantity(result.workbook.installedCarbonKg, 'mass', unitSystem)}</td></tr>
           <tr><td>Redundant vessels</td><td>—</td><td>{result.workbook.redundantVessels}</td></tr>
-          <tr><td title="Workbook lookup sizes; mm values are converted inches, not nominal DN designations.">Process / inlet pipe size</td><td>—</td><td>{quantity(result.workbook.processPipeInches * 0.0254, 'pipe', unitSystem, 1)} / {quantity(result.workbook.influentPipeInches * 0.0254, 'pipe', unitSystem, 1)}</td></tr>
-          <tr><td>Carbon life / annual carbon</td><td>—</td><td>{result.workbook.carbonLifeMonths ? `${result.workbook.carbonLifeMonths.toFixed(2)} months / ${quantity(result.workbook.annualCarbonKg, 'mass', unitSystem, 1)}/year` : 'Carbon-life input required'}</td></tr></>}
+          <tr><td title="Workbook lookup sizes; mm values are converted inches, not nominal DN designations.">Process / inlet pipe size</td><td>—</td><td>{quantity(result.workbook.processPipeInches * 0.0254, 'pipe', unitSystem)} / {quantity(result.workbook.influentPipeInches * 0.0254, 'pipe', unitSystem)}</td></tr>
+          <tr><td>Carbon life / annual carbon</td><td>—</td><td>{result.workbook.carbonLifeMonths ? `${formatNumber(result.workbook.carbonLifeMonths)} months / ${quantity(result.workbook.annualCarbonKg, 'mass', unitSystem)}/year` : 'Carbon-life input required'}</td></tr></>}
         <tr><td>Sampling / hydraulic verification</td><td>Unresolved</td><td>Further design required</td></tr>
       </tbody></table>}
       {result && <div className="calculation-evidence"><h3>Calculation basis</h3>
         {result.workbook && <p className="execution-provenance"><strong>{result.workbook.execution?.engine === 'microsoft_excel' ? 'Microsoft Excel' : 'Online Plan B: workbook formula engine'}</strong>{result.workbook.execution?.engine === 'microsoft_excel' ? (result.workbook.execution.agentMode === 'llm_excel_tool' ? ' | AI tool call' : ' | Direct Excel tool (AI unavailable)') : ' | JavaScript calculation; Microsoft Excel was not run.'}</p>}
-        <p>{quantity(result.flowM3H, 'flow', unitSystem)} × {result.inputs.totalEbctMinutes} min {unitSystem === 'si' ? '÷ 60 min/h' : '÷ 7.480519 US gal/ft³'} = {quantity(result.theoreticalMediaM3 ?? result.requiredMediaM3 ?? result.totalMediaM3, 'volume', unitSystem)} theoretical media</p>
+        <p>{quantity(result.flowM3H, 'flow', unitSystem)} × {formatNumber(result.inputs.totalEbctMinutes)} min {unitSystem === 'si' ? '÷ 60 min/h' : '÷ 7.4805 US gal/ft³'} = {quantity(result.theoreticalMediaM3 ?? result.requiredMediaM3 ?? result.totalMediaM3, 'volume', unitSystem)} theoretical media</p>
         {result.workbook && <p>Workbook required media: {quantity(result.requiredMediaM3, 'volume', unitSystem)}. Original workbook conversion: 7.481 US gal/ft³; the theoretical conversion above uses exact unit factors.</p>}
-        <p>{result.inputs.series} series × {result.inputs.parallel} parallel; {result.ebctPerVesselMinutes.toFixed(2)} min per vessel</p>
+        <p>{result.inputs.series} series × {result.inputs.parallel} parallel; {formatNumber(result.ebctPerVesselMinutes)} min per vessel</p>
         <details><summary>Source</summary><p>{result.inputs.ebctSource}</p></details>
-        {result.workbook && <details><summary>Excel formulas (original workbook units)</summary><p>{result.workbook.source.file}</p><p>{result.workbook.inputs.geometryMode === 'auto' ? 'AutoSize upright dimensions for requested trains' : 'Manual upright vessel dimensions'}; installed total EBCT: {result.workbook.actualTotalEbctMinutes.toFixed(3)} min</p>{result.workbook.formulaTrace.map((f: any) => <p key={f.citation}><strong>{f.citation}</strong><br /><code>{f.formula}</code></p>)}<p>{result.workbook.assumptions.constants}</p></details>}
+        {result.workbook && <details><summary>Excel formulas (original workbook units)</summary><p>{result.workbook.source.file}</p><p>{result.workbook.inputs.geometryMode === 'auto' ? 'AutoSize upright dimensions for requested trains' : 'Manual upright vessel dimensions'}; installed total EBCT: {formatNumber(result.workbook.actualTotalEbctMinutes)} min</p>{result.workbook.formulaTrace.map((f: any) => <p key={f.citation}><strong>{f.citation}</strong><br /><code>{f.formula}</code></p>)}<p>{result.workbook.assumptions.constants}</p></details>}
         <details><summary>Calculation assumptions</summary><ul>{result.assumptions.map(a => <li key={a}>{a}</li>)}</ul><p>{result.version}</p></details>
       </div>}
-      {!result && <p className="basis-summary">{form.species || 'PFAS'} · {fieldValue('flow', form, unitSystem)} · {form.totalEbctMinutes || '—'} min EBCT</p>}
+      {!result && <p className="basis-summary">{form.species || 'PFAS'} · {fieldValue('flow', form, unitSystem)} · {formatNumber(form.totalEbctMinutes) || '—'} min EBCT</p>}
       {proposal && <div className="research-actions"><button onClick={() => gacCommand('accept')}>Accept and apply</button><button onClick={() => gacCommand('reject')}>Reject</button></div>}
     </div>}
   </div>;
@@ -95,8 +95,8 @@ export function GacDecisionTrail() {
     {history.length === 0 && <p>No decisions yet.</p>}
     {history.slice().reverse().map((event, index) => {
       const result = event.calculation || event.result;
-      const description = event.action === 'User accepted GAC proposal' ? `${quantity(result.flowM3H, 'flow', unitSystem)}, ${result.inputs.totalEbctMinutes} min → ${result.vesselCount} vessels × ${quantity(result.mediaPerVesselM3, 'volume', unitSystem)} → user accepted → ${event.changedVesselIds.join(', ')}`
-        : event.action === 'Calculate GAC proposal' ? `${quantity(result.flowM3H, 'flow', unitSystem)}, ${result.inputs.totalEbctMinutes} min → ${quantity(result.totalMediaM3, 'volume', unitSystem)} → proposed`
+      const description = event.action === 'User accepted GAC proposal' ? `${quantity(result.flowM3H, 'flow', unitSystem)}, ${formatNumber(result.inputs.totalEbctMinutes)} min → ${result.vesselCount} vessels × ${quantity(result.mediaPerVesselM3, 'volume', unitSystem)} → user accepted → ${event.changedVesselIds.join(', ')}`
+        : event.action === 'Calculate GAC proposal' ? `${quantity(result.flowM3H, 'flow', unitSystem)}, ${formatNumber(result.inputs.totalEbctMinutes)} min → ${quantity(result.totalMediaM3, 'volume', unitSystem)} → proposed`
         : event.field ? `${fieldLabel(event.field, event.field, unitSystem)}: ${fieldValue(event.field, { [event.field]: event.before, flowUnit: 'm3/h' }, unitSystem)} → ${fieldValue(event.field, { [event.field]: event.after, flowUnit: 'm3/h' }, unitSystem)} → sizing requires review` : event.action;
       return <div className="trail-entry" key={`${event.timestamp}-${index}`}><p>{description}</p><details><summary>Evidence (stored units)</summary><pre>{JSON.stringify(event, null, 2)}</pre></details></div>;
     })}

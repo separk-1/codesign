@@ -1,4 +1,4 @@
-import { fieldCanonical, fieldLabel, fieldValue, fieldDefinition, quantity } from '../../shared/gacUnits.js';
+import { formatNumber, fieldCanonical, fieldLabel, fieldValue, fieldDefinition, quantity } from '../../shared/gacUnits.js';
 import { GacUnitInput } from './GacUnitInput';
 import { reviewGacInputs, unknownValue } from '../../shared/gacReview.js';
 import { useEffect, useRef, useState } from 'react';
@@ -244,12 +244,12 @@ export function GacPanel() {
         {key === 'species' ? <select aria-label={key} title={help(key)} value={form[key]} onChange={e => edit(key, e.target.value)}><option value="">Select PFAS</option>{speciesOptions.map(s => <option key={s} value={s}>{s}</option>)}</select> : <GacUnitInput key={`${key}-${unitSystem}`} field={key} title={help(key)} value={form[key]} system={unitSystem} flowUnit={form.flowUnit} onChange={value => edit(key, value)} />}
       </label>)}</div>
       <label title={workbookFields.carbonLifeMode.definition}>Carbon life input type <select aria-label="carbonLifeMode" value={form.carbonLifeMode} onChange={e => edit('carbonLifeMode', e.target.value)}><option value="none">Not specified</option><option value="bv">Bed volumes to breakthrough</option><option value="months">Measured life (months)</option><option value="freundlich">Freundlich isotherm</option></select></label>
-      {form.carbonLifeMode !== 'none' && <><label title={fieldHelp.carbonLifeValue}>{({ bv: 'Bed volumes to breakthrough', months: 'Carbon life (months)', freundlich: 'Freundlich Kf' } as Record<string, string>)[form.carbonLifeMode]}<input aria-label="carbonLifeValue" title={fieldHelp.carbonLifeValue} type="text" inputMode="decimal" value={form.carbonLifeValue} onChange={e => edit('carbonLifeValue', e.target.value)} /></label>
+      {form.carbonLifeMode !== 'none' && <><label title={fieldHelp.carbonLifeValue}>{({ bv: 'Bed volumes to breakthrough', months: 'Carbon life (months)', freundlich: 'Freundlich Kf' } as Record<string, string>)[form.carbonLifeMode]}<GacUnitInput key={`carbonLifeValue-${unitSystem}`} field="carbonLifeValue" title={fieldHelp.carbonLifeValue} value={form.carbonLifeValue} system={unitSystem} flowUnit={form.flowUnit} onChange={value => edit('carbonLifeValue', value)} /></label>
         {form.carbonLifeMode === 'bv' && <label title="BV = treated water volume / reference media volume. PFAS Reference uses total media in the series train.">BV volume basis <select aria-label="bvDefinition" value={form.bvDefinition} onChange={e => edit('bvDefinition', e.target.value)}><option value="total_series">Total series media</option><option value="per_vessel">Single vessel media</option></select></label>}
-        {form.carbonLifeMode === 'freundlich' && <div className="gac-fields">{['freundlichExponent', 'influentNgL', 'targetNgL'].map(key => <label key={key} title={workbookFields[key].definition}>{fieldLabel(key, 'Freundlich 1/n', unitSystem)}<input aria-label={key} title={workbookFields[key].definition} type="text" inputMode="decimal" value={form[key]} onChange={e => edit(key, e.target.value)} /></label>)}</div>}
+        {form.carbonLifeMode === 'freundlich' && <div className="gac-fields">{['freundlichExponent', 'influentNgL', 'targetNgL'].map(key => <label key={key} title={workbookFields[key].definition}>{fieldLabel(key, 'Freundlich 1/n', unitSystem)}<GacUnitInput key={`${key}-${unitSystem}`} field={key} title={workbookFields[key].definition} value={form[key]} system={unitSystem} flowUnit={form.flowUnit} onChange={value => edit(key, value)} /></label>)}</div>}
       </>}
     </div>}
-    <p>{form.species} · {fieldValue('flow', form, unitSystem)} · {form.totalEbctMinutes} min EBCT</p>
+    <p>{form.species} · {fieldValue('flow', form, unitSystem)} · {formatNumber(form.totalEbctMinutes)} min EBCT</p>
     <button onClick={reviewInputs}>Review inputs</button>
     {reviewOpen && <div className="input-review">
       {review.issues.map((issue: any, i: number) => <p key={`issue-${i}`}><strong>Needs correction:</strong> {issue.message}</p>)}

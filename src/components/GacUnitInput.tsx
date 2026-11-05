@@ -9,7 +9,11 @@ export function GacUnitInput({ field, value, system, flowUnit, title, onChange }
 }) {
   const [draft, setDraft] = useState(() => ({ canonical: value, text: fieldDisplay(field, value, system, flowUnit) }));
   const text = draft.canonical === value ? draft.text : fieldDisplay(field, value, system, flowUnit);
-  return <input aria-label={field} title={title} type="text" inputMode="decimal" value={text} onChange={e => {
+  return <input aria-label={field} title={title} type="text" inputMode="decimal" value={text} onBlur={() => {
+    // Finish displaying the edit without writing the rounded value to the model.
+    setDraft({ canonical: value, text: fieldDisplay(field, value, system, flowUnit) });
+  }} onChange={e => {
+    if (e.target.value === text) return;
     const canonical = fieldCanonical(field, e.target.value, system, flowUnit);
     setDraft({ canonical, text: e.target.value });
     onChange(canonical);

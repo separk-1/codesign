@@ -8,7 +8,7 @@ const form = { species: 'PFOA', flow: '100', averageFlow: '100', flowUnit: 'm3/h
 assert.equal(reviewGacInputs(form, model, corpus).canCalculate, true);
 assert.match(reviewGacInputs({ ...form, averageFlow: '150' }, model).issues[0].message, /exceeds design flow/);
 assert.ok(reviewGacInputs({ ...form, series: '1.5' }, model).issues.some(i => /whole number/.test(i.message)));
-assert.ok(reviewGacInputs({ ...form, heightFt: '5' }, model).issues.some(i => /10.70 ft/.test(i.message)));
+assert.ok(reviewGacInputs({ ...form, heightFt: '5' }, model).issues.some(i => /10\.7 ft/.test(i.message)));
 assert.ok(reviewGacInputs({ ...form, bedDepthFt: '0' }, model).issues.length);
 const unknown = { ...form, diameterFt: '?', heightFt: '', bedDepthFt: '?' };
 const original = JSON.stringify(unknown);

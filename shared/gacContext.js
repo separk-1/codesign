@@ -1,4 +1,4 @@
-import { fieldLabel, fieldValue, fieldDefinition, displayNumber, unitLabel, FT_M, GPM_M3H } from './gacUnits.js';
+import { DEFAULT_UNIT_SYSTEM, formatNumber, fieldLabel, fieldValue, fieldDefinition, displayNumber, unitLabel, FT_M, GPM_M3H } from './gacUnits.js';
 export const workbookFields = {
   species: { label: 'PFAS species', citation: 'INPUT!E4 (contaminant selection)', definition: 'The PFAS compound selected for the design. It identifies compound-specific PFAS Reference records; the name alone does not predict removal performance.', aliases: ['pfas species', 'species'] },
   flow: { label: 'Design flow', citation: 'INPUT!G29', definition: 'The maximum design treatment flow. Flow and EBCT determine required media volume. Flow divided by vessel capacity determines parallel train count.', aliases: ['design flow', 'flow'] },
@@ -39,7 +39,7 @@ function calculationRelations(form) {
   }
   return edges;
 }
-export function buildWorkbookGraph(form, result, model, designGraph, unitSystem = 'si') {
+export function buildWorkbookGraph(form, result, model, designGraph, unitSystem = DEFAULT_UNIT_SYSTEM) {
   const w = result?.workbook;
   const inputKeys = ['flow', 'totalEbctMinutes', 'series', 'diameterFt', 'bedDepthFt', 'heightFt', 'densityLbFt3', 'averageFlow', 'carbonLifeValue'];
   const nodes = inputKeys.map((key, i) => ({ id: key, name: fieldLabel(key, workbookFields[key].label, unitSystem), type: 'ExcelInput', column: 0, row: i,
@@ -65,7 +65,7 @@ export function buildWorkbookGraph(form, result, model, designGraph, unitSystem 
     const shown = conversion && typeof value === 'number' ? displayNumber(value * conversion[1], conversion[0], unitSystem) : value;
     const shownUnit = conversion ? unitLabel(conversion[0], unitSystem) : unit;
     nodes.push({ id, name, type: 'ExcelCalculation', column, row,
-      value: shown == null ? 'Not calculated' : `${typeof shown === 'number' ? Number(shown.toFixed(3)) : shown} ${shownUnit}`.trim(), citation,
+      value: shown == null ? 'Not calculated' : `${typeof shown === 'number' ? formatNumber(shown) : shown} ${shownUnit}`.trim(), citation,
       attributes: { citation, formula: model.formulas[citation]?.formula, value: shown ?? null, unit: shownUnit, storedValue: value ?? null, storedUnit: unit, formulaUnits: 'original workbook units', state: designGraph?.nodes.some(n => n.attributes?.calculationState === 'stale') ? 'stale result' : result ? 'proposal or applied result' : 'pending', mode: form.carbonLifeMode } });
   }
   const links = calculationRelations(form).map(([source, target, citation]) => ({ source, target, citation, label: 'input_to_formula' }));
@@ -85,7 +85,7 @@ export function buildWorkbookGraph(form, result, model, designGraph, unitSystem 
     for (const source of ['count', 'media', 'mass', 'pipe', 'life']) links.push({ source, target: v.id, label: 'maps_to_vessel', citation: 'design mapping' }); });
   return { nodes, links };
 }
-export function nextWorkbookStep({ form, proposal, accepted, graph, unitSystem = 'si' }) {
+export function nextWorkbookStep({ form, proposal, accepted, graph, unitSystem = DEFAULT_UNIT_SYSTEM }) {
   const required = ['species', 'flow', 'averageFlow', 'totalEbctMinutes', 'series', 'diameterFt', 'heightFt', 'bedDepthFt', 'densityLbFt3'];
   if (form.carbonLifeMode !== 'none') required.push('carbonLifeValue', 'carbonLifeSource');
   if (form.carbonLifeMode === 'freundlich') required.push('freundlichExponent', 'influentNgL', 'targetNgL');
@@ -102,7 +102,7 @@ export function nextWorkbookStep({ form, proposal, accepted, graph, unitSystem =
 }
 export function answerWorkbookQuestion(query, context, model) {
   const q = query.toLowerCase();
-  const unitSystem = context.unitSystem || 'si';
+  const unitSystem = context.unitSystem || DEFAULT_UNIT_SYSTEM;
   const next = nextWorkbookStep(context);
   if (/다음|뭐.*해|무엇.*해|이제|필요.*값|빠진|어떤.*입력|무슨.*값|넣어야|next|missing|what.*need/.test(q)) return { mode: 'local_context', message: next.message, fields: next.fields, action: next.action };
   const matched = Object.entries(workbookFields).filter(([key, f]) => q.includes(key.toLowerCase()) || f.aliases.some(a => q.includes(a.toLowerCase())));

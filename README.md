@@ -26,7 +26,7 @@ The research view shows the next design decision, before/proposed or before/appl
 2. Run the bounded GAC tool-calling agent. It asks for missing inputs and calls `calculate_gac_excel` through the local API. Locally on Windows, the tool recalculates a disposable copy in Microsoft Excel with macros disabled. Online, the explicitly labeled Plan B engine evaluates the supported workbook formulas in JavaScript; Microsoft Excel is not running. Calculation exports identify the actual engine and tool call.
 3. Review total/per-vessel media volumes and assumptions, then accept or reject the proposal. Only acceptance changes the candidate graph.
 4. Change an input to flag previously applied sizing as stale. Recalculate and review a new proposal.
-5. Export the case JSON to save inputs, tool version, proposals, accepted results, graph, before/after changes and decision history. Session data are not automatically saved across reloads.
+5. Export the case JSON to save inputs, tool version, proposals, accepted results, graph, before/after changes and decision history. Session data are not automatically saved across reloads. The view starts in US customary units (US first, SI available). Numeric inputs and results display at most four decimal places. Active edits retain typed precision; focusing, blurring or switching units never rounds stored inputs, calculations or JSON exports.
 
 Chat also accepts one `field=value` per message (for example `flow=100`, `species=PFOA`, `totalEbctMinutes=20`, `ebctSource=Pilot report section 3`), then `calculate` and `accept`. GraphRAG Mode queries the current graph and its calculation evidence. The legacy heat-exchanger design workflow remains available on other inputs.
 

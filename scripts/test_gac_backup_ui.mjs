@@ -1,3 +1,4 @@
+import { formatNumber, FT3_M3 } from '../shared/gacUnits.js';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import express from 'express';
@@ -16,6 +17,11 @@ try {
  await page.goto(base);
  await page.getByText(native?'Local Excel tool-calling agent':'Online Plan B: workbook formulas',{exact:true}).waitFor();
  await page.getByRole('button',{name:'Design basis +',exact:true}).click();
+ const toggle=page.getByRole('switch',{name:'Use US customary units'});
+ assert.equal(await toggle.getAttribute('aria-checked'),'true');
+ assert.equal(await page.getByRole('textbox',{name:'flow',exact:true}).inputValue(),'440.2868');
+ await page.getByRole('textbox',{name:'flow',exact:true}).focus();
+ await page.getByRole('textbox',{name:'flow',exact:true}).blur();
  const button=page.getByRole('button',{name:'Calculate GAC sizing',exact:true});
  await button.click();await page.getByRole('button',{name:'Accept and apply',exact:true}).waitFor();
  assert.match(await page.locator('.execution-provenance').innerText(),native?/Microsoft Excel/:/Plan B.*Microsoft Excel was not run/);
@@ -31,7 +37,12 @@ try {
  assert.equal(w.operatingVessels,2);assert.ok(Math.abs(w.operatingMediaM3-33.3466549602622)<1e-8);
  assert.equal(w.toolCalls[0].name,native?'calculate_gac_excel':'calculate_gac_formula_backup');
  assert.deepEqual(proposed.history.find(e=>e.action==='Calculate GAC proposal').execution,w.execution);
- const toggle=page.getByRole('switch',{name:'Use US customary units'});await toggle.click();await toggle.click();
+ assert.equal(proposed.form.flow,'100');
+ assert.equal(w.inputs.flowGpm,100/(0.003785411784*60));
+ assert.ok(await page.locator('.change-table').getByText(formatNumber(w.requiredMediaM3/FT3_M3)+' ft³',{exact:true}).count());
+ await toggle.click();
+ assert.ok(await page.locator('.change-table').getByText(formatNumber(w.requiredMediaM3)+' m³',{exact:true}).count());
+ await toggle.click();
  assert.deepEqual((await snapshot()).proposal,proposed.proposal);
  await page.getByRole('button',{name:'Reject',exact:true}).click();assert.equal((await snapshot()).proposal,null);
  await button.click();await page.getByRole('button',{name:'Accept and apply',exact:true}).waitFor();

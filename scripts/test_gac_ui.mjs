@@ -1,9 +1,9 @@
 import fs from 'node:fs';
-import { GPM_M3H, FT3_M3 } from '../shared/gacUnits.js';
+import { quantity, GPM_M3H, FT3_M3 } from '../shared/gacUnits.js';
 import { calculateWorkbook } from '../shared/gacWorkbookEngine.js';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
-const required = flow => (flow / GPM_M3H * 20 / 7.481 * FT3_M3).toFixed(3) + ' m³';
+const required = flow => quantity(flow / GPM_M3H * 20 / 7.481 * FT3_M3, 'volume', 'si');
 const browser = await chromium.launch({ headless: true, channel: process.env.GAC_BROWSER_CHANNEL || 'msedge' });
 try {
   const page = await browser.newPage({ viewport: { width: 1500, height: 1000 } });
@@ -16,6 +16,7 @@ try {
   });
   await page.goto(process.env.GAC_TEST_URL || 'http://127.0.0.1:4173');
   await page.getByRole('button', { name: 'Design basis +', exact: true }).click();
+  await page.getByRole('switch', { name: 'Use US customary units' }).click();
   assert.equal(await page.getByRole('textbox', { name: 'flow', exact: true }).inputValue(), '100');
   assert.equal(await page.getByRole('combobox', { name: 'species', exact: true }).inputValue(), 'PFOA');
   assert.ok(await page.getByRole('combobox', { name: 'species', exact: true }).getAttribute('title'));
@@ -133,6 +134,7 @@ try {
   await page.setViewportSize({ width: 1500, height: 1000 });
   await page.reload();
   await page.getByRole('button', { name: 'Design basis +', exact: true }).click();
+  await page.getByRole('switch', { name: 'Use US customary units' }).click();
   await page.getByRole('textbox', { name: 'averageFlow', exact: true }).fill('150');
   await page.getByRole('button', { name: 'Calculate GAC sizing', exact: true }).click();
   await page.locator('.input-review').getByText(/Average flow.*exceeds design flow/).waitFor();
